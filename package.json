@@ -1,0 +1,30 @@
+{
+  "name": "mux-lifeguide",
+  "version": "0.0.1",
+  "description": "A prototype for a Progressive Web App for the map and calendar function of the sustainability magazine Lifeguide Augsburg.",
+  "main": "index.html",
+  "dependencies": {
+    "leaflet": "^1.5.1",
+    "leaflet-control-geocoder": "^1.7.0",
+    "leaflet-routing-machine": "^3.2.12"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-terser": "^1.2.0",
+    "local-web-server": "^2.6.1",
+    "parallelshell": "3.0.1",
+    "pump": "^3.0.0"
+  },
+  "scripts": {
+    "start": "parallelshell \"gulp watch\" \"ws\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "repository": {}
+}
