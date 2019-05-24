@@ -1,30 +1,3 @@
-// Registering Service Worker after the page loaded and removed old one
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    
-    //remove all old service Worker
-    //TODO: this ist just for development
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
-      for(let registration of registrations) {
-        registration.unregister().then(function(boolean) {
-          if (boolean) console.log('Unregistration succeeded');
-        });
-    }
-    
-    }).then(function(){
-      navigator.serviceWorker.register('/service-worker.js', {scope: './'}).then(function(registration) {
-        // registration worked
-        console.log('Registration succeeded.');
-      }).catch(function(error) {
-        // registration failed
-        console.log('Registration failed with ' + error);
-      });
-    }).catch(function(err) {
-        console.log('Service Worker unregistration failed: ', err);
-    });
-  }); 
-}
-
 //get accessToken
 fetch('accessTokenMapBox.txt')
   .then(response => response.text())
@@ -66,7 +39,19 @@ fetch('accessTokenMapBox.txt')
       autoRoute: true,
       geocoder: L.Control.Geocoder.nominatim()
     }).addTo(mymap);
-  })
+  });
 
 
 
+//Add Xwiper  
+const xwiper = new Xwiper('.slider');
+ 
+xwiper.onSwipeLeft(() => console.log('swipe left'));
+ 
+xwiper.onSwipeRight(() => console.log('swipe right'));
+ 
+xwiper.onSwipeUp(() => console.log('swipe up'));
+ 
+xwiper.onSwipeDown(() => console.log('swipe down'));
+ 
+xwiper.onTap(() => console.log('tap'));

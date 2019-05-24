@@ -7,7 +7,9 @@ var CURRENT_CACHES = {
 var contentToCache = [
   './',
   './index.html',
+  '/public/js/register-worker.js',
   '/public/js/app.js',
+  '/public/js/db.js',
   '/public/css/compress/style.min.css',
   '/public/assets/favicon.ico',
   '/public/assets/icons/icon-32.png',
@@ -48,6 +50,8 @@ self.addEventListener('install', (event) => {
   );
 });
 
+
+//TODO: Dont fetch all tiles of map!
 /*
   FETCH EVENT: triggered for every request made by index page, after install.
 */

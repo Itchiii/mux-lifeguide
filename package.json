@@ -6,7 +6,9 @@
   "dependencies": {
     "leaflet": "^1.5.1",
     "leaflet-control-geocoder": "^1.7.0",
-    "leaflet-routing-machine": "^3.2.12"
+    "leaflet-routing-machine": "^3.2.12",
+    "pouchdb": "^7.0.0",
+    "xwiper": "^2.2.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
@@ -17,11 +19,15 @@
     "gulp-sass": "^4.0.2",
     "gulp-terser": "^1.2.0",
     "local-web-server": "^2.6.1",
-    "parallelshell": "3.0.1",
+    "npm-run-all": "^4.1.5",
+    "pouchdb-server": "^4.1.0",
     "pump": "^3.0.0"
   },
   "scripts": {
-    "start": "parallelshell \"gulp watch\" \"ws\""
+    "start": "npm-run-all -p start-gulp start-server start-db",
+    "start-gulp": "gulp watch",
+    "start-server": "ws",
+    "start-db": "pouchdb-server --port 5984 -d db"
   },
   "keywords": [],
   "author": "",
