@@ -6,9 +6,10 @@ A project at the University of Applied Science Brandenburg in Digital Media.
 ______
 ##### Technologies / Frameworks / Libraries used in project:
 * [npm/nodeJS](https://nodejs.org/en/)
+* [ServiceWorkerAPI](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
 * [PouchDB](https://pouchdb.com/)
 * [Leaflet](https://leafletjs.com/)
-* [Xwiper](https://github.com/uxitten/xwiper)
+* [Slideout.js](https://slideout.js.org/)
 * [SCSS](https://sass-lang.com/)
 * [Gulp](https://gulpjs.com/)
 * [Git](https://git-scm.com/)
@@ -44,3 +45,5 @@ $ npm start
 In browser, open [http://localhost:8000](http://localhost:8000)
 
 To open your remote database based on pouchedb-server: [http://localhost:5984/_utils/](http://localhost:5984/_utils/)
+
+Note: To get the map tiles, you need a API Token of Mapbox or you have to change the tiles server e.g http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png

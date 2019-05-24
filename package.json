@@ -8,7 +8,7 @@
     "leaflet-control-geocoder": "^1.7.0",
     "leaflet-routing-machine": "^3.2.12",
     "pouchdb": "^7.0.0",
-    "xwiper": "^2.2.0"
+    "slideout": "^1.0.1"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

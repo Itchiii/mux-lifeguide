@@ -43,15 +43,15 @@ fetch('accessTokenMapBox.txt')
 
 
 
-//Add Xwiper  
-const xwiper = new Xwiper('.slider');
- 
-xwiper.onSwipeLeft(() => console.log('swipe left'));
- 
-xwiper.onSwipeRight(() => console.log('swipe right'));
- 
-xwiper.onSwipeUp(() => console.log('swipe up'));
- 
-xwiper.onSwipeDown(() => console.log('swipe down'));
- 
-xwiper.onTap(() => console.log('tap'));
+//Added Slideout
+var slideout = new Slideout({
+  'panel': document.getElementById('panel'),
+  'menu': document.getElementById('menu'),
+  'padding': 256,
+  'tolerance': 70
+});
+
+// Toggle button
+document.querySelector('.toggle-button').addEventListener('click', function() {
+  slideout.toggle();
+});
