@@ -1,4 +1,4 @@
-# [Progressive Web Application]()
+# Lifeguide
 
 *A prototype for a Progressive Web App for the map and calendar function of the sustainability magazine Lifeguide Augsburg.*
 
