@@ -4,76 +4,138 @@ class Database {
     this.remoteDB = new PouchDB(`http://localhost:5984/${this.name}`);
     this.localDB = new PouchDB(name);
 
-    this.handlePreload();
+    //remote database will be initialized only with first use
+    this.infoRemote.then(function(info) {
+      this._syncFromRemoteToLocal();
+    }.bind(this));
   }
 
-  handlePreload() {
-    // https://pouchdb.com/2016/04/28/prebuilt-databases-with-pouchdb.html
-    // check a local document to see if we've already preloaded
-    this.remoteDB.get('_local/preloaded').then(function (doc, that) {
-    }.bind(this)).catch(function (err) {
-      if (err.name !== 'not_found') {
-        throw err;
-      }
-      // we got a 404, so the local document doesn't exist. so let's preload!
-      return this.remoteDB.load(`${this.name}.txt`).then(function () {
-        // create the local document to note that we've preloaded
-        return this.remoteDB.put({_id: '_local/preloaded'});
-      }.bind(this));
-    }.bind(this)).then(function () {
-      return this.remoteDB.allDocs({include_docs: true});
-    }.bind(this)).then(function (res) {
-    }.bind(this)).catch(console.log.bind(console));
-  }
-
+  //get info about remote database
   get infoRemote() {
-    this.remoteDB
-      .info()
-      .then(function (info) {
-        return console.log(info);
-      })
+    return this.remoteDB.info()
   }
 
+  //get info about local database
   get infoLocal() {
-    this.localDB
-      .info()
-      .then(function (info) {
-        return console.log(info);
-      })
+    return this.localDB.info()
   }
 
-  _putItem(id, desctiption) {
-    //put an entry to movies
-    this.localDB
+  /* Put an item in local database with given parameter
+   * and check if item already exits
+  */
+  _putItem(params) {
+
+    //add default values for unspedified parameters
+    var handler = {
+      get: function(obj, prop) {
+        if (prop in obj) {
+          return obj[prop];
+        }
+        else {
+          switch (prop) {
+            case 'id': obj[prop] = makeid(10); break;
+            case 'title': obj[prop] = "title"; break;
+            case 'description': obj[prop] = "description"; break;
+            case 'lat': obj[prop] = 0; break;
+            case 'long': obj[prop] = 0; break;
+            case 'rating': obj[prop] = 0; break;
+            case 'summary': obj[prop] = "summary"; break;
+            default: obj[prop] = null; break;
+          }
+        }
+        return obj[prop];
+      }
+    };
+
+    let options = new Proxy(params, handler);
+
+    //add a new document
+    return this.localDB
       .put({
-        _id: `location-${id}`,
-        title: desctiption,
-        director: desctiption
+        _id: options.id.toString(),
+        title: options.title,
+        description: options.description,
+        lat: options.lat,
+        long: options.long,
+        rating: options.rating,
+        summary: options.summary
       }).then(function (response) {
-        //Success
+        //Success -> Sync to remote
         this._syncFromLocalToRemote();
-      }.bind(this)).catch(function (err) {
-        console.warn("Error", err)
-      });
+      }.bind(this)).catch(function () {
+
+        //ups, something did not work. Document already exits?
+        this.localDB.get(options.id.toString()).then(function(doc) {
+            return this.localDB.put({
+              _id: options.id.toString(),
+              title: options.title,
+              description: options.description,
+              lat: options.lat,
+              long: options.long,
+              rating: options.rating,
+              summary: options.summary,
+              //_rev is needed at document update
+              _rev: doc._rev
+            });
+          }.bind(this)).then(function(response) {
+            //Success -> Sync to remote
+            this._syncFromLocalToRemote();
+          }.bind(this)).catch(function (err) {
+            //Nope, here is an error
+            console.error(err);
+          });
+      }.bind(this));
   }
 
-  _putImage() {
-    //just a test function
-    fetch('baby-cat.jpg')
+  /* Put an image to a document in local database with given parameter
+   * path must be defined!
+   TODO: change path, if user upload an image
+  */
+  _putImage(id, path, name) {
+    fetch(path)
       .then((response) => response.blob())
       .then((blob) => {
-        this.localDB.putAttachment('meowth', 'meowth.png', blob, 'image/jpg').then(function () {
-          console.log(blob);
-          const imageUrl = URL.createObjectURL(blob);
-          const img = document.querySelector('img');
-          img.addEventListener('load', () => URL.revokeObjectURL(imageUrl));
-          document.querySelector('img').src = imageUrl;
-        }.bind(blob)).catch(function(){
-          console.log("ah");
-        })
+        this.localDB.putAttachment(id, name, blob, 'image/jpg').then(function () {
+          //Success -> Sync to remote
+          this._syncFromLocalToRemote();
+        }.bind(blob, this)).catch(function(){
+
+          //ups, something did not work. Document already exits?
+          this.localDB.get(id).then(function(doc) {
+            console.log(doc);
+            this.localDB.putAttachment(id, name, doc._rev, blob, 'image/jpg').then(function(response) {
+              //Success -> Sync to remote
+              this._syncFromLocalToRemote();
+            }.bind(this, blob)).catch(function (err) {
+              //Nope, here is an error
+              console.error(err);
+            });
+          }.bind(this));
+        }.bind(this))
       });
   }
 
+  //get all documents
+  get allDocsOfLocalDB() {
+    return this.localDB.allDocs({
+      include_docs: true,
+      attachments: true
+    });
+  }
+
+  //get a specific document with given id
+  _getDoc(id) {
+    return this.localDB.get(id);
+  }
+
+  //get a specific attachment with given id and image name
+  _getAttachment(id, image) {
+    return this.localDB.getAttachment(id, image);
+  }
+
+  /*sync from local to remote database, 
+   *checkpoint if needed: [URL]
+  */
   _syncFromLocalToRemote() {
     var sync = PouchDB.replicate(this.localDB, this.remoteDB, {
       live: false,
@@ -90,20 +152,88 @@ class Database {
     }).on('complete', function (info) {
       // handle complete
     }).on('error', function (err) {
-      console.console.warn("boo, we hit an error!", err);
+      console.error("boo, we hit an error!", err);
+    });
+  }
+
+  /*sync from remote to local database, 
+   *checkpoint if needed: [URL]
+  */
+  _syncFromRemoteToLocal() {
+    var sync = PouchDB.replicate(this.remoteDB, this.localDB, {
+      live: false,
+      retry: false,
+      checkpoint: 'target'
+    }).on('change', function (info) {
+      // handle change
+    }).on('paused', function (err) {
+      // replication paused (e.g. replication up to date, user went offline)
+    }).on('active', function () {
+      // replicate resumed (e.g. new changes replicating, user went back online)
+    }).on('denied', function (err) {
+      // a document failed to replicate (e.g. due to permissions)
+    }).on('complete', function (info) {
+      // handle complete
+    }).on('error', function (err) {
+      console.error("boo, we hit an error!", err);
     });
   }
 }
 
+//function to make a random id, if id not specific
+//https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript#answer-1349426
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 
+//init location and event database
 const locationDB = new Database('locations');
-//locationDB.infoLocal;
-locationDB.infoRemote;
-locationDB._putItem('test5', 'test');
-locationDB._putImage();
-
-
-
 const eventDB = new Database('events');
-eventDB.infoRemote;
+
+//init from assets (only in development needed)
+fetch('./public/js/init.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    //create an entry for all documents or update it
+    for (const i of myJson) {
+      locationDB._putItem(i).then(function() {
+        //after finish of create, add attachment if specific
+        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+          locationDB._putImage(i.id, i.attachment, i.attachmentName)
+        }
+      });
+    }
+  });
+
+
+//just a test function to get all documents from location and display as div and image if necessary   
+locationDB.allDocsOfLocalDB.then(function(result) {
+  for (const entry of result.rows) {
+    const newDiv = document.createElement("div");
+    const newH = document.createElement("h1");
+    const newP = document.createElement("p");
+    newH.innerHTML = entry.doc.title;
+    newP.innerHTML = entry.doc.description;
+    newDiv.append(newH);
+    newDiv.append(newP);
+    document.body.append(newDiv);
+    if (entry.doc._attachments !== undefined) {
+      locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
+        console.log("test");
+        var url = URL.createObjectURL(blob);
+        var img = document.createElement('img');
+        img.src = url;
+        document.body.appendChild(img);
+      });
+    }
+  }
+});

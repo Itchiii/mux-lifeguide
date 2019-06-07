@@ -28,8 +28,7 @@
     "start": "npm-run-all -p start-gulp start-server start-db",
     "start-gulp": "gulp watch",
     "start-server": "ws",
-    "start-db": "pouchdb-server --port 5984 -d db",
-    "copy-db": "pouchdb-dump http://localhost:5984/kittens > kittens.txt"
+    "start-db": "pouchdb-server --port 5984 -d db"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,22 @@
+[
+    {
+        "id": "5",
+        "title": "NEUER TITEL",
+        "summary": "Wichtige Zusammenfassung",
+        "description": "Wichtige Beschreibung",
+        "lat": 48.36842,
+        "long": 10.88674,
+        "rating": 0
+    },
+    {
+        "id": "image",
+        "title": "Wichtiger Titel2",
+        "summary": "Wichtige Zusammenfassung2",
+        "description": "Wichtige Beschreibung2",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "rating": 0,
+        "attachment": "./public/assets/images/baby-cat.jpg",
+        "attachmentName": "baby-cat.jpg"
+    }
+]
