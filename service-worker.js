@@ -7,9 +7,11 @@ var CURRENT_CACHES = {
 var contentToCache = [
   './',
   './index.html',
+  './map.html',
   '/public/js/register-worker.js',
   '/public/js/app.js',
   '/public/js/db.js',
+  '/public/js/map.js',
   '/public/css/compress/style.min.css',
   '/public/assets/favicon.ico',
   '/public/assets/icons/icon-32.png',

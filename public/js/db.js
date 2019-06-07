@@ -225,7 +225,7 @@ locationDB.allDocsOfLocalDB.then(function(result) {
     newP.innerHTML = entry.doc.description;
     newDiv.append(newH);
     newDiv.append(newP);
-    document.body.append(newDiv);
+    document.getElementById('index').append(newDiv);
     if (entry.doc._attachments !== undefined) {
       locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
         console.log("test");
