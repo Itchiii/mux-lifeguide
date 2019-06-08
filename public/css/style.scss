@@ -39,6 +39,15 @@ h2 {
 
 
 /*CSS for Slideout Menu*/
+.toggle-button {
+  position: absolute;
+  z-index: 99999;
+  top: 0;
+  transition: transform 250ms ease-in-out
+}
+
+
+
 .slideout-menu {
   position: fixed;
   top: 0;
@@ -49,14 +58,15 @@ h2 {
   -webkit-overflow-scrolling: touch;
   z-index: 0;
   display: none;
+  transform: translateX(-256px);
+  transition: transform 250ms ease-in-out;
 }
 
 .slideout-menu-left {
   left: 0;
-}
-
-.slideout-menu-right {
-  right: 0;
+  position: absolute;
+  z-index: 99999999;
+  background-color: white;
 }
 
 .slideout-panel {
@@ -65,6 +75,7 @@ h2 {
  // will-change: transform;
   background-color: #FFF; /* A background-color is required */
   min-height: 100vh;
+  transform: none !important; 
 }
 
 .slideout-open,

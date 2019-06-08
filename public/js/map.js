@@ -5,7 +5,7 @@ fetch('accessTokenMapBox.txt')
     const accessTokenMapBox = data;
 
     // initialize the map on the "map" div with a given center and zoom
-    var mymap = L.map('mapid').setView([48.37154, 10.89851], 13);
+    var mymap = L.map('mapid', {zoomControl: false}).setView([48.37154, 10.89851], 13);
 
     //http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png //https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -15,6 +15,13 @@ fetch('accessTokenMapBox.txt')
         accessToken: accessTokenMapBox
     }).addTo(mymap);
 
+    
+    // Add a layer control element to the map on desktop enviroment
+    if (!L.Browser.mobile) {
+      L.control.zoom({
+        position:'bottomright'
+      }).addTo(mymap);
+    }
 
     //declare custom Icon
     var myIcon = L.icon({
