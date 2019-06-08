@@ -42,6 +42,12 @@ $ npm install
 $ npm start
 ```
 
+#### `Step 6` - open application on mobile
+
+A ServiceWorker and a the WebShareAPI need a secure connection to server. Localhost is considered secure but can not be opened remotely. You can use [ngrok](https://ngrok.com/) to tunnel localhost or follow [these](https://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http#answer-43426714) instruction.
+
+_____
+
 In browser, open [http://localhost:8000](http://localhost:8000)
 
 To open your remote database based on pouchedb-server: [http://localhost:5984/_utils/](http://localhost:5984/_utils/)
