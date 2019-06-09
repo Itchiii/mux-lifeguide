@@ -31,3 +31,21 @@ slideout.on('open', function() {
     document.getElementById('menu').style.display = "none";
   }, 250)
  });
+
+//https://css-tricks.com/how-to-use-the-web-share-api/
+const title = document.title;
+const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+
+document.getElementById('share-button').addEventListener('click', event => {
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      url: url
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    })
+    .catch(console.error);
+  } else {
+    // fallback
+  }
+});
