@@ -47,6 +47,9 @@ fetch('accessTokenMapBox.txt')
       geocoder: L.Control.Geocoder.nominatim()
     }).addTo(mymap);
 
+    //add search function
+    L.Control.geocoder().addTo(mymap);
+
     //set all entries as a marker on map
     locationDB.allDocsOfLocalDB.then(function(result) {
       for (const entry of result.rows) {
