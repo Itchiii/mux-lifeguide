@@ -18,5 +18,16 @@
         "rating": 0,
         "attachment": "./public/assets/images/baby-cat.jpg",
         "attachmentName": "baby-cat.jpg"
+    },
+    {
+        "id": "01",
+        "title": "Veranstaltung YEAHi",
+        "summary": "Wichtige Zusammenfassung",
+        "description": "Laaaaaaaaaaaaaaaaaaanger Text",
+        "location": "Bar Nimmersatt",
+        "adresse": "Hauptstraße 3, 10243 Augsburg",
+        "lat": 48.36842,
+        "long": 10.88674,
+        "rating": 0
     }
 ]
