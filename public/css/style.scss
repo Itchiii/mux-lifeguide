@@ -46,8 +46,6 @@ h2 {
   transition: transform 250ms ease-in-out
 }
 
-
-
 .slideout-menu {
   position: fixed;
   top: 0;
@@ -92,4 +90,11 @@ h2 {
 #mapid {
   width: 100vw;
   height: 100vh;
+}
+
+.share-button {
+  height: 50px;
+  background-color: #1e1e1e;
+  color: #fff;
+  border: none;
 }

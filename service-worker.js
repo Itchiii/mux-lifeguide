@@ -26,7 +26,9 @@ var contentToCache = [
   '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js',
   '/node_modules/leaflet/dist/leaflet.css',
   '/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css',
-  '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css'
+  '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css',
+  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js',
+  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css'
 ];
 
 //code from https://github.com/gokulkrishh/demo-progressive-web-app/blob/master/serviceWorker.js
