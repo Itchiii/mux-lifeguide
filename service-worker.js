@@ -14,11 +14,7 @@ var contentToCache = [
   '/public/js/map.js',
   '/public/css/compress/style.min.css',
   '/public/assets/favicon.ico',
-  '/public/assets/icons/icon-32.png',
-  '/public/assets/icons/icon-64.png',
-  '/public/assets/icons/icon-128.png',
-  '/public/assets/icons/icon-256.png',
-  '/public/assets/icons/icon-512.png',
+  '/public/assets/images/lifeguideLogo.png',
   '/accessTokenMapBox.txt',
   '/mux-lifeguide.manifest',
   '/node_modules/leaflet/dist/leaflet.js',
@@ -28,7 +24,8 @@ var contentToCache = [
   '/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css',
   '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css',
   '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js',
-  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css'
+  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css',
+  '/node_modules/pouchdb/dist/pouchdb.find.js'
 ];
 
 //code from https://github.com/gokulkrishh/demo-progressive-web-app/blob/master/serviceWorker.js
