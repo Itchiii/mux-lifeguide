@@ -23,7 +23,7 @@ class Database {
   /* Put an item in local database with given parameter
    * and check if item already exits
   */
-  _putItem(params) {
+  _putItem(params, resolve, reject) {
 
     //add default values for unspedified parameters
     var handler = {
@@ -40,6 +40,7 @@ class Database {
             case 'long': obj[prop] = 0; break;
             case 'rating': obj[prop] = 0; break;
             case 'summary': obj[prop] = "summary"; break;
+            case 'recommend': obj[prop] = false; break;
             default: obj[prop] = null; break;
           }
         }
@@ -50,7 +51,7 @@ class Database {
     let options = new Proxy(params, handler);
 
     //add a new document
-    return this.localDB
+    this.localDB
       .put({
         _id: options.id.toString(),
         title: options.title,
@@ -58,15 +59,17 @@ class Database {
         lat: options.lat,
         long: options.long,
         rating: options.rating,
-        summary: options.summary
+        summary: options.summary,
+        recommend: options.recommend
       }).then(function (response) {
+        resolve("hello world")
         //Success -> Sync to remote
         this._syncFromLocalToRemote();
       }.bind(this)).catch(function () {
 
         //ups, something did not work. Document already exits?
         this.localDB.get(options.id.toString()).then(function(doc) {
-            return this.localDB.put({
+            this.localDB.put({
               _id: options.id.toString(),
               title: options.title,
               description: options.description,
@@ -74,11 +77,12 @@ class Database {
               long: options.long,
               rating: options.rating,
               summary: options.summary,
+              recommend: options.recommend,
               //_rev is needed at document update
               _rev: doc._rev
             });
           }.bind(this)).then(function(response) {
-            //Success -> Sync to remote
+            resolve("hello world2")//Success -> Sync to remote
             this._syncFromLocalToRemote();
           }.bind(this)).catch(function (err) {
             //Nope, here is an error
@@ -91,21 +95,21 @@ class Database {
    * path must be defined!
    TODO: change path, if user upload an image
   */
-  _putImage(id, path, name) {
+  _putImage(id, path, name, resolve, reject) {
     fetch(path)
       .then((response) => response.blob())
       .then((blob) => {
         this.localDB.putAttachment(id, name, blob, 'image/jpg').then(function () {
           //Success -> Sync to remote
           this._syncFromLocalToRemote();
+          resolve("hello world01")
         }.bind(blob, this)).catch(function(){
 
           //ups, something did not work. Document already exits?
           this.localDB.get(id).then(function(doc) {
-            console.log(doc);
             this.localDB.putAttachment(id, name, doc._rev, blob, 'image/jpg').then(function(response) {
-              //Success -> Sync to remote
               this._syncFromLocalToRemote();
+              resolve("hello world02");
             }.bind(this, blob)).catch(function (err) {
               //Nope, here is an error
               console.error(err);
@@ -133,6 +137,18 @@ class Database {
     return this.localDB.getAttachment(id, image);
   }
 
+  _getDocByFind(field, param) {
+    return this.localDB.createIndex({
+      index: {fields: [field]}
+    }).then(function(){
+      return this.localDB.find({
+        selector: {
+          [field]: param
+        }
+      })
+    }.bind(this));
+  }
+
   /*sync from local to remote database, 
    *checkpoint if needed: [URL]
   */
@@ -152,7 +168,7 @@ class Database {
     }).on('complete', function (info) {
       // handle complete
     }).on('error', function (err) {
-      console.error("boo, we hit an error!", err);
+      //console.error("boo, we hit an error!", err);
     });
   }
 
@@ -160,7 +176,7 @@ class Database {
    *checkpoint if needed: [URL]
   */
   _syncFromRemoteToLocal() {
-    var sync = PouchDB.replicate(this.remoteDB, this.localDB, {
+    return PouchDB.replicate(this.remoteDB, this.localDB, {
       live: false,
       retry: false,
       checkpoint: 'target'
@@ -175,7 +191,7 @@ class Database {
     }).on('complete', function (info) {
       // handle complete
     }).on('error', function (err) {
-      console.error("boo, we hit an error!", err);
+      //console.error("boo, we hit an error!", err);
     });
   }
 }
@@ -196,7 +212,28 @@ function makeid(length) {
 //init location and event database
 const locationDB = new Database('locations');
 const eventDB = new Database('events');
+const tourDB = new Database('tours');
 
+
+//if you want change your local init, comment fetchJson out and setRecommend in.
+locationDB._syncFromRemoteToLocal().on('complete', function(info){
+  setRecommend(locationDB);
+  //fetchJson();
+}).on('error', function (err) {
+  setRecommend(locationDB);
+  //fetchJson(); //for mobile, because you cant access the remote database
+});
+
+eventDB._syncFromRemoteToLocal().on('complete', function(info){
+  setRecommend(eventDB);
+});
+
+tourDB._syncFromRemoteToLocal().on('complete', function(info){
+  setRecommend(tourDB);
+});
+
+
+function fetchJson() {
 //init from assets (only in development needed)
 fetch('./public/js/init.json')
   .then(function(response) {
@@ -205,35 +242,47 @@ fetch('./public/js/init.json')
   .then(function(myJson) {
     //create an entry for all documents or update it
     for (const i of myJson) {
-      locationDB._putItem(i).then(function() {
-        //after finish of create, add attachment if specific
+      let putItemEventDB = new Promise(function(resolve, reject){
+        eventDB._putItem(i, resolve, reject);
+      })
+      putItemEventDB.then(function success(data){
         if (i.attachment !== undefined && i.attachmentName !== undefined) {
-          locationDB._putImage(i.id, i.attachment, i.attachmentName)
+          let putImageEventDB = new Promise(function(resolve, reject){
+            eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+          })
+          putImageEventDB.then(function success(data) {
+            setTipWithJSON(eventDB, i);
+          });
         }
-      });
+      })
+
+      let putItemTourDB = new Promise(function(resolve, reject){
+        tourDB._putItem(i, resolve, reject);
+      })
+      putItemTourDB.then(function success(data){
+        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+          let putImageTourDB = new Promise(function(resolve, reject){
+            tourDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+          })
+          putImageTourDB.then(function success(data) {
+            setTipWithJSON(tourDB, i);
+          });
+        }
+      })
+
+      let putItemLocationDB = new Promise(function(resolve, reject){
+        locationDB._putItem(i, resolve, reject);
+      })
+      putItemLocationDB.then(function success(data){
+        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+          let putImageLocationDB = new Promise(function(resolve, reject){
+            locationDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+          })
+          putImageLocationDB.then(function success(data) {
+            setTipWithJSON(locationDB, i);
+          });
+        }
+      })
     }
   });
-
-
-//just a test function to get all documents from location and display as div and image if necessary   
-locationDB.allDocsOfLocalDB.then(function(result) {
-  for (const entry of result.rows) {
-    const newDiv = document.createElement("div");
-    const newH = document.createElement("h1");
-    const newP = document.createElement("p");
-    newH.innerHTML = entry.doc.title;
-    newP.innerHTML = entry.doc.description;
-    newDiv.append(newH);
-    newDiv.append(newP);
-    document.getElementById('index').append(newDiv);
-    if (entry.doc._attachments !== undefined) {
-      locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
-        console.log("test");
-        var url = URL.createObjectURL(blob);
-        var img = document.createElement('img');
-        img.src = url;
-        document.body.appendChild(img);
-      });
-    }
-  }
-});
+}
