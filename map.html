@@ -4,16 +4,16 @@
 	<meta charset="utf-8">
 	<meta name="description" content="A prototype for a Progressive Web App for the map and calendar function of the sustainability magazine Lifeguide Augsburg.">
 	<meta name="author" content="">
-	<meta name="theme-color" content="#f7f7f7">
+	<meta name="theme-color" content="#e66740">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:image" content="/public/assets/icons/icon-512.png">
+	<meta property="og:image" content="/public/assets/images/lifeguideLogo.png">
 	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet/dist/leaflet.css" />
 	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
 	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
 	<link rel="shortcut icon" href="public/assets/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
 	<link rel="stylesheet" href="/public/css/compress/style.min.css">
 	<link rel="manifest" href="mux-lifeguide.manifest">
-	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
 	<script type="text/javascript" src="/node_modules/leaflet/dist/leaflet.js"></script>
 	<script type="text/javascript" src="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 	<script type="text/javascript" src="/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
@@ -31,6 +31,7 @@
 	<main id="panel">
 		<button class="toggle-button" id="toggle-button">☰</button>
 		<div id="mapid" data-slideout-ignore></div>
+		<button class="add-location">+</button>
 		<div class="bottom-menu">
 			<div class="bm-inner-menu">
 				<span><a href="events.html">Events</a></span>

@@ -9,7 +9,7 @@ const gulp = require('gulp'),
       csscomb = require('gulp-csscomb');
 
 //style paths
-const scssFiles = 'public/css/style.scss',
+const scssFiles = 'public/css/*.scss',
       jsFiles ='public/js/*.js',
       cssCompDest = 'public/css/compress/',
       jsDest = 'public/js/compress/';
@@ -17,7 +17,10 @@ const scssFiles = 'public/css/style.scss',
 gulp.task('styles', function (cb) {
   pump([
       gulp.src(scssFiles),
+      concat('styles.scss'),
       sass(),
+      rename('style.css'),
+      gulp.dest(cssCompDest),
       cleanCSS(),
       rename('style.min.css'),
       gulp.dest(cssCompDest)
