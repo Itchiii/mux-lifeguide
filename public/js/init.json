@@ -9,25 +9,51 @@
         "rating": 0
     },
     {
-        "id": "image",
-        "title": "Wichtiger Titel2",
-        "summary": "Wichtige Zusammenfassung2",
-        "description": "Wichtige Beschreibung2",
+        "id": "architekturmusuem",
+        "title": "Architekturmuseum im Theolottviertel",
+        "summary": "In der Villa des Architekten Sebastian Buchegger befindet sich heute ein Museum. Anfang des 20. Jahrhunderts plante der Architekt dieses Viertel als grüne Gartenstadt. Citynah und trotzdem im Grünen. ",
+        "description": "Der Architekt Sebastian Buchegger griff die Idee der Gartenstädte auf und kaufte 1905 ein Stück feuchtes, abschüssiges Land an der Wertach – für 2,60 Mark pro Quadratmeter. Dort entstanden hübsche Bürgerhäuser und mehrgeschossige Mietshäuser, die durch gewundene Straßen miteinander verbunden sind und wie eine eigene Kleinstadt anmuten.",
         "lat": 48.36756,
         "long": 10.88579,
         "rating": 0,
-        "attachment": "./public/assets/images/baby-cat.jpg",
-        "attachmentName": "baby-cat.jpg"
+        "attachment": "./public/assets/images/architekturmuseum.jpg",
+        "attachmentName": "architekturmusuem.jpg",
+        "recommend": true
     },
     {
-        "id": "01",
-        "title": "Veranstaltung YEAHi",
-        "summary": "Wichtige Zusammenfassung",
-        "description": "Laaaaaaaaaaaaaaaaaaanger Text",
-        "location": "Bar Nimmersatt",
-        "adresse": "Hauptstraße 3, 10243 Augsburg",
-        "lat": 48.36842,
-        "long": 10.88674,
-        "rating": 0
+        "id": "europadorf",
+        "title": "Augsburger Europadorf",
+        "summary": "Gelungenes Integrationsprojekt, günstige Mieten, buntgemischte Mieterschaft, generationsübergreifendes Wohnen, ökologischer Wohnungsbau ",
+        "description": "Die Idee für Europadörfer stammt aus der Zeit nach dem zweiten Weltkrieg. Heimatlose Menschen aus unterschiedlichen Ländern sollten in den sechs Häusern in Hochzoll friedlich miteinander leben. Der Initiator Pater Dominique Pire erhielt für diese Idee der Völkerverständigung 1958 den Friedensnobelpreis.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "rating": 0,
+        "attachment": "./public/assets/images/europadorf.jpg",
+        "attachmentName": "europadorf.jpg",
+        "recommend": true
+    },
+    {
+        "id": "gruenfux",
+        "title": "Schuberts Biobackwaren im Grünfux-deluxe",
+        "summary": "Für Sparfüchse: Im neuen Unverpackt-Verkaufswagen der Bio-Bäckerei Schubert kommt das (noch) Gute von gestern ins Körbchen – beste Bioqualität wandert preiswert und unverpackt in die Einkaufstaschen der Kund*innen!",
+        "description": "Warum wegwerfen was noch schmeckt? Gutes Brot, Feingebäck und Snacks von gestern, leckerer Kuchen mit Schönheitsfehlern, Dauerbackwaren mit kurzem Mindesthaltbarkeitsdatum und guter Kondition, frisches Kleingebäck aus den laufenden Qualitätskontrollen, Brezen falsch geschlungen, Backtests aus der Produktentwicklung (Sneak Preview!) – all die feinen Dinge können doch nicht im Müll landen! Ab sofort kommen diese hochwertigen Biobackwaren ins neue Grünfux-deluxe und warten dort auf ihre Genießer*innen. Jeder Tag wird anders.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "rating": 0,
+        "attachment": "./public/assets/images/gruenfux.jpg",
+        "attachmentName": "gruenfux.jpg",
+        "recommend": true
+    },
+    {
+        "id": "horn",
+        "title": "Deutscher Alpenverein Sektion Augsburg",
+        "summary": "Seit 150 Jahren Engagement für die Alpenlandschaft, Bergsport und Naturschutz. Augsburg hat 15.000 Mitglieder. ",
+        "description": "Vor 150 Jahren, am 8. Juli 1869, gründeten die Augsburger Buchhändler Theodor Lampart und Friedrich Schenkenhofer mit 56 weiteren Herren der gehobenen Gesellschaft die Sektion Augsburg des Deutschen Alpenvereins. Aus einer Interessengemeinschaft für die Alpenlandschaft entwickelte sich zunächst ein Bergsportverband und seit den frühen achtziger Jahren des vergangenen Jahrhunderts auch ein Naturschutzverband. Heute hat die Sektion Augsburg 15.000 Mitglieder und engagiert sich nachhaltig für Natur- und Umweltschutz",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "rating": 0,
+        "attachment": "./public/assets/images/horn.jpg",
+        "attachmentName": "horn.jpg",
+        "recommend": true
     }
 ]
