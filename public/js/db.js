@@ -217,80 +217,113 @@ const tourDB = new Database('tours');
 
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
-  setRecommend(locationDB);
-  fetchJson();
+  //setRecommend(locationDB);
+  fetchJson(locationDB);
 }).on('error', function (err) {
   setRecommend(locationDB);
-  //fetchJson(); //for mobile, because you cant access the remote database
+  //fetchJson(locationDB); //for mobile, because you cant access the remote database
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info){
-  setRecommend(eventDB);
+  //setRecommend(eventDB);
+  fetchJson(eventDB);
 }).on('error', function (err) {
     setRecommend(eventDB);
-    //fetchJson(); //for mobile, because you cant access the remote database
+    //fetchJson(eventDB); //for mobile, because you cant access the remote database
 });
 
 tourDB._syncFromRemoteToLocal().on('complete', function(info){
-  setRecommend(tourDB);
+  //setRecommend(tourDB);
+  fetchJson(tourDB);
 }).on('error', function (err) {
     setRecommend(tourDB);
-    //fetchJson(); //for mobile, because you cant access the remote database
+    //fetchJson(tourDB); //for mobile, because you cant access the remote database
 });
 
 
-function fetchJson() {
+function fetchJson(database) {
 //init from assets (only in development needed)
-fetch('./public/js/init.json')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    //create an entry for all documents or update it
-    for (const i of myJson) {
-      let putItemEventDB = new Promise(function(resolve, reject){
-        eventDB._putItem(i, resolve, reject);
-      });
-      putItemEventDB.then(function success(data){
-        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-          let putImageEventDB = new Promise(function(resolve, reject){
-            eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          });
-          putImageEventDB.then(function success(data) {
-            setTipWithJSON(eventDB, i);
-          });
-        }
-      });
-
-      let putItemTourDB = new Promise(function(resolve, reject){
-        tourDB._putItem(i, resolve, reject);
-      });
-      putItemTourDB.then(function success(data){
-        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-          let putImageTourDB = new Promise(function(resolve, reject){
-            tourDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          });
-          putImageTourDB.then(function success(data) {
-            setTipWithJSON(tourDB, i);
-          });
-        }
-      });
-
-      let putItemLocationDB = new Promise(function(resolve, reject){
-        locationDB._putItem(i, resolve, reject);
-      });
-      putItemLocationDB.then(function success(data){
-        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-          let putImageLocationDB = new Promise(function(resolve, reject){
-            locationDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          });
-          putImageLocationDB.then(function success(data) {
-            setTipWithJSON(locationDB, i);
-          });
-        }
-      })
+    switch (database) {
+        case locationDB:  initLocations(); break;
+        case eventDB: initEvents(); break;
+        case tourDB: initTours(); break;
     }
-  });
+
+    function initLocations() {
+        fetch('./public/js/init.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(myJson) {
+                //create an entry for all documents or update it
+                for (const i of myJson) {
+                    let putItemLocationDB = new Promise(function(resolve, reject){
+                        locationDB._putItem(i, resolve, reject);
+                    });
+                    putItemLocationDB.then(function success(data){
+                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+                            let putImageLocationDB = new Promise(function(resolve, reject){
+                                locationDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+                            });
+                            putImageLocationDB.then(function success(data) {
+                                setTipWithJSON(locationDB, i);
+                            });
+                        }
+                    });
+                }
+            });
+    }
+
+    function initEvents() {
+        fetch('./public/js/initEvents.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(myJson) {
+                //create an entry for all documents or update it
+                for (const i of myJson) {
+                    let putItemEventDB = new Promise(function(resolve, reject){
+                        eventDB._putItem(i, resolve, reject);
+                    });
+                    putItemEventDB.then(function success(data){
+                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+                            let putImageEventDB = new Promise(function(resolve, reject){
+                                eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+                            });
+                            putImageEventDB.then(function success(data) {
+                                setTipWithJSON(eventDB, i);
+                            });
+                        }
+                    });
+                }
+            });
+    }
+
+    function initTours() {
+        fetch('./public/js/init.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(myJson) {
+                //create an entry for all documents or update it
+                for (const i of myJson) {
+
+                    let putItemTourDB = new Promise(function(resolve, reject){
+                        tourDB._putItem(i, resolve, reject);
+                    });
+                    putItemTourDB.then(function success(data){
+                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
+                            let putImageTourDB = new Promise(function(resolve, reject){
+                                tourDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+                            });
+                            putImageTourDB.then(function success(data) {
+                                setTipWithJSON(tourDB, i);
+                            });
+                        }
+                    });
+                }
+            });
+    }
 }
 
 //function to get database entrys appear on events.html
