@@ -62,7 +62,7 @@ class Database {
         summary: options.summary,
         recommend: options.recommend
       }).then(function (response) {
-        resolve("hello world")
+        resolve();
         //Success -> Sync to remote
         this._syncFromLocalToRemote();
       }.bind(this)).catch(function () {
@@ -82,7 +82,7 @@ class Database {
               _rev: doc._rev
             });
           }.bind(this)).then(function(response) {
-            resolve("hello world2")//Success -> Sync to remote
+            resolve();//Success -> Sync to remote
             this._syncFromLocalToRemote();
           }.bind(this)).catch(function (err) {
             //Nope, here is an error
@@ -102,14 +102,14 @@ class Database {
         this.localDB.putAttachment(id, name, blob, 'image/jpg').then(function () {
           //Success -> Sync to remote
           this._syncFromLocalToRemote();
-          resolve("hello world01")
+          resolve();
         }.bind(blob, this)).catch(function(){
 
           //ups, something did not work. Document already exits?
           this.localDB.get(id).then(function(doc) {
             this.localDB.putAttachment(id, name, doc._rev, blob, 'image/jpg').then(function(response) {
               this._syncFromLocalToRemote();
-              resolve("hello world02");
+              resolve();
             }.bind(this, blob)).catch(function (err) {
               //Nope, here is an error
               console.error(err);
@@ -153,7 +153,7 @@ class Database {
    *checkpoint if needed: [URL]
   */
   _syncFromLocalToRemote() {
-    var sync = PouchDB.replicate(this.localDB, this.remoteDB, {
+    return PouchDB.replicate(this.localDB, this.remoteDB, {
       live: false,
       retry: false,
       checkpoint: 'source'
@@ -215,10 +215,10 @@ const eventDB = new Database('events');
 const tourDB = new Database('tours');
 
 
-//if you want change your local init, comment fetchJson out and setRecommend in.
+//if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
   setRecommend(locationDB);
-  //fetchJson();
+  fetchJson();
 }).on('error', function (err) {
   setRecommend(locationDB);
   //fetchJson(); //for mobile, because you cant access the remote database
@@ -226,10 +226,16 @@ locationDB._syncFromRemoteToLocal().on('complete', function(info){
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info){
   setRecommend(eventDB);
+}).on('error', function (err) {
+    setRecommend(eventDB);
+    //fetchJson(); //for mobile, because you cant access the remote database
 });
 
 tourDB._syncFromRemoteToLocal().on('complete', function(info){
   setRecommend(tourDB);
+}).on('error', function (err) {
+    setRecommend(tourDB);
+    //fetchJson(); //for mobile, because you cant access the remote database
 });
 
 
@@ -244,40 +250,40 @@ fetch('./public/js/init.json')
     for (const i of myJson) {
       let putItemEventDB = new Promise(function(resolve, reject){
         eventDB._putItem(i, resolve, reject);
-      })
+      });
       putItemEventDB.then(function success(data){
         if (i.attachment !== undefined && i.attachmentName !== undefined) {
           let putImageEventDB = new Promise(function(resolve, reject){
             eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          })
+          });
           putImageEventDB.then(function success(data) {
             setTipWithJSON(eventDB, i);
           });
         }
-      })
+      });
 
       let putItemTourDB = new Promise(function(resolve, reject){
         tourDB._putItem(i, resolve, reject);
-      })
+      });
       putItemTourDB.then(function success(data){
         if (i.attachment !== undefined && i.attachmentName !== undefined) {
           let putImageTourDB = new Promise(function(resolve, reject){
             tourDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          })
+          });
           putImageTourDB.then(function success(data) {
             setTipWithJSON(tourDB, i);
           });
         }
-      })
+      });
 
       let putItemLocationDB = new Promise(function(resolve, reject){
         locationDB._putItem(i, resolve, reject);
-      })
+      });
       putItemLocationDB.then(function success(data){
         if (i.attachment !== undefined && i.attachmentName !== undefined) {
           let putImageLocationDB = new Promise(function(resolve, reject){
             locationDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-          })
+          });
           putImageLocationDB.then(function success(data) {
             setTipWithJSON(locationDB, i);
           });
