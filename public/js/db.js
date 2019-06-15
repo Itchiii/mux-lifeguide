@@ -326,25 +326,3 @@ function fetchJson(database) {
     }
 }
 
-//function to get database entrys appear on events.html
-locationDB.allDocsOfLocalDB.then(function(result) {
-  for (const entry of result.rows) {
-    const newDiv = document.createElement("div");
-    const newH = document.createElement("h1");
-    const newP = document.createElement("p");
-    newH.innerHTML = entry.doc.title;
-    newP.innerHTML = entry.doc.description;
-    newDiv.append(newH);
-    newDiv.append(newP);
-    document.getElementById('events').append(newDiv);
-    if (entry.doc._attachments !== undefined) {
-      locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
-        console.log("test");
-        var url = URL.createObjectURL(blob);
-        var img = document.createElement('img');
-        img.src = url;
-        document.body.appendChild(img);
-      });
-    }
-  }
-});

@@ -24,24 +24,27 @@
 	<script src="/node_modules/pouchdb/dist/pouchdb.find.js"></script>
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
-<body id="events">
+<body id="eventformular">
 	<div class="wrapper">
 		<img class="index-lifeguideLogo" src="/public/assets/images/lifeguideLogo.png" alt="LifeguideLogo">
-		<div class="event-tips-container">
-			<h2 class="event-tips-heading">Empfohlene Veranstaltungen</h2>
-			<!-- <a class="event-tips-showAll" href="events.html">Alle anzeigen</a> -->
-			<div class="event-tips" id="event-tips"></div>
-		</div>
 	</div>
+        <h2>Gib hier deine Veranstaltung ein</h2>
+        <form onsubmit="showAlert()"> 
+            <label for="vname">Vorname: <input id="vname" name="vname"> </label></br>
+            <label for="nname">Nachname: <input id="nname" name="nname"> </label></br>
+            <label for="titel">Veranstaltungstitel: <input id="titel" name="titel"> </label></br>
+            <label for="beschreibung">Beschreibung: <input id="beschreibung" name="beschreibung"> </label></br>
+            <label for="vortrag">Vortrag</label> <input type="radio" id="vortrag" name="art" value="0"></br>
+            <label for="wanderung">Wanderung</label> <input type="radio" id="wanderung" name="art" value="1"></br>
+            <a href="events.html"><input type="submit" value="senden"></a>
+        </form>
+        <script>
+                function showAlert() {
+                  alert("Veranstaltung abgesendet. Wir prüfen deinen Eintrag baldmöglichst.");
+                  console.log("Hello world!");
+                }
+        </script>
 
-	<nav id="menu">
-		<h2>Menu</h2>
-	</nav>
-  
-	<main id="panel">
-
-
-		<button class="share-button" id="share-button">Share Me</button>
 		<div class="bottom-menu">
 			<div class="bm-inner-menu">
 				<span><a href="events.html">Events</a></span>
@@ -49,8 +52,7 @@
 				<span><a href="map.html">Map</a></span>
 			</div>
 		</div>
-		<a href="eventformular.html" class="float">+</a>
-	</main>
+
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/app.js"></script>
 	<script src="/public/js/events.js"></script>
