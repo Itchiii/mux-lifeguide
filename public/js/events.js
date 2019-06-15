@@ -3,14 +3,17 @@ eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
       const newDiv = document.createElement("div");
       const newF = document.createElement("img");
+      const newD = document.createElement("p");
       const newH = document.createElement("h2");
       const newS = document.createElement("h3");
       const newP = document.createElement("p");
       newF.innerHTML = entry.doc.attachment;
+      newD.innerHTML = entry.doc.datum;
       newH.innerHTML = entry.doc.title;
       newS.innerHTML = entry.doc.summary;
       newP.innerHTML = entry.doc.description;
       newDiv.append(newF);
+      newDiv.append(newD);
       newDiv.append(newH);
       newDiv.append(newS);
       newDiv.append(newP);
