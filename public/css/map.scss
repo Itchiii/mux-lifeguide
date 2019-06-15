@@ -1,9 +1,20 @@
+body.overflow-hidden {
+  overflow: hidden;
+}
+
+/*Map Styling*/
+#mapid {
+  width: 100vw;
+  height: 100vh;
+}
+
 .leaflet-top.leaflet-right {
   left: 0;
   right: 0;
   margin: auto;
   display: flex;
   justify-content: center;
+  z-index: 990;
 
   .leaflet-routing-container {
     display: none;
@@ -66,7 +77,41 @@
   cursor: pointer;
 }
 
+.location-item-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 250px;
+  background-color: #fff;
+  bottom: 0;
+  z-index: 10001;
+  padding-bottom: 50px;
+  overflow-y: auto;
+  box-shadow: 0 -6px 8px 0 rgba(0,0,0,.05);
 
+  &.show-complete {
+    top: 0;
+    height: 100vh;
+    bottom: unset;
+  }
+}
 
+.location-item-placeholder {
+  position: absolute;
+  width: 100vw;
+  background-color: #fff;
+  bottom: 1px;
+  z-index: 10000;
+}
 
+.location-item-holder {
+  display: flex;
+  height: 20px;
+  width: 100%;
+  justify-content: center;
 
+  svg {
+    height: 100%;
+    width: auto;
+    transform: scale(1.5);
+  }
+}
