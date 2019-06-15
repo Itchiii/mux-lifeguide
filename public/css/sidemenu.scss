@@ -1,0 +1,61 @@
+/*CSS for Slideout Menu*/
+.toggle-button {
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	transition: transform 250ms ease-in-out;
+	right: 0;
+	width: 30px; 
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	background-color: #fff;
+	
+	svg.toggle-button-icon {
+		transform: scale(1.5);
+		width: 30px;
+		height: 30px;
+	}
+}
+
+.slideout-menu {
+	$width: 256px;
+	top: 0;
+	bottom: 0;
+	width: $width;
+	height: 80vh;
+	margin: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: block;
+	transform: translateX(-1 * $width + 30px);
+	transition: transform 250ms ease-in-out;
+	box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+	left: 0;
+	position: absolute;
+	z-index: 1000;
+	background-color: #fff;
+	
+	&.open {
+		transform: translateX(0);
+	}
+}
+
+.panel:before {
+	content: '';
+	display: block;
+	pointer-events: none;
+	background-color: rgba(0,0,0,0);
+	transition: background-color 250ms ease-in-out;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 999;
+}
+
+.panel.open:before {
+	background-color: rgba(0,0,0,.5);
+}

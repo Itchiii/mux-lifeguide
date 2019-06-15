@@ -18,30 +18,42 @@
 	<script type="text/javascript" src="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 	<script type="text/javascript" src="/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 	<script type="text/javascript" src="/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
-	<script src="/node_modules/slideout/dist/slideout.min.js"></script>	
 	<script src="/node_modules/pouchdb/dist/pouchdb.min.js"></script>
 	<script src="/node_modules/pouchdb-load/dist/pouchdb.load.min.js"></script>
 	<script src="/node_modules/pouchdb/dist/pouchdb.find.js"></script>
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
-<body class="slider">
-	<nav id="menu">
+<body class="overflow-hidden">
+	<nav id="menu" class="slideout-menu">
+		<button class="toggle-button" id="toggle-button">
+			<svg class="toggle-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+				<path fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M26 20.006L40 32 26 44.006" stroke-linejoin="round" stroke-linecap="round"/>
+				</svg>
+		</button>
 		<h2>Menu</h2>
 	</nav>
-	<main id="panel">
-		<button class="toggle-button" id="toggle-button">☰</button>
-		<div id="mapid" data-slideout-ignore></div>
+	<main id="panel" class="panel">
+		<div id="mapid"></div>
 		<button class="add-location">+</button>
-		<div class="bottom-menu">
-			<div class="bm-inner-menu">
-				<span><a href="events.html">Events</a></span>
-				<span><a href="index.html">Start</a></span>
-				<span><a href="map.html">Map</a></span>
-			</div>
-		</div>
 	</main>
+	<div class="location-item-wrapper" id="location-item-wrapper">
+		<div class="location-item-holder" id="location-item-holder">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+				<path fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M20 40l11.994-14L44 40" stroke-linejoin="round" stroke-linecap="round"/>
+			</svg>
+		</div>
+	</div>
+	<div class="location-item-placeholder" id="location-item-heightPlaceholder"></div>
+	<div class="bottom-menu">
+		<div class="bm-inner-menu">
+			<span><a href="events.html">Events</a></span>
+			<span><a href="index.html">Start</a></span>
+			<span><a href="map.html">Map</a></span>
+		</div>
+	</div>
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/map.js"></script>
 	<script src="/public/js/app.js"></script>
+	<script src="/public/js/sidemenu.js"></script>
 </body>
 </html>

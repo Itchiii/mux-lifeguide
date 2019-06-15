@@ -77,3 +77,63 @@ fetch('accessTokenMapBox.txt')
       }
     });
   });
+
+/* function for sliding the container after click on a location */
+const holder = document.getElementById('location-item-holder');
+const locationItem = document.getElementById('location-item-wrapper');
+const placeholder = document.getElementById('location-item-heightPlaceholder');
+
+//add various EventListener for touch and mouse interactions
+holder.addEventListener("touchmove", holderOnMove);
+holder.addEventListener("mousedown", holderOnDown);
+holder.addEventListener("mouseup", holderOnUp);
+holder.addEventListener("touchstart", holderOnDown);
+holder.addEventListener("touchend", holderOnUp);
+
+var touchBeginOnHolder = 0;
+var touchDif = 0;
+
+//save start position
+function holderOnDown(e) {
+  if (e.type === 'mousedown') {
+    touchBeginOnHolder = e.pageY;
+    //add eventlistener after mousedown
+    holder.addEventListener("mousemove", holderOnMove);
+  }
+  else {
+    touchBeginOnHolder = e.touches[0].pageY;
+  }
+}
+
+
+function holderOnMove(e) {
+  if (e.type === 'mousemove') {
+    touchDif = touchBeginOnHolder - e.pageY;
+  }
+  else {
+    touchDif = touchBeginOnHolder - e.touches[0].pageY;
+  }
+  //add moving difference as transform
+  locationItem.style.setProperty('transform', `translateY(${touchDif * (-1)}px)`);
+
+  if (touchDif > 0){
+    //change heigt of a div after the container, that is looks like an expanding container 
+    placeholder.style.setProperty('height', `${touchDif}px`);
+  }
+}
+
+function holderOnUp(e) {
+  if (e.type === 'mouseup') {
+    holder.removeEventListener("mousemove", holderOnMove);
+  }
+  //remove added properties
+  locationItem.style.removeProperty('transform');
+  locationItem.style.removeProperty('height');
+  placeholder.style.removeProperty('height');
+  if (touchDif > 100) {
+    locationItem.classList.add('show-complete');
+  }
+  if (touchDif < 100 ) {
+    locationItem.classList.remove('show-complete');
+  }
+}

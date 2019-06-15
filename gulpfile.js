@@ -53,5 +53,4 @@ gulp.task('scripts', function (cb) {
 
 gulp.task('watch',function() {
     gulp.watch(scssFiles, gulp.series('styles'));
-    gulp.watch(jsFiles,gulp.series('scripts'));
 });
