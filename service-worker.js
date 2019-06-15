@@ -12,6 +12,7 @@ var contentToCache = [
   '/public/js/app.js',
   '/public/js/db.js',
   '/public/js/map.js',
+  '/public/js/sidemenu.js',
   '/public/css/compress/style.min.css',
   '/public/assets/favicon.ico',
   '/public/assets/images/lifeguideLogo.png',

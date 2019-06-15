@@ -32,7 +32,7 @@ a {
   position: fixed;
   bottom: 0;
   left:0;
-  z-index: 9999;
+  z-index: 99999999;
 }
 
 .bm-inner-menu {
@@ -43,61 +43,6 @@ a {
   max-width: 50em;
   width: 100vw;
   height: 100%; 
-}
-
-
-/*CSS for Slideout Menu*/
-.toggle-button {
-  position: absolute;
-  z-index: 99999;
-  top: 0;
-  transition: transform 250ms ease-in-out
-}
-
-.slideout-menu {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 256px;
-  min-height: 100vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  z-index: 0;
-  display: none;
-  transform: translateX(-256px);
-  transition: transform 250ms ease-in-out;
-}
-
-.slideout-menu-left {
-  left: 0;
-  position: absolute;
-  z-index: 99999999;
-  background-color: white;
-}
-
-.slideout-panel {
-  position: relative;
-  z-index: 1;
- // will-change: transform;
-  background-color: #FFF; /* A background-color is required */
-  min-height: 100vh;
-  transform: none !important; 
-}
-
-.slideout-open,
-.slideout-open body,
-.slideout-open .slideout-panel {
-  overflow: hidden;
-}
-
-.slideout-open .slideout-menu {
-  display: block;
-}
-
-/*Map Styling*/
-#mapid {
-  width: 100vw;
-  height: 100vh;
 }
 
 .share-button {
