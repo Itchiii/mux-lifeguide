@@ -10,3 +10,34 @@
 	text-align:center;
 	box-shadow: 2px 2px 3px #999;
 }
+
+.eventColumn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  padding: 5px;
+  background-color: #F6F7F9;
+  border-radius: 5px;
+}
+
+.eventDates{
+  margin: 5px;
+  padding: 5px;
+  
+}
+
+.eventList{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+}
+
+.eventList h3 {
+  margin-bottom: 6px;
+}
+
+#events{
+  margin-bottom: 50px;
+}
