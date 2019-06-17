@@ -41,6 +41,8 @@ class Database {
             case 'rating': obj[prop] = 0; break;
             case 'summary': obj[prop] = "summary"; break;
             case 'recommend': obj[prop] = false; break;
+            case 'start': obj[prop] = "start"; break;
+            case 'date': obj[prop] = "date"; break;
             default: obj[prop] = null; break;
           }
         }
@@ -60,7 +62,9 @@ class Database {
         long: options.long,
         rating: options.rating,
         summary: options.summary,
-        recommend: options.recommend
+        recommend: options.recommend,
+        start: options.start,
+        date: options.date
       }).then(function (response) {
         resolve();
         //Success -> Sync to remote
@@ -78,6 +82,8 @@ class Database {
               rating: options.rating,
               summary: options.summary,
               recommend: options.recommend,
+              start: options.start,
+              date: options.date,
               //_rev is needed at document update
               _rev: doc._rev
             });

@@ -6,17 +6,17 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       const newD = document.createElement("p");
       const newH = document.createElement("h2");
       const newS = document.createElement("h3");
-      const newP = document.createElement("p");
-      newF.innerHTML = entry.doc.attachment;
-      newD.innerHTML = entry.doc.datum;
+      //const newP = document.createElement("p");
+      newF.innerHTML = entry.doc.attachmentName;
+      newD.innerHTML = entry.doc.date;
       newH.innerHTML = entry.doc.title;
       newS.innerHTML = entry.doc.summary;
-      newP.innerHTML = entry.doc.description;
+      //newP.innerHTML = entry.doc.description;
       newDiv.append(newF);
       newDiv.append(newD);
       newDiv.append(newH);
       newDiv.append(newS);
-      newDiv.append(newP);
+      //newDiv.append(newP);
       document.getElementById('events').append(newDiv);
 /*       if (entry.doc._attachments !== undefined) {
         locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
