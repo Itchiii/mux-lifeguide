@@ -2,19 +2,21 @@
 const title = document.title;
 const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
 
-document.getElementById('share-button').addEventListener('click', event => {
-  if (navigator.share) {
-    navigator.share({
-      title: title,
-      url: url
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    })
-    .catch(console.error);
-  } else {
-    // fallback
-  }
-});
+if (document.getElementById('share-button') !== null) {
+  document.getElementById('share-button').addEventListener('click', event => {
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      })
+      .catch(console.error);
+    } else {
+      // fallback
+    }
+  });
+}
 
 function setRecommend(database) {
   switch (database) {
@@ -75,6 +77,10 @@ function setAllTips(database, recommends) {
 //just for development
 function setTipWithJSON(database, entry) {  
   const locationTips = document.getElementById('location-tips');
+
+  if (locationTips === null || locationTips === undefined) {
+    return;
+  }
   const eventTips = document.getElementById('event-tips');
   const tourTips = document.getElementById('tour-tips');
   let container;

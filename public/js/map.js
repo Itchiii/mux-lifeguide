@@ -25,7 +25,7 @@ fetch('accessTokenMapBox.txt')
 
     //declare custom Icon
     const myIcon = L.icon({
-      iconUrl: '/public/assets/icons/icon-64.png',
+      iconUrl: '/public/assets/images/icon-72x72.png',
       iconSize: [32, 32],
       iconAnchor: [16, 16]
     });
@@ -72,29 +72,66 @@ fetch('accessTokenMapBox.txt')
     locationDB.allDocsOfLocalDB.then(function(result) {
       for (const entry of result.rows) {
         if (entry.doc.lat !== undefined) {
-          L.marker([entry.doc.lat, entry.doc.long], {icon: myIcon}).addTo(mymap);
+          let newLocation = L.marker([entry.doc.lat, entry.doc.long], {icon: myIcon}).addTo(mymap);
+
+          const i = newLocation._icon;
+          //set id to data attribute
+          i.setAttribute("data-id", entry.doc._id);
+
+          //add eventListener to create a new bottom layer
+          i.addEventListener('click', function(){
+            const id = this.getAttribute("data-id");
+            locationDB._getDoc(id).then(function(data){
+              const itemWrapper  = document.getElementById('location-item-wrapper');
+              itemWrapper.classList.add('show');
+              const h2 = document.createElement('h2'); 
+              h2.textContent = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
+              Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
+              Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
+              Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.   
+              Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
+              At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur`;
+              itemWrapper.append(h2);
+            })
+          })
         }
       }
     });
   });
 
-/* function for sliding the container after click on a location */
+/* Code for animate the bottom layer after click on a location, that it can be draged to fullscreen  */
 const holder = document.getElementById('location-item-holder');
-const locationItem = document.getElementById('location-item-wrapper');
-const placeholder = document.getElementById('location-item-heightPlaceholder');
+const locationBottomLayer = document.getElementById('location-item-wrapper');
+const emptyPlaceholderElement = document.getElementById('location-item-heightPlaceholder');
 
-//add various EventListener for touch and mouse interactions
+//add various EventListener for touch and mouse interactions on holder and on bottom layer
 holder.addEventListener("touchmove", holderOnMove);
 holder.addEventListener("mousedown", holderOnDown);
 holder.addEventListener("mouseup", holderOnUp);
 holder.addEventListener("touchstart", holderOnDown);
 holder.addEventListener("touchend", holderOnUp);
+holder.addEventListener('click', holderOnClick);
+locationBottomLayer.addEventListener("touchmove", holderOnMove);
+locationBottomLayer.addEventListener("mousedown", holderOnDown);
+locationBottomLayer.addEventListener("mouseup", holderOnUp);
+locationBottomLayer.addEventListener("touchstart", holderOnDown);
+locationBottomLayer.addEventListener("touchend", holderOnUp);
 
 var touchBeginOnHolder = 0;
 var touchDif = 0;
 
+//toggle the bottom layer to fullscreen
+function holderOnClick() {
+  locationBottomLayer.classList.toggle('show-complete');
+}
+
 //save start position
 function holderOnDown(e) {
+  //remove transition for top
+  locationBottomLayer.classList.remove('transition');
+  
+  
+  //remember actual position
   if (e.type === 'mousedown') {
     touchBeginOnHolder = e.pageY;
     //add eventlistener after mousedown
@@ -107,33 +144,75 @@ function holderOnDown(e) {
 
 
 function holderOnMove(e) {
+  //calcutate the difference from start to actual position (after mouse move)
   if (e.type === 'mousemove') {
     touchDif = touchBeginOnHolder - e.pageY;
   }
   else {
     touchDif = touchBeginOnHolder - e.touches[0].pageY;
   }
-  //add moving difference as transform
-  locationItem.style.setProperty('transform', `translateY(${touchDif * (-1)}px)`);
 
-  if (touchDif > 0){
-    //change heigt of a div after the container, that is looks like an expanding container 
-    placeholder.style.setProperty('height', `${touchDif}px`);
+  //return checks, if it scrolled on 'great' Layer but it can be scrolled for moving his content
+  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif < 0 && locationBottomLayer.scrollTop != 0) {
+    return;
   }
+  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif > 0 && locationBottomLayer.scrollTop >= 0) {
+    return;
+  }
+
+
+  const vhInPx = window.innerHeight / 100;
+  const vh = touchDif / vhInPx;
+  const vhDifUp = 75 - vh;
+  const vhDifDown = 0 + vh;
+    
+  /*
+   * add moving difference as top
+   * touchDif > 0 -> user scrolled layer to top; touchDiv < 0 -> user scrolled layer to bottom
+   */
+  if (touchDif > 0 && !locationBottomLayer.classList.contains('show-complete')){
+    //change heigt of a div after the container, that is looks like an expanding container 
+    emptyPlaceholderElement.style.setProperty('height', `${touchDif}px`);
+    locationBottomLayer.style.setProperty('top', `${vhDifUp}vh`);
+    locationBottomLayer.classList.add('on-translate');
+  }
+  //change top on bottom layer on scroll down -> just show a animation
+  if (touchDif < 0 && !locationBottomLayer.classList.contains('show-complete')) {
+    locationBottomLayer.style.setProperty('top', `${vhDifUp}vh`);
+  }
+
+  //change top from complete version to bottom 
+  if (touchDif < 0 && locationBottomLayer.classList.contains('show-complete')) {
+    locationBottomLayer.style.setProperty('top', `${vhDifDown * (-1)}vh`);
+    locationBottomLayer.classList.add('on-translate');
+  }  
 }
 
 function holderOnUp(e) {
+  locationBottomLayer.classList.add('transition');
+
+  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif < 0 && locationBottomLayer.scrollTop != 0) {
+    return;
+  }
+
+  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif > 0 && locationBottomLayer.scrollTop >= 0) {
+    return;
+  }
+
   if (e.type === 'mouseup') {
     holder.removeEventListener("mousemove", holderOnMove);
   }
   //remove added properties
-  locationItem.style.removeProperty('transform');
-  locationItem.style.removeProperty('height');
-  placeholder.style.removeProperty('height');
+  locationBottomLayer.style.removeProperty('top');
+  locationBottomLayer.style.removeProperty('height');
+  emptyPlaceholderElement.style.removeProperty('height');
+  locationBottomLayer.classList.remove('on-translate');
+
+  //100px as min touch difference
   if (touchDif > 100) {
-    locationItem.classList.add('show-complete');
+    locationBottomLayer.classList.add('show-complete');
   }
-  if (touchDif < 100 ) {
-    locationItem.classList.remove('show-complete');
+  if (touchDif < -100 ) {
+    locationBottomLayer.classList.remove('show-complete');
   }
 }

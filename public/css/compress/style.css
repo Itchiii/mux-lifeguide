@@ -52,42 +52,57 @@ body.overflow-hidden {
   position: absolute;
   bottom: 70px;
   right: 20px;
-  z-index: 999999;
+  z-index: 9998;
   border: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer; }
 
 .location-item-wrapper {
+  display: none;
   position: absolute;
   width: 100vw;
-  height: 250px;
+  min-height: 25vh;
   background-color: #fff;
-  bottom: 0;
+  top: 75vh;
   z-index: 10001;
   padding-bottom: 50px;
-  overflow-y: auto;
-  box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.05); }
+  box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden; }
+  .location-item-wrapper.show {
+    display: block; }
+  .location-item-wrapper.transition {
+    transition: top 250ms ease; }
   .location-item-wrapper.show-complete {
     top: 0;
     height: 100vh;
-    bottom: unset; }
-
-.location-item-placeholder {
-  position: absolute;
-  width: 100vw;
-  background-color: #fff;
-  bottom: 1px;
-  z-index: 10000; }
-
-.location-item-holder {
-  display: flex;
-  height: 20px;
-  width: 100%;
-  justify-content: center; }
-  .location-item-holder svg {
-    height: 100%;
-    width: auto;
-    transform: scale(1.5); }
+    bottom: unset;
+    overflow: auto; }
+    .location-item-wrapper.show-complete .location-item-holder svg {
+      transform: scale(1.5) rotate(180deg); }
+  .location-item-wrapper.on-translate {
+    opacity: 0.8; }
+    .location-item-wrapper.on-translate + .location-item-placeholder {
+      opacity: 0.8; }
+  .location-item-wrapper h2 {
+    padding-top: 21px; }
+  .location-item-wrapper .location-item-holder {
+    display: flex;
+    height: 20px;
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    background-color: #fff;
+    margin-top: -1px; }
+    .location-item-wrapper .location-item-holder svg {
+      height: 100%;
+      width: auto;
+      transform: scale(1.5); }
+  .location-item-wrapper + .location-item-placeholder {
+    position: absolute;
+    width: 100vw;
+    background-color: #fff;
+    bottom: 1px;
+    z-index: 10000; }
 
 /*CSS for Slideout Menu*/
 .toggle-button {
@@ -238,3 +253,15 @@ a {
   .about-us-container .about-us-image {
     width: 100%;
     height: auto; }
+
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 80px;
+  right: 40px;
+  background-color: #0C9;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999; }

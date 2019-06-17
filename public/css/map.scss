@@ -17,7 +17,7 @@ body.overflow-hidden {
   z-index: 990;
 
   .leaflet-routing-container {
-    display: none;
+    display: none; 
   }
 
   .leaflet-control-geocoder {
@@ -71,47 +71,76 @@ body.overflow-hidden {
   position: absolute;
   bottom: 70px;
   right: 20px;
-  z-index: 999999;
+  z-index: 9998;
   border: none;
   box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
   cursor: pointer;
 }
 
 .location-item-wrapper {
+  display: none;
   position: absolute;
   width: 100vw;
-  height: 250px;
+  min-height: 25vh;
   background-color: #fff;
-  bottom: 0;
+  top: 75vh;
   z-index: 10001;
   padding-bottom: 50px;
-  overflow-y: auto;
   box-shadow: 0 -6px 8px 0 rgba(0,0,0,.05);
+  overflow: hidden;
+
+  &.show {
+    display: block;
+  }
+
+  &.transition {
+    transition: top 250ms ease;
+  }
 
   &.show-complete {
     top: 0;
     height: 100vh;
     bottom: unset;
+    overflow: auto;
+
+    .location-item-holder svg {
+      transform: scale(1.5) rotate(180deg);
+    }
   }
-}
 
-.location-item-placeholder {
-  position: absolute;
-  width: 100vw;
-  background-color: #fff;
-  bottom: 1px;
-  z-index: 10000;
-}
+  &.on-translate {
+    opacity: 0.8;
 
-.location-item-holder {
-  display: flex;
-  height: 20px;
-  width: 100%;
-  justify-content: center;
+    & + .location-item-placeholder {
+      opacity: 0.8;
+    }
+  }
 
-  svg {
-    height: 100%;
-    width: auto;
-    transform: scale(1.5);
+  h2 {
+    padding-top: 21px;
+  }
+
+  .location-item-holder {
+    display: flex;
+    height: 20px;
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    background-color: #fff;
+    margin-top: -1px;
+  
+    svg {
+      height: 100%;
+      width: auto;
+      transform: scale(1.5);
+    }
+  }
+
+  & + .location-item-placeholder {
+    position: absolute;
+    width: 100vw;
+    background-color: #fff;
+    bottom: 1px;
+    z-index: 10000;
   }
 }
