@@ -79,7 +79,7 @@ function setTipWithJSON(database, entry) {
   const locationTips = document.getElementById('location-tips');
 
   if (locationTips === null || locationTips === undefined) {
-    return;
+    //return;
   }
   const eventTips = document.getElementById('event-tips');
   const tourTips = document.getElementById('tour-tips');

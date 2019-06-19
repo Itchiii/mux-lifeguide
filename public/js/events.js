@@ -15,25 +15,30 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       //newF.innerHTML = entry.doc.attachmentName;
       newH.innerHTML = entry.doc.title;
       newS.innerHTML = entry.doc.summary;
+
+      newDiv.dataset.id = entry.doc._id;
+
       //newDiv.append(newF);
       newDiv.append(newH);
       newDiv.append(newS);
-      newDiv.className = "eventList";
+      newDiv.classList.add("eventList");
       //document.getElementById('events').append(newDiv);
 
       const eventColumn = document.createElement("div");
       eventColumn.append(newDate);
       eventColumn.append(newDiv);
       eventColumn.className = "eventColumn";
-      document.getElementById('events').append(eventColumn);
-/*       if (entry.doc._attachments !== undefined) {
-        locationDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
-          console.log("test");
+
+
+      if (entry.doc._attachments !== undefined) {
+        eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
           var url = URL.createObjectURL(blob);
           var img = document.createElement('img');
           img.src = url;
-          document.body.appendChild(img);
+          eventColumn.append(img);
+          document.getElementById('events').append(eventColumn);
         });
-      } */
+      }
+
     }
   });
