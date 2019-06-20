@@ -13,34 +13,24 @@
 	border-radius:50px;
   //text-align:center;
   font-size: 40px;
-	box-shadow: 2px 2px 3px #999;
+	//box-shadow: 2px 2px 3px #999;
 }
 
 .eventColumn{
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 10px;
-  padding: 5px;
-  background-color: #F6F7F9;
-  border-radius: 5px;
+  width: 95%;
+  //margin: 10px;
+  padding: 10px;
+  background-color: rgb(232, 234, 236);
+  //border-radius: 5px;
 }
 
 .eventDate{
   margin: 5px;
   padding: 5px;
   
-}
-
-.event{
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  padding: 5px;
-}
-
-.eventimg{
-  width: 50%;
 }
 
 .eventInfo{
@@ -50,7 +40,22 @@
   padding: 5px;
 }
 
-.eventList h4 {
+.event{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+}
+
+.eventimg{
+  margin-top: 20px;
+  width: 95%;
+}
+
+
+
+.eventInfo h4 {
   margin-bottom: 6px;
 }
 

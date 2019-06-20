@@ -33,6 +33,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
 
           //div for eventColumn and eventimg
           const event = document.createElement("div");
+          event.classList.add("event")
           event.append(eventimg);
           event.append(eventColumn);
           //dataset
