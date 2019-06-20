@@ -31,14 +31,25 @@ eventDB.allDocsOfLocalDB.then(function(result) {
           eventimg.src = url;
           eventimg.classList.add("eventimg");
 
-          //div for eventColumn and eventimg
+          //div for eventimg and eventColumn
           const event = document.createElement("div");
           event.classList.add("event")
           event.append(eventimg);
           event.append(eventColumn);
+/*        link container
+          const link = document.createElement("a");
+          link.append(event); */
+
           //dataset
           event.dataset.id = entry.doc._id;
+          //Put events container in DOM
           document.getElementById('events').append(event);
+          event.addEventListener("click", function(){
+            const article = document.createElement('p');
+            article.innerHTML = entry.doc.summary;
+            document.getElementById('article').append(article);
+            window.open("article.html", "_self");
+          });
         });
       }
 
