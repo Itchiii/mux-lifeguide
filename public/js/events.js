@@ -2,41 +2,42 @@
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
 
-      //div for dates
-      const newDate = document.createElement("h5");
-      newDate.innerHTML = entry.doc.date;
-      newDate.className = "eventDates";
-      //document.getElementById('events').append(newDate);
+      //div for dates called eventDate
+      const eventDate = document.createElement("h5");
+      eventDate.innerHTML = entry.doc.date;
+      eventDate.classList.add("eventDate");
 
-      const newDiv = document.createElement("div");
-      //const newF = document.createElement("img");
-      const newH = document.createElement("h4");
-      const newS = document.createElement("p");
-      //newF.innerHTML = entry.doc.attachmentName;
-      newH.innerHTML = entry.doc.title;
-      newS.innerHTML = entry.doc.summary;
+      //div for titel and summary called eventInfo
+      const eventInfo = document.createElement("div");
+      const titel = document.createElement("h4");
+      const summary = document.createElement("p");
+      titel.innerHTML = entry.doc.title;
+      summary.innerHTML = entry.doc.summary;
+      eventInfo.append(titel);
+      eventInfo.append(summary);
+      eventInfo.classList.add("eventInfo");
 
-      newDiv.dataset.id = entry.doc._id;
-
-      //newDiv.append(newF);
-      newDiv.append(newH);
-      newDiv.append(newS);
-      newDiv.classList.add("eventList");
-      //document.getElementById('events').append(newDiv);
-
+      //div for eventInfo and eventDate called eventColumn
       const eventColumn = document.createElement("div");
-      eventColumn.append(newDate);
-      eventColumn.append(newDiv);
-      eventColumn.className = "eventColumn";
+      eventColumn.append(eventDate);
+      eventColumn.append(eventInfo);
+      eventColumn.classList.add("eventColumn");
 
-
+      //div for event image called eventimg
       if (entry.doc._attachments !== undefined) {
         eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
           var url = URL.createObjectURL(blob);
-          var img = document.createElement('img');
-          img.src = url;
-          eventColumn.append(img);
-          document.getElementById('events').append(eventColumn);
+          var eventimg = document.createElement('img');
+          eventimg.src = url;
+          eventimg.classList.add("eventimg");
+
+          //div for eventColumn and eventimg
+          const event = document.createElement("div");
+          event.append(eventimg);
+          event.append(eventColumn);
+          //dataset
+          event.dataset.id = entry.doc._id;
+          document.getElementById('events').append(event);
         });
       }
 

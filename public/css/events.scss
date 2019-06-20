@@ -26,13 +26,24 @@
   border-radius: 5px;
 }
 
-.eventDates{
+.eventDate{
   margin: 5px;
   padding: 5px;
   
 }
 
-.eventList{
+.event{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+}
+
+.eventimg{
+  width: 50%;
+}
+
+.eventInfo{
   display: flex;
   flex-direction: column;
   margin: 5px;
