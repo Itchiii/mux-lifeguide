@@ -45,10 +45,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
           //Put events container in DOM
           document.getElementById('events').append(event);
           event.addEventListener("click", function(){
-            const article = document.createElement('p');
-            article.innerHTML = entry.doc.summary;
-            document.getElementById('article').append(article);
-            window.open("article.html", "_self");
+            window.open(`article.html?id=${this.dataset.id}`, "_self");
           });
         });
       }
