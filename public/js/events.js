@@ -23,6 +23,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventColumn.append(eventInfo);
       eventColumn.classList.add("eventColumn");
 
+
       //div for event image called eventimg
       if (entry.doc._attachments !== undefined) {
         eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
