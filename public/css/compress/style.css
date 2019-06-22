@@ -79,6 +79,72 @@
   color: #F6F7F9;
   font-size: 14px; }
 
+div[class^="related"] {
+  color: #fff;
+  width: 100%; }
+  div[class^="related"] h4[class^="r-heading"] {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center; }
+  div[class^="related"] .r-heading-contact, div[class^="related"] .r-heading-imprint {
+    padding: 0.8em 0; }
+
+.related-about {
+  background-color: #646464; }
+  .related-about .r-heading-about {
+    padding-top: 2em; }
+  .related-about .r-text-about {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 1em 0; }
+
+.related-contact {
+  background-color: #7c7c7c; }
+
+.related-imprint {
+  background-color: #6d6d6d; }
+
+.index-lifeguideLogo {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2em; }
+
+.location-tips, .event-tips, .tour-tips {
+  margin-top: 0.8em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  flex: 0 0 100%;
+  padding-bottom: 1rem; }
+  .location-tips article, .event-tips article, .tour-tips article {
+    min-width: 11em;
+    padding: 0 1em; }
+    .location-tips article:last-child, .event-tips article:last-child, .tour-tips article:last-child {
+      padding: 0 0 0 1em; }
+    .location-tips article:first-child, .event-tips article:first-child, .tour-tips article:first-child {
+      padding: 0 1em 0 0; }
+    .location-tips article img, .event-tips article img, .tour-tips article img {
+      height: 100px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 5px; }
+    .location-tips article h4.recommend-sub-heading, .event-tips article h4.recommend-sub-heading, .tour-tips article h4.recommend-sub-heading {
+      font-weight: 400;
+      font-size: 1em; }
+
+.location-tips-showAll, .event-tips-showAll, .tour-tips-showAll {
+  align-self: flex-end;
+  margin-left: auto;
+  color: #e66740; }
+
+.location-tips-heading, .event-tips-heading, .tour-tips-heading {
+  font-size: 1em;
+  max-width: 60%;
+  text-transform: uppercase; }
+
 body.overflow-hidden {
   overflow: hidden;
   overscroll-behavior: contain; }
@@ -258,13 +324,14 @@ a {
     color: #e66740; }
 
 .bottom-menu {
-  height: 3em;
+  height: 56px;
   width: 100%;
-  background-color: #e66740;
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 99999999; }
+  z-index: 11111;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); }
 
 .bm-inner-menu {
   display: flex;
@@ -274,6 +341,17 @@ a {
   max-width: 50em;
   width: 100vw;
   height: 100%; }
+  .bm-inner-menu a {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .bm-inner-menu a svg {
+      height: 30%; }
+    .bm-inner-menu a span {
+      font-size: 0.7em;
+      margin-top: 0.3em; }
 
 .share-button {
   height: 50px;
@@ -287,51 +365,8 @@ a {
   flex-wrap: wrap;
   margin-top: 3em; }
 
-.location-tips, .event-tips, .tour-tips {
-  margin-top: 0.8em;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  flex: 0 0 100%;
-  padding-bottom: 1rem; }
-  .location-tips article, .event-tips article, .tour-tips article {
-    min-width: 15em;
-    padding: 0 1em; }
-    .location-tips article:last-child, .event-tips article:last-child, .tour-tips article:last-child {
-      padding: 0 0 0 1em; }
-    .location-tips article:first-child, .event-tips article:first-child, .tour-tips article:first-child {
-      padding: 0 1em 0 0; }
-    .location-tips article img, .event-tips article img, .tour-tips article img {
-      height: 150px;
-      width: 100%;
-      object-fit: cover; }
-
-.wrapper {
+.default-wrapper {
   width: 100%;
   max-width: 60em;
   margin: 0 auto;
   padding: 1.5em; }
-
-.index-lifeguideLogo {
-  display: block;
-  margin: 0 auto;
-  margin-top: 2em; }
-
-.location-tips-showAll, .event-tips-showAll, .tour-tips-showAll {
-  align-self: flex-end;
-  margin-left: auto;
-  color: #e66740; }
-
-.location-tips-heading, .event-tips-heading, .tour-tips-heading {
-  font-size: 1.2em;
-  max-width: 60%;
-  border-bottom: 5px solid #e66740; }
-
-.about-us-container {
-  width: 100%;
-  margin-top: 2em; }
-  .about-us-container .about-us-image {
-    width: 100%;
-    height: auto; }

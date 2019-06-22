@@ -1,0 +1,95 @@
+$highlightedColor: #e66740;
+
+div[class^="related"] {
+	color: #fff;
+	width: 100%;
+
+	h4[class^="r-heading"] {
+		font-weight: bold;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	.r-heading-contact, .r-heading-imprint {
+		padding: 0.8em 0;
+	}
+}
+
+.related-about {
+	background-color: rgb(100, 100, 100);
+
+	.r-heading-about {
+    padding-top: 2em;
+	}
+	
+	.r-text-about {
+		margin: auto;
+		width: 50%;
+		text-align: center;
+		padding: 1em 0;
+	}
+}
+
+.related-contact {
+	background-color: rgb(124, 124, 124);
+}
+
+.related-imprint {
+	background-color: rgb(109, 109, 109);
+}
+
+.index-lifeguideLogo {
+	display: block;
+	margin: 0 auto;
+	margin-top: 2em;
+}
+
+.location-tips, .event-tips, .tour-tips {
+  margin-top: 0.8em;
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: nowrap;  
+  overflow-x: auto;
+  flex: 0 0 100%;
+  padding-bottom: 1rem;
+  
+
+  & article {
+    min-width: 11em;
+    padding: 0 1em;
+
+    &:last-child {
+      padding: 0 0 0 1em;
+    }
+
+    &:first-child {
+      padding: 0 1em 0 0;
+    }
+
+    & img {
+      height: 100px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    h4.recommend-sub-heading {
+      font-weight: 400;
+      font-size: 1em;
+    }
+  }
+}
+
+.location-tips-showAll, .event-tips-showAll, .tour-tips-showAll {
+	align-self: flex-end;
+	margin-left: auto;
+	color: $highlightedColor;
+}
+
+.location-tips-heading, .event-tips-heading, .tour-tips-heading {
+	font-size: 1em;
+	max-width: 60%;
+	text-transform: uppercase;
+}
+
