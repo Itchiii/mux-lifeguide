@@ -43,15 +43,19 @@ class Database {
             case 'recommend': obj[prop] = false; break;
             case 'start': obj[prop] = "start"; break;
             case 'date': obj[prop] = "date"; break;
+            case 'daydate': obj[prop] = "daydate"; break;
+            case 'day': obj[prop] = "day"; break;
+            case 'month': obj[prop] = "month"; break;
+            case 'location': obj[prop] = "location"; break;
+            case 'street': obj[prop] = "street"; break;
+            case 'place': obj[prop] = "place"; break;
             default: obj[prop] = null; break;
           }
         }
         return obj[prop];
       }
     };
-
     let options = new Proxy(params, handler);
-
     //add a new document
     this.localDB
       .put({
@@ -64,7 +68,13 @@ class Database {
         summary: options.summary,
         recommend: options.recommend,
         start: options.start,
-        date: options.date
+        date: options.date,
+        daydate: options.daydate,
+        day: options.day,
+        month: options.month,
+        location: options.location,
+        street: options.street,
+        place: options.place,
       }).then(function (response) {
         resolve();
         //Success -> Sync to remote
