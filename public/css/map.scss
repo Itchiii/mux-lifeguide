@@ -1,3 +1,6 @@
+$highlightedColor: #e66740;
+
+
 body.overflow-hidden {
   overflow: hidden;
   overscroll-behavior: contain;
@@ -16,6 +19,7 @@ body.overflow-hidden {
   display: flex;
   justify-content: center;
   z-index: 990;
+  align-items: center;
 
   .leaflet-routing-container {
     display: none; 
@@ -25,16 +29,27 @@ body.overflow-hidden {
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: 50px;
+    border-radius: 5px;
     border: none;
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+    background-color: rgb(248, 248, 248);
 
     .leaflet-control-geocoder-icon {
       display: none;
     }
 
     .leaflet-control-geocoder-form {
-      padding: 0 10px;
+      padding: 10px;
+      font-size: 0.7em;
+
+      &::after {
+        content:"A";
+        color: $highlightedColor;
+        height: 75%;
+        width: auto;
+        position: absolute;
+        right: 1em;
+      }
     }
 
     .leaflet-control-geocoder-alternatives {
@@ -52,23 +67,29 @@ body.overflow-hidden {
 
     a.leaflet-bar-part {
       border-radius: 50%;
+      width: 20px;
+      height: 20px;
 
       svg.icon-geolocate-svg {
         transform: scale(0.8);
+
+        path, circle {
+          stroke: #e66740;
+        }
       }
     }
   }
 }
 
 .add-location {
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  background-color: $highlightedColor;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
+  font-size: 1.8em;
   position: absolute;
   bottom: 70px;
   right: 20px;
@@ -76,17 +97,17 @@ body.overflow-hidden {
   border: none;
   box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
   cursor: pointer;
+  color:#fff;
 }
 
 .location-item-wrapper {
   display: none;
   position: absolute;
   width: 100vw;
-  min-height: 25vh;
   background-color: #fff;
   top: 75vh;
   z-index: 10001;
-  padding-bottom: 50px;
+  padding-bottom: 58px;
   box-shadow: 0 -6px 8px 0 rgba(0,0,0,.05);
   overflow: hidden;
 
@@ -104,7 +125,7 @@ body.overflow-hidden {
     bottom: unset;
     overflow: auto;
 
-    .location-item-holder svg {
+    .location-item-holder .location-item-grabble {
       transform: scale(1.5) rotate(180deg);
     }
   }
@@ -123,17 +144,49 @@ body.overflow-hidden {
 
   .location-item-holder {
     display: flex;
-    height: 20px;
+    height: 30px;
     width: 100%;
     justify-content: center;
     position: fixed;
     background-color: #fff;
     margin-top: -1px;
+    position: relative;
+    align-items: center;
   
-    svg {
+    .location-item-grabble {
       height: 100%;
       width: auto;
       transform: scale(1.5);
+      margin: 0 auto;
+
+      path {
+        stroke: $highlightedColor;
+      }
+    }
+
+    .location-item-shareButton, .location-item-markButton {
+      position: absolute;
+      height: 100%;
+      width: 30px;
+
+      svg {
+        transform: scale(0.8);
+      }
+      path, circle {
+        stroke: $highlightedColor;
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    .location-item-markButton {
+      right: 60px;
+    }
+
+    .location-item-shareButton {
+      right: 20px;
     }
   }
 
@@ -144,4 +197,57 @@ body.overflow-hidden {
     bottom: 1px;
     z-index: 10000;
   }
+
+  .location-item-content {
+    
+    .hide {
+      display: none;
+    }
+
+    .location-item-collapsed-text {
+      margin-left: 30px;
+    }
+  
+    .location-item-createRoute {
+      width: 30px;
+      height: 30px;
+      background-color: $highlightedColor;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8em;
+      cursor: pointer;
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+    
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+  
+      path {
+        stroke: #fff;
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+  }
+}
+
+.location-item-open-text {
+
+  .entity-open-description {
+    width: 75%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    -moz-line-clamp: 3;
+    -moz-box-orient: vertical;  
+  }
+
 }
