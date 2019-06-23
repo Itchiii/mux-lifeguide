@@ -38,6 +38,12 @@ class Database {
             case 'description': obj[prop] = "description"; break;
             case 'lat': obj[prop] = 0; break;
             case 'long': obj[prop] = 0; break;
+            case 'address': obj[prop] = "address"; break;
+            case 'zipCode': obj[prop] = "zip Code"; break;
+            case 'openingHours': obj[prop] = '42 Uhr'; break;
+            case 'phone': obj[prop] = '000'; break;
+            case 'web': obj[prop] = '#'; break;
+            case 'owner': obj[prop] = 'May Mustermann'; break;
             case 'rating': obj[prop] = 0; break;
             case 'summary': obj[prop] = "summary"; break;
             case 'recommend': obj[prop] = false; break;
@@ -64,6 +70,12 @@ class Database {
         description: options.description,
         lat: options.lat,
         long: options.long,
+        address: options.address,
+        zipCode: options.zipCode,
+        openingHours: options.openingHours,
+        phone: options.phone,
+        web: options.web,
+        owner: options.owner,
         rating: options.rating,
         summary: options.summary,
         recommend: options.recommend,
@@ -89,6 +101,12 @@ class Database {
               description: options.description,
               lat: options.lat,
               long: options.long,
+              address: options.address,
+              zipCode: options.zipCode,
+              openingHours: options.openingHours,
+              phone: options.phone,
+              web: options.web,
+              owner: options.owner,
               rating: options.rating,
               summary: options.summary,
               recommend: options.recommend,
