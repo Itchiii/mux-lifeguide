@@ -1,14 +1,5 @@
 [
     {
-        "id": "5",
-        "title": "NEUER TITEL",
-        "summary": "Wichtige Zusammenfassung",
-        "description": "Wichtige Beschreibung",
-        "lat": 48.36842,
-        "long": 10.88674,
-        "rating": 0
-    },
-    {
         "id": "architekturmusuem",
         "title": "Architekturmuseum im Theolottviertel",
         "summary": "In der Villa des Architekten Sebastian Buchegger befindet sich heute ein Museum. Anfang des 20. Jahrhunderts plante der Architekt dieses Viertel als grüne Gartenstadt. Citynah und trotzdem im Grünen. ",
