@@ -44,6 +44,13 @@ div[class^="related"] {
 	margin-top: 2em;
 }
 
+.location-tips-container, .event-tips-container, .tour-tips-container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 3em;
+}
+
 .location-tips, .event-tips, .tour-tips {
   margin-top: 0.8em;
   width: 100%;

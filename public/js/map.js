@@ -33,7 +33,7 @@ fetch('accessTokenMapBox.txt')
     //set custom marker
     var marker = L.marker([48.36592, 10.88924], {icon: myIcon}).addTo(mymap);
     //set Popup to our marker
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
     //create Routing with waypoints and geocoder api
     L.Routing.control({
@@ -107,20 +107,34 @@ window.onload = function () {
 var startTopProperty = 0;
 function setItemContent(id) {
   locationDB._getDoc(id).then(function(data) {
-    //
-    const itemWrapper  = document.getElementById('location-item-wrapper');
-    itemWrapper.classList.add('show');
 
-    //set top property, 56 vom bottom nav
-    const topInPx = window.innerHeight - (itemWrapper.offsetHeight + 56);
-    const topInVh = topInPx / (window.innerHeight / 100);
-    startTopProperty = topInVh;
-    itemWrapper.style.setProperty('top', `${topInVh}vh`);
+    const itemWrapper  = document.getElementById('location-item-wrapper');
+    
+    if (itemWrapper.getAttribute('data-id') === id) {
+      return;
+    }
+
+    if (!itemWrapper.classList.contains('show')) {
+      itemWrapper.classList.add('show');
+      //set top property, 56 vom bottom nav
+      const topInPx = window.innerHeight - (itemWrapper.offsetHeight + 56);
+      const topInVh = topInPx / (window.innerHeight / 100);
+      startTopProperty = topInVh;
+      itemWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    }
+    else {
+      itemWrapper.classList.add('show');
+      itemWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    }
+    itemWrapper.setAttribute('data-id', id);
+    
+
+
 
     //hide all items for full text content
-    console.log(document.getElementById('location-item-full-text').children)
     for (const entry of document.getElementById('location-item-full-text').children){
       entry.classList.add('hide');
+      entry.textContent = "";
     }
 
     //set const wrappers
@@ -177,26 +191,21 @@ function setItemContent(id) {
       }
     }
 
-
-
-
-
-
-    
-  
-
-
-
-    //header full
-    const fragment = document.createDocumentFragment();
-    const shortDescriptionOnOpen = document.getElementById('location-item-open-text');
-    const openHeadline = document.createElement('h4');
-    openHeadline.classList.add('openHeadline');
-    openHeadline.textContent = data.title;
-
-    const openDescription = document.createElement('p');
-
-
+    //add images
+    const entityFullImages = document.getElementById('entity-full-images');
+    if (data._attachments !== undefined && Object.keys(data._attachments).length !== 0) {
+      console.log(data._attachments);
+      for (attachment in data._attachments) {
+        locationDB._getAttachment(data._id, attachment).then(function(blob){
+          const img = document.createElement('img');
+          let url = URL.createObjectURL(blob);
+          img.src = url;
+          entityFullImages.append(img);
+        }).catch(function(e) {
+          console.error(e)
+        });
+      }
+    }
 
   });
 }
@@ -284,9 +293,9 @@ function holderOnMove(e) {
    */
   if (touchDif > 0 && !locationBottomLayer.classList.contains('show-complete')){
     //change heigt of a div after the container, that is looks like an expanding container 
-    emptyPlaceholderElement.style.setProperty('height', `${touchDif}px`);
+    emptyPlaceholderElement.style.setProperty('height', `${touchDif + 1}px`);
     locationBottomLayer.style.setProperty('top', `${vhDifUp}vh`);
-    locationBottomLayer.classList.add('on-translate');
+    //locationBottomLayer.classList.add('on-translate');
   }
   //change top on bottom layer on scroll down -> just show a animation
   if (touchDif < 0 && !locationBottomLayer.classList.contains('show-complete')) {
@@ -296,7 +305,7 @@ function holderOnMove(e) {
   //change top from complete version to bottom 
   if (touchDif < 0 && locationBottomLayer.classList.contains('show-complete')) {
     locationBottomLayer.style.setProperty('top', `${vhDifDown * (-1)}vh`);
-    locationBottomLayer.classList.add('on-translate');
+    //locationBottomLayer.classList.add('on-translate');
   }  
 }
 
@@ -317,7 +326,7 @@ function holderOnUp(e) {
   //remove added properties
   //locationBottomLayer.style.removeProperty('height');
   emptyPlaceholderElement.style.removeProperty('height');
-  locationBottomLayer.classList.remove('on-translate');
+  //locationBottomLayer.classList.remove('on-translate');
 
   //100px as min touch difference
   if (touchDif > 100) {

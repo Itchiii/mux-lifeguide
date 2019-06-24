@@ -99,8 +99,8 @@ function setTipWithJSON(database, entry) {
   const heading = document.createElement('h4');
   heading.classList.add('recommend-sub-heading');
 
-  if (entry.attachmentName !== undefined) {
-    database._getAttachment(entry.id, entry.attachmentName).then(function(blob){
+  if (entry.attachments !== undefined && entry.attachments.length !== 0) {
+    database._getAttachment(entry.id, entry.attachments[0].attachmentName).then(function(blob){
       let url = URL.createObjectURL(blob);
       img.src = url;
       article.append(img);

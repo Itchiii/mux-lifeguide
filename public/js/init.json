@@ -1,14 +1,5 @@
 [
     {
-        "id": "5",
-        "title": "NEUER TITEL",
-        "summary": "Wichtige Zusammenfassung",
-        "description": "Wichtige Beschreibung",
-        "lat": 48.36842,
-        "long": 10.88674,
-        "rating": 0
-    },
-    {
         "id": "architekturmusuem",
         "title": "Architekturmuseum im Theolottviertel",
         "summary": "In der Villa des Architekten Sebastian Buchegger befindet sich heute ein Museum. Anfang des 20. Jahrhunderts plante der Architekt dieses Viertel als grüne Gartenstadt. Citynah und trotzdem im Grünen. ",
@@ -22,8 +13,20 @@
         "web": "https://www.takuna.de",
         "owner": "Mustermann",
         "rating": 0,
-        "attachment": "./public/assets/images/architekturmuseum.jpg",
-        "attachmentName": "architekturmusuem.jpg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/architekturmuseum.jpg",
+                "attachmentName": "architekturmusuem.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/architekturmuseum.jpg",
+                "attachmentName": "architekturmusuem2.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/architekturmuseum.jpg",
+                "attachmentName": "architekturmusuem3.jpg"
+            }
+        ],
         "recommend": true
     },
     {
@@ -34,8 +37,12 @@
         "lat": 48.36756,
         "long": 10.88579,
         "rating": 0,
-        "attachment": "./public/assets/images/europadorf.jpg",
-        "attachmentName": "europadorf.jpg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/europadorf.jpg",
+                "attachmentName": "europadorf.jpg"
+            }
+        ],
         "recommend": true
     },
     {
@@ -46,8 +53,12 @@
         "lat": 48.36756,
         "long": 10.88579,
         "rating": 0,
-        "attachment": "./public/assets/images/gruenfux.jpg",
-        "attachmentName": "gruenfux.jpg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/gruenfux.jpg",
+                "attachmentName": "gruenfux.jpg"
+            }
+        ],
         "recommend": true
     },
     {
@@ -58,8 +69,12 @@
         "lat": 48.36756,
         "long": 10.88579,
         "rating": 0,
-        "attachment": "./public/assets/images/horn.jpg",
-        "attachmentName": "horn.jpg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/horn.jpg",
+                "attachmentName": "horn.jpg"
+            }
+        ],
         "recommend": true
     }
 ]
