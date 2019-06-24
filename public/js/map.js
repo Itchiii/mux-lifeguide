@@ -51,7 +51,7 @@ fetch('accessTokenMapBox.txt')
 
     L.Control.geocoder({
         collapsed: false,
-        placeholder: "Nach Orten suchen..."
+        placeholder: "Orte durchsuchen"
     }).addTo(mymap);
 
     //add geolocate to map
@@ -80,24 +80,126 @@ fetch('accessTokenMapBox.txt')
 
           //add eventListener to create a new bottom layer
           i.addEventListener('click', function(){
+
+            if (history.pushState) {
+              var newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
+              window.history.pushState({path:newurl},'',newurl);
+            }
+            //TODO: den zuück button anpassen
+
             const id = this.getAttribute("data-id");
-            locationDB._getDoc(id).then(function(data){
-              const itemWrapper  = document.getElementById('location-item-wrapper');
-              itemWrapper.classList.add('show');
-              const h2 = document.createElement('h2'); 
-              h2.textContent = `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
-              Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
-              Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
-              Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.   
-              Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
-              At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur`;
-              itemWrapper.append(h2);
-            })
+            setItemContent(id);
           })
         }
       }
     });
   });
+
+
+window.onload = function () {
+  let params = new URLSearchParams(document.location.search.substring(1));
+  let id = params.get("id");
+  if (id !== null) {
+    setItemContent(id);
+  }
+}
+
+var startTopProperty = 0;
+function setItemContent(id) {
+  locationDB._getDoc(id).then(function(data) {
+    //
+    const itemWrapper  = document.getElementById('location-item-wrapper');
+    itemWrapper.classList.add('show');
+
+    //set top property, 56 vom bottom nav
+    const topInPx = window.innerHeight - (itemWrapper.offsetHeight + 56);
+    const topInVh = topInPx / (window.innerHeight / 100);
+    startTopProperty = topInVh;
+    itemWrapper.style.setProperty('top', `${topInVh}vh`);
+
+    //hide all items for full text content
+    console.log(document.getElementById('location-item-full-text').children)
+    for (const entry of document.getElementById('location-item-full-text').children){
+      entry.classList.add('hide');
+    }
+
+    //set const wrappers
+    const entityCollapsedHeading = document.getElementById('entity-collapsed-heading');
+    const entityCollapsedAddress = document.getElementById('entity-collapsed-address');
+    const entityCollapsedZipCode = document.getElementById('entity-collapsed-zipCode');
+    const entityOpenHeading = document.getElementById('entity-open-heading');
+    const entityOpenDescription = document.getElementById('entity-open-description');
+    const entityFullAddress = document.getElementById('entity-full-address');
+    const entityFullOpeningHours = document.getElementById('entity-full-openingHours');
+    const entityFullPhone = document.getElementById('entity-full-phone');
+    const entityFullWeb = document.getElementById('entity-full-web');
+    const entityFullOwner = document.getElementById('entity-full-owner');
+    for (const entry in data) {
+      switch (entry) {
+        case 'title':
+          entityCollapsedHeading.textContent = data[entry];
+          entityCollapsedHeading.classList.remove('hide');
+          entityOpenHeading.textContent = data[entry];
+          entityOpenHeading.classList.remove('hide');
+          break;
+        case 'address':
+          entityCollapsedAddress.textContent = data[entry];
+          entityCollapsedAddress.classList.remove('hide');
+          entityFullAddress.textContent = `${data.address}, ${data.zipCode}`;
+          entityFullAddress.classList.remove('hide');
+          break;
+        case 'zipCode':
+          entityCollapsedZipCode.textContent = data[entry];
+          entityCollapsedZipCode.classList.remove('hide');
+          break;
+        case 'summary':
+          entityOpenDescription.textContent = data[entry];
+          entityOpenDescription.classList.remove('hide');
+          break;
+        case 'openingHours':
+          entityFullOpeningHours.insertAdjacentHTML('afterbegin', data[entry]);
+          entityFullOpeningHours.classList.remove('hide');
+          break;
+        case 'phone':
+          entityFullPhone.textContent = data[entry];
+          entityFullPhone.classList.remove('hide');
+          break;
+        case 'web':
+          entityFullWeb.textContent = data[entry];
+          entityFullWeb.classList.remove('hide');
+          break;
+        case 'owner':
+          entityFullOwner.textContent = data[entry];
+          entityFullOwner.classList.remove('hide');
+          break;
+        default:
+          break;
+      }
+    }
+
+
+
+
+
+
+    
+  
+
+
+
+    //header full
+    const fragment = document.createDocumentFragment();
+    const shortDescriptionOnOpen = document.getElementById('location-item-open-text');
+    const openHeadline = document.createElement('h4');
+    openHeadline.classList.add('openHeadline');
+    openHeadline.textContent = data.title;
+
+    const openDescription = document.createElement('p');
+
+
+
+  });
+}
 
 /* Code for animate the bottom layer after click on a location, that it can be draged to fullscreen  */
 const holder = document.getElementById('location-item-holder');
@@ -122,7 +224,17 @@ var touchDif = 0;
 
 //toggle the bottom layer to fullscreen
 function holderOnClick() {
-  locationBottomLayer.classList.toggle('show-complete');
+  if (locationBottomLayer.classList.contains('show-complete')) {
+    locationBottomLayer.classList.remove('show-complete');
+    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
+    removeMoreButtons();
+  }
+  else {
+    locationBottomLayer.style.setProperty('top', `${0}vh`);    
+    locationBottomLayer.classList.add('show-complete');
+    addMoreButtons();
+
+  }
 }
 
 //save start position
@@ -163,7 +275,7 @@ function holderOnMove(e) {
 
   const vhInPx = window.innerHeight / 100;
   const vh = touchDif / vhInPx;
-  const vhDifUp = 75 - vh;
+  const vhDifUp = startTopProperty - vh;
   const vhDifDown = 0 + vh;
     
   /*
@@ -203,16 +315,47 @@ function holderOnUp(e) {
     holder.removeEventListener("mousemove", holderOnMove);
   }
   //remove added properties
-  locationBottomLayer.style.removeProperty('top');
-  locationBottomLayer.style.removeProperty('height');
+  //locationBottomLayer.style.removeProperty('height');
   emptyPlaceholderElement.style.removeProperty('height');
   locationBottomLayer.classList.remove('on-translate');
 
   //100px as min touch difference
   if (touchDif > 100) {
+  locationBottomLayer.style.removeProperty('top');
+
     locationBottomLayer.classList.add('show-complete');
+
+    addMoreButtons();
   }
-  if (touchDif < -100 ) {
+  else if (touchDif < -100 ) {
+    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
     locationBottomLayer.classList.remove('show-complete');
+    removeMoreButtons();
   }
+  else if (locationBottomLayer.classList.contains('show-complete')) {
+  locationBottomLayer.style.removeProperty('top');
+    
+  }
+  else if (!locationBottomLayer.classList.contains('show-complete')) {
+    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
+  }
+}
+
+function addMoreButtons() {
+  document.getElementById('location-item-shareButton').classList.remove('hide');
+  document.getElementById('location-item-markButton').classList.remove('hide');
+  document.getElementById('location-item-full-text').classList.remove('hide');
+  document.getElementById('location-item-createRoute').classList.add('hide');
+  document.getElementById('location-item-open-text').classList.remove('hide');
+  document.getElementById('location-item-open-text').classList.remove('hide');
+  document.getElementById('location-item-text').classList.add('hide');
+}
+
+function removeMoreButtons() {
+  document.getElementById('location-item-shareButton').classList.add('hide');
+  document.getElementById('location-item-full-text').classList.add('hide');
+  document.getElementById('location-item-markButton').classList.add('hide');
+  document.getElementById('location-item-createRoute').classList.remove('hide');
+  document.getElementById('location-item-text').classList.remove('hide');
+  document.getElementById('location-item-open-text').classList.add('hide');
 }

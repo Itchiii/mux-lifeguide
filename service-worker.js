@@ -34,7 +34,7 @@ var contentToCache = [
 
 //Adding `install` event listener
 self.addEventListener('install', (event) => {
-  console.info('Event: Install');
+  //console.info('Event: Install');
 
   event.waitUntil(
     caches.open(CURRENT_CACHES.app)
@@ -60,7 +60,7 @@ self.addEventListener('install', (event) => {
 
 //Adding `fetch` event listener
 self.addEventListener('fetch', (event) => {
-  console.info('Event: Fetch');
+  //console.info('Event: Fetch');
 
   var request = event.request;
 
@@ -93,7 +93,7 @@ self.addEventListener('fetch', (event) => {
 
 //Adding `activate` event listener
 self.addEventListener('activate', (event) => {
-  console.info('Event: Activate');
+  //console.info('Event: Activate');
 
   //Remove old and unwanted caches
   event.waitUntil(
