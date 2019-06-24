@@ -2,10 +2,17 @@
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
 
-      //div for dates called daydate
-      const daydate = document.createElement("h5");
+      //div for daydate and month called eventDate
+      const eventDate = document.createElement("div");
+      const daydate = document.createElement("div");
+      const month = document.createElement("div");
       daydate.innerHTML = entry.doc.daydate;
+      month.innerHTML = entry.doc.month;
       daydate.classList.add("daydate");
+      month.classList.add("month");
+      eventDate.classList.add("eventDate");
+      eventDate.append(daydate);
+      eventDate.append(month);
 
       //div for titel and summary called eventInfo
       const eventInfo = document.createElement("div");
@@ -17,9 +24,9 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventInfo.append(summary);
       eventInfo.classList.add("eventInfo");
 
-      //div for eventInfo and daydate called eventColumn
+      //div for eventInfo and eventDate called eventColumn
       const eventColumn = document.createElement("div");
-      eventColumn.append(daydate);
+      eventColumn.append(eventDate);
       eventColumn.append(eventInfo);
       eventColumn.classList.add("eventColumn");
 
