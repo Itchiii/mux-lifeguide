@@ -301,13 +301,27 @@ function fetchJson(database) {
                         locationDB._putItem(i, resolve, reject);
                     });
                     putItemLocationDB.then(function success(data){
-                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-                            let putImageLocationDB = new Promise(function(resolve, reject){
-                                locationDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+                      let arrayOfPromises = [];
+                        if (i.attachments !== undefined && i.attachments.length !== 0) {
+                          let a = 0;
+                          addImage();
+                          function addImage() {
+                            let p = new Promise(function(resolve, reject){
+                              locationDB._putImage(i.id, i.attachments[a].attachmentFile, i.attachments[a].attachmentName, resolve, reject);
+                            }).then(function(){
+                              arrayOfPromises.push(p);
+                              a++;
+                              if (i.attachments[a] !== undefined) {
+                                addImage();
+                              }
+                              else {
+                                Promise.all(arrayOfPromises)
+                                .then(_ => {
+                                  setTipWithJSON(locationDB, i);
+                                });
+                              }
                             });
-                            putImageLocationDB.then(function success(data) {
-                                setTipWithJSON(locationDB, i);
-                            });
+                          }
                         }
                     });
                 }

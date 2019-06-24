@@ -311,7 +311,7 @@ body.overflow-hidden {
         content: "P";
         padding-left: 10px; }
   .location-item-wrapper .location-item-content .location-item-full-text {
-    padding: 0 30px; }
+    padding: 0 30px 60px 30px; }
     .location-item-wrapper .location-item-content .location-item-full-text > span {
       border-top: 1px solid grey;
       display: flex;
@@ -331,7 +331,8 @@ body.overflow-hidden {
         min-width: 11em;
         height: 100px;
         object-fit: cover;
-        border-radius: 5px; }
+        border-radius: 5px;
+        margin-right: 20px; }
   .location-item-wrapper .location-item-content .location-item-createRoute {
     width: 30px;
     height: 30px;

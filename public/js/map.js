@@ -115,7 +115,6 @@ function setItemContent(id) {
     }
 
     if (!itemWrapper.classList.contains('show')) {
-      console.log("test");
       itemWrapper.classList.add('show');
       //set top property, 56 vom bottom nav
       const topInPx = window.innerHeight - (itemWrapper.offsetHeight + 56);
@@ -193,8 +192,20 @@ function setItemContent(id) {
     }
 
     //add images
-    console.log(data);
-
+    const entityFullImages = document.getElementById('entity-full-images');
+    if (data._attachments !== undefined && Object.keys(data._attachments).length !== 0) {
+      console.log(data._attachments);
+      for (attachment in data._attachments) {
+        locationDB._getAttachment(data._id, attachment).then(function(blob){
+          const img = document.createElement('img');
+          let url = URL.createObjectURL(blob);
+          img.src = url;
+          entityFullImages.append(img);
+        }).catch(function(e) {
+          console.error(e)
+        });
+      }
+    }
 
   });
 }
