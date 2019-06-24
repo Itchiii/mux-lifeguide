@@ -94,6 +94,12 @@ class Database {
               recommend: options.recommend,
               start: options.start,
               date: options.date,
+              daydate: options.daydate,
+              day: options.day,
+              month: options.month,
+              location: options.location,
+              street: options.street,
+              place: options.place,
               //_rev is needed at document update
               _rev: doc._rev
             });
