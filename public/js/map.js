@@ -232,7 +232,12 @@ var touchBeginOnHolder = 0;
 var touchDif = 0;
 
 //toggle the bottom layer to fullscreen
-function holderOnClick() {
+function holderOnClick(e) {
+  console.log(e);
+  if (e.target.id === 'location-item-shareButton') {
+    return;
+  }
+
   if (locationBottomLayer.classList.contains('show-complete')) {
     locationBottomLayer.classList.remove('show-complete');
     locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
@@ -367,4 +372,25 @@ function removeMoreButtons() {
   document.getElementById('location-item-createRoute').classList.remove('hide');
   document.getElementById('location-item-text').classList.remove('hide');
   document.getElementById('location-item-open-text').classList.add('hide');
+}
+
+//https://css-tricks.com/how-to-use-the-web-share-api/
+
+if (document.getElementById('location-item-shareButton') !== null) {
+  document.getElementById('location-item-shareButton').addEventListener('click', event => {
+    const title = document.title;
+    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+    console.log(url);
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      })
+      .catch(console.error);
+    } else {
+      // fallback
+    }
+  });
 }
