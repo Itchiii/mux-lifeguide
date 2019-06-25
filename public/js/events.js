@@ -14,13 +14,13 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventDate.append(daydate);
       eventDate.append(month);
 
-      //div for titel and summary called eventInfo
+      //div for title and summary called eventInfo
       const eventInfo = document.createElement("div");
-      const titel = document.createElement("h4");
+      const title = document.createElement("h4");
       const summary = document.createElement("p");
-      titel.innerHTML = entry.doc.title;
+      title.innerHTML = entry.doc.title;
       summary.innerHTML = entry.doc.summary;
-      eventInfo.append(titel);
+      eventInfo.append(title);
       eventInfo.append(summary);
       eventInfo.classList.add("eventInfo");
 
