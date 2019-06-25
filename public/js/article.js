@@ -1,5 +1,16 @@
+//get id from URL
 let params = (new URL(document.location)).searchParams;
 let iddata = params.get('id');
+
+//init div for article.html
+const articleForm = document.createElement("div");
+articleForm.classList.add("articleform");
+
+        //div for sharing
+        const sharing = document.createElement("div");
+        sharing.classList.add("sharing");
+        sharing.innerHTML = "sharing";
+        articleForm.append(sharing);
 
 eventDB._getDoc(iddata).then(function(doc) {
 
@@ -8,11 +19,9 @@ eventDB._getDoc(iddata).then(function(doc) {
         var articleimg = document.createElement('img');
         articleimg.src = url;
         articleimg.classList.add("articleimg");
-        const articleForm = document.createElement("div");
-        articleForm.classList.add("articleform")
         articleForm.append(articleimg);
         document.getElementById('article').append(articleForm);
-
+        
         //div for article title
         const articleTitle = document.createElement("h2");
         articleTitle.innerHTML = doc.title;

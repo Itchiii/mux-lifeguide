@@ -13,6 +13,11 @@
   align-items: center;
   width: 95%; }
 
+.sharing-top {
+  height: 3em; }
+  .sharing-top a svg {
+    height: 30%; }
+
 .floatingButton {
   display: flex;
   flex-direction: row;
