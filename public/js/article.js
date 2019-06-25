@@ -66,13 +66,14 @@ eventDB._getDoc(iddata).then(function(doc) {
         articleHead.append(map);
 
         //div for summary and description
-        const articleSummary = document.createElement("h5");
-        articleSummary = doc.summary;
+        const articleSummary = document.createElement("h4");
+        articleSummary.innerHTML = doc.summary;
         const articleText = document.createElement("div");
-        arcitleText = doc.description;
+        articleText.innerHTML = doc.description;
         articleForm.append(articleSummary);
+        articleForm.append(articleText);
 
-        document.getElementById('article').append(articleForm);
+
 
 
 
