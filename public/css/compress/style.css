@@ -1,6 +1,7 @@
 .articleimg {
   width: 100%;
-  height: auto; }
+  height: auto;
+  margin-bottom: 1em; }
 
 .dayandstart {
   display: flex;
@@ -11,7 +12,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 95%; }
+  width: 95%;
+  margin-bottom: 1em; }
+
+.articletitle, .articleSummary {
+  margin-bottom: 1em; }
 
 .top-nav {
   display: flex;
@@ -32,6 +37,10 @@
   width: 50%; }
 
 #article-body {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
   margin-bottom: 5em; }
 
 .floatingButton {

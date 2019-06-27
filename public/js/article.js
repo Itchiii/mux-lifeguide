@@ -7,7 +7,6 @@ const articleForm = document.createElement("div");
 articleForm.classList.add("articleform");
 
 eventDB._getDoc(iddata).then(function(doc) {
-
     eventDB._getAttachment(doc._id, Object.keys(doc._attachments)[0]).then(function(blob){
         var url = URL.createObjectURL(blob);
         var articleimg = document.createElement('img');
@@ -71,6 +70,7 @@ eventDB._getDoc(iddata).then(function(doc) {
         //div for summary and description
         const articleSummary = document.createElement("h4");
         articleSummary.innerHTML = doc.summary;
+        articleSummary.classList.add("articleSummary");
         const articleText = document.createElement("div");
         articleText.innerHTML = doc.description;
         articleForm.append(articleSummary);
