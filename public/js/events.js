@@ -1,3 +1,7 @@
+          //div for every event
+          const events = document.createElement("div");
+          events.classList.add("events");
+
 //function to get database entrys appear on events.html
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
@@ -30,7 +34,6 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventColumn.append(eventInfo);
       eventColumn.classList.add("eventColumn");
 
-
       //div for event image called eventimg
       if (entry.doc._attachments !== undefined) {
         eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
@@ -44,19 +47,16 @@ eventDB.allDocsOfLocalDB.then(function(result) {
           event.classList.add("event")
           event.append(eventimg);
           event.append(eventColumn);
-/*        link container
-          const link = document.createElement("a");
-          link.append(event); */
+          events.append(event);
 
           //dataset
           event.dataset.id = entry.doc._id;
           //Put events container in DOM
-          document.getElementById('events').append(event);
+          document.getElementById('events').append(events);
           event.addEventListener("click", function(){
             window.open(`article.html?id=${this.dataset.id}`, "_self");
           });
         });
       }
-
     }
   });

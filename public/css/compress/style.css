@@ -13,10 +13,26 @@
   align-items: center;
   width: 95%; }
 
-.sharing-top {
-  height: 3em; }
-  .sharing-top a svg {
-    height: 30%; }
+.top-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 2em; }
+
+.left-nav {
+  display: flex;
+  width: 50%;
+  margin-left: 2em; }
+
+.right-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%; }
+
+#article-body {
+  margin-bottom: 5em; }
 
 .floatingButton {
   display: flex;
@@ -38,14 +54,16 @@
   flex-direction: row;
   align-items: center;
   width: 95%;
-  padding: 10px;
+  padding: 1em;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
   background-color: #e8eaec; }
 
 .eventDate {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px; }
+  padding: 1em; }
 
 .daydate {
   font-size: 2em; }
@@ -53,25 +71,39 @@
 .eventInfo {
   display: flex;
   flex-direction: column;
-  margin: 5px;
-  padding: 5px; }
+  padding: 1em; }
 
 .event {
+  min-width: 400px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
-  padding: 5px; }
+  margin: 1em; }
 
 .eventimg {
-  margin-top: 20px;
-  width: 95%; }
+  margin-top: 1em;
+  width: 95%;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em; }
 
 .eventInfo h4 {
-  margin-bottom: 6px; }
+  margin-bottom: 0.5em; }
+
+.events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; }
 
 #events {
-  margin-bottom: 50px; }
+  margin-bottom: 3em; }
+
+@media only screen and (min-width: 768px) {
+  .events {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start; } }
 
 .form {
   display: flex;

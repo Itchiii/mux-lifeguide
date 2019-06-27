@@ -2,7 +2,6 @@
 	width: 100%;
 	height: auto;
 }
-
 .dayandstart{
 	display: flex;
 	flex-direction: row;
@@ -14,12 +13,25 @@
 	align-items: center;
 	width: 95%;
 }
-
-.sharing-top{
-	height: 3em;
-	a {
-		svg{
-			height: 30%;
-		}
-	}
+.top-nav{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	//width: 90%;
+	height: 2em;
+}
+.left-nav{
+	display:flex;
+	width: 50%;
+	margin-left: 2em;
+}
+.right-nav{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 50%;
+}
+#article-body{
+	margin-bottom: 5em;
 }

@@ -6,12 +6,6 @@ let iddata = params.get('id');
 const articleForm = document.createElement("div");
 articleForm.classList.add("articleform");
 
-        //div for sharing
-        const sharing = document.createElement("div");
-        sharing.classList.add("sharing");
-        sharing.innerHTML = "sharing";
-        articleForm.append(sharing);
-
 eventDB._getDoc(iddata).then(function(doc) {
 
     eventDB._getAttachment(doc._id, Object.keys(doc._attachments)[0]).then(function(blob){
