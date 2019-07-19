@@ -129,14 +129,12 @@ function setItemContent(id) {
     itemWrapper.setAttribute('data-id', id);
     
 
+    document.getElementById('entity-full-images').textContent = "";
 
-
-    //hide all items for full text content
-    for (const entry of document.getElementById('location-item-full-text').children){
-      entry.classList.add('hide');
+    for (const entry of document.getElementById('location-item-keydata').children){
       entry.textContent = "";
     }
-
+    
     //set const wrappers
     const entityCollapsedHeading = document.getElementById('entity-collapsed-heading');
     const entityCollapsedAddress = document.getElementById('entity-collapsed-address');
@@ -148,6 +146,7 @@ function setItemContent(id) {
     const entityFullPhone = document.getElementById('entity-full-phone');
     const entityFullWeb = document.getElementById('entity-full-web');
     const entityFullOwner = document.getElementById('entity-full-owner');
+
     for (const entry in data) {
       switch (entry) {
         case 'title':
@@ -207,6 +206,14 @@ function setItemContent(id) {
       }
     }
 
+    if (data.linkedEvents.length !== 0) {
+      for (const id of data.linkedEvents) {
+        eventDB._getDoc(id).then(function(eventById) {
+          console.log(eventById)
+        });
+      }
+
+    }
   });
 }
 

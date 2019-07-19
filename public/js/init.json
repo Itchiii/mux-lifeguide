@@ -27,6 +27,7 @@
                 "attachmentName": "architekturmusuem3.jpg"
             }
         ],
+        "linkedEvents": ["barfuss", "stadtwald"],
         "recommend": true
     },
     {

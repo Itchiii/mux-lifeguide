@@ -199,25 +199,38 @@ body.overflow-hidden {
   }
 
   .location-item-content {
+    margin-top: 1em;
     
     .hide {
       display: none;
     }
 
     .location-item-collapsed-text {
-      padding: 0 30px;
+      padding: 0 1.5em;
+
+      .entity-collapsed-address, .entity-collapsed-zipCode {
+        font-size: 0.8em;
+        color: #747474;
+      }
     }
 
     .location-item-open-text {
-      padding: 0 30px;
+      padding: 0 1.5em;
       display: flex;
       flex-direction: column;
 
       &.hide {
         display: none;
       }
+
+      .entity-open-heading {
+        text-transform: uppercase;
+      }
     
       .entity-open-description {
+        font-size: 0.8em;
+        margin-top: 0.5em;
+        color: #747474;
         width: 75%;
         overflow: hidden;
         display: -webkit-box;
@@ -228,6 +241,7 @@ body.overflow-hidden {
       }
 
       .entity-show-more {
+        margin-top: 0.5em;
         color: $highlightedColor;
         margin-left: auto;
 
@@ -240,23 +254,32 @@ body.overflow-hidden {
     }
 
     .location-item-full-text {
-      padding: 0 30px 60px 30px;
+      //padding: 0 30px 60px 30px;
 
-      > span {
-        border-top: 1px solid grey;
-        display: flex;
-        padding: 10px 0;
-        align-items: center;
+      .location-item-keydata {
+        > span {
+          color: #747474;
+          border-top: 1px solid #e7e7e7;
+          display: flex;
+          padding: 1em 0;
+          align-items: center;
 
-        &::before {
-          content: "U";
-          padding-right: 30px;
-          padding-left: 30px;
-          color: $highlightedColor;
+          &:last-child {
+            border-bottom: 1px solid #e7e7e7;
+          }
+  
+          &::before {
+            content: "U";
+            padding-right: 1.5em;
+            padding-left: 1.5em;
+            color: $highlightedColor;
+          }
         }
       }
 
+
       .entity-full-images {
+        margin: 2em 1.5em 0 1.5em;
         display: flex;
         flex-direction: row; 
         flex-wrap: nowrap;  
@@ -272,6 +295,8 @@ body.overflow-hidden {
         }
       }
     }
+
+
   
     .location-item-createRoute {
       width: 30px;
