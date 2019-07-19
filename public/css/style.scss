@@ -9,8 +9,9 @@ $highlightedColor: #e66740;
 body {
   width: 100%;
   height: 100%;
-  color: #1e1e1e;
+  color: #3d3d3d;
   font-family: sans-serif;
+  font-size: 16px;
 }
 
 a {
@@ -51,12 +52,13 @@ a {
     align-items: center;
 
     svg {
-      height: 30%;
+      height: 40%;
     }
   
     span {
-      font-size: 0.7em;
+      font-size: 0.8em;
       margin-top: 0.3em;
+      color: #747474;
     }
   }
 }
@@ -73,4 +75,30 @@ a {
   max-width: 60em;
   margin: 0 auto;
   padding: 1.5em;
+}
+
+.input {
+	display: block;
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 5px;
+
+  &:not(:first-child):not(:last-child) {
+    margin: 1em 0;
+  }
+}
+
+.submit-button  {
+  background-color: $highlightedColor;
+  display: block;
+  padding: 1.2em 5em;
+  margin: auto;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin-top: 2em;
+  font-weight: 700;
 }

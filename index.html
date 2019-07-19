@@ -15,36 +15,61 @@
 	<script src="/node_modules/pouchdb/dist/pouchdb.find.js"></script>
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
-<body class="slider" id="index">
+<body id="index">
 	<div class="default-wrapper">
 		<img class="index-lifeguideLogo" src="/public/assets/images/lifeguideLogo.png" alt="LifeguideLogo">
 		<div class="location-tips-container">
 			<h2 class="location-tips-heading">Guck mal Hier!</h2>
-			<a class="location-tips-showAll" href="map.html">Alle anzeigen</a>
+			<a class="location-tips-showAll" href="map.html">
+				<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-width="2" stroke-miterlimit="10" fill="none" d="M55.9 28.3c.1-.8.1-1.5.1-2.3a24 24 0 0 0-48 0c0 .8 0 1.6.1 2.3v.3C10.1 47.6 32 61 32 61s21.9-13.6 23.8-32.3z" data-name="layer2" stroke-linejoin="round" stroke-linecap="round"></path>
+					<circle stroke-width="2" stroke-miterlimit="10" fill="none" r="12" cy="26" cx="32" data-name="layer1" stroke-linejoin="round" stroke-linecap="round"></circle>
+				</svg>
+			</a>
 			<div class="location-tips" id="location-tips"></div>
 		</div>
 
 		<div class="event-tips-container">
 			<h2 class="event-tips-heading">Sehen, Hören, Machen</h2>
-			<a class="event-tips-showAll" href="events.html">Alle anzeigen</a>
+			<a class="event-tips-showAll" href="events.html">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+					<path data-name="layer1" fill="none" stroke-miterlimit="10" stroke-width="2" d="M2 8h60v54H2z" stroke-linejoin="round" stroke-linecap="round"></path>
+					<path data-name="layer2" fill="none" stroke-miterlimit="10" stroke-width="2" d="M54 54H10V16h44v38z" stroke-linejoin="round" stroke-linecap="round"></path>
+					<path data-name="layer1" fill="none" stroke-miterlimit="10" stroke-width="2" d="M32 2v18M18 2v18M46 2v18" stroke-linejoin="round" stroke-linecap="round"></path>
+				</svg>
+			</a>
 			<div class="event-tips" id="event-tips"></div>
 		</div>
 
 		<div class="tour-tips-container">
 			<h2 class="tour-tips-heading">Entspannt spazieren gehen</h2>
-			<a class="tour-tips-showAll" href="map.html">Alle anzeigen</a>
+			<a class="location-tips-showAll" href="map.html">
+				<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-width="2" stroke-miterlimit="10" fill="none" d="M55.9 28.3c.1-.8.1-1.5.1-2.3a24 24 0 0 0-48 0c0 .8 0 1.6.1 2.3v.3C10.1 47.6 32 61 32 61s21.9-13.6 23.8-32.3z" data-name="layer2" stroke-linejoin="round" stroke-linecap="round"></path>
+					<circle stroke-width="2" stroke-miterlimit="10" fill="none" r="12" cy="26" cx="32" data-name="layer1" stroke-linejoin="round" stroke-linecap="round"></circle>
+				</svg>
+			</a>
 			<div class="tour-tips" id="tour-tips"></div>
 		</div>
 	</div>
-	<div class="related-about">
-		<h4 class="r-heading-about">Über uns</h4>
+	<div class="related-about" id="related-about">
+		<h4 class="r-heading-about heading">Über uns</h4>
 		<p class="r-text-about">Lerne mehr über den Lifeguide und wie du dich enagieren kannst!</p>
 	</div>
-	<div class="related-contact">
-		<h4 class="r-heading-contact">Kontakt</h4>
+	<div class="related-contact" id="related-contact">
+		<h4 class="r-heading-contact heading">Kontakt</h4>
+		<div class="related-contact-content close">
+			<p class="contact-text">Schreib` uns gerne wenn du Fragen oder Anregungen hast. Wir freuen uns auf deine Nachricht.</p>
+			<form action="">
+				<input class="input" type="text" name="name" placeholder="Name">
+				<input class="input" type="email" name="email" placeholder="E-Mail">
+				<textarea class="input" name="message" placeholder="Nachricht" rows="10"></textarea>
+				<button class="submit-button" type="submit">Senden</button>
+			</form>
+		</div>
 	</div>
-	<div class="related-imprint">
-		<h4 class="r-heading-imprint">Impressum</h4>
+	<div class="related-imprint" id="related-imprint">
+		<h4 class="r-heading-imprint heading">Impressum</h4>
 	</div>
 
 	<button class="share-button" id="share-button">Share Me</button>
@@ -83,5 +108,6 @@
 	</div>
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/app.js"></script>
+	<script src="/public/js/index.js"></script>
 </body>
 </html>
