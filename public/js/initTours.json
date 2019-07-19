@@ -1,0 +1,82 @@
+[
+    {
+        "id": "seightseeing",
+        "title": "Sehenswürdigkeiten - Erste Tour",
+        "rating": 0,
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus1.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus2.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus3.jpg"
+            }
+        ],
+        "recommend": true
+    },
+    {
+        "id": "seightseeing2",
+        "title": "Sehenswürdigkeiten - Zweite Tour",
+        "rating": 0,
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech2.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech3.jpg"
+            }
+        ],
+        "recommend": true
+    },
+    {
+        "id": "seightseeing3",
+        "title": "Sehenswürdigkeiten - Dritte Tour",
+        "rating": 0,
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech1.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech2.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/lech_foto_norbert_liesz_1.jpg",
+                "attachmentName": "lech3.jpg"
+            }
+        ],
+        "recommend": true
+    },
+    {
+        "id": "seightseeing4",
+        "title": "Sehenswürdigkeiten - Vierte Tour",
+        "rating": 0,
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus1.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus2.jpg"
+            },
+            {
+                "attachmentFile": "./public/assets/images/tours/rathausplatz_augsburg_foto_norbert_liesz_3.jpg",
+                "attachmentName": "rathaus3.jpg"
+            }
+        ],
+        "recommend": true
+    }
+]

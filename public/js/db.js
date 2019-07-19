@@ -55,6 +55,7 @@ class Database {
             case 'location': obj[prop] = "location"; break;
             case 'street': obj[prop] = "street"; break;
             case 'place': obj[prop] = "place"; break;
+            case 'linkedEvents': obj[prop] = []; break;
             default: obj[prop] = null; break;
           }
         }
@@ -87,6 +88,7 @@ class Database {
         location: options.location,
         street: options.street,
         place: options.place,
+        linkedEvents: options.linkedEvents
       }).then(function (response) {
         resolve();
         //Success -> Sync to remote
@@ -118,6 +120,7 @@ class Database {
               location: options.location,
               street: options.street,
               place: options.place,
+              linkedEvents: options.linkedEvents,
               //_rev is needed at document update
               _rev: doc._rev
             });
@@ -300,13 +303,13 @@ function fetchJson(database) {
                     let putItemLocationDB = new Promise(function(resolve, reject){
                         locationDB._putItem(i, resolve, reject);
                     });
-                    putItemLocationDB.then(function success(data){
+                    putItemLocationDB.then(function success(data) {
                       let arrayOfPromises = [];
                         if (i.attachments !== undefined && i.attachments.length !== 0) {
                           let a = 0;
                           addImage();
                           function addImage() {
-                            let p = new Promise(function(resolve, reject){
+                            let p = new Promise(function(resolve, reject) {
                               locationDB._putImage(i.id, i.attachments[a].attachmentFile, i.attachments[a].attachmentName, resolve, reject);
                             }).then(function(){
                               arrayOfPromises.push(p);
@@ -317,7 +320,7 @@ function fetchJson(database) {
                               else {
                                 Promise.all(arrayOfPromises)
                                 .then(_ => {
-                                  setTipWithJSON(locationDB, i);
+                                  if(document.body.id === "index") setTipWithJSON(locationDB, i);
                                 });
                               }
                             });
@@ -345,7 +348,7 @@ function fetchJson(database) {
                                 eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
                             });
                             putImageEventDB.then(function success(data) {
-                                setTipWithJSON(eventDB, i);
+                              if(document.body.id === "index") setTipWithJSON(eventDB, i);
                             });
                         }
                     });
@@ -354,7 +357,7 @@ function fetchJson(database) {
     }
 
     function initTours() {
-        fetch('./public/js/init.json')
+        fetch('./public/js/initTours.json')
             .then(function(response) {
                 return response.json();
             })
@@ -365,14 +368,28 @@ function fetchJson(database) {
                     let putItemTourDB = new Promise(function(resolve, reject){
                         tourDB._putItem(i, resolve, reject);
                     });
-                    putItemTourDB.then(function success(data){
-                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-                            let putImageTourDB = new Promise(function(resolve, reject){
-                                tourDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
+                    putItemTourDB.then(function success(data) {
+                      let arrayOfPromises = [];
+                        if (i.attachments !== undefined && i.attachments.length !== 0) {
+                          let a = 0;
+                          addImage();
+                          function addImage() {
+                            let p = new Promise(function(resolve, reject) {
+                              tourDB._putImage(i.id, i.attachments[a].attachmentFile, i.attachments[a].attachmentName, resolve, reject);
+                            }).then(function(){
+                              arrayOfPromises.push(p);
+                              a++;
+                              if (i.attachments[a] !== undefined) {
+                                addImage();
+                              }
+                              else {
+                                Promise.all(arrayOfPromises)
+                                .then(_ => {
+                                  if(document.body.id === "index") setTipWithJSON(tourDB, i);
+                                });
+                              }
                             });
-                            putImageTourDB.then(function success(data) {
-                                setTipWithJSON(tourDB, i);
-                            });
+                          }
                         }
                     });
                 }
