@@ -100,7 +100,7 @@ body.overflow-hidden {
   color:#fff;
 }
 
-.location-item-wrapper {
+.location-entity-wrapper {
   display: none;
   position: absolute;
   width: 100vw;
@@ -110,6 +110,7 @@ body.overflow-hidden {
   padding-bottom: 56px;
   box-shadow: 0 -6px 8px 0 rgba(0,0,0,.05);
   overflow: hidden;
+  scroll-behavior: smooth;
 
   &.show {
     display: block;
@@ -124,8 +125,10 @@ body.overflow-hidden {
     height: 100vh;
     bottom: unset;
     overflow: auto;
+    //height of nav
+    padding-bottom: 56px !important;
 
-    .location-item-holder .location-item-grabble {
+    .location-entity-holder .location-entity-grabble {
       transform: scale(1.5) rotate(180deg);
     }
   }
@@ -133,7 +136,7 @@ body.overflow-hidden {
   &.on-translate {
     //opacity: 0.8;
 
-    & + .location-item-placeholder {
+    & + .location-entity-placeholder {
       //@debugopacity: 0.8;
     }
   }
@@ -142,7 +145,7 @@ body.overflow-hidden {
     padding-top: 21px;
   }
 
-  .location-item-holder {
+  .location-entity-holder {
     display: flex;
     height: 30px;
     width: 100%;
@@ -153,7 +156,7 @@ body.overflow-hidden {
     position: relative;
     align-items: center;
   
-    .location-item-grabble {
+    .location-entity-grabble {
       height: 100%;
       width: auto;
       transform: scale(1.5);
@@ -164,7 +167,7 @@ body.overflow-hidden {
       }
     }
 
-    .location-item-shareButton, .location-item-markButton {
+    .location-entity-shareButton, .location-entity-markButton {
       position: absolute;
       height: 80%;
       width: 30px;
@@ -181,16 +184,16 @@ body.overflow-hidden {
       }
     }
 
-    .location-item-markButton {
+    .location-entity-markButton {
       right: 60px;
     }
 
-    .location-item-shareButton {
+    .location-entity-shareButton {
       right: 20px;
     }
   }
 
-  & + .location-item-placeholder {
+  & + .location-entity-placeholder {
     position: absolute;
     width: 100vw;
     background-color: #fff;
@@ -198,14 +201,14 @@ body.overflow-hidden {
     z-index: 10000;
   }
 
-  .location-item-content {
+  .location-entity-content {
     margin-top: 1em;
     
     .hide {
       display: none;
     }
 
-    .location-item-collapsed-text {
+    .location-entity-collapsed-text {
       padding: 0 1.5em;
 
       .entity-collapsed-address, .entity-collapsed-zipCode {
@@ -214,7 +217,7 @@ body.overflow-hidden {
       }
     }
 
-    .location-item-open-text {
+    .location-entity-open-text {
       padding: 0 1.5em;
       display: flex;
       flex-direction: column;
@@ -253,10 +256,10 @@ body.overflow-hidden {
       }
     }
 
-    .location-item-full-text {
+    .location-entity-full-text {
       //padding: 0 30px 60px 30px;
 
-      .location-item-keydata {
+      .location-entity-keydata {
         > span {
           color: #747474;
           border-top: 1px solid #e7e7e7;
@@ -294,11 +297,90 @@ body.overflow-hidden {
           margin-right: 20px;
         }
       }
+
+      .map-entity-events {
+        margin-top: 2em;
+        padding: 0 1.5em;
+
+        .eventColumn {
+          margin-top: 1em;
+          border-radius: 5px;
+          width: auto;
+
+          .eventInfo {
+            flex: 1;
+          }
+
+          .eventMenu {
+            color: $highlightedColor;
+            align-self: flex-start;
+
+            &:after {
+              content: "I";
+            }
+          }
+        }
+      }
+
+      .entity-full-text {
+        margin: 2em 0;
+        padding: 0 1.5em;
+
+        > p {
+        margin: 1em 0;
+        font-size: 0.8em;
+        color: #747474;
+        }
+      }
+
+      .event-menu-content {
+        position: absolute;
+        background-color: #fff;
+        z-index: 10002;
+        top: 0;
+        right: 0;
+        padding: 1.5em;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+        display: block;
+
+        &.hide {
+          display: none;
+        }
+
+        .entity-event-share, .entity-event-export, .entity-event-bookmark {
+          display: block;
+          font-size: 0.8em;
+          color: #747474;
+
+          &:not(:last-child):not(:first-child) {
+            margin: 1.5em 0;
+          }
+
+           &:before {
+            padding-right: 1.5em;
+            color: $highlightedColor;
+          }
+        }
+
+        .entity-event-share:before {
+          content: "T";
+        }
+
+        .entity-event-export:before {
+          content: "R";
+        }
+
+        .entity-event-bookmark:before {
+          content: "S";
+        }
+      }
     }
 
 
   
-    .location-item-createRoute {
+    .location-entity-createRoute {
       width: 30px;
       height: 30px;
       background-color: $highlightedColor;

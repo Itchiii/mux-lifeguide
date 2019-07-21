@@ -82,13 +82,12 @@ fetch('accessTokenMapBox.txt')
           i.addEventListener('click', function(){
 
             if (history.pushState) {
-              var newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
+              let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
               window.history.pushState({path:newurl},'',newurl);
             }
             //TODO: den zuück button anpassen
 
-            const id = this.getAttribute("data-id");
-            setItemContent(id);
+            setEntityContent(this.getAttribute("data-id"));
           })
         }
       }
@@ -98,44 +97,70 @@ fetch('accessTokenMapBox.txt')
 
 window.onload = function () {
   let params = new URLSearchParams(document.location.search.substring(1));
+
   let id = params.get("id");
   if (id !== null) {
-    setItemContent(id);
+    setEntityContent(id);
   }
+
+  let open = params.get("open");
+  if (id !== null && open) {
+    smallEntityWrapper.classList.add('show-complete');
+    addTopButtons();
+  }
+
+  setFunctionForShareButton();
+  setFunctionForLinkedEventMenuContent();
 }
 
-var startTopProperty = 0;
-function setItemContent(id) {
-  locationDB._getDoc(id).then(function(data) {
+let startTopProperty;
 
-    const itemWrapper  = document.getElementById('location-item-wrapper');
+
+/*
+  set title, description, key data, images and linked events for clicked entity
+*/
+function setEntityContent(id) {
+  locationDB._getDoc(id).then(function(data) {
+    const heightOfNavigation = 56;
+    const entityWrapper  = document.getElementById('location-entity-wrapper');
     
-    if (itemWrapper.getAttribute('data-id') === id) {
+    //avoid content parse on same location
+    if (entityWrapper.getAttribute('data-id') === id) {
       return;
     }
+    entityWrapper.setAttribute('data-id', id);
 
-    if (!itemWrapper.classList.contains('show')) {
-      itemWrapper.classList.add('show');
-      //set top property, 56 vom bottom nav
-      const topInPx = window.innerHeight - (itemWrapper.offsetHeight + 56);
-      const topInVh = topInPx / (window.innerHeight / 100);
-      startTopProperty = topInVh;
-      itemWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    //open preview of entity
+    if (!entityWrapper.classList.contains('show')) {
+      entityWrapper.classList.add('show');
+      //calculate appropriate top property from height of entity and navigation
+      startTopProperty = (window.innerHeight - (entityWrapper.offsetHeight + heightOfNavigation)) / (window.innerHeight / 100);
+      //set padding for sliding up function
+      entityWrapper.style.paddingBottom = "100vh";
     }
-    else {
-      itemWrapper.classList.add('show');
-      itemWrapper.style.setProperty('top', `${startTopProperty}vh`);
+
+    //set top property for preview
+    if (!entityWrapper.classList.contains('show-complete')) {
+      entityWrapper.style.setProperty('top', `${startTopProperty}vh`);
     }
-    itemWrapper.setAttribute('data-id', id);
-    
 
-    document.getElementById('entity-full-images').textContent = "";
+    //get content elements
+    const entityFullImages = document.getElementById('entity-full-images');
+    const entityFullEvent = document.getElementById('entity-full-events');
+    const entityFullSummary = document.getElementById('entity-full-summary');
+    const entityFullDescription = document.getElementById('entity-full-description');
 
-    for (const entry of document.getElementById('location-item-keydata').children){
+    //clear content
+    entityFullImages.textContent = "";
+    entityFullEvent.textContent = "";
+    entityFullSummary.textContent = "";
+    entityFullDescription.textContent = "";
+    //clear all keydata
+    for (const entry of document.getElementById('location-entity-keydata').children){
       entry.textContent = "";
     }
     
-    //set const wrappers
+    //get const elements for keydata
     const entityCollapsedHeading = document.getElementById('entity-collapsed-heading');
     const entityCollapsedAddress = document.getElementById('entity-collapsed-address');
     const entityCollapsedZipCode = document.getElementById('entity-collapsed-zipCode');
@@ -147,6 +172,7 @@ function setItemContent(id) {
     const entityFullWeb = document.getElementById('entity-full-web');
     const entityFullOwner = document.getElementById('entity-full-owner');
 
+    //set keydata
     for (const entry in data) {
       switch (entry) {
         case 'title':
@@ -190,15 +216,12 @@ function setItemContent(id) {
       }
     }
 
-    //add images
-    const entityFullImages = document.getElementById('entity-full-images');
+    //add all images as sliding container
     if (data._attachments !== undefined && Object.keys(data._attachments).length !== 0) {
-      console.log(data._attachments);
       for (attachment in data._attachments) {
-        locationDB._getAttachment(data._id, attachment).then(function(blob){
+        locationDB._getAttachment(data._id, attachment).then(function(blob) {
           const img = document.createElement('img');
-          let url = URL.createObjectURL(blob);
-          img.src = url;
+          img.src = URL.createObjectURL(blob);;
           entityFullImages.append(img);
         }).catch(function(e) {
           console.error(e)
@@ -206,96 +229,167 @@ function setItemContent(id) {
       }
     }
 
+    //add all linked events for this entity
     if (data.linkedEvents.length !== 0) {
       for (const id of data.linkedEvents) {
         eventDB._getDoc(id).then(function(eventById) {
-          console.log(eventById)
+          //add wrapper
+          const event = document.createElement('div');
+          event.dataset.eventid = eventById._id;
+          event.classList.add('eventColumn', 'map-entity-event');
+          event.addEventListener('click', function (event) {
+            if (!event.target.classList.contains("eventMenu")) {
+              window.location.href = `article.html?id=${eventById._id}`
+            }
+          });
+
+          const date = document.createElement('div');
+          date.classList.add('eventDate');   
+
+          const info = document.createElement('div');
+          info.classList.add('eventInfo');
+
+          const day = document.createElement('p');
+          day.classList.add('daydate');
+          day.textContent = eventById.daydate;
+
+          const month = document.createElement('p');
+          month.classList.add('month');
+          month.textContent = eventById.month;
+
+          const title = document.createElement('h4');
+          title.textContent = eventById.title;
+
+          const start = document.createElement('p');
+          start.textContent = eventById.day + " " + eventById.start;
+
+          const summary = document.createElement('p');
+          summary.textContent = eventById.summary;
+
+          const menu = document.createElement('div');
+          menu.classList.add('eventMenu');
+          //move and toggle display of menu content
+          menu.addEventListener('click', function () {
+            const offset = 80;
+            const content = document.getElementById('event-menu-content');
+            //set position
+            content.style.top = this.getBoundingClientRect().top - document.getElementById('location-entity-content').getBoundingClientRect().top + offset + "px";
+
+            if(content.dataset.eventid === this.closest('.eventColumn').dataset.eventid || content.classList.contains('hide')) {
+              content.classList.toggle('hide');
+            }
+
+            if (!content.classList.contains('hide')) {
+              content.dataset.eventid = eventById._id;
+            }
+          });
+          
+          date.append(day, month);
+          info.append(title, start, summary);
+          event.append(date, info, menu);
+          entityFullEvent.append(event);
         });
       }
-
     }
+
+    entityFullSummary.textContent = data.summary;
+    entityFullDescription.textContent = data.description;
+
+    //add body listener on click to hide the event menu
+    document.body.addEventListener('click', function (event) {
+      if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {
+        document.getElementById('event-menu-content').classList.add('hide');
+      }
+    });
+
   });
 }
 
-/* Code for animate the bottom layer after click on a location, that it can be draged to fullscreen  */
-const holder = document.getElementById('location-item-holder');
-const locationBottomLayer = document.getElementById('location-item-wrapper');
-const emptyPlaceholderElement = document.getElementById('location-item-heightPlaceholder');
+
+/* 
+  code to animate the bottom layer after click on a location, that it can be draged to fullscreen  
+*/
+const holder = document.getElementById('location-entity-holder');
+const smallEntityWrapper = document.getElementById('location-entity-wrapper');
 
 //add various EventListener for touch and mouse interactions on holder and on bottom layer
-holder.addEventListener("touchmove", holderOnMove);
-holder.addEventListener("mousedown", holderOnDown);
-holder.addEventListener("mouseup", holderOnUp);
-holder.addEventListener("touchstart", holderOnDown);
-holder.addEventListener("touchend", holderOnUp);
+holder.addEventListener("touchmove", touchMove);
+holder.addEventListener("touchstart", touchDown);
+holder.addEventListener("touchend", touchUp);
 holder.addEventListener('click', holderOnClick);
-locationBottomLayer.addEventListener("touchmove", holderOnMove);
-locationBottomLayer.addEventListener("mousedown", holderOnDown);
-locationBottomLayer.addEventListener("mouseup", holderOnUp);
-locationBottomLayer.addEventListener("touchstart", holderOnDown);
-locationBottomLayer.addEventListener("touchend", holderOnUp);
+smallEntityWrapper.addEventListener("touchmove", touchMove);
+smallEntityWrapper.addEventListener("touchstart", touchDown);
+smallEntityWrapper.addEventListener("touchend", touchUp);
 
-var touchBeginOnHolder = 0;
-var touchDif = 0;
+//init variables to remember touchStart and global touch difference
+let touchBeginOnHolder, touchDif;
 
-//toggle the bottom layer to fullscreen
+//init variables to avoid toggle view after scroll on image container
+let initScrollLeftOfImgContainer, firstMoveScrollLeftOfImgContainer, moveCount = 0;
+
+/* 
+  toggle the preview to fullscreen or vice versa  
+*/
 function holderOnClick(e) {
-  console.log(e);
-  if (e.target.id === 'location-item-shareButton') {
+  //return after click on share button
+  if (e !== undefined && e.target.id === 'location-entity-shareButton') {
     return;
   }
 
-  if (locationBottomLayer.classList.contains('show-complete')) {
-    locationBottomLayer.classList.remove('show-complete');
-    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
-    removeMoreButtons();
+  //fullscreen -> preview
+  if (smallEntityWrapper.classList.contains('show-complete')) {
+    smallEntityWrapper.classList.remove('show-complete');
+    smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    removeTopButtons();
+    removeParamOpen();
   }
-  else {
-    locationBottomLayer.style.setProperty('top', `${0}vh`);    
-    locationBottomLayer.classList.add('show-complete');
-    addMoreButtons();
 
+  //preview -> fullscreen
+  else {
+    smallEntityWrapper.style.setProperty('top', `0`);    
+    smallEntityWrapper.classList.add('show-complete');
+    addParamOpen();
+    addTopButtons();
   }
 }
 
-//save start position
-function holderOnDown(e) {
+function touchDown(e) {
+  touchDif = 0;
+  initScrollLeftOfImgContainer = document.getElementById('entity-full-images').scrollLeft;
+
   //remove transition for top
-  locationBottomLayer.classList.remove('transition');
-  
+  smallEntityWrapper.classList.remove('transition');
   
   //remember actual position
-  if (e.type === 'mousedown') {
-    touchBeginOnHolder = e.pageY;
-    //add eventlistener after mousedown
-    holder.addEventListener("mousemove", holderOnMove);
-  }
-  else {
-    touchBeginOnHolder = e.touches[0].pageY;
-  }
+  touchBeginOnHolder = e.touches[0].pageY;
 }
 
+function touchMove(e) {
+  //compare init scrollLeft property with first move. If they are unequal, then the image container was scrolled.
+  if (moveCount === 0) {
+    firstMoveScrollLeftOfImgContainer = document.getElementById('entity-full-images').scrollLeft;
+    if (e.target.closest('#entity-full-images') !== null || e.target.id === "entity-full-images") {
+      firstMoveScrollLeftOfImgContainer++;
+    }
+    moveCount++;
+  } 
+  if (initScrollLeftOfImgContainer !== firstMoveScrollLeftOfImgContainer) {
+    return;
+  }
 
-function holderOnMove(e) {
   //calcutate the difference from start to actual position (after mouse move)
-  if (e.type === 'mousemove') {
-    touchDif = touchBeginOnHolder - e.pageY;
-  }
-  else {
-    touchDif = touchBeginOnHolder - e.touches[0].pageY;
-  }
+  touchDif = touchBeginOnHolder - e.touches[0].pageY;
 
-  //return checks, if it scrolled on 'great' Layer but it can be scrolled for moving his content
-  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif < 0 && locationBottomLayer.scrollTop != 0) {
+  //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif < 0 && smallEntityWrapper.scrollTop != 0) {
     return;
   }
-  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif > 0 && locationBottomLayer.scrollTop >= 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif > 0 && smallEntityWrapper.scrollTop >= 0) {
     return;
   }
 
-
-  const vhInPx = window.innerHeight / 100;
-  const vh = touchDif / vhInPx;
+  //calculate top property on scroll
+  const vh = touchDif / (window.innerHeight / 100);
   const vhDifUp = startTopProperty - vh;
   const vhDifDown = 0 + vh;
     
@@ -303,101 +397,188 @@ function holderOnMove(e) {
    * add moving difference as top
    * touchDif > 0 -> user scrolled layer to top; touchDiv < 0 -> user scrolled layer to bottom
    */
-  if (touchDif > 0 && !locationBottomLayer.classList.contains('show-complete')){
+  if (touchDif > 0 && !smallEntityWrapper.classList.contains('show-complete')){
     //change heigt of a div after the container, that is looks like an expanding container 
-    emptyPlaceholderElement.style.setProperty('height', `${touchDif + 1}px`);
-    locationBottomLayer.style.setProperty('top', `${vhDifUp}vh`);
-    //locationBottomLayer.classList.add('on-translate');
+   // emptyPlaceholderElement.style.setProperty('height', `${touchDif + 1}px`);
+    smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
+    //smallEntityWrapper.classList.add('on-translate');
   }
   //change top on bottom layer on scroll down -> just show a animation
-  if (touchDif < 0 && !locationBottomLayer.classList.contains('show-complete')) {
-    locationBottomLayer.style.setProperty('top', `${vhDifUp}vh`);
+  if (touchDif < 0 && !smallEntityWrapper.classList.contains('show-complete')) {
+    smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
   }
 
   //change top from complete version to bottom 
-  if (touchDif < 0 && locationBottomLayer.classList.contains('show-complete')) {
-    locationBottomLayer.style.setProperty('top', `${vhDifDown * (-1)}vh`);
-    //locationBottomLayer.classList.add('on-translate');
+  if (touchDif < 0 && smallEntityWrapper.classList.contains('show-complete')) {
+    smallEntityWrapper.style.setProperty('top', `${vhDifDown * (-1)}vh`);
+    //smallEntityWrapper.classList.add('on-translate');
   }  
 }
 
-function holderOnUp(e) {
-  locationBottomLayer.classList.add('transition');
+function touchUp(e) {
+  //add transition for top
+  smallEntityWrapper.classList.add('transition');
 
-  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif < 0 && locationBottomLayer.scrollTop != 0) {
+  //reset
+  moveCount = 0;
+
+  //return i
+  if (initScrollLeftOfImgContainer !== firstMoveScrollLeftOfImgContainer) {
     return;
   }
 
-  if (this === locationBottomLayer &&  locationBottomLayer.classList.contains('show-complete') && touchDif > 0 && locationBottomLayer.scrollTop >= 0) {
+  //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif <= 0 && smallEntityWrapper.scrollTop != 0) {
     return;
   }
-
-  if (e.type === 'mouseup') {
-    holder.removeEventListener("mousemove", holderOnMove);
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif >= 0 && smallEntityWrapper.scrollTop >= 0) {
+    return;
   }
-  //remove added properties
-  //locationBottomLayer.style.removeProperty('height');
-  emptyPlaceholderElement.style.removeProperty('height');
-  //locationBottomLayer.classList.remove('on-translate');
 
   //100px as min touch difference
-  if (touchDif > 100) {
-  locationBottomLayer.style.removeProperty('top');
-
-    locationBottomLayer.classList.add('show-complete');
-
-    addMoreButtons();
+  const minDifference = 100;
+  
+  if (touchDif > minDifference) {
+    smallEntityWrapper.style.removeProperty('top');
+    smallEntityWrapper.classList.add('show-complete');
+    addTopButtons();
+    addParamOpen();
   }
-  else if (touchDif < -100 ) {
-    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
-    locationBottomLayer.classList.remove('show-complete');
-    removeMoreButtons();
+  else if (touchDif < (minDifference * (-1))) {
+    let params = new URLSearchParams(document.location.search.substring(1));
+  
+    //set initial top property from URL (important after comming from click this URL as a link)
+    if (params.get("startTopProperty")) {
+      startTopProperty = params.get('startTopProperty');
+    }
+
+    smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    smallEntityWrapper.classList.remove('show-complete');
+    removeTopButtons();
+    removeParamOpen();
   }
-  else if (locationBottomLayer.classList.contains('show-complete')) {
-  locationBottomLayer.style.removeProperty('top');
+  //after click on holder in fullscreen
+  else if (smallEntityWrapper.classList.contains('show-complete')) {
+    smallEntityWrapper.style.removeProperty('top');
     
   }
-  else if (!locationBottomLayer.classList.contains('show-complete')) {
-    locationBottomLayer.style.setProperty('top', `${startTopProperty}vh`);
+  //after click on holder in preview
+  else if (!smallEntityWrapper.classList.contains('show-complete')) {
+    smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
   }
 }
 
-function addMoreButtons() {
-  document.getElementById('location-item-shareButton').classList.remove('hide');
-  document.getElementById('location-item-markButton').classList.remove('hide');
-  document.getElementById('location-item-full-text').classList.remove('hide');
-  document.getElementById('location-item-createRoute').classList.add('hide');
-  document.getElementById('location-item-open-text').classList.remove('hide');
-  document.getElementById('location-item-open-text').classList.remove('hide');
-  document.getElementById('location-item-text').classList.add('hide');
+function addTopButtons() {
+  document.getElementById('location-entity-shareButton').classList.remove('hide');
+  document.getElementById('location-entity-markButton').classList.remove('hide');
+  document.getElementById('location-entity-full-text').classList.remove('hide');
+  document.getElementById('location-entity-createRoute').classList.add('hide');
+  document.getElementById('location-entity-open-text').classList.remove('hide');
+  document.getElementById('location-entity-open-text').classList.remove('hide');
+  document.getElementById('location-entity-text').classList.add('hide');
 }
 
-function removeMoreButtons() {
-  document.getElementById('location-item-shareButton').classList.add('hide');
-  document.getElementById('location-item-full-text').classList.add('hide');
-  document.getElementById('location-item-markButton').classList.add('hide');
-  document.getElementById('location-item-createRoute').classList.remove('hide');
-  document.getElementById('location-item-text').classList.remove('hide');
-  document.getElementById('location-item-open-text').classList.add('hide');
+function removeTopButtons() {
+  document.getElementById('location-entity-shareButton').classList.add('hide');
+  document.getElementById('location-entity-full-text').classList.add('hide');
+  document.getElementById('location-entity-markButton').classList.add('hide');
+  document.getElementById('location-entity-createRoute').classList.remove('hide');
+  document.getElementById('location-entity-text').classList.remove('hide');
+  document.getElementById('location-entity-open-text').classList.add('hide');
 }
 
-//https://css-tricks.com/how-to-use-the-web-share-api/
+function removeParamOpen() {
+  let params = new URLSearchParams(document.location.search.substring(1));
 
-if (document.getElementById('location-item-shareButton') !== null) {
-  document.getElementById('location-item-shareButton').addEventListener('click', event => {
+  if (params.get("open") !== null && history.pushState && params.get("startTopProperty") !== null) {
+    params.delete('open');
+    params.delete('startTopProperty');
+
+    let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${params.get("id")}`;
+    window.history.pushState({path:newurl},'',newurl);
+  }
+}
+
+function addParamOpen() {
+  if (history.pushState) {
+    let newurl = `${window.location.href}&open=true&startTopProperty=${startTopProperty}`;
+    window.history.pushState({path:newurl},'',newurl);
+  }
+}
+
+function setFunctionForShareButton() {
+  //https://css-tricks.com/how-to-use-the-web-share-api/
+  document.getElementById('location-entity-shareButton').addEventListener('click', () => {
     const title = document.title;
     const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+      })
+      .catch(console.error);
+    } else {
+      //fallback
+      console.log(url);
+    }
+  });
+}
+
+function setFunctionForLinkedEventMenuContent() {
+
+  //functionality for share button
+  document.getElementById('entity-event-share').addEventListener('click', () => {
+    const title = document.title;
+    const url = 'wichtigeURL'
     console.log(url);
     if (navigator.share) {
       navigator.share({
         title: title,
         url: url
       }).then(() => {
-        console.log('Thanks for sharing!');
       })
       .catch(console.error);
     } else {
       // fallback
     }
   });
+
+  //functionality for export button
+
+
+  //functionality for bookmark button
+  document.getElementById('entity-event-bookmark').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    eventDB._getDoc(eventID).then(function(data) {
+      let putItemBookmarksDB = new Promise(function(resolve, reject){
+        bookmarksDB._putItem(data, resolve, reject);
+      });
+      putItemBookmarksDB.then(() => {
+        bookmarksDB.infoLocal.then(function(info) {
+          console.log(info);
+        });
+      });
+    });
+  });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
