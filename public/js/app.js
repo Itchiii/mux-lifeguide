@@ -30,6 +30,7 @@ function setAllTips(database, recommends) {
     const article = document.createElement('article');
     const img = document.createElement('img');
     const heading = document.createElement('h4');
+    heading.classList.add('recommend-sub-heading');
 
     if (entry._attachments !== undefined) {
       database._getAttachment(entry._id, Object.keys(entry._attachments)[0]).then(function(blob){

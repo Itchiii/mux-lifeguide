@@ -313,7 +313,7 @@ body.overflow-hidden {
   cursor: pointer;
   color: #fff; }
 
-.location-item-wrapper {
+.location-entity-wrapper {
   display: none;
   position: absolute;
   width: 100vw;
@@ -322,21 +322,23 @@ body.overflow-hidden {
   z-index: 10001;
   padding-bottom: 56px;
   box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.05);
-  overflow: hidden; }
-  .location-item-wrapper.show {
+  overflow: hidden;
+  scroll-behavior: smooth; }
+  .location-entity-wrapper.show {
     display: block; }
-  .location-item-wrapper.transition {
+  .location-entity-wrapper.transition {
     transition: top 250ms ease; }
-  .location-item-wrapper.show-complete {
+  .location-entity-wrapper.show-complete {
     top: 0;
     height: 100vh;
     bottom: unset;
-    overflow: auto; }
-    .location-item-wrapper.show-complete .location-item-holder .location-item-grabble {
+    overflow: auto;
+    padding-bottom: 56px !important; }
+    .location-entity-wrapper.show-complete .location-entity-holder .location-entity-grabble {
       transform: scale(1.5) rotate(180deg); }
-  .location-item-wrapper h2 {
+  .location-entity-wrapper h2 {
     padding-top: 21px; }
-  .location-item-wrapper .location-item-holder {
+  .location-entity-wrapper .location-entity-holder {
     display: flex;
     height: 30px;
     width: 100%;
@@ -346,51 +348,51 @@ body.overflow-hidden {
     margin-top: -1px;
     position: relative;
     align-items: center; }
-    .location-item-wrapper .location-item-holder .location-item-grabble {
+    .location-entity-wrapper .location-entity-holder .location-entity-grabble {
       height: 100%;
       width: auto;
       transform: scale(1.5);
       margin: 0 auto; }
-      .location-item-wrapper .location-item-holder .location-item-grabble path {
+      .location-entity-wrapper .location-entity-holder .location-entity-grabble path {
         stroke: #e66740; }
-    .location-item-wrapper .location-item-holder .location-item-shareButton, .location-item-wrapper .location-item-holder .location-item-markButton {
+    .location-entity-wrapper .location-entity-holder .location-entity-shareButton, .location-entity-wrapper .location-entity-holder .location-entity-markButton {
       position: absolute;
       height: 80%;
       width: 30px; }
-      .location-item-wrapper .location-item-holder .location-item-shareButton svg, .location-item-wrapper .location-item-holder .location-item-markButton svg {
+      .location-entity-wrapper .location-entity-holder .location-entity-shareButton svg, .location-entity-wrapper .location-entity-holder .location-entity-markButton svg {
         transform: scale(0.8); }
-      .location-item-wrapper .location-item-holder .location-item-shareButton path, .location-item-wrapper .location-item-holder .location-item-shareButton circle, .location-item-wrapper .location-item-holder .location-item-markButton path, .location-item-wrapper .location-item-holder .location-item-markButton circle {
+      .location-entity-wrapper .location-entity-holder .location-entity-shareButton path, .location-entity-wrapper .location-entity-holder .location-entity-shareButton circle, .location-entity-wrapper .location-entity-holder .location-entity-markButton path, .location-entity-wrapper .location-entity-holder .location-entity-markButton circle {
         stroke: #e66740; }
-      .location-item-wrapper .location-item-holder .location-item-shareButton.hide, .location-item-wrapper .location-item-holder .location-item-markButton.hide {
+      .location-entity-wrapper .location-entity-holder .location-entity-shareButton.hide, .location-entity-wrapper .location-entity-holder .location-entity-markButton.hide {
         display: none; }
-    .location-item-wrapper .location-item-holder .location-item-markButton {
+    .location-entity-wrapper .location-entity-holder .location-entity-markButton {
       right: 60px; }
-    .location-item-wrapper .location-item-holder .location-item-shareButton {
+    .location-entity-wrapper .location-entity-holder .location-entity-shareButton {
       right: 20px; }
-  .location-item-wrapper + .location-item-placeholder {
+  .location-entity-wrapper + .location-entity-placeholder {
     position: absolute;
     width: 100vw;
     background-color: #fff;
     bottom: 1px;
     z-index: 10000; }
-  .location-item-wrapper .location-item-content {
+  .location-entity-wrapper .location-entity-content {
     margin-top: 1em; }
-    .location-item-wrapper .location-item-content .hide {
+    .location-entity-wrapper .location-entity-content .hide {
       display: none; }
-    .location-item-wrapper .location-item-content .location-item-collapsed-text {
+    .location-entity-wrapper .location-entity-content .location-entity-collapsed-text {
       padding: 0 1.5em; }
-      .location-item-wrapper .location-item-content .location-item-collapsed-text .entity-collapsed-address, .location-item-wrapper .location-item-content .location-item-collapsed-text .entity-collapsed-zipCode {
+      .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-address, .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-zipCode {
         font-size: 0.8em;
         color: #747474; }
-    .location-item-wrapper .location-item-content .location-item-open-text {
+    .location-entity-wrapper .location-entity-content .location-entity-open-text {
       padding: 0 1.5em;
       display: flex;
       flex-direction: column; }
-      .location-item-wrapper .location-item-content .location-item-open-text.hide {
+      .location-entity-wrapper .location-entity-content .location-entity-open-text.hide {
         display: none; }
-      .location-item-wrapper .location-item-content .location-item-open-text .entity-open-heading {
+      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-heading {
         text-transform: uppercase; }
-      .location-item-wrapper .location-item-content .location-item-open-text .entity-open-description {
+      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-description {
         font-size: 0.8em;
         margin-top: 0.5em;
         color: #747474;
@@ -401,39 +403,88 @@ body.overflow-hidden {
         -webkit-box-orient: vertical;
         -moz-line-clamp: 3;
         -moz-box-orient: vertical; }
-      .location-item-wrapper .location-item-content .location-item-open-text .entity-show-more {
+      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more {
         margin-top: 0.5em;
         color: #e66740;
         margin-left: auto; }
-        .location-item-wrapper .location-item-content .location-item-open-text .entity-show-more::after {
+        .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more::after {
           content: "P";
           padding-left: 10px; }
-    .location-item-wrapper .location-item-content .location-item-full-text .location-item-keydata > span {
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span {
       color: #747474;
       border-top: 1px solid #e7e7e7;
       display: flex;
       padding: 1em 0;
       align-items: center; }
-      .location-item-wrapper .location-item-content .location-item-full-text .location-item-keydata > span:last-child {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span:last-child {
         border-bottom: 1px solid #e7e7e7; }
-      .location-item-wrapper .location-item-content .location-item-full-text .location-item-keydata > span::before {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span::before {
         content: "U";
         padding-right: 1.5em;
         padding-left: 1.5em;
         color: #e66740; }
-    .location-item-wrapper .location-item-content .location-item-full-text .entity-full-images {
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
       margin: 2em 1.5em 0 1.5em;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       overflow-x: auto; }
-      .location-item-wrapper .location-item-content .location-item-full-text .entity-full-images img {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images img {
         min-width: 11em;
         height: 100px;
         object-fit: cover;
         border-radius: 5px;
         margin-right: 20px; }
-    .location-item-wrapper .location-item-content .location-item-createRoute {
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
+      margin-top: 2em;
+      padding: 0 1.5em; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
+        margin-top: 1em;
+        border-radius: 5px;
+        width: auto; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
+          flex: 1; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
+          color: #e66740;
+          align-self: flex-start; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu:after {
+            content: "I"; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
+      margin: 2em 0;
+      padding: 0 1.5em; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text > p {
+        margin: 1em 0;
+        font-size: 0.8em;
+        color: #747474; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content {
+      position: absolute;
+      background-color: #fff;
+      z-index: 10002;
+      top: 0;
+      right: 0;
+      padding: 1.5em;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+      display: block; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
+        display: none; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
+        display: block;
+        font-size: 0.8em;
+        color: #747474; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
+          margin: 1.5em 0; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:before {
+          padding-right: 1.5em;
+          color: #e66740; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:before {
+        content: "T"; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:before {
+        content: "R"; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:before {
+        content: "S"; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute {
       width: 30px;
       height: 30px;
       background-color: #e66740;
@@ -446,12 +497,12 @@ body.overflow-hidden {
       position: absolute;
       bottom: 90px;
       right: 20px; }
-      .location-item-wrapper .location-item-content .location-item-createRoute svg {
+      .location-entity-wrapper .location-entity-content .location-entity-createRoute svg {
         height: 100%;
         width: 100%; }
-      .location-item-wrapper .location-item-content .location-item-createRoute path {
+      .location-entity-wrapper .location-entity-content .location-entity-createRoute path {
         stroke: #fff; }
-      .location-item-wrapper .location-item-content .location-item-createRoute.hide {
+      .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
         display: none; }
 
 /*CSS for Slideout Menu*/
