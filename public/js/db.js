@@ -1,13 +1,18 @@
 class Database {
   constructor(name) {
     this.name = name;
-    this.remoteDB = new PouchDB(`http://localhost:5984/${this.name}`);
-    this.localDB = new PouchDB(name);
 
-    //remote database will be initialized only with first use
-    this.infoRemote.then(function(info) {
-      this._syncFromRemoteToLocal();
-    }.bind(this));
+    //create remote database if database not for bookmarks
+    if (name !== "bookmarks") {
+      this.remoteDB = new PouchDB(`http://localhost:5984/${this.name}`);
+
+      //remote database will be initialized only with first use
+      this.infoRemote.then(function(info) {
+        this._syncFromRemoteToLocal();
+      }.bind(this));
+
+    }
+    this.localDB = new PouchDB(name);
   }
 
   //get info about remote database
@@ -63,10 +68,14 @@ class Database {
       }
     };
     let options = new Proxy(params, handler);
+
+    //set specific id, because params for an entry of bookmarks has not an 'id', it has jus an '_id'
+    let id = this.name === "bookmarks" ? params._id : options.id.toString();
+    
     //add a new document
     this.localDB
       .put({
-        _id: options.id.toString(),
+        _id: id,
         title: options.title,
         description: options.description,
         lat: options.lat,
@@ -91,14 +100,17 @@ class Database {
         linkedEvents: options.linkedEvents
       }).then(function (response) {
         resolve();
-        //Success -> Sync to remote
-        this._syncFromLocalToRemote();
+
+        //Success -> Sync to remote if it is not bookmarks database
+        if (this.name !== "bookmarks") {
+          this._syncFromLocalToRemote();
+        }
       }.bind(this)).catch(function () {
 
         //ups, something did not work. Document already exits?
-        this.localDB.get(options.id.toString()).then(function(doc) {
+        this.localDB.get(id).then(function(doc) {
             this.localDB.put({
-              _id: options.id.toString(),
+              _id: id,
               title: options.title,
               description: options.description,
               lat: options.lat,
@@ -125,8 +137,12 @@ class Database {
               _rev: doc._rev
             });
           }.bind(this)).then(function(response) {
-            resolve();//Success -> Sync to remote
-            this._syncFromLocalToRemote();
+            resolve();
+
+            //Sync to remote if it is not bookmarks database
+            if (this.name !== "bookmarks") {
+              this._syncFromLocalToRemote();
+            }
           }.bind(this)).catch(function (err) {
             //Nope, here is an error
             console.error(err);
@@ -252,34 +268,36 @@ function makeid(length) {
 }
 
 
-//init location and event database
+//init databases
 const locationDB = new Database('locations');
 const eventDB = new Database('events');
 const tourDB = new Database('tours');
+const bookmarksDB = new Database('bookmarks');
 
 
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
-  //setRecommend(locationDB);
-  fetchJson(locationDB);
+  if(document.body.id === "index") setRecommend(locationDB);
+  //fetchJson(locationDB);
 }).on('error', function (err) {
-  setRecommend(locationDB);
+  if(document.body.id === "index") setRecommend(locationDB);
   //fetchJson(locationDB); //for mobile, because you cant access the remote database
 });
 
-eventDB._syncFromRemoteToLocal().on('complete', function(info){
-  //setRecommend(eventDB);
-  fetchJson(eventDB);
+eventDB._syncFromRemoteToLocal().on('complete', function(info) {
+  if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
+  //fetchJson(eventDB);
 }).on('error', function (err) {
-    setRecommend(eventDB);
+  if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
     //fetchJson(eventDB); //for mobile, because you cant access the remote database
 });
 
-tourDB._syncFromRemoteToLocal().on('complete', function(info){
-  //setRecommend(tourDB);
-  fetchJson(tourDB);
+tourDB._syncFromRemoteToLocal().on('complete', function(info) {
+  if(document.body.id === "index") setRecommend(tourDB);
+  //fetchJson(tourDB);
 }).on('error', function (err) {
-    setRecommend(tourDB);
+  console.log("error");
+  if(document.body.id === "index") setRecommend(tourDB);
     //fetchJson(tourDB); //for mobile, because you cant access the remote database
 });
 
