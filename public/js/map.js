@@ -545,7 +545,21 @@ function setFunctionForLinkedEventMenuContent() {
   });
 
   //functionality for export button
+  var cal = ics();
+	cal.addEvent('Demo Event', 'This is an all day event', 'Nome, AK', '8/7/2013', '8/7/2013');
+  cal.addEvent('Demo Event', 'This is thirty minute event', 'Nome, AK', '8/7/2013 5:30 pm', '8/7/2013 6:00 pm');
+  
+  // You can use this for easy debugging
+  makelogs = function(obj) {
+    console.log('Events Array');
+    console.log('=================');
+    console.log(obj.events());
+    console.log('Calendar With Header');
+    console.log('=================');
+    console.log(obj.calendar());
+  }
 
+  makelogs(cal);
 
   //functionality for bookmark button
   document.getElementById('entity-event-bookmark').addEventListener('click', () => {

@@ -9,6 +9,7 @@ ______
 * [ServiceWorkerAPI](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
 * [PouchDB](https://pouchdb.com/)
 * [Leaflet](https://leafletjs.com/)
+* [ics.js](https://github.com/nwcell/ics.js/)
 * [SCSS](https://sass-lang.com/)
 * [Gulp](https://gulpjs.com/)
 * [Git](https://git-scm.com/)
