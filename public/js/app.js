@@ -27,7 +27,7 @@ function setAllTips(database, recommends) {
         break;
     }
 
-    const article = document.createElement('article');
+    const article = document.createElement('a');
     const img = document.createElement('img');
     const heading = document.createElement('h4');
     heading.classList.add('recommend-sub-heading');
@@ -50,6 +50,14 @@ function setAllTips(database, recommends) {
       container.append(article);
     }
 
+    switch (database) {
+      case eventDB: article.href = `article.html?id=${entry._id}`; break;
+      case locationDB: article.href = `map.html?id=${entry._id}`; break;
+      case tourDB: container = tourTips; break;
+      default:
+        break;
+    }
+    
     heading.textContent = entry.title;
   }
 }
@@ -75,7 +83,7 @@ function setTipWithJSON(database, entry) {
   }
 
      
-  const article = document.createElement('article');
+  const article = document.createElement('a');
   const img = document.createElement('img');
   const heading = document.createElement('h4');
   heading.classList.add('recommend-sub-heading');
@@ -98,5 +106,13 @@ function setTipWithJSON(database, entry) {
     container.append(article);
   }
 
+  switch (database) {
+    case eventDB: article.href = `article.html?id=${entry._id}`; break;
+    case locationDB: article.href = `map.html?id=${entry._id}`; break;
+    case tourDB: container = tourTips; break;
+    default:
+      break;
+  }
+  
   heading.textContent = entry.title;
 }
