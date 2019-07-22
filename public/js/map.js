@@ -92,6 +92,20 @@ fetch('accessTokenMapBox.txt')
         }
       }
     });
+
+    //add listener to remove entity on bottom
+    document.getElementById('mapid').addEventListener('click', function(event) {
+      if (!event.target.classList.contains('leaflet-marker-icon')) {
+        const entityWrapper = document.getElementById('location-entity-wrapper')
+        entityWrapper.classList.remove('show');
+        entityWrapper.style.removeProperty('top');
+        entityWrapper.style.removeProperty('padding-bottom');
+        entityWrapper.removeAttribute("data-id");
+        removeTopButtons();
+        removeParam("open");
+        removeParam("id");
+      }
+    });
   });
 
 
@@ -115,7 +129,6 @@ window.onload = function () {
 
 let startTopProperty;
 
-
 /*
   set title, description, key data, images and linked events for clicked entity
 */
@@ -129,20 +142,6 @@ function setEntityContent(id) {
       return;
     }
     entityWrapper.setAttribute('data-id', id);
-
-    //open preview of entity
-    if (!entityWrapper.classList.contains('show')) {
-      entityWrapper.classList.add('show');
-      //calculate appropriate top property from height of entity and navigation
-      startTopProperty = (window.innerHeight - (entityWrapper.offsetHeight + heightOfNavigation)) / (window.innerHeight / 100);
-      //set padding for sliding up function
-      entityWrapper.style.paddingBottom = "100vh";
-    }
-
-    //set top property for preview
-    if (!entityWrapper.classList.contains('show-complete')) {
-      entityWrapper.style.setProperty('top', `${startTopProperty}vh`);
-    }
 
     //get content elements
     const entityFullImages = document.getElementById('entity-full-images');
@@ -295,6 +294,21 @@ function setEntityContent(id) {
     entityFullSummary.textContent = data.summary;
     entityFullDescription.textContent = data.description;
 
+
+    //open preview of entity
+    if (!entityWrapper.classList.contains('show')) {
+      entityWrapper.classList.add('show');
+      //calculate appropriate top property from height of entity and navigation
+      startTopProperty = (window.innerHeight - (entityWrapper.offsetHeight + heightOfNavigation)) / (window.innerHeight / 100);
+      //set padding for sliding up function
+      entityWrapper.style.paddingBottom = "100vh";
+    }
+
+    //set top property for preview
+    if (!entityWrapper.classList.contains('show-complete')) {
+      entityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    }
+
     //add body listener on click to hide the event menu
     document.body.addEventListener('click', function (event) {
       if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {
@@ -338,18 +352,12 @@ function holderOnClick(e) {
 
   //fullscreen -> preview
   if (smallEntityWrapper.classList.contains('show-complete')) {
-    smallEntityWrapper.classList.remove('show-complete');
-    smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
-    removeTopButtons();
-    removeParamOpen();
+    changeToPreview();
   }
 
   //preview -> fullscreen
   else {
-    smallEntityWrapper.style.setProperty('top', `0`);    
-    smallEntityWrapper.classList.add('show-complete');
-    addParamOpen();
-    addTopButtons();
+    changeToFullscreen();
   }
 }
 
@@ -439,23 +447,10 @@ function touchUp(e) {
   const minDifference = 100;
   
   if (touchDif > minDifference) {
-    smallEntityWrapper.style.removeProperty('top');
-    smallEntityWrapper.classList.add('show-complete');
-    addTopButtons();
-    addParamOpen();
+    changeToFullscreen();
   }
   else if (touchDif < (minDifference * (-1))) {
-    let params = new URLSearchParams(document.location.search.substring(1));
-  
-    //set initial top property from URL (important after comming from click this URL as a link)
-    if (params.get("startTopProperty")) {
-      startTopProperty = params.get('startTopProperty');
-    }
-
-    smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
-    smallEntityWrapper.classList.remove('show-complete');
-    removeTopButtons();
-    removeParamOpen();
+    changeToPreview();
   }
   //after click on holder in fullscreen
   else if (smallEntityWrapper.classList.contains('show-complete')) {
@@ -487,14 +482,38 @@ function removeTopButtons() {
   document.getElementById('location-entity-open-text').classList.add('hide');
 }
 
-function removeParamOpen() {
+function changeToFullscreen() {
+  smallEntityWrapper.style.removeProperty('top');
+  smallEntityWrapper.classList.add('show-complete');
+  addTopButtons();
+  addParamOpen();
+}
+
+function changeToPreview() {
+  let params = new URLSearchParams(document.location.search.substring(1));
+  
+  //set initial top property from URL (important after comming from click this URL as a link)
+  if (params.get("startTopProperty")) {
+    startTopProperty = params.get('startTopProperty');
+  }
+
+  smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+  smallEntityWrapper.classList.remove('show-complete');
+  removeTopButtons();
+  removeParam("open");
+}
+
+function removeParam(param) {
   let params = new URLSearchParams(document.location.search.substring(1));
 
-  if (params.get("open") !== null && history.pushState && params.get("startTopProperty") !== null) {
-    params.delete('open');
-    params.delete('startTopProperty');
+  if (params.get(param) !== null && history.pushState) {
+    params.delete(param);
 
-    let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${params.get("id")}`;
+    if (params.get("startTopProperty") !== null) {
+      params.delete('startTopProperty');
+    }
+
+    let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${params.toString()}`;
     window.history.pushState({path:newurl},'',newurl);
   }
 }

@@ -318,9 +318,8 @@ body.overflow-hidden {
   position: absolute;
   width: 100vw;
   background-color: #fff;
-  top: 75vh;
+  padding-bottom: 1em;
   z-index: 10001;
-  padding-bottom: 56px;
   box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.05);
   overflow: hidden;
   scroll-behavior: smooth; }
