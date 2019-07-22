@@ -43,20 +43,8 @@
   max-width: 800px;
   margin-bottom: 5em; }
 
-.floatingButton {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 80px;
-  right: 40px;
-  background-color: #0C9;
-  color: #FFF;
-  border-radius: 50px;
-  font-size: 40px; }
+.floatingButton.addEvent {
+  background-color: #0C9; }
 
 .eventColumn {
   display: flex;
@@ -295,24 +283,6 @@ body.overflow-hidden {
         .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part svg.icon-geolocate-svg path, .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part svg.icon-geolocate-svg circle {
           stroke: #e66740; }
 
-.add-location {
-  width: 30px;
-  height: 30px;
-  background-color: #e66740;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.8em;
-  position: absolute;
-  bottom: 70px;
-  right: 20px;
-  z-index: 9998;
-  border: none;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  color: #fff; }
-
 .location-entity-wrapper {
   display: none;
   position: absolute;
@@ -483,26 +453,13 @@ body.overflow-hidden {
         content: "R"; }
       .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:before {
         content: "S"; }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute {
-      width: 30px;
-      height: 30px;
-      background-color: #e66740;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.8em;
-      cursor: pointer;
-      position: absolute;
-      bottom: 90px;
-      right: 20px; }
-      .location-entity-wrapper .location-entity-content .location-entity-createRoute svg {
-        height: 100%;
-        width: 100%; }
-      .location-entity-wrapper .location-entity-content .location-entity-createRoute path {
-        stroke: #fff; }
-      .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
-        display: none; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute svg {
+      height: 60%;
+      width: 60%; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute path {
+      stroke: #fff; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
+      display: none; }
 
 /*CSS for Slideout Menu*/
 .toggle-button {
@@ -641,3 +598,21 @@ a {
   font-size: 1em;
   margin-top: 2em;
   font-weight: 700; }
+
+.floatingButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  bottom: 80px;
+  right: 40px;
+  color: #FFF;
+  border-radius: 50px;
+  font-size: 1.8em;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  z-index: 9998;
+  background-color: #e66740; }

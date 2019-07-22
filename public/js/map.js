@@ -101,9 +101,11 @@ fetch('accessTokenMapBox.txt')
         entityWrapper.style.removeProperty('top');
         entityWrapper.style.removeProperty('padding-bottom');
         entityWrapper.removeAttribute("data-id");
-        removeTopButtons();
+        removeContentToEntity();
         removeParam("open");
         removeParam("id");
+
+        document.getElementById('location-entity-createRoute').classList.add('hide')
       }
     });
   });
@@ -120,7 +122,7 @@ window.onload = function () {
   let open = params.get("open");
   if (id !== null && open) {
     smallEntityWrapper.classList.add('show-complete');
-    addTopButtons();
+    addContentToEntity();
   }
 
   setFunctionForShareButton();
@@ -309,6 +311,9 @@ function setEntityContent(id) {
       entityWrapper.style.setProperty('top', `${startTopProperty}vh`);
     }
 
+    //show create route button
+    document.getElementById('location-entity-createRoute').classList.remove('hide');
+
     //add body listener on click to hide the event menu
     document.body.addEventListener('click', function (event) {
       if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {
@@ -463,17 +468,16 @@ function touchUp(e) {
   }
 }
 
-function addTopButtons() {
+function addContentToEntity() {
   document.getElementById('location-entity-shareButton').classList.remove('hide');
   document.getElementById('location-entity-markButton').classList.remove('hide');
   document.getElementById('location-entity-full-text').classList.remove('hide');
-  document.getElementById('location-entity-createRoute').classList.add('hide');
   document.getElementById('location-entity-open-text').classList.remove('hide');
   document.getElementById('location-entity-open-text').classList.remove('hide');
   document.getElementById('location-entity-text').classList.add('hide');
 }
 
-function removeTopButtons() {
+function removeContentToEntity() {
   document.getElementById('location-entity-shareButton').classList.add('hide');
   document.getElementById('location-entity-full-text').classList.add('hide');
   document.getElementById('location-entity-markButton').classList.add('hide');
@@ -485,7 +489,7 @@ function removeTopButtons() {
 function changeToFullscreen() {
   smallEntityWrapper.style.removeProperty('top');
   smallEntityWrapper.classList.add('show-complete');
-  addTopButtons();
+  addContentToEntity();
   addParamOpen();
 }
 
@@ -499,7 +503,7 @@ function changeToPreview() {
 
   smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
   smallEntityWrapper.classList.remove('show-complete');
-  removeTopButtons();
+  removeContentToEntity();
   removeParam("open");
 }
 

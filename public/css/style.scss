@@ -102,3 +102,22 @@ a {
   margin-top: 2em;
   font-weight: 700;
 }
+
+.floatingButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	position:fixed;
+	width:56px;
+	height:56px;
+	bottom:80px;
+	right:40px;
+	color:#FFF;
+	border-radius:50px;
+  font-size: 1.8em;
+  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  z-index: 9998;
+  background-color: $highlightedColor;
+}
