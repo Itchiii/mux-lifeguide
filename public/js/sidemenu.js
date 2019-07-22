@@ -4,64 +4,72 @@ const panel = document.getElementById('panel');
 
 //add various EventListener for touch and mouse interactions
 toggleButton.addEventListener("click", toggleButtonOnClick);
-toggleButton.addEventListener("touchmove", toggleButtonOnTouchMove);
-toggleButton.addEventListener("mousedown", toggleButtonOnStart);
-toggleButton.addEventListener("mouseup", toggleButtonOnEnd);
-toggleButton.addEventListener("touchstart", toggleButtonOnStart);
-toggleButton.addEventListener("touchend", toggleButtonOnEnd);
+sidemenu.addEventListener("touchmove", sideMenuOnTouchMove);
+sidemenu.addEventListener("touchstart", sideMenuOnTouchDown);
+sidemenu.addEventListener("touchend", sideMenuOnTouchUp);
 
-let touchBeginAtSidemenu = 0;
-let touchDifference = 0;
+//init variables to remember touchStart and global touch difference
+let touchBeginAtSidemenu, touchDifference;
 
-//toogle sidemenu
+//toggle sidemenu
 function toggleButtonOnClick() {
 	sidemenu.classList.toggle('open');
 	panel.classList.toggle('open');
 }
 
-function toggleButtonOnStart(e) {
-	if (e.type === 'mousedown') {
-		touchBeginAtSidemenu = e.pageX;
-		touchDifference = touchBeginAtSidemenu - e.pageX;
-		toggleButton.addEventListener("mousemove", toggleButtonOnTouchMove);
-	}
-	else {
-		touchBeginAtSidemenu = e.touches[0].pageX;
-		touchDifference = touchBeginAtSidemenu - e.touches[0].pageX;
-	}
+function sideMenuOnTouchDown(e) {
+	touchBeginAtSidemenu = e.touches[0].pageX;
+	touchDifference = touchBeginAtSidemenu - e.touches[0].pageX;
+
+	//remove transition for translateX
+	sidemenu.classList.remove('transition');
 }
 
 //add moving difference as transform
-function toggleButtonOnTouchMove(e) {
-	if (e.type === 'mousemove') {
-		touchDifference = touchBeginAtSidemenu - e.pageX;
-		if (touchBeginAtSidemenu <= 220 && e.pageX <= 220) {
-			sidemenu.style.setProperty('transform', `translateX(${touchDifference * (-1) + (-226)}px)`);
-		}
+function sideMenuOnTouchMove(e) {
+	const widthOfMenu = 226;
+	touchDifference = touchBeginAtSidemenu - e.touches[0].pageX;
+	console.log(touchDifference);
+
+	//set matrix to get translateX value (.m41)
+	let matrix = new DOMMatrix(window.getComputedStyle(sidemenu).transform);
+	
+	//touch from right to left (close sidemenu)
+	if (matrix.m41 >= -widthOfMenu && sidemenu.classList.contains('open') && touchDifference >= 0) {
+		sidemenu.style.setProperty('transform', `translateX(${touchDifference * (-1)}px)`);
 	}
-	else {
-		touchDifference = touchBeginAtSidemenu - e.touches[0].pageX;
-		if (touchBeginAtSidemenu <= 220 && e.touches[0].pageX <= 220) {
-			sidemenu.style.setProperty('transform', `translateX(${touchDifference * (-1) + (-226)}px)`);
-		}
+	else if (matrix.m41 <= -widthOfMenu && sidemenu.classList.contains('open') && touchDifference >= 0){
+		sidemenu.style.removeProperty('transform');
+		sidemenu.classList.remove('open');
+		panel.classList.remove('open');
+	}
+
+	//touch from left to right (open sidemenu)
+	if (matrix.m41 >= 0 && touchDifference < 0 && !sidemenu.classList.contains('open')) {
+		sidemenu.style.removeProperty('transform');
+		sidemenu.classList.add('open');
+		panel.classList.add('open');
+		return;
+	}
+	else if (touchDifference < 0 && !sidemenu.classList.contains('open')){
+		sidemenu.style.setProperty('transform', `translateX(${touchDifference * (-1) + (-widthOfMenu)}px)`);
 	}
 }
 
 //remove class and transform property
-function toggleButtonOnEnd(e) {
-	if (e.type === 'mouseup') {
-		toggleButton.removeEventListener("mousemove", toggleButtonOnTouchMove);
-	}
+function sideMenuOnTouchUp(e) {
+	const minDistance = 100;
+
+	//add transition for translateX
+	sidemenu.classList.add('transition');
 
 	sidemenu.style.removeProperty('transform');
-	if (touchDifference < -100) {
-		sidemenu.style.removeProperty('transform');
+	if (touchDifference < -minDistance) {
 		sidemenu.classList.add('open');
 		panel.classList.add('open');
 	}
-	if (touchDifference > 100 && touchDifference > 0) {
+	if (touchDifference > minDistance && touchDifference > 0) {
 		sidemenu.classList.remove('open');
 		panel.classList.remove('open');
-		sidemenu.style.removeProperty('transform');
 	}
 }

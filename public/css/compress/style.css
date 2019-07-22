@@ -534,12 +534,13 @@ body.overflow-hidden {
   overflow-x: hidden;
   display: block;
   transform: translateX(-226px);
-  transition: transform 250ms ease-in-out;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   left: 0;
   position: absolute;
   z-index: 1000;
   background-color: #fff; }
+  .slideout-menu.transition {
+    transition: transform 250ms ease-in-out; }
   .slideout-menu.open {
     transform: translateX(0); }
 

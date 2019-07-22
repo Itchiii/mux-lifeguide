@@ -31,12 +31,15 @@
 	overflow-x: hidden;
 	display: block;
 	transform: translateX(-1 * $width + 30px);
-	transition: transform 250ms ease-in-out;
 	box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
 	left: 0;
 	position: absolute;
 	z-index: 1000;
 	background-color: #fff;
+
+	&.transition {
+		transition: transform 250ms ease-in-out;
+	}
 	
 	&.open {
 		transform: translateX(0);
