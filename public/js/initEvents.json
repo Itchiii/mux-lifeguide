@@ -14,8 +14,12 @@
         "location": "Waldpavillon",
         "street": "Ilsungstraße 15a, ",
         "place": "86161 Augsburg",
-        "attachment": "./public/assets/images/events/barfuss.jpg",
-        "attachmentName": "barfuss.jpg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/barfuss.jpg",
+                "attachmentName": "barfuss.jpg"
+            }
+        ],
         "rating": 0,
         "recommend": true
     },
@@ -34,9 +38,13 @@
         "location": "Stadtwald",
         "street": "Ilsungstraße 15a, ",
         "place": "86161 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/stadtwald.jpg",
+                "attachmentName": "stadtwald.jpg"
+            }
+        ],
         "rating": 0,
-        "attachment": "./public/assets/images/events/stadtwald.jpg",
-        "attachmentName": "stadtwald.jpg",
         "recommend": true
     },
     {
@@ -54,9 +62,13 @@
         "location": "Anna Café",
         "street": "Im Annahof 4, ",
         "place": "86150 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/lebensstil.jpg",
+                "attachmentName": "lebensstil.jpg"
+            }
+        ],
         "rating": 0,
-        "attachment": "./public/assets/images/events/lebensstil.jpg",
-        "attachmentName": "lebensstil.jpg",
         "recommend": true
     },
     {
@@ -74,9 +86,13 @@
         "location": "The Box",
         "street": "Werner-Heisenberg-Straße 4, ",
         "place": "96123 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/marktwirtschaft.png",
+                "attachmentName": "marktwirtschaft.jpg"
+            }
+        ],
         "rating": 0,
-        "attachment": "./public/assets/images/events/marktwirtschaft.png",
-        "attachmentName": "marktwirtschaft.png",
         "recommend": true
     }
 ]

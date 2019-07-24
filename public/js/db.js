@@ -1,3 +1,4 @@
+
 class Database {
   constructor(name) {
     this.name = name;
@@ -275,6 +276,7 @@ const tourDB = new Database('tours');
 const bookmarksDB = new Database('bookmarks');
 
 
+
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
   if(document.body.id === "index") setRecommend(locationDB);
@@ -285,11 +287,11 @@ locationDB._syncFromRemoteToLocal().on('complete', function(info){
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info) {
-  if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
-  //fetchJson(eventDB);
+  //if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
+  fetchJson(eventDB);
 }).on('error', function (err) {
-  if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
-    //fetchJson(eventDB); //for mobile, because you cant access the remote database
+  //if(document.body.id === "index" || document.body.id === "events") setRecommend(eventDB);
+    fetchJson(eventDB); //for mobile, because you cant access the remote database
 });
 
 tourDB._syncFromRemoteToLocal().on('complete', function(info) {
@@ -361,14 +363,28 @@ function fetchJson(database) {
                         eventDB._putItem(i, resolve, reject);
                     });
                     putItemEventDB.then(function success(data){
-                        if (i.attachment !== undefined && i.attachmentName !== undefined) {
-                            let putImageEventDB = new Promise(function(resolve, reject){
-                                eventDB._putImage(i.id, i.attachment, i.attachmentName, resolve, reject);
-                            });
-                            putImageEventDB.then(function success(data) {
-                              if(document.body.id === "index") setTipWithJSON(eventDB, i);
-                            });
+                      let arrayOfPromises = [];
+                      if (i.attachments !== undefined && i.attachments.length !== 0) {
+                        let a = 0;
+                        addImage();
+                        function addImage() {
+                          let p = new Promise(function(resolve, reject) {
+                            eventDB._putImage(i.id, i.attachments[a].attachmentFile, i.attachments[a].attachmentName, resolve, reject);
+                          }).then(function(){
+                            arrayOfPromises.push(p);
+                            a++;
+                            if (i.attachments[a] !== undefined) {
+                              addImage();
+                            }
+                            else {
+                              Promise.all(arrayOfPromises)
+                              .then(_ => {
+                                if(document.body.id === "index" || document.body.id === "events") setTipWithJSON(eventDB, i);
+                              });
+                            }
+                          });
                         }
+                      }
                     });
                 }
             });

@@ -6,6 +6,8 @@
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
 
+      console.log(entry);
+
       //div for daydate and month called eventDate
       const eventDate = document.createElement("div");
       const daydate = document.createElement("div");
