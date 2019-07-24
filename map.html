@@ -7,20 +7,16 @@
 	<meta name="theme-color" content="#e66740">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:image" content="/public/assets/images/lifeguideLogo.png">
-	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet/dist/leaflet.css" />
-	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
-	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
 	<link rel="shortcut icon" href="public/assets/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+	<link rel="stylesheet" href="/node_modules/mapbox-gl/dist/mapbox-gl.css">
+	<link rel="stylesheet" href="/node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css">
 	<link rel="stylesheet" href="/public/css/compress/style.min.css">
 	<link rel="manifest" href="mux-lifeguide.manifest">
-	<script type="text/javascript" src="/node_modules/leaflet/dist/leaflet.js"></script>
-	<script type="text/javascript" src="/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
-	<script type="text/javascript" src="/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-	<script type="text/javascript" src="/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
 	<script src="/node_modules/pouchdb/dist/pouchdb.min.js"></script>
 	<script src="/node_modules/pouchdb-load/dist/pouchdb.load.min.js"></script>
 	<script src="/node_modules/pouchdb/dist/pouchdb.find.js"></script>
+	<script src="/node_modules/mapbox-gl/dist/mapbox-gl.js"></script>
+	<script src="/node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js"></script>
 	<script src="/vendor/ics/ics.js"></script>
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
@@ -34,9 +30,30 @@
 		<h2>Menu</h2>
 	</nav>
 	<main id="panel" class="panel">
+		<div class="topSearch" id="topSearch">
+			<div class="search">
+				<input class="input searchLocations" type="text" name="" id="" placeholder="Orte durchsuchen">
+			</div>
+		</div>
 		<div id="mapid"></div>
-		<button class="floatingButton add-location">+</button>
 	</main>
+	<button class="floatingButton add-location">+</button>
+	<div class="location-routing hide transitionOut" id="location-routing">
+		<div class="create-routing-back" id="create-routing-back">
+			<svg class="c-r-back-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+				<path fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M20 40l11.994-14L44 40" stroke-linejoin="round" stroke-linecap="round"/>
+			</svg>
+		</div>
+		<div class="create-routing-symbol">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="create-routing-inputs" id="create-routing-inputs">
+			<input class="input c-r-to" type="text" name="" id="c-r-to" placeholder="Zielpunkt">
+		</div>
+		<div class="create-routing-menu">A</div>
+	</div>
 	<div class="location-entity-wrapper transition" id="location-entity-wrapper">
 		<div class="location-entity-holder" id="location-entity-holder">
 			<svg class="location-entity-grabble" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
