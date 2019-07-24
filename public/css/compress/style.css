@@ -102,6 +102,16 @@
     flex-wrap: wrap;
     align-items: flex-start; } }
 
+.wrapperFormular {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#stepOne, #stepTwo, #stepThree {
+  display: flex;
+  flex-direction: column;
+  width: 100vw; }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -109,29 +119,64 @@
 
 .formInput {
   font-weight: bold;
-  width: 300px;
-  margin-top: 20px;
-  height: 35px;
-  padding: 6px 15px;
+  width: 75vw;
+  margin-top: 1em;
+  height: 3em;
+  padding: 1em;
   border-radius: 5px;
   outline: none;
   border: none;
   background: #F6F7F9;
   color: #748194;
-  font-size: 14px; }
+  font-size: 1em; }
 
 .formButton {
   font-weight: bold;
-  width: 300px;
-  margin-top: 20px;
-  height: 35px;
-  padding: 6px 15px;
+  width: 50vw;
+  margin-top: 1em;
+  height: 3em;
+  padding: 1em;
   border-radius: 5px;
   outline: none;
   border: none;
   background: #e66740;
   color: #F6F7F9;
-  font-size: 14px; }
+  font-size: 1em; }
+
+.backdrop {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: green; }
+
+.warning {
+  color: white; }
+
+#loadingBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 0.2em; }
+
+#bar1, #bar2, #bar3 {
+  height: 5px;
+  width: 33vw;
+  background-color: white; }
+
+#eventformular {
+  display: flex;
+  flex-direction: column;
+  background-color: grey; }
+
+#headernav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white; }
 
 div[class^="related"] {
   color: #fff;

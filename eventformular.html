@@ -25,36 +25,79 @@
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
 <body id="eventformular">
-	<div class="wrapper">
-		<img class="index-lifeguideLogo" src="/public/assets/images/lifeguideLogo.png" alt="LifeguideLogo">
+	<div id="headernav">
+		<div id="back" onclick="back()">Einen Schritt zurück</div>
+		<a href="/events.html"><div id="exit">Exit</div></a>
 	</div>
-        
-		<form onsubmit="showAlert()" class="form"> 
-			<h2>Gib hier deine Veranstaltung ein</h2>
-			<input name="name" type="text" placeholder="Dein Name*" class="formInput"/>
-			<input name="titel" type="text" placeholder="Veranstaltungstitel*" class="formInput"/>
-			<input name="summary" type="text" placeholder="Veranstaltungsbeschreibung*" class="formInput"/>
-            <!-- <label for="vortrag">Vortrag</label> <input type="radio" id="vortrag" name="art" value="0"></br>
-            <label for="wanderung">Wanderung</label> <input type="radio" id="wanderung" name="art" value="1"></br> -->
-            <a href="events.html"><input type="submit" value="Senden" class="formButton"></a>
-        </form>
-        <script>
-                function showAlert() {
-                  alert("Veranstaltung abgesendet. Wir prüfen deinen Eintrag baldmöglichst.");
-                  console.log("Hello world!");
-                }
-        </script>
-
-		<div class="bottom-menu">
-			<div class="bm-inner-menu">
-				<span><a href="events.html">Events</a></span>
-				<span><a href="index.html">Start</a></span>
-				<span><a href="map.html">Map</a></span>
-			</div>
+	<div id="loadingBar"> <div id="bar1"></div><div id="bar2"></div><div id="bar3"></div></div>
+    <div class="wrapperFormular"> 
+		<h2>Veranstaltung erstellen</h2>
+		<div class="stepOne" id="stepOne"> 
+			<p>Bitte teile uns für eventuelle Rückfragen deinen Namen und deine E-Mail Adresse mit.</p>
+				<form class="form"> 
+					<input name="name" type="text" placeholder="Name*" class="formInput"/>
+					<input name="titel" type="email" placeholder="E-Mail*" class="formInput"/>
+					<input name="summary" type="text" placeholder="Telefonnummer*" class="formInput"/>
+					<input type="button" value="Weiter" class="formButton" onclick="nextStep()">
+				</form>
 		</div>
+		<div class="stepTwo" id="stepTwo"> 
+				<p>Wo und wann findet deine Veranstaltung statt?</p>
+				<form class="form"> 
+					<input name="name" type="date" placeholder="Datum*" class="formInput"/>
+					<input name="titel" type="text" placeholder="Uhrzeit*" class="formInput"/>
+					<input name="summary" type="text" placeholder="Veranstaltungsort*" class="formInput"/>
+					<input type="button" value="Weiter" class="formButton" onclick="nextStep()">
+				</form>
+		</div>
+		<div class="stepThree" id="stepThree"> 
+				<p>Erzähle uns mehr darüber</p>
+				<form class="form"> 
+					<input name="name" type="text" placeholder="Name der Veranstaltung*" class="formInput"/>
+					<input name="titel" type="text" placeholder="Veranstalter*" class="formInput"/>
+					<input name="summary" type="text" placeholder="Beschreibungstext*" class="formInput"/>
+					<input type="button" value="Abschicken" class="formButton" onclick="sentEvent()">
+				</form>
+		</div>
+	</div>  
+
+<div class="bottom-menu">
+	<div class="bm-inner-menu">
+		<a href="index.html">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+				<path data-name="layer1" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M2 31L32 5l30 26" stroke-linejoin="round"></path>
+				<path data-name="layer2" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M54 19v-9h-9" stroke-linejoin="round"></path>
+				<path data-name="layer1" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M10 32.167V62h14V42h16v20h14V32.083" stroke-linejoin="round"></path>
+			</svg>
+			<span>Start</span>
+		</a>
+		<a href="events.html">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+				<path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M2 8h60v54H2z" stroke-linejoin="round" stroke-linecap="round"></path>
+				<path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M54 54H10V16h44v38z" stroke-linejoin="round" stroke-linecap="round"></path>
+				<path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M32 2v18M18 2v18M46 2v18" stroke-linejoin="round" stroke-linecap="round"></path>
+			</svg>
+			<span>Kalender</span>
+		</a>
+		<a href="map.html">
+				<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-width="2" stroke-miterlimit="10" stroke="#202020" fill="none" d="M55.9 28.3c.1-.8.1-1.5.1-2.3a24 24 0 0 0-48 0c0 .8 0 1.6.1 2.3v.3C10.1 47.6 32 61 32 61s21.9-13.6 23.8-32.3z" data-name="layer2" stroke-linejoin="round" stroke-linecap="round"></path>
+					<circle stroke-width="2" stroke-miterlimit="10" stroke="#202020" fill="none" r="12" cy="26" cx="32" data-name="layer1" stroke-linejoin="round" stroke-linecap="round"></circle>
+				</svg>
+			<span>Karte</span>
+		</a>
+		<a href="bookmarks.html">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+					<path data-name="layer1" d="M47 5c-6.5 0-12.9 4.2-15 10-2.1-5.8-8.5-10-15-10A15 15 0 0 0 2 20c0 13 11 26 30 39 19-13 30-26 30-39A15 15 0 0 0 47 5z" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+				</svg>
+			<span>Merkliste</span>
+		</a>
+	</div>
+</div>
 
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/app.js"></script>
 	<script src="/public/js/events.js"></script>
+	<script src="/public/js/eventformular.js"></script>
 </body>
 </html>
