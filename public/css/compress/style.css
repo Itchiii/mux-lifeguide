@@ -335,7 +335,7 @@ body.overflow-hidden {
   background-color: #fff;
   padding-bottom: 1em;
   z-index: 10001;
-  box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
   scroll-behavior: smooth; }
   .location-entity-wrapper.show {
@@ -505,6 +505,90 @@ body.overflow-hidden {
       stroke: #fff; }
     .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
       display: none; }
+
+.location-routing {
+  background-color: #fff;
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  display: flex;
+  padding: 1.5em;
+  width: 100%;
+  transition: transform 0.3s ease-out;
+  transform: translateY(0px);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); }
+  .location-routing.transitionOut {
+    transform: translateY(-200px); }
+  .location-routing.hide {
+    display: none; }
+  .location-routing .create-routing-back {
+    width: 30px; }
+    .location-routing .create-routing-back .c-r-back-symbol {
+      height: auto;
+      width: 100%;
+      transform: scale(1.5) rotate(-90deg); }
+      .location-routing .create-routing-back .c-r-back-symbol path {
+        stroke: #e66740; }
+  .location-routing .create-routing-symbol {
+    width: 1.5em;
+    background-color: green;
+    margin: 0 0.5em; }
+  .location-routing .create-routing-inputs {
+    flex: 1; }
+    .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder {
+      width: 100%;
+      box-shadow: none;
+      margin-bottom: 0.5em; }
+      .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-search {
+        display: none; }
+      .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-close, .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-loading {
+        background-color: #f2f2f2; }
+    .location-routing .create-routing-inputs input {
+      display: block;
+      width: 100%;
+      padding: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: #f2f2f2; }
+  .location-routing .create-routing-menu {
+    margin-left: 0.5em; }
+
+.marker {
+  background-image: url("/public/assets/images/icon-72x72.png");
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  cursor: pointer; }
+
+.topSearch {
+  margin: auto;
+  display: flex;
+  width: 80%;
+  max-width: 30rem;
+  position: absolute;
+  top: 1em;
+  z-index: 9997;
+  right: 0;
+  left: 0;
+  align-items: center; }
+  .topSearch .search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative; }
+    .topSearch .search:after {
+      content: "I";
+      position: absolute;
+      right: 1em;
+      color: #e66740; }
+    .topSearch .search .searchLocations {
+      background-color: #f2f2f2; }
+  .topSearch .mapboxgl-ctrl-group {
+    border-radius: 50%;
+    margin-left: 0.5em; }
+    .topSearch .mapboxgl-ctrl-group .mapboxgl-ctrl-icon {
+      height: 2.5em;
+      width: 2.5em; }
 
 /*CSS for Slideout Menu*/
 .toggle-button {
