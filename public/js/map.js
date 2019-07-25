@@ -121,6 +121,51 @@ fetch('accessTokenMapBox.txt')
     });
     document.getElementById('create-routing-inputs').prepend(startInput.onAdd(map));
 
+
+    //add geolocate control to search field.
+    const geolocateForRoute = new mapboxgl.GeolocateControl({
+      positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: false,
+        showUserLocation: false
+      });
+
+    let endMarkerEle = document.createElement('div');
+    endMarkerEle.classList.add('end-marker', 'hide');
+    
+    let endMarker = new mapboxgl.Marker({
+      element: endMarkerEle,
+      anchor: 'center'
+    }).setLngLat([0, 0]).addTo(map);
+
+    document.getElementById('create-routing-inputs').prepend(geolocateForRoute.onAdd(map));
+    geolocateForRoute.on('geolocate', function(data) {
+      const input = document.querySelector('.create-routing-inputs .mapboxgl-ctrl-geocoder input');
+      input.value = "Mein Standort";
+
+      console.log(data);
+
+
+      //get id param from url
+      let params = new URLSearchParams(document.location.search.substring(1));
+      const id = params.get("id");
+
+      //get entry with param id
+      locationDB._getDoc(id).then(function(entry) {
+        //create Routing with waypoints and geocoder api
+        let end = [entry.long, entry.lat];
+
+
+        let start = [data.coords.longitude, data.coords.latitude];
+        console.log(start, end);
+
+        setRoute(start, end);
+      });
+
+
+    });
+
     //click on "create routing"
     document.getElementById('location-entity-createRoute').addEventListener('click', function() {
       const routeWrapper = document.getElementById('location-routing')
@@ -139,6 +184,7 @@ fetch('accessTokenMapBox.txt')
       const destination = document.getElementById('c-r-to');
       const startpoint = document.querySelector('.mapboxgl-ctrl-geocoder > input');
       startpoint.value = "";
+      startpoint.focus();
 
       //get id param from url
       let params = new URLSearchParams(document.location.search.substring(1));
@@ -153,13 +199,16 @@ fetch('accessTokenMapBox.txt')
 
       //on result of startpoint setRoute
       startInput.on('result', function(data) {
-        start = [data.result.center[0], data.result.center[1]];
+        const start = [data.result.center[0], data.result.center[1]];
         setRoute(start, end);
       });
     });
 
     // click on back button on routing form
     document.getElementById('create-routing-back').addEventListener('click', function(){
+      endMarkerEle.classList.add('hide');
+      map.removeLayer('route');
+      
       const routeWrapper = document.getElementById('location-routing');
       routeWrapper.classList.add('transitionOut');
       routeWrapper.addEventListener('transitionend', hideRoutingAfterTransition);
@@ -192,6 +241,7 @@ fetch('accessTokenMapBox.txt')
         
         // if the route already exists on the map, reset it using setData
         if (map.getSource('route')) {
+          endMarker.setLngLat([start[0], start[1]]);
           map.getSource('route').setData(geojson);
         } else { // otherwise, make a new request
           map.addLayer({
@@ -213,11 +263,18 @@ fetch('accessTokenMapBox.txt')
               'line-cap': 'round'
             },
             paint: {
-              'line-color': '#fff',
+              'line-color': '#7ECE96',
               'line-width': 5,
-              'line-opacity': 0.75
+              'line-opacity': 0.75,
+              'line-dasharray': [1, 2]
             }
           });
+
+          endMarkerEle.classList.remove('hide');
+          endMarker.setLngLat([start[0], start[1]]);
+
+          map.flyTo({center: [start[0], start[1]], zoom: 15});
+
         }
       };
       req.send();
