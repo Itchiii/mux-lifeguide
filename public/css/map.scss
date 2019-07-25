@@ -20,6 +20,7 @@ body.overflow-hidden {
   box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
   overflow: hidden;
   scroll-behavior: smooth;
+  top: 100vh;
 
   &.show {
     display: block;
@@ -307,13 +308,14 @@ body.overflow-hidden {
   transition: transform 0.3s ease-out;
   transform: translateY(0px);
   box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+  visibility: visible;
 
   &.transitionOut {
     transform: translateY(-200px);
   }
 
   &.hide {
-    display: none;
+    visibility: hidden;
   }
 
   .create-routing-back {

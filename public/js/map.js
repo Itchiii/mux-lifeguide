@@ -52,23 +52,14 @@ fetch('accessTokenMapBox.txt')
       }
     });
 
-    //add listener to remove entity on bottom
+    //add listener to remove entity on bottom, remove sidebar and search results
     document.getElementById('mapid').addEventListener('click', function(event) {
       if (!event.target.classList.contains('marker')) {
-        const entityWrapper = document.getElementById('location-entity-wrapper')
-        entityWrapper.classList.remove('show');
-        entityWrapper.style.removeProperty('top');
-        entityWrapper.style.removeProperty('padding-bottom');
-        entityWrapper.removeAttribute("data-id");
-        removeContentToEntity();
-        removeParam("open");
-        removeParam("id");
-        document.getElementById('location-entity-createRoute').classList.add('hide');
+        removePreview();
       }
 
       document.getElementById('menu').classList.remove('open');
       document.getElementById('panel').classList.remove('open');  
-      
       
       document.getElementById('search-results').classList.add('hide');
     });
@@ -171,10 +162,7 @@ fetch('accessTokenMapBox.txt')
       const routeWrapper = document.getElementById('location-routing')
       routeWrapper.removeEventListener('transitionend', hideRoutingAfterTransition);
       routeWrapper.classList.remove('hide');
-      if (!routeWrapper.classList.contains('hide')) {
-        routeWrapper.classList.remove('transitionOut');
-
-      }
+      routeWrapper.classList.remove('transitionOut');
 
       //fullscreen -> preview of entity
       if (document.getElementById('location-entity-wrapper').classList.contains('show-complete')) {
@@ -207,7 +195,9 @@ fetch('accessTokenMapBox.txt')
     // click on back button on routing form
     document.getElementById('create-routing-back').addEventListener('click', function(){
       endMarkerEle.classList.add('hide');
-      map.removeLayer('route');
+      if (map.getSource('route')) {
+        map.removeLayer('route');
+      }
       
       const routeWrapper = document.getElementById('location-routing');
       routeWrapper.classList.add('transitionOut');
@@ -536,8 +526,10 @@ function holderOnClick(e) {
     changeToFullscreen();
   }
 }
+let cancelMoveFunktion;
 
 function touchDown(e) {
+  cancelMoveFunktion = false;
   touchDif = 0;
   initScrollLeftOfImgContainer = document.getElementById('entity-full-images').scrollLeft;
 
@@ -565,10 +557,12 @@ function touchMove(e) {
   touchDif = touchBeginOnHolder - e.touches[0].pageY;
 
   //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif < 0 && smallEntityWrapper.scrollTop != 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif < 0 && smallEntityWrapper.scrollTop != 0 || cancelMoveFunktion === true) {
+    cancelMoveFunktion = true;
     return;
   }
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif > 0 && smallEntityWrapper.scrollTop >= 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif > 0 && smallEntityWrapper.scrollTop >= 0 || cancelMoveFunktion === true) {
+    cancelMoveFunktion = true;
     return;
   }
 
@@ -586,13 +580,14 @@ function touchMove(e) {
    // emptyPlaceholderElement.style.setProperty('height', `${touchDif + 1}px`);
     smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
     //smallEntityWrapper.classList.add('on-translate');
+    addContentToEntity();
   }
-  //change top on bottom layer on scroll down -> just show a animation
+  //change top on preview on scroll down -> just show a animation
   if (touchDif < 0 && !smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
   }
 
-  //change top from complete version to bottom 
+  //change top from fullscreen version to preview 
   if (touchDif < 0 && smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.setProperty('top', `${vhDifDown * (-1)}vh`);
     //smallEntityWrapper.classList.add('on-translate');
@@ -612,30 +607,33 @@ function touchUp(e) {
   }
 
   //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif <= 0 && smallEntityWrapper.scrollTop != 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif <= 0 && smallEntityWrapper.scrollTop != 0 || cancelMoveFunktion === true) {
     return;
   }
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif >= 0 && smallEntityWrapper.scrollTop >= 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif >= 0 && smallEntityWrapper.scrollTop >= 0 || cancelMoveFunktion === true) {
     return;
   }
 
   //100px as min touch difference
-  const minDifference = 100;
-  
+  const minDifference = 50;
   if (touchDif > minDifference) {
     changeToFullscreen();
   }
-  else if (touchDif < (minDifference * (-1))) {
+  else if (smallEntityWrapper.classList.contains('show-complete') && touchDif < (minDifference * (-1))) {
     changeToPreview();
   }
   //after click on holder in fullscreen
   else if (smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.removeProperty('top');
-    
   }
-  //after click on holder in preview
-  else if (!smallEntityWrapper.classList.contains('show-complete')) {
+  //from preview with small touchDif -> still on preview
+  else if (!smallEntityWrapper.classList.contains('show-complete') && touchDif * (-1) < minDifference) {
     smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    removeContentToEntity();
+  }
+  //from preview with higher touchDif -> remove Preview
+  else if (!smallEntityWrapper.classList.contains('show-complete') && touchDif < minDifference * (-1)) {
+    removePreview();
   }
 }
 
@@ -676,6 +674,18 @@ function changeToPreview() {
   smallEntityWrapper.classList.remove('show-complete');
   removeContentToEntity();
   removeParam("open");
+}
+
+function removePreview() {
+  const entityWrapper = document.getElementById('location-entity-wrapper')
+  entityWrapper.classList.remove('show');
+  entityWrapper.style.removeProperty('top');
+  entityWrapper.style.removeProperty('padding-bottom');
+  entityWrapper.removeAttribute("data-id");
+  removeContentToEntity();
+  removeParam("open");
+  removeParam("id");
+  document.getElementById('location-entity-createRoute').classList.add('hide');
 }
 
 function removeParam(param) {
