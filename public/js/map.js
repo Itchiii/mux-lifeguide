@@ -20,7 +20,7 @@ fetch('accessTokenMapBox.txt')
         },
         trackUserLocation: true
       });
-    document.getElementById('topSearch').append(geolocate.onAdd(map));
+    document.getElementById('search').append(geolocate.onAdd(map));
     
     //set all entries as a marker on map
     locationDB.allDocsOfLocalDB.then(function(result) {
@@ -77,20 +77,24 @@ fetch('accessTokenMapBox.txt')
       
       locationDB.allDocsOfLocalDB.then(function(result) {
         for (const entry of result.rows) {
-          const title = entry.doc.title.toUpperCase();
-          if (title.includes(this.value.toUpperCase())) {
-            const li = document.createElement('li');
-            li.textContent = entry.doc.title;
-            li.addEventListener('click', () => {
-              if (history.pushState) {
-                let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
-                window.history.pushState({path:newurl},'',newurl);
-              }
-              map.flyTo({center: [entry.doc.long, entry.doc.lat], zoom: 15});
-              setEntityContent(entry.doc._id);
-              searchResults.classList.add('hide');
-            });
-            searchResults.append(li);
+          if (entry.doc.title !== undefined) {
+            const title = entry.doc.title.toUpperCase();
+            const summary = entry.doc.summary.toUpperCase();
+            if (title.includes(this.value.toUpperCase()) || summary.includes(this.value.toUpperCase())) {
+              const li = document.createElement('li');
+              li.textContent = entry.doc.title;
+              li.addEventListener('click', () => {
+                if (history.pushState) {
+                  let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
+                  window.history.pushState({path:newurl},'',newurl);
+                }
+                document.getElementById('searchLocations').value = entry.doc.title;
+                map.flyTo({center: [entry.doc.long, entry.doc.lat], zoom: 15});
+                setEntityContent(entry.doc._id);
+                searchResults.classList.add('hide');
+              });
+              searchResults.append(li);
+            }
           }
         }
       }.bind(this));
@@ -749,21 +753,34 @@ function setFunctionForLinkedEventMenuContent() {
   });
 
   //functionality for export button
-  var cal = ics();
-	cal.addEvent('Demo Event', 'This is an all day event', 'Nome, AK', '8/7/2013', '8/7/2013');
-  cal.addEvent('Demo Event', 'This is thirty minute event', 'Nome, AK', '8/7/2013 5:30 pm', '8/7/2013 6:00 pm');
-  
-  // You can use this for easy debugging
-  makelogs = function(obj) {
-    console.log('Events Array');
-    console.log('=================');
-    console.log(obj.events());
-    console.log('Calendar With Header');
-    console.log('=================');
-    console.log(obj.calendar());
-  }
 
-  makelogs(cal);
+  document.getElementById('entity-event-export').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    eventDB._getDoc(eventID).then(function(data) {
+      const cal = ics();
+      const date = data.date.split('.').reverse().join('-');
+      const time = data.start.replace(/[^\d:]/g, '');
+      //add offset to UTC 
+      cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
+
+      // You can use this for easy debugging
+      makelogs = function(obj) {
+        console.log('Events Array');
+        console.log('=================');
+        console.log(obj.events());
+        console.log('Calendar With Header');
+        console.log('=================');
+        console.log(obj.calendar());
+      }
+
+      makelogs(cal);
+
+      //time is not local time format
+      cal.download(data.title);
+    });
+  });
+
+
 
   //functionality for bookmark button
   document.getElementById('entity-event-bookmark').addEventListener('click', () => {

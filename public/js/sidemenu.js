@@ -29,7 +29,6 @@ function sideMenuOnTouchDown(e) {
 function sideMenuOnTouchMove(e) {
 	const widthOfMenu = 226;
 	touchDifference = touchBeginAtSidemenu - e.touches[0].pageX;
-	console.log(touchDifference);
 
 	//set matrix to get translateX value (.m41)
 	let matrix = new DOMMatrix(window.getComputedStyle(sidemenu).transform);
