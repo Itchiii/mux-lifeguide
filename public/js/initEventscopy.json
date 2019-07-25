@@ -1,0 +1,98 @@
+[
+    {
+        "id": "barfuss",
+        "title": "Barfuß im Wald",
+        "summary": "Den Wald auf eine neue Art und Weise spüren",
+        "description": "Den Wald auf eine neue Art und Weise spüren. Raus aus den Schuhen und barfuß über den Waldboden. Jeder Schritt wird zum Abenteuer. Es warten weiches Gras, Steine und knorrige Äste. Barfuß durch den Wald zu laufen ist ein besonderes Erlebnis, das im wahrsten Sinne des Wortes entschleunigend wirkt.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "02.08.2019",
+        "daydate": "02",
+        "day": "Fr., ",
+        "month": "AUG",
+        "start": "14:30 Uhr",
+        "location": "Waldpavillon",
+        "street": "Ilsungstraße 15a, ",
+        "place": "86161 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/barfuss.jpg",
+                "attachmentName": "barfuss.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": true
+    },
+    {
+        "id": "stadtwald",
+        "title": "Wie wird der Stadtwald gepflegt?",
+        "summary": "Radtour durch den Haunstetter Wald",
+        "description": "Erfahren Sie auf der Radtour,  wie der Haunstetter Wald von Förstergenerationen gepflegt und für den Klimawandel fit gemacht wird.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "28.06.2019",
+        "daydate": "28",
+        "day": "Fr., ",
+        "month": "JUN",
+        "start": "17:00 Uhr",
+        "location": "Stadtwald",
+        "street": "Ilsungstraße 15a, ",
+        "place": "86161 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/stadtwald.jpg",
+                "attachmentName": "stadtwald.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": true
+    },
+    {
+        "id": "lebensstil",
+        "title": "Globale Veränderungen und unser Lebensstil",
+        "summary": "Der BUND lädt zum offenen Treffen",
+        "description": "Ob Klimawandel, Artensterben oder Plastikmüll in der Antarktis, weltweit sind Ökosysteme und Menschen von menschenverursachten Umweltveränderungen betroffen. Sie alle sind darauf zurückzuführen, dass der Mensch Ressourcen beansprucht, ohne Rücksicht auf die planetaren Grenzen zu nehmen. Doch was hat nun unser Lebensstil damit zu tun, dass in der Arktis das Eis schmilzt oder in Bayern immer weniger Insekten über die Felder brummen? Dieser spannenden Frage geht die Ortsgruppe Augsburg des Bund Naturschutz Bayern e.V. beim Offenen Treffen am 26.6. um 19:30 Uhr im Anna Café, Im Annahof 4, nach und lädt Naturschützer*innen und Interessierte herzlich zur Diskussionsrunde ein.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "26.06.2019",
+        "daydate": "26",
+        "day": "Mi., ",
+        "month": "JUN",
+        "start": "19:30 Uhr",
+        "location": "Anna Café",
+        "street": "Im Annahof 4, ",
+        "place": "86150 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/lebensstil.jpg",
+                "attachmentName": "lebensstil.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": true
+    },
+    {
+        "id": "marktwirtschaft",
+        "title": "Soziale Marktwirtschaft - nach vorne gedacht",
+        "summary": "Professor Dr. Nils Goldschmidt, Vorsitzender der Aktionsgemeinschaft Soziale Marktwirtschaft e. V. beim Boxenstopp",
+        "description": "Das Konzept der Sozialen Marktwirtschaft beruht auf christlichen Werten und ist durch die sozialethische Tradition des deutschen Protestantismus geprägt. In dieser Werteordnung haben Freiheit, Initiative und Eigenverantwortung einen besonderen Stellenwert. Vor diesem Hintergrund fragen engagierte Unternehmer*innen immer wieder nach den Voraussetzungen und Gefährdungen, aber auch nach den Grenzen unternehmerischer Freiheit. Im Rahmen des Unternehmergesprächs der regionalen Arbeitsgruppe des AEU in Augsburg/Schwaben greift Professor Dr. Nils Goldschmidt, Vorsitzender der Aktionsgemeinschaft Soziale Marktwirtschaft e. V., diese Fragen auf. Zu diesem Unternehmergespräch sind Mitglieder, sowie Interessierte herzlich eingeladen. Informationen zu dem Abend hier.  Informationen über den Arbeitskreis Evangelischer Unternehmer in Deutschland. Der Trägerkreis Boxenstopp Augsburg findet es überaus lohnenswert darüber nachzudenken, wie die 17 Ziele für eine nachhaltige Entwicklung Unternehmer*innen, Führungskräfte und Selbständige betreffen und wird auch weitere Veranstaltungen zu diesem Thema anbieten. INFO: Eintritt frei. Kostenbeitrag möglich. Anmeldung bitte unter box@boxenstopp-augsburg.de.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "26.06.2019",
+        "daydate": "26",
+        "day": "Mi., ",
+        "month": "JUN",
+        "start": "18:30 Uhr",
+        "location": "The Box",
+        "street": "Werner-Heisenberg-Straße 4, ",
+        "place": "96123 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/marktwirtschaft.png",
+                "attachmentName": "marktwirtschaft.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": true
+    }
+]

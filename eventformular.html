@@ -30,8 +30,9 @@
 		<a href="/events.html"><div id="exit">Exit</div></a>
 	</div>
 	<div id="loadingBar"> <div id="bar1"></div><div id="bar2"></div><div id="bar3"></div></div>
+	<h2>Veranstaltung erstellen</h2>
+
     <div class="wrapperFormular"> 
-		<h2>Veranstaltung erstellen</h2>
 		<div class="stepOne" id="stepOne"> 
 			<p>Bitte teile uns für eventuelle Rückfragen deinen Namen und deine E-Mail Adresse mit.</p>
 				<form class="form"> 
@@ -44,9 +45,12 @@
 		<div class="stepTwo" id="stepTwo"> 
 				<p>Wo und wann findet deine Veranstaltung statt?</p>
 				<form class="form"> 
-					<input name="name" type="date" placeholder="Datum*" class="formInput"/>
+					<input name="name" type="date" placeholder="Wochentag*" class="formInput"/>
+					<input name="name" type="date" placeholder="Datumtag*" class="formInput"/>
+					<input name="name" type="date" placeholder="Monat*" class="formInput"/>
 					<input name="titel" type="text" placeholder="Uhrzeit*" class="formInput"/>
 					<input name="summary" type="text" placeholder="Veranstaltungsort*" class="formInput"/>
+					<input name="adress" type="text" placeholder="Veranstaltungsadresse*" class="formInput"/>
 					<input type="button" value="Weiter" class="formButton" onclick="nextStep()">
 				</form>
 		</div>
@@ -54,9 +58,10 @@
 				<p>Erzähle uns mehr darüber</p>
 				<form class="form"> 
 					<input name="name" type="text" placeholder="Name der Veranstaltung*" class="formInput"/>
-					<input name="titel" type="text" placeholder="Veranstalter*" class="formInput"/>
-					<input name="summary" type="text" placeholder="Beschreibungstext*" class="formInput"/>
-					<input type="button" value="Abschicken" class="formButton" onclick="sentEvent()">
+					<input name="titel" type="text" placeholder="Veranstalter*" id="hostID" class="formInput"/>
+					<input name="summary" type="text" placeholder="Thema der Veranstaltung*" class="formInput"/>
+					<input name="description" type="text" placeholder="Beschreibungstext*" id="description" class="formInput"/>
+					<input type="button" value="Abschicken" class="formButton" onclick="sendEvent()">
 				</form>
 		</div>
 	</div>  

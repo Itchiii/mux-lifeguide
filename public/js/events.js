@@ -1,4 +1,10 @@
-          //div for every event
+function search(ele) {
+  if(event.keyCode == 13) {
+      alert(ele.value);        
+  }
+}
+
+//div for every event
           const events = document.createElement("div");
           events.classList.add("events");
 

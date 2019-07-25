@@ -1,3 +1,14 @@
+var day;
+var daydate;
+var month;
+var time;
+var city;
+var adress;
+var titleEvent;
+var hostID;
+var subject;
+var text;
+
 var stepOne = document.getElementById('stepOne');
 var stepTwo = document.getElementById('stepTwo');
 var stepThree = document.getElementById('stepThree');
@@ -46,7 +57,45 @@ function back() {
         document.getElementById('back').style.visibility="visible";
     }
 }
-function sentEvent() {
+function sendEvent() {
+    hostID = document.getElementById('hostID').value;
+    text = document.getElementById('description').value;
+
+/*     const entry = {
+        id: hostID,
+        title: "test",
+        summary: "Professor Dr. Nils Goldschmidt, Vorsitzender der Aktionsgemeinschaft Soziale Marktwirtschaft e. V. beim Boxenstopp",
+        description: text,
+        lat: 48.36756,
+        long: 10.88579,
+        date: "26.06.2019",
+        daydate: "26",
+        day: "Mi., ",
+        month: "JUN",
+        start: "18:30 Uhr",
+        location: "The Box",
+        street: "Werner-Heisenberg-Straße 4, ",
+        place: "96123 Augsburg",
+        "rating": 0,
+        "recommend": true
+    }
+    const jsonString = JSON.stringify(entry, null, 2); */
+
+
+
+/*     
+    eventDB._putItem()({
+        id: 'neu',
+        title: 'test'
+      }).then(function (response) {
+        // handle response
+      }).catch(function (err) {
+        console.log(err);
+      }); */
+      
+      
+  
+
     var backdrop = document.createElement("div");
     backdrop.classList.add("backdrop");
     var warning = document.createElement("h4");
@@ -58,3 +107,4 @@ function sentEvent() {
         location.href = "/events.html";
     }
 }
+
