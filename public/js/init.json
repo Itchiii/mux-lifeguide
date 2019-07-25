@@ -28,6 +28,7 @@
             }
         ],
         "linkedEvents": ["barfuss", "stadtwald"],
+        "category": "shop",
         "recommend": true
     },
     {
@@ -44,6 +45,7 @@
                 "attachmentName": "europadorf.jpg"
             }
         ],
+        "category": "leisure",
         "recommend": true
     },
     {
@@ -60,6 +62,7 @@
                 "attachmentName": "gruenfux.jpg"
             }
         ],
+        "category": "dinner",
         "recommend": true
     },
     {
@@ -76,6 +79,7 @@
                 "attachmentName": "horn.jpg"
             }
         ],
+        "category": "greenLocation",
         "recommend": true
     }
 ]

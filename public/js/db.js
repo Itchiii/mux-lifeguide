@@ -49,7 +49,7 @@ class Database {
             case 'openingHours': obj[prop] = '42 Uhr'; break;
             case 'phone': obj[prop] = '000'; break;
             case 'web': obj[prop] = '#'; break;
-            case 'owner': obj[prop] = 'May Mustermann'; break;
+            case 'owner': obj[prop] = 'Max Mustermann'; break;
             case 'rating': obj[prop] = 0; break;
             case 'summary': obj[prop] = "summary"; break;
             case 'recommend': obj[prop] = false; break;
@@ -62,6 +62,7 @@ class Database {
             case 'street': obj[prop] = "street"; break;
             case 'place': obj[prop] = "place"; break;
             case 'linkedEvents': obj[prop] = []; break;
+            case 'category': obj[prop] = "category"; break;
             default: obj[prop] = null; break;
           }
         }
@@ -98,7 +99,8 @@ class Database {
         location: options.location,
         street: options.street,
         place: options.place,
-        linkedEvents: options.linkedEvents
+        linkedEvents: options.linkedEvents,
+        category: options.category,
       }).then(function (response) {
         resolve();
 
@@ -134,6 +136,7 @@ class Database {
               street: options.street,
               place: options.place,
               linkedEvents: options.linkedEvents,
+              category: options.category,
               //_rev is needed at document update
               _rev: doc._rev
             });

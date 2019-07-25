@@ -29,7 +29,7 @@ fetch('accessTokenMapBox.txt')
           //TODO: switch case mit Klassenname
 
           var el = document.createElement('div');
-          el.className = 'marker';
+          el.classList.add('marker', entry.doc.category);
           //set id to data attribute
           el.setAttribute("data-id", entry.doc._id);
           
