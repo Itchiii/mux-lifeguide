@@ -22,17 +22,21 @@
 </head>
 <body class="overflow-hidden">
 	<nav id="menu" class="slideout-menu transition">
-		<button class="toggle-button" id="toggle-button">
-			<svg class="toggle-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-				<path fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M26 20.006L40 32 26 44.006" stroke-linejoin="round" stroke-linecap="round"/>
-				</svg>
-		</button>
-		<h2>Menu</h2>
+		<button class="toggle-button" id="toggle-button"></button>
+		<h3 class="filter-heading">Filter</h3>
+		<div class="filter">
+			<span class="filter-shop">Einkaufen</span>
+			<span class="filter-dinner">Gastronomie</span>
+			<span class="filter-greenLocation">Grüne Orte</span>
+			<span class="filter-orga">Vereine & Organisationen</span>
+			<span class="filter-leisure">Freizeit</span>
+		</div>
 	</nav>
 	<main id="panel" class="panel">
 		<div class="topSearch" id="topSearch">
 			<div class="search">
-				<input class="input searchLocations" type="text" name="" id="" placeholder="Orte durchsuchen">
+				<input class="input searchLocations" type="text" name="" id="searchLocations" placeholder="Orte durchsuchen">
+				<ul class="search-results hide" id="search-results"></ul>
 			</div>
 		</div>
 		<div id="mapid"></div>
