@@ -363,7 +363,7 @@ body.overflow-hidden {
       }
 
       .geocoder-icon-close, .geocoder-icon-loading {
-        background-color: #f2f2f2;
+        background-color: #fff;
         right: 3.5em;
       }
     }
@@ -483,17 +483,10 @@ body.overflow-hidden {
     align-items: center;
     position: relative;
 
-    &::after {
-      content: url('/public/assets/images/icons/search.svg');
-      height: 17px;
-      width: 21px;
-      position: absolute;
-      right: 1em;
-      stroke: $highlightedColor;
-    }
-
     .searchLocations {
-      background-color: #f2f2f2;
+      background-color: #fff;
+      padding-right: 2.5em;
+      text-overflow: ellipsis;
     }
 
     .search-results {
@@ -519,27 +512,38 @@ body.overflow-hidden {
         }
       }
     }
-  }
 
-
-
-  .mapboxgl-ctrl-group {
+    .mapboxgl-ctrl-group {
       border-radius: 50%;
       margin-left: 0.5em;
+      box-shadow: none;
+      position: absolute;
+      right: 4px;
+      top: 4px;
 
-    .mapboxgl-ctrl-icon {
-      height: 2.5em;
-      width: 2.5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      &::before {
-        background-image: none;
-        content: url("/public/assets/images/icons/geolocate.svg");
-        height: 28px;
-        width: 28px;
+      .mapboxgl-ctrl-icon {
+        height: 2.5em;
+        width: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before {
+          background-image: none;
+          content: url("/public/assets/images/icons/geolocate.svg");
+          height: 28px;
+          width: 28px;
+        }
+
+        &:hover {
+          background: none;
+        }
       }
     }
   }
+
+
+
+
 }

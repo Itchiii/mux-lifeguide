@@ -522,7 +522,7 @@ body.overflow-hidden {
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-search {
         display: none; }
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-close, .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-loading {
-        background-color: #f2f2f2;
+        background-color: #fff;
         right: 3.5em; }
     .location-routing .create-routing-inputs input {
       display: block;
@@ -607,15 +607,10 @@ body.overflow-hidden {
     display: flex;
     align-items: center;
     position: relative; }
-    .topSearch .search::after {
-      content: url("/public/assets/images/icons/search.svg");
-      height: 17px;
-      width: 21px;
-      position: absolute;
-      right: 1em;
-      stroke: #7ECE96; }
     .topSearch .search .searchLocations {
-      background-color: #f2f2f2; }
+      background-color: #fff;
+      padding-right: 2.5em;
+      text-overflow: ellipsis; }
     .topSearch .search .search-results {
       background-color: #fff;
       border-radius: 5px;
@@ -632,20 +627,26 @@ body.overflow-hidden {
         padding: 1em; }
         .topSearch .search .search-results > li:not(:last-child) {
           border-bottom: 1px solid #f2f2f2; }
-  .topSearch .mapboxgl-ctrl-group {
-    border-radius: 50%;
-    margin-left: 0.5em; }
-    .topSearch .mapboxgl-ctrl-group .mapboxgl-ctrl-icon {
-      height: 2.5em;
-      width: 2.5em;
-      display: flex;
-      align-items: center;
-      justify-content: center; }
-      .topSearch .mapboxgl-ctrl-group .mapboxgl-ctrl-icon::before {
-        background-image: none;
-        content: url("/public/assets/images/icons/geolocate.svg");
-        height: 28px;
-        width: 28px; }
+    .topSearch .search .mapboxgl-ctrl-group {
+      border-radius: 50%;
+      margin-left: 0.5em;
+      box-shadow: none;
+      position: absolute;
+      right: 4px;
+      top: 4px; }
+      .topSearch .search .mapboxgl-ctrl-group .mapboxgl-ctrl-icon {
+        height: 2.5em;
+        width: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .topSearch .search .mapboxgl-ctrl-group .mapboxgl-ctrl-icon::before {
+          background-image: none;
+          content: url("/public/assets/images/icons/geolocate.svg");
+          height: 28px;
+          width: 28px; }
+        .topSearch .search .mapboxgl-ctrl-group .mapboxgl-ctrl-icon:hover {
+          background: none; }
 
 /*CSS for Slideout Menu*/
 .toggle-button {
