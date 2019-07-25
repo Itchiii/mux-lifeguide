@@ -50,7 +50,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 95%;
+  width: 95vw;
   padding: 1em;
   border-bottom-left-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
@@ -71,8 +71,6 @@
   padding: 1em; }
 
 .event {
-  min-width: 400px;
-  max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +78,7 @@
 
 .eventimg {
   margin-top: 1em;
-  width: 95%;
+  width: 95vw;
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em; }
 
@@ -100,24 +98,34 @@
   .events {
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start; } }
+    align-items: flex-start;
+    width: 500px; }
+  .eventColumn, .eventimg {
+    width: 500px; } }
 
-.wrapperFormular {
+#wrapperFormular {
+  width: 300vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  overflow: hidden; }
+  transition: transform 0.3s ease-in-out; }
+  #wrapperFormular.showStepOne {
+    transform: translateX(0vw); }
+  #wrapperFormular.showStepTwo {
+    transform: translateX(-100vw); }
+  #wrapperFormular.showStepThree {
+    transform: translateX(-200vw); }
 
 #stepOne, #stepTwo, #stepThree {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  transition: all .3s linear; }
+  margin-top: 2em;
+  width: 100vw; }
 
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  margin-top: 2em; }
 
 .formInput {
   width: 75vw;
@@ -143,7 +151,7 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  background: #e66740;
+  background: #7ECE96;
   color: #F6F7F9;
   font-size: 1em; }
 
@@ -155,7 +163,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: green; }
+  background-color: #7ECE96; }
 
 .warning {
   color: white; }
@@ -170,17 +178,24 @@
   height: 5px;
   width: 33vw;
   background-color: white; }
+  #bar1.greenbar, #bar2.greenbar, #bar3.greenbar {
+    background-color: #7ECE96; }
 
 #eventformular {
   display: flex;
   flex-direction: column;
-  background-color: grey; }
+  background-color: #cfd1d4;
+  overflow: hidden; }
 
 #headernav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white; }
+
+.summary {
+  margin: 0 auto;
+  width: 75vw; }
 
 div[class^="related"] {
   color: #fff;

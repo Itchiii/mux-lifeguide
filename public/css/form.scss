@@ -1,22 +1,30 @@
-.wrapperFormular{
-  //width: 300vw;
+#wrapperFormular{
+  width: 300vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  overflow: hidden;
-  //background-color: grey;
-  
+  transition: transform 0.3s ease-in-out;
+    &.showStepOne {
+      transform: translateX(-0vw);
+    }
+    &.showStepTwo {
+      transform: translateX(-100vw);
+    }
+    &.showStepThree {
+      transform: translateX(-200vw);
+    } 
 }
 #stepOne, #stepTwo, #stepThree{
   display: flex;
   flex-direction: column;
+  margin-top: 2em;
   width: 100vw;
-  transition: all .3s linear;
 }
 .form{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2em;
+
 }
 
 .formInput{
@@ -43,7 +51,7 @@
   border-radius: 5px;
   outline: none;
   border: none;
-  background: #e66740;
+  background: #7ECE96;
   color: #F6F7F9;
   font-size: 1em;
 }
@@ -55,7 +63,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: green;
+  background-color: #7ECE96;
 }
 .warning{
   color: white;
@@ -66,19 +74,30 @@
   justify-content: space-around;
   margin-top: 0.2em;
 }
+
 #bar1, #bar2, #bar3 {
   height: 5px;
   width: 33vw;
   background-color: white;
+  &.greenbar {
+    background-color: #7ECE96;
+  }
 }
+
 #eventformular {
   display: flex;
   flex-direction: column;
-  background-color: grey;
+  background-color: rgb(207, 209, 212);
+  overflow: hidden;
 }
 #headernav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
+}
+
+.summary{
+  margin: 0 auto;
+  width: 75vw;
 }

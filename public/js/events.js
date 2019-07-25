@@ -42,7 +42,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventColumn.append(eventInfo);
       eventColumn.classList.add("eventColumn");
 
-      //div for event image called eventimg
+      //div for event with image called eventimg
       if (entry.doc._attachments !== undefined) {
         eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
           var url = URL.createObjectURL(blob);
@@ -65,6 +65,23 @@ eventDB.allDocsOfLocalDB.then(function(result) {
             window.open(`article.html?id=${this.dataset.id}`, "_self");
           });
         });
+      }
+      //event when there's no image
+      else {
+          //div for eventimg and eventColumn
+          const event = document.createElement("div");
+          event.classList.add("event")
+          //event.append(eventimg);
+          event.append(eventColumn);
+          events.append(event);
+
+          //dataset
+          event.dataset.id = entry.doc._id;
+          //Put events container in DOM
+          document.getElementById('events').append(events);
+          event.addEventListener("click", function(){
+            window.open(`article.html?id=${this.dataset.id}`, "_self");
+          });
       }
     }
   });
