@@ -558,11 +558,20 @@ body.overflow-hidden {
     margin-left: 0.5em; }
 
 .marker {
-  background-image: url("/public/assets/images/icon-72x72.png");
   background-size: cover;
-  height: 50px;
-  width: 50px;
+  height: 38px;
+  width: 28px;
   cursor: pointer; }
+  .marker.shop {
+    background-image: url("/public/assets/images/marker/shop.svg"); }
+  .marker.dinner {
+    background-image: url("/public/assets/images/marker/dinner.svg"); }
+  .marker.leisure {
+    background-image: url("/public/assets/images/marker/leisure.svg"); }
+  .marker.greenLocation {
+    background-image: url("/public/assets/images/marker/greenLocation.svg"); }
+  .marker.orga {
+    background-image: url("/public/assets/images/marker/orga.svg"); }
 
 .topSearch {
   margin: auto;
