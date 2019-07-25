@@ -17,11 +17,10 @@
 	</head>
 <body id="events">
 		<form class="form"> 
-		<input name="name" type="text" placeholder="Veranstaltung suchen" class="formInput" onkeypress="search(this)"/>
+		<input name="name" type="text" placeholder="Veranstaltung suchen" id="formInput" class="formInput" onkeypress="search(this)"/>
 		</form>
 		<div class="event-tips-container">
 			<h2 class="event-tips-heading">Empfohlene Veranstaltungen</h2>
-			<!-- <a class="event-tips-showAll" href="events.html">Alle anzeigen</a> -->
 			<div class="event-tips" id="event-tips"></div>
 		</div>
   
@@ -58,7 +57,8 @@
 			</a>
 		</div>
 	</div>
-	<a href="eventformular.html" class="floatingButton addEvent">+</a>
+	<a href="eventformular.html" class="floatingButton">+</a>
+
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/events.js"></script>
 	<script src="/public/js/app.js"></script>

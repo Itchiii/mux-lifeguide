@@ -1,6 +1,11 @@
 function search(ele) {
   if(event.keyCode == 13) {
-      alert(ele.value);        
+    event.preventDefault();
+    var tippedWord = ele.value;
+    var wort = document.getElementsByTagName("h4").value;
+    console.log(wort);
+    var right = wort.includes(tippedWord);
+    console.log(right);
   }
 }
 

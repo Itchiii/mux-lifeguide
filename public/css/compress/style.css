@@ -43,9 +43,6 @@
   max-width: 800px;
   margin-bottom: 5em; }
 
-.floatingButton.addEvent {
-  background-color: #0C9; }
-
 .eventColumn {
   display: flex;
   flex-direction: row;
