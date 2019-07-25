@@ -277,11 +277,11 @@ div[class^="related"] {
 .location-tips-showAll, .event-tips-showAll, .tour-tips-showAll {
   align-self: flex-end;
   margin-left: auto;
-  color: #e66740; }
+  color: #7ECE96; }
   .location-tips-showAll svg, .event-tips-showAll svg, .tour-tips-showAll svg {
     height: 30px; }
     .location-tips-showAll svg > *, .event-tips-showAll svg > *, .tour-tips-showAll svg > * {
-      stroke: #e66740; }
+      stroke: #7ECE96; }
 
 .location-tips-heading, .event-tips-heading, .tour-tips-heading {
   font-size: 1em;
@@ -299,54 +299,6 @@ body.overflow-hidden {
   width: 100vw;
   height: 100vh; }
 
-.leaflet-top.leaflet-right {
-  left: 0;
-  right: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  z-index: 990;
-  align-items: center; }
-  .leaflet-top.leaflet-right .leaflet-routing-container {
-    display: none; }
-  .leaflet-top.leaflet-right .leaflet-control-geocoder {
-    position: relative;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-    background-color: #f8f8f8; }
-    .leaflet-top.leaflet-right .leaflet-control-geocoder .leaflet-control-geocoder-icon {
-      display: none; }
-    .leaflet-top.leaflet-right .leaflet-control-geocoder .leaflet-control-geocoder-form {
-      padding: 10px;
-      font-size: 0.7em; }
-      .leaflet-top.leaflet-right .leaflet-control-geocoder .leaflet-control-geocoder-form::after {
-        content: "A";
-        color: #e66740;
-        height: 75%;
-        width: auto;
-        position: absolute;
-        right: 1em; }
-    .leaflet-top.leaflet-right .leaflet-control-geocoder .leaflet-control-geocoder-alternatives {
-      position: absolute;
-      background-color: #fff;
-      top: 0;
-      transform: translateY(2.2rem); }
-  .leaflet-top.leaflet-right .leaflet-control-locate {
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); }
-    .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part {
-      border-radius: 50%;
-      width: 20px;
-      height: 20px; }
-      .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part svg.icon-geolocate-svg {
-        transform: scale(0.8); }
-        .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part svg.icon-geolocate-svg path, .leaflet-top.leaflet-right .leaflet-control-locate a.leaflet-bar-part svg.icon-geolocate-svg circle {
-          stroke: #e66740; }
-
 .location-entity-wrapper {
   display: none;
   position: absolute;
@@ -356,7 +308,8 @@ body.overflow-hidden {
   z-index: 10001;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  scroll-behavior: smooth; }
+  scroll-behavior: smooth;
+  top: 100vh; }
   .location-entity-wrapper.show {
     display: block; }
   .location-entity-wrapper.transition {
@@ -387,7 +340,7 @@ body.overflow-hidden {
       transform: scale(1.5);
       margin: 0 auto; }
       .location-entity-wrapper .location-entity-holder .location-entity-grabble path {
-        stroke: #e66740; }
+        stroke: #7ECE96; }
     .location-entity-wrapper .location-entity-holder .location-entity-shareButton, .location-entity-wrapper .location-entity-holder .location-entity-markButton {
       position: absolute;
       height: 80%;
@@ -395,7 +348,7 @@ body.overflow-hidden {
       .location-entity-wrapper .location-entity-holder .location-entity-shareButton svg, .location-entity-wrapper .location-entity-holder .location-entity-markButton svg {
         transform: scale(0.8); }
       .location-entity-wrapper .location-entity-holder .location-entity-shareButton path, .location-entity-wrapper .location-entity-holder .location-entity-shareButton circle, .location-entity-wrapper .location-entity-holder .location-entity-markButton path, .location-entity-wrapper .location-entity-holder .location-entity-markButton circle {
-        stroke: #e66740; }
+        stroke: #7ECE96; }
       .location-entity-wrapper .location-entity-holder .location-entity-shareButton.hide, .location-entity-wrapper .location-entity-holder .location-entity-markButton.hide {
         display: none; }
     .location-entity-wrapper .location-entity-holder .location-entity-markButton {
@@ -438,7 +391,7 @@ body.overflow-hidden {
         -moz-box-orient: vertical; }
       .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more {
         margin-top: 0.5em;
-        color: #e66740;
+        color: #7ECE96;
         margin-left: auto; }
         .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more::after {
           content: "P";
@@ -455,7 +408,7 @@ body.overflow-hidden {
         content: "U";
         padding-right: 1.5em;
         padding-left: 1.5em;
-        color: #e66740; }
+        color: #7ECE96; }
     .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
       margin: 2em 1.5em 0 1.5em;
       display: flex;
@@ -478,9 +431,9 @@ body.overflow-hidden {
         .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
           flex: 1; }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
-          color: #e66740;
+          color: #7ECE96;
           align-self: flex-start; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu:after {
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
             content: "I"; }
     .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
       margin: 2em 0;
@@ -508,14 +461,14 @@ body.overflow-hidden {
         color: #747474; }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
           margin: 1.5em 0; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:before {
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
           padding-right: 1.5em;
-          color: #e66740; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:before {
+          color: #7ECE96; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
         content: "T"; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:before {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
         content: "R"; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:before {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
         content: "S"; }
     .location-entity-wrapper .location-entity-content .location-entity-createRoute svg {
       height: 60%;
@@ -535,40 +488,74 @@ body.overflow-hidden {
   width: 100%;
   transition: transform 0.3s ease-out;
   transform: translateY(0px);
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  visibility: visible; }
   .location-routing.transitionOut {
     transform: translateY(-200px); }
   .location-routing.hide {
-    display: none; }
+    visibility: hidden; }
   .location-routing .create-routing-back {
-    width: 30px; }
-    .location-routing .create-routing-back .c-r-back-symbol {
-      height: auto;
-      width: 100%;
-      transform: scale(1.5) rotate(-90deg); }
-      .location-routing .create-routing-back .c-r-back-symbol path {
-        stroke: #e66740; }
+    width: 30px;
+    border: none;
+    background: 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%; }
+    .location-routing .create-routing-back::after {
+      content: url("/public/assets/images/icons/arrow.svg");
+      width: 17px;
+      height: 24px; }
   .location-routing .create-routing-symbol {
     width: 1.5em;
-    background-color: green;
-    margin: 0 0.5em; }
+    margin: 0 0.5em;
+    max-height: 70px;
+    align-self: center; }
+    .location-routing .create-routing-symbol img {
+      max-height: 70px; }
   .location-routing .create-routing-inputs {
-    flex: 1; }
+    flex: 1;
+    position: relative; }
     .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder {
       width: 100%;
       box-shadow: none;
       margin-bottom: 0.5em; }
+      .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder input {
+        padding: 1em 5em 1em 1em; }
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-search {
         display: none; }
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-close, .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-loading {
-        background-color: #f2f2f2; }
+        background-color: #f2f2f2;
+        right: 3.5em; }
     .location-routing .create-routing-inputs input {
       display: block;
-      width: 100%;
       padding: 1em;
+      width: 100%;
       border: none;
       border-radius: 5px;
-      background-color: #f2f2f2; }
+      background-color: #f2f2f2;
+      text-overflow: ellipsis; }
+    .location-routing .create-routing-inputs .mapboxgl-ctrl-group {
+      border-radius: 50%;
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      z-index: 10000;
+      background: none;
+      box-shadow: none; }
+      .location-routing .create-routing-inputs .mapboxgl-ctrl-group .mapboxgl-ctrl-icon {
+        height: 2.5em;
+        width: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .location-routing .create-routing-inputs .mapboxgl-ctrl-group .mapboxgl-ctrl-icon::before {
+          background-image: none;
+          content: url("/public/assets/images/icons/geolocate.svg");
+          height: 28px;
+          width: 28px; }
+        .location-routing .create-routing-inputs .mapboxgl-ctrl-group .mapboxgl-ctrl-icon:hover {
+          background: none; }
   .location-routing .create-routing-menu {
     margin-left: 0.5em; }
 
@@ -578,15 +565,34 @@ body.overflow-hidden {
   width: 28px;
   cursor: pointer; }
   .marker.shop {
-    background-image: url("/public/assets/images/marker/shop.svg"); }
+    background-image: url("/public/assets/images/marker/shop-white.svg"); }
   .marker.dinner {
     background-image: url("/public/assets/images/marker/dinner.svg"); }
   .marker.leisure {
-    background-image: url("/public/assets/images/marker/leisure.svg"); }
+    background-image: url("/public/assets/images/marker/leisure-grey.svg"); }
   .marker.greenLocation {
     background-image: url("/public/assets/images/marker/greenLocation.svg"); }
   .marker.orga {
     background-image: url("/public/assets/images/marker/orga.svg"); }
+
+.end-marker {
+  height: 15px;
+  width: 15px;
+  background-color: #ac39ac;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; }
+  .end-marker::after {
+    position: absolute;
+    background-color: rgba(172, 57, 172, 0.5);
+    content: "";
+    height: 25px;
+    width: 25px;
+    border-radius: 50%; }
+  .end-marker.hide {
+    display: none; }
 
 .topSearch {
   margin: auto;
@@ -604,19 +610,45 @@ body.overflow-hidden {
     display: flex;
     align-items: center;
     position: relative; }
-    .topSearch .search:after {
-      content: "I";
+    .topSearch .search::after {
+      content: url("/public/assets/images/icons/search.svg");
+      height: 17px;
+      width: 21px;
       position: absolute;
       right: 1em;
-      color: #e66740; }
+      stroke: #7ECE96; }
     .topSearch .search .searchLocations {
       background-color: #f2f2f2; }
+    .topSearch .search .search-results {
+      background-color: #fff;
+      border-radius: 5px;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      top: 3em;
+      display: block; }
+      .topSearch .search .search-results.hide {
+        display: none; }
+      .topSearch .search .search-results > li {
+        list-style: none;
+        font-size: 0.8em;
+        padding: 1em; }
+        .topSearch .search .search-results > li:not(:last-child) {
+          border-bottom: 1px solid #f2f2f2; }
   .topSearch .mapboxgl-ctrl-group {
     border-radius: 50%;
     margin-left: 0.5em; }
     .topSearch .mapboxgl-ctrl-group .mapboxgl-ctrl-icon {
       height: 2.5em;
-      width: 2.5em; }
+      width: 2.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .topSearch .mapboxgl-ctrl-group .mapboxgl-ctrl-icon::before {
+        background-image: none;
+        content: url("/public/assets/images/icons/geolocate.svg");
+        height: 28px;
+        width: 28px; }
 
 /*CSS for Slideout Menu*/
 .toggle-button {
@@ -631,11 +663,15 @@ body.overflow-hidden {
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: #fff; }
-  .toggle-button svg.toggle-button-icon {
-    transform: scale(1.5);
-    width: 30px;
-    height: 30px; }
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .toggle-button::after {
+    content: url("/public/assets/images/icons/grabble.svg");
+    transform: rotate(90deg);
+    height: 100%;
+    width: 19px; }
 
 .slideout-menu {
   top: 0;
@@ -656,8 +692,32 @@ body.overflow-hidden {
     transition: transform 250ms ease-in-out; }
   .slideout-menu.open {
     transform: translateX(0); }
+  .slideout-menu .filter-heading {
+    text-transform: uppercase;
+    margin: 1em; }
+  .slideout-menu .filter > span {
+    display: flex;
+    color: #707070;
+    font-size: 0.8em;
+    padding: 1.5em 0 1.5em 4em;
+    align-items: center; }
+    .slideout-menu .filter > span::after {
+      height: 24px;
+      width: 24px;
+      position: absolute;
+      right: 3px; }
+  .slideout-menu .filter .filter-shop::after {
+    content: url("/public/assets/images/icons/shop.svg"); }
+  .slideout-menu .filter .filter-dinner::after {
+    content: url("/public/assets/images/icons/dinner.svg"); }
+  .slideout-menu .filter .filter-greenLocation::after {
+    content: url("/public/assets/images/icons/greenLocation.svg"); }
+  .slideout-menu .filter .filter-orga::after {
+    content: url("/public/assets/images/icons/orga.svg"); }
+  .slideout-menu .filter .filter-leisure::after {
+    content: url("/public/assets/images/icons/leisure.svg"); }
 
-.panel:before {
+.panel::before {
   content: '';
   display: block;
   pointer-events: none;
@@ -669,7 +729,7 @@ body.overflow-hidden {
   width: 100%;
   z-index: 999; }
 
-.panel.open:before {
+.panel.open::before {
   background-color: rgba(0, 0, 0, 0.5); }
 
 * {
@@ -689,7 +749,7 @@ a {
   text-decoration: none;
   transition: color .2s ease-in; }
   a:hover {
-    color: #e66740; }
+    color: #7ECE96; }
 
 .bottom-menu {
   height: 56px;
@@ -744,7 +804,7 @@ a {
     margin: 1em 0; }
 
 .submit-button {
-  background-color: #e66740;
+  background-color: #7ECE96;
   display: block;
   padding: 1.2em 5em;
   margin: auto;
@@ -772,4 +832,4 @@ a {
   border: none;
   cursor: pointer;
   z-index: 9998;
-  background-color: #e66740; }
+  background-color: #7ECE96; }

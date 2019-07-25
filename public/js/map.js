@@ -8,7 +8,7 @@ fetch('accessTokenMapBox.txt')
     mapboxgl.accessToken = accessTokenMapBox;
     var map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/student123456/cjyg2vfgp02sy1cr6dp37yer7',
+      style: 'mapbox://styles/student123456/cjyg2mizy00731cpb3g66n986',
       center: [10.89851, 48.37154], // starting position [lng, lat]
       zoom: 12 // starting zoom
     });
@@ -52,23 +52,49 @@ fetch('accessTokenMapBox.txt')
       }
     });
 
-    //add listener to remove entity on bottom
+    //add listener to remove entity on bottom, remove sidebar and search results
     document.getElementById('mapid').addEventListener('click', function(event) {
       if (!event.target.classList.contains('marker')) {
-        const entityWrapper = document.getElementById('location-entity-wrapper')
-        entityWrapper.classList.remove('show');
-        entityWrapper.style.removeProperty('top');
-        entityWrapper.style.removeProperty('padding-bottom');
-        entityWrapper.removeAttribute("data-id");
-        removeContentToEntity();
-        removeParam("open");
-        removeParam("id");
-        document.getElementById('location-entity-createRoute').classList.add('hide');
+        removePreview();
       }
 
       document.getElementById('menu').classList.remove('open');
-      document.getElementById('panel').classList.remove('panel');      
+      document.getElementById('panel').classList.remove('open');  
+      
+      document.getElementById('search-results').classList.add('hide');
     });
+
+
+    /* 
+     * Search functionality 
+     */
+    document.getElementById('searchLocations').addEventListener('keydown', searchLocation);
+
+    function searchLocation() {
+      const searchResults = document.getElementById('search-results');
+      searchResults.textContent = ""
+      searchResults.classList.remove('hide');
+      
+      locationDB.allDocsOfLocalDB.then(function(result) {
+        for (const entry of result.rows) {
+          const title = entry.doc.title.toUpperCase();
+          if (title.includes(this.value.toUpperCase())) {
+            const li = document.createElement('li');
+            li.textContent = entry.doc.title;
+            li.addEventListener('click', () => {
+              if (history.pushState) {
+                let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
+                window.history.pushState({path:newurl},'',newurl);
+              }
+              map.flyTo({center: [entry.doc.long, entry.doc.lat], zoom: 15});
+              setEntityContent(entry.doc._id);
+              searchResults.classList.add('hide');
+            });
+            searchResults.append(li);
+          }
+        }
+      }.bind(this));
+    }
 
 
     /* 
@@ -86,15 +112,57 @@ fetch('accessTokenMapBox.txt')
     });
     document.getElementById('create-routing-inputs').prepend(startInput.onAdd(map));
 
+
+    //add geolocate control to search field.
+    const geolocateForRoute = new mapboxgl.GeolocateControl({
+      positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: false,
+        showUserLocation: false
+      });
+
+    let endMarkerEle = document.createElement('div');
+    endMarkerEle.classList.add('end-marker', 'hide');
+    
+    let endMarker = new mapboxgl.Marker({
+      element: endMarkerEle,
+      anchor: 'center'
+    }).setLngLat([0, 0]).addTo(map);
+
+    document.getElementById('create-routing-inputs').prepend(geolocateForRoute.onAdd(map));
+    geolocateForRoute.on('geolocate', function(data) {
+      const input = document.querySelector('.create-routing-inputs .mapboxgl-ctrl-geocoder input');
+      input.value = "Mein Standort";
+
+      console.log(data);
+
+
+      //get id param from url
+      let params = new URLSearchParams(document.location.search.substring(1));
+      const id = params.get("id");
+
+      //get entry with param id
+      locationDB._getDoc(id).then(function(entry) {
+        //create Routing with waypoints and geocoder api
+        let end = [entry.long, entry.lat];
+
+
+        let start = [data.coords.longitude, data.coords.latitude];
+        console.log(start, end);
+
+        setRoute(start, end);
+      });
+
+
+    });
+
     //click on "create routing"
     document.getElementById('location-entity-createRoute').addEventListener('click', function() {
       const routeWrapper = document.getElementById('location-routing')
       routeWrapper.removeEventListener('transitionend', hideRoutingAfterTransition);
       routeWrapper.classList.remove('hide');
-      if (!routeWrapper.classList.contains('hide')) {
-        routeWrapper.classList.remove('transitionOut');
-
-      }
+      routeWrapper.classList.remove('transitionOut');
 
       //fullscreen -> preview of entity
       if (document.getElementById('location-entity-wrapper').classList.contains('show-complete')) {
@@ -104,6 +172,7 @@ fetch('accessTokenMapBox.txt')
       const destination = document.getElementById('c-r-to');
       const startpoint = document.querySelector('.mapboxgl-ctrl-geocoder > input');
       startpoint.value = "";
+      startpoint.focus();
 
       //get id param from url
       let params = new URLSearchParams(document.location.search.substring(1));
@@ -118,13 +187,18 @@ fetch('accessTokenMapBox.txt')
 
       //on result of startpoint setRoute
       startInput.on('result', function(data) {
-        start = [data.result.center[0], data.result.center[1]];
+        const start = [data.result.center[0], data.result.center[1]];
         setRoute(start, end);
       });
     });
 
     // click on back button on routing form
     document.getElementById('create-routing-back').addEventListener('click', function(){
+      endMarkerEle.classList.add('hide');
+      if (map.getSource('route')) {
+        map.removeLayer('route');
+      }
+      
       const routeWrapper = document.getElementById('location-routing');
       routeWrapper.classList.add('transitionOut');
       routeWrapper.addEventListener('transitionend', hideRoutingAfterTransition);
@@ -157,6 +231,7 @@ fetch('accessTokenMapBox.txt')
         
         // if the route already exists on the map, reset it using setData
         if (map.getSource('route')) {
+          endMarker.setLngLat([start[0], start[1]]);
           map.getSource('route').setData(geojson);
         } else { // otherwise, make a new request
           map.addLayer({
@@ -178,11 +253,18 @@ fetch('accessTokenMapBox.txt')
               'line-cap': 'round'
             },
             paint: {
-              'line-color': '#fff',
+              'line-color': '#7ECE96',
               'line-width': 5,
-              'line-opacity': 0.75
+              'line-opacity': 0.75,
+              'line-dasharray': [1, 2]
             }
           });
+
+          endMarkerEle.classList.remove('hide');
+          endMarker.setLngLat([start[0], start[1]]);
+
+          map.flyTo({center: [start[0], start[1]], zoom: 15});
+
         }
       };
       req.send();
@@ -444,8 +526,10 @@ function holderOnClick(e) {
     changeToFullscreen();
   }
 }
+let cancelMoveFunktion;
 
 function touchDown(e) {
+  cancelMoveFunktion = false;
   touchDif = 0;
   initScrollLeftOfImgContainer = document.getElementById('entity-full-images').scrollLeft;
 
@@ -473,10 +557,12 @@ function touchMove(e) {
   touchDif = touchBeginOnHolder - e.touches[0].pageY;
 
   //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif < 0 && smallEntityWrapper.scrollTop != 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif < 0 && smallEntityWrapper.scrollTop != 0 || cancelMoveFunktion === true) {
+    cancelMoveFunktion = true;
     return;
   }
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif > 0 && smallEntityWrapper.scrollTop >= 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif > 0 && smallEntityWrapper.scrollTop >= 0 || cancelMoveFunktion === true) {
+    cancelMoveFunktion = true;
     return;
   }
 
@@ -494,13 +580,14 @@ function touchMove(e) {
    // emptyPlaceholderElement.style.setProperty('height', `${touchDif + 1}px`);
     smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
     //smallEntityWrapper.classList.add('on-translate');
+    addContentToEntity();
   }
-  //change top on bottom layer on scroll down -> just show a animation
+  //change top on preview on scroll down -> just show a animation
   if (touchDif < 0 && !smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.setProperty('top', `${vhDifUp}vh`);
   }
 
-  //change top from complete version to bottom 
+  //change top from fullscreen version to preview 
   if (touchDif < 0 && smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.setProperty('top', `${vhDifDown * (-1)}vh`);
     //smallEntityWrapper.classList.add('on-translate');
@@ -520,30 +607,33 @@ function touchUp(e) {
   }
 
   //return checks, if it scrolled on fullscreen but it can be scrolled for moving his content
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif <= 0 && smallEntityWrapper.scrollTop != 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif <= 0 && smallEntityWrapper.scrollTop != 0 || cancelMoveFunktion === true) {
     return;
   }
-  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif >= 0 && smallEntityWrapper.scrollTop >= 0) {
+  if (this === smallEntityWrapper &&  smallEntityWrapper.classList.contains('show-complete') && touchDif >= 0 && smallEntityWrapper.scrollTop >= 0 || cancelMoveFunktion === true) {
     return;
   }
 
   //100px as min touch difference
-  const minDifference = 100;
-  
+  const minDifference = 50;
   if (touchDif > minDifference) {
     changeToFullscreen();
   }
-  else if (touchDif < (minDifference * (-1))) {
+  else if (smallEntityWrapper.classList.contains('show-complete') && touchDif < (minDifference * (-1))) {
     changeToPreview();
   }
   //after click on holder in fullscreen
   else if (smallEntityWrapper.classList.contains('show-complete')) {
     smallEntityWrapper.style.removeProperty('top');
-    
   }
-  //after click on holder in preview
-  else if (!smallEntityWrapper.classList.contains('show-complete')) {
+  //from preview with small touchDif -> still on preview
+  else if (!smallEntityWrapper.classList.contains('show-complete') && touchDif * (-1) < minDifference) {
     smallEntityWrapper.style.setProperty('top', `${startTopProperty}vh`);
+    removeContentToEntity();
+  }
+  //from preview with higher touchDif -> remove Preview
+  else if (!smallEntityWrapper.classList.contains('show-complete') && touchDif < minDifference * (-1)) {
+    removePreview();
   }
 }
 
@@ -584,6 +674,18 @@ function changeToPreview() {
   smallEntityWrapper.classList.remove('show-complete');
   removeContentToEntity();
   removeParam("open");
+}
+
+function removePreview() {
+  const entityWrapper = document.getElementById('location-entity-wrapper')
+  entityWrapper.classList.remove('show');
+  entityWrapper.style.removeProperty('top');
+  entityWrapper.style.removeProperty('padding-bottom');
+  entityWrapper.removeAttribute("data-id");
+  removeContentToEntity();
+  removeParam("open");
+  removeParam("id");
+  document.getElementById('location-entity-createRoute').classList.add('hide');
 }
 
 function removeParam(param) {
