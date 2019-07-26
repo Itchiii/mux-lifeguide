@@ -282,11 +282,11 @@ const bookmarksDB = new Database('bookmarks');
 
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
-  if(document.body.id === "index") setRecommend(locationDB);
-  //fetchJson(locationDB);
+  //if(document.body.id === "index") setRecommend(locationDB);
+  fetchJson(locationDB);
 }).on('error', function (err) {
-  if(document.body.id === "index") setRecommend(locationDB);
-  //fetchJson(locationDB); //for mobile, because you cant access the remote database
+  //if(document.body.id === "index") setRecommend(locationDB);
+  fetchJson(locationDB); //for mobile, because you cant access the remote database
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info) {

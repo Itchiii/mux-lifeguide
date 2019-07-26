@@ -21,17 +21,6 @@
 	<script src="/public/js/register-worker.js" defer></script>
 </head>
 <body class="overflow-hidden">
-	<nav id="menu" class="slideout-menu transition">
-		<button class="toggle-button" id="toggle-button"></button>
-		<h3 class="filter-heading">Filter</h3>
-		<div class="filter">
-			<span class="filter-shop">Einkaufen</span>
-			<span class="filter-dinner">Gastronomie</span>
-			<span class="filter-greenLocation">Grüne Orte</span>
-			<span class="filter-orga">Vereine & Organisationen</span>
-			<span class="filter-leisure">Freizeit</span>
-		</div>
-	</nav>
 	<main id="panel" class="panel">
 		<div class="topSearch" id="topSearch">
 			<div class="search" id="search">
@@ -41,7 +30,14 @@
 		</div>
 		<div id="mapid"></div>
 	</main>
-	<button class="floatingButton add-location">+</button>
+	<div class="wrapping-filter">
+		<button class="floatingButton filter-shop"></button>
+		<button class="floatingButton filter-dinner"></button>
+		<button class="floatingButton filter-greenLocation"></button>
+		<button class="floatingButton filter-orga"></button>
+		<button class="floatingButton filter-leisure"></button>
+		<button class="floatingButton filter-add" id="filter-add">+</button>
+	</div>
 	<div class="location-routing hide transitionOut" id="location-routing">
 		<button class="create-routing-back" id="create-routing-back"></button>
 		<div class="create-routing-symbol">
@@ -142,6 +138,5 @@
 	<script src="/public/js/db.js"></script>
 	<script src="/public/js/map.js"></script>
 	<script src="/public/js/app.js"></script>
-	<script src="/public/js/sidemenu.js"></script>
 </body>
 </html>

@@ -542,8 +542,68 @@ body.overflow-hidden {
       }
     }
   }
+}
 
+.wrapping-filter {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  align-items: center;
 
+  > button {
+    position: relative;
+    right: unset;
+    bottom: unset;
 
+    &.active {
+      background-color: $highlightedColor;
+    }
+  }
+  
+  > button:not(.filter-add) {
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+  }
 
+  > button:not(:first-child) {
+    margin-top: 0.3em;
+  }
+
+  .filter-shop::after {
+    content: url('/public/assets/images/icons/shop.svg');
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
+
+  .filter-dinner::after {
+    content: url('/public/assets/images/icons/dinner.svg');
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
+
+  .filter-greenLocation::after {
+    content: url('/public/assets/images/icons/greenLocation.svg');
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
+
+  .filter-orga::after {
+    content: url('/public/assets/images/icons/orga.svg');
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
+
+  .filter-leisure::after {
+    content: url('/public/assets/images/icons/leisure.svg');
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
 }

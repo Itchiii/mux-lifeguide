@@ -58,8 +58,8 @@ fetch('accessTokenMapBox.txt')
         removePreview();
       }
 
-      document.getElementById('menu').classList.remove('open');
-      document.getElementById('panel').classList.remove('open');  
+      //document.getElementById('menu').classList.remove('open');
+     //document.getElementById('panel').classList.remove('open');  
       
       document.getElementById('search-results').classList.add('hide');
     });
@@ -68,7 +68,7 @@ fetch('accessTokenMapBox.txt')
     /* 
      * Search functionality 
      */
-    document.getElementById('searchLocations').addEventListener('keydown', searchLocation);
+    document.getElementById('searchLocations').addEventListener('keyup', searchLocation);
 
     function searchLocation() {
       const searchResults = document.getElementById('search-results');
@@ -259,8 +259,8 @@ fetch('accessTokenMapBox.txt')
             paint: {
               'line-color': '#7ECE96',
               'line-width': 5,
-              'line-opacity': 0.75,
-              'line-dasharray': [1, 2]
+              'line-opacity': 0.75
+              //'line-dasharray': [1, 2]
             }
           });
 
@@ -292,6 +292,7 @@ window.onload = function () {
 
   setFunctionForShareButton();
   setFunctionForLinkedEventMenuContent();
+  setFuntionForFilter();
 }
 
 let startTopProperty;
@@ -730,6 +731,13 @@ function setFunctionForShareButton() {
       //fallback
       console.log(url);
     }
+  });
+}
+
+
+function setFuntionForFilter() {
+  document.getElementById('location-filter').addEventListener('click', function() {
+
   });
 }
 
