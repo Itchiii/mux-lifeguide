@@ -353,6 +353,7 @@ body.overflow-hidden {
       width: 100%;
       box-shadow: none;
       margin-bottom: 0.5em;
+      max-width: none;
 
       input {
         padding: 1em 5em 1em 1em;
@@ -420,24 +421,48 @@ body.overflow-hidden {
   width: 28px;
   cursor: pointer;
 
+  &.hide {
+    display: none;
+  }
+
   &.shop {
-    background-image: url('/public/assets/images/marker/shop-white.svg');
+    background-image: url('/public/assets/images/marker/shop.svg');
+
+    &.openPreview {
+      background-image: url('/public/assets/images/marker/shop-green.svg');
+    }
   }
 
   &.dinner {
     background-image: url('/public/assets/images/marker/dinner.svg');
+
+    &.openPreview {
+      background-image: url('/public/assets/images/marker/dinner-green.svg');
+    }
   }
 
   &.leisure {
-    background-image: url('/public/assets/images/marker/leisure-grey.svg');
+    background-image: url('/public/assets/images/marker/leisure.svg');
+
+    &.openPreview {
+      background-image: url('/public/assets/images/marker/leisure-green.svg');
+    }
   }
 
   &.greenLocation {
     background-image: url('/public/assets/images/marker/greenLocation.svg');
+
+    &.openPreview {
+      background-image: url('/public/assets/images/marker/greenLocation-green.svg');
+    }
   }
 
   &.orga {
     background-image: url('/public/assets/images/marker/orga.svg');
+
+    &.openPreview {
+      background-image: url('/public/assets/images/marker/orga-green.svg');
+    }
   }
 }
 
@@ -549,61 +574,118 @@ body.overflow-hidden {
   flex-direction: column;
   position: fixed;
   bottom: 80px;
-  right: 40px;
+  right: 20px;
   align-items: center;
+
+  $time2: 0;
+  @for $var from 1 to 6 {
+    $time2: $time2 + 0.1;
+    &.showElements > button:nth-child(#{$var}){
+      transition: transform #{0.6 - $time2}s, opacity #{0.6 - $time2}s, visibility #{0.6 - $time2}s;
+
+    }
+  }
+
+  &.showElements > button:not(.filter-add){
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  } 
+
+  &.hideElements > button:not(.filter-add):not(.active){
+    display: none;
+  }
 
   > button {
     position: relative;
     right: unset;
     bottom: unset;
 
+    $time: 0;
+    @for $var from 1 to 6 {
+      $time: $time + 0.1;
+      &:nth-child(#{$var}){
+        transition: transform #{$time}s ease-in-out, opacity #{$time}s ease-in-out, visibility #{$time}s ease-in-out;
+      }
+    }
+
+    &:not(.filter-add) {
+      height: 35px;
+      width: 35px;
+      background-color: #fff;
+      display: flex;
+      opacity: 0;
+      transform: scale(0.5);
+      visibility: hidden;
+
+      &.hide {
+        display: none;
+
+      }
+    }
+
     &.active {
       background-color: $highlightedColor;
+      opacity: 1;
+      transform: scale(1);
+      visibility: visible;
+      display: flex;
+
+      &.filter-shop::after {
+        content: url('/public/assets/images/icons/shop-white.svg');
+      }
+    
+      &.filter-dinner::after {
+        content: url('/public/assets/images/icons/dinner-white.svg');
+      }
+    
+      &.filter-greenLocation::after {
+        content: url('/public/assets/images/icons/greenLocation-white.svg');
+      }
+    
+      &.filter-orga::after {
+        content: url('/public/assets/images/icons/orga-white.svg');
+      }
+    
+      &.filter-leisure::after {
+        content: url('/public/assets/images/icons/leisure-white.svg');
+      }
+    }
+
+    &:not(.filter-add)::after {
+      height: 50%;
+      width: 50%;
     }
   }
-  
-  > button:not(.filter-add) {
-    height: 30px;
-    width: 30px;
-    background-color: #fff;
+
+  .filter-add {
+
+    &.open {
+      transform: rotate(45deg);
+    }
   }
 
   > button:not(:first-child) {
-    margin-top: 0.3em;
+    margin-top: 0.4em;
   }
 
   .filter-shop::after {
-    content: url('/public/assets/images/icons/shop.svg');
-    height: 70%;
-    width: 70%;
-    position: absolute;
+    content: url('/public/assets/images/icons/shop-green.svg');
   }
 
   .filter-dinner::after {
-    content: url('/public/assets/images/icons/dinner.svg');
-    height: 70%;
-    width: 70%;
-    position: absolute;
+    content: url('/public/assets/images/icons/dinner-green.svg');
   }
 
   .filter-greenLocation::after {
-    content: url('/public/assets/images/icons/greenLocation.svg');
-    height: 70%;
-    width: 70%;
-    position: absolute;
+    content: url('/public/assets/images/icons/greenLocation-green.svg');
   }
 
   .filter-orga::after {
-    content: url('/public/assets/images/icons/orga.svg');
-    height: 70%;
-    width: 70%;
-    position: absolute;
+    content: url('/public/assets/images/icons/orga-green.svg');
   }
 
   .filter-leisure::after {
-    content: url('/public/assets/images/icons/leisure.svg');
-    height: 70%;
-    width: 70%;
-    position: absolute;
+    content: url('/public/assets/images/icons/leisure-green.svg');
   }
 }

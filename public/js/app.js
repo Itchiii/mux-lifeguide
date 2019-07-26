@@ -107,8 +107,8 @@ function setTipWithJSON(database, entry) {
   }
 
   switch (database) {
-    case eventDB: article.href = `article.html?id=${entry._id}`; break;
-    case locationDB: article.href = `map.html?id=${entry._id}`; break;
+    case eventDB: article.href = `article.html?id=${entry.id}`; break;
+    case locationDB: article.href = `map.html?id=${entry.id}`; break;
     case tourDB: container = tourTips; break;
     default:
       break;

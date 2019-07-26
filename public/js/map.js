@@ -40,6 +40,7 @@ fetch('accessTokenMapBox.txt')
           
           //add eventListener to create a new bottom layer
           el.addEventListener('click', function(){
+            removeStyleOfMarker();
             if (history.pushState) {
               let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
               window.history.pushState({path:newurl},'',newurl);
@@ -84,13 +85,15 @@ fetch('accessTokenMapBox.txt')
               const li = document.createElement('li');
               li.textContent = entry.doc.title;
               li.addEventListener('click', () => {
+                removeStyleOfMarker();
                 if (history.pushState) {
                   let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
                   window.history.pushState({path:newurl},'',newurl);
                 }
                 document.getElementById('searchLocations').value = entry.doc.title;
-                map.flyTo({center: [entry.doc.long, entry.doc.lat], zoom: 15});
+                map.flyTo({center: [entry.doc.long, entry.doc.lat], zoom: 16});
                 setEntityContent(entry.doc._id);
+                document.querySelector(`.marker[data-id=${entry.doc._id}`).classList.add('openPreview');
                 searchResults.classList.add('hide');
               });
               searchResults.append(li);
@@ -273,6 +276,18 @@ fetch('accessTokenMapBox.txt')
       };
       req.send();
     }
+
+    map.on('load', () => {
+      let params = new URLSearchParams(document.location.search.substring(1));
+
+      let id = params.get("id");
+      if (id !== null) {
+        locationDB._getDoc(id).then(function(data) {
+          map.flyTo({center: [data.long, data.lat], zoom: 16});
+        });
+        document.querySelector(`.marker[data-id=${id}`).classList.add('openPreview');
+      }
+    })
   });
 
 
@@ -462,6 +477,9 @@ function setEntityContent(id) {
     entityFullSummary.textContent = data.summary;
     entityFullDescription.textContent = data.description;
 
+    if (document.querySelector(`.marker[data-id=${id}`) !== null) {
+      document.querySelector(`.marker[data-id=${id}`).classList.add('openPreview');
+    }
 
     //open preview of entity
     if (!entityWrapper.classList.contains('show')) {
@@ -682,6 +700,7 @@ function changeToPreview() {
 }
 
 function removePreview() {
+  removeStyleOfMarker();
   const entityWrapper = document.getElementById('location-entity-wrapper')
   entityWrapper.classList.remove('show');
   entityWrapper.style.removeProperty('top');
@@ -715,6 +734,14 @@ function addParamOpen() {
   }
 }
 
+function removeStyleOfMarker() {
+  let params = new URLSearchParams(document.location.search.substring(1));
+
+  if (params.get("id") !== null && history.pushState) {
+    document.querySelector(`.marker[data-id=${params.get("id")}`).classList.remove('openPreview');
+  }
+}
+
 function setFunctionForShareButton() {
   //https://css-tricks.com/how-to-use-the-web-share-api/
   document.getElementById('location-entity-shareButton').addEventListener('click', () => {
@@ -736,18 +763,65 @@ function setFunctionForShareButton() {
 
 
 function setFuntionForFilter() {
-  document.getElementById('location-filter').addEventListener('click', function() {
+  document.getElementById('filter-add').addEventListener('click', function() {
+    this.classList.toggle('open');
+    if (this.classList.contains('open')) {
+      const array = document.querySelectorAll('.wrapping-filter button:not(.filter-add)');
+      for (const button of array) {
+        button.classList.remove('hide');
+      }
+    }
 
+    setTimeout(() => {
+      this.parentNode.classList.toggle('showElements');
+      if (!this.parentNode.classList.contains('showElements')) {
+        const array = document.querySelectorAll('.wrapping-filter button:not(.filter-add)');
+        for (const button of array) {
+          button.addEventListener('transitionend', function () {
+            if (!this.parentNode.classList.contains('showElements')) {
+              this.classList.add('hide');
+            }
+          }); 
+        }
+      } 
+    }, 1);
   });
+
+  const allButtons = document.querySelectorAll('.wrapping-filter .floatingButton:not(:last-child)');
+  for (const button of allButtons) {
+    button.addEventListener('click', function() {
+      this.classList.toggle('active');
+
+      const allActiveButtons = document.querySelectorAll('.wrapping-filter .floatingButton.active');
+      const allMarker = document.querySelectorAll('.mapboxgl-canvas-container > div.marker');
+
+      for (const marker of allMarker) {
+        marker.classList.add('hide');
+      }
+
+      for (const activeButton of allActiveButtons) {
+        for (const marker of allMarker) {
+          if (marker.classList.contains(activeButton.dataset.category)) {
+            marker.classList.remove('hide');
+          }
+        }
+      }
+
+      if (allActiveButtons.length === 0) {
+        for (const marker of allMarker) {
+          marker.classList.remove('hide');
+        }
+      }
+    });
+  }
 }
 
 function setFunctionForLinkedEventMenuContent() {
 
   //functionality for share button
   document.getElementById('entity-event-share').addEventListener('click', () => {
+    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
     const title = document.title;
-    const url = 'wichtigeURL'
-    console.log(url);
     if (navigator.share) {
       navigator.share({
         title: title,
@@ -761,7 +835,6 @@ function setFunctionForLinkedEventMenuContent() {
   });
 
   //functionality for export button
-
   document.getElementById('entity-event-export').addEventListener('click', () => {
     const eventID = document.getElementById('event-menu-content').dataset.eventid;
     eventDB._getDoc(eventID).then(function(data) {
@@ -771,23 +844,10 @@ function setFunctionForLinkedEventMenuContent() {
       //add offset to UTC 
       cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
 
-      // You can use this for easy debugging
-      makelogs = function(obj) {
-        console.log('Events Array');
-        console.log('=================');
-        console.log(obj.events());
-        console.log('Calendar With Header');
-        console.log('=================');
-        console.log(obj.calendar());
-      }
-
-      makelogs(cal);
-
       //time is not local time format
       cal.download(data.title);
     });
   });
-
 
 
   //functionality for bookmark button
