@@ -1,4 +1,4 @@
-var CACHE_VERSION = 3;
+var CACHE_VERSION = 4;
 var CURRENT_CACHES = {
   app: 'mux-lifeguide-v' + CACHE_VERSION
 };
@@ -12,20 +12,11 @@ var contentToCache = [
   '/public/js/app.js',
   '/public/js/db.js',
   '/public/js/map.js',
-  '/public/js/sidemenu.js',
   '/public/css/compress/style.min.css',
   '/public/assets/favicon.ico',
   '/public/assets/images/lifeguideLogo.png',
   '/accessTokenMapBox.txt',
   '/mux-lifeguide.manifest',
-  '/node_modules/leaflet/dist/leaflet.js',
-  '/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js',
-  '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js',
-  '/node_modules/leaflet/dist/leaflet.css',
-  '/node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css',
-  '/node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css',
-  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js',
-  '/node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css',
   '/node_modules/pouchdb/dist/pouchdb.find.js'
 ];
 
