@@ -1,11 +1,33 @@
-function search(ele) {
-  if(event.keyCode == 13) {
-    event.preventDefault();
-    var tippedWord = ele.value;
-    var wort = document.getElementsByTagName("h4").value;
-    console.log(wort);
-    var right = wort.includes(tippedWord);
-    console.log(right);
+
+document.getElementById("formInput").addEventListener("keyup", search);
+
+function search() {
+  console.log(event);
+  var entrys = document.getElementsByClassName("eventInfo");
+  var eventBlock = document.getElementsByClassName("event");
+  //check if input is empty again
+  if(document.getElementById("formInput").value === "") {
+    console.log()
+    //Show all events
+    for (i = 0; i<eventBlock.length; i++) {
+      eventBlock[i].style.display="flex";
+    }
+  }
+  if(event.key === "Enter") {
+    var tippedWord = document.getElementById("formInput").value.toLowerCase();
+    //Show all events when you make a new search
+    for (i = 0; i<eventBlock.length; i++) {
+        eventBlock[i].style.display="flex";
+    }
+    //check tippedWord
+    for (i = 0; i<entrys.length; i++) {
+      if(entrys[i].textContent.toLowerCase().includes(tippedWord)) {
+        console.log("Gefunden!");
+      }
+      else {
+        eventBlock[i].style.display="none";
+      }
+    }
   }
 }
 
