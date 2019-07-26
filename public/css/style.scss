@@ -95,7 +95,7 @@ a {
 
     svg {
       height: 40%;
-    }
+    } 
   
     span {
       font-size: 0.8em;
@@ -163,3 +163,9 @@ a {
   z-index: 9998;
   background-color: $highlightedColor;
 }
+
+@import 'index';
+@import 'events';
+@import 'article';
+@import 'form';
+@import 'map';
