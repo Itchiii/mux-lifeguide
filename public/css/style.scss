@@ -1,16 +1,39 @@
 $highlightedColor: #7ECE96;
 
+@mixin fontFace($name) {
+  font-synthesis: none;
+  font-display: swap;
+  font-family: $name;
+  src:
+    local($name),
+    url('/public/fonts/#{$name}.woff2') format('woff2'), /* Super Modern Browsers */
+    url('/public/fonts/#{$name}.woff') format('woff'), /* Pretty Modern Browsers */
+    url('/public/fonts/#{$name}.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('/public/fonts/#{$name}.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+/****************FONTS**************/
+@font-face {
+  $name: 'BarlowCondensed-SemiBold';
+  @include fontFace($name);
+}
+
+@font-face {
+  $name: 'Oxygen-Regular';
+  @include fontFace($name);
+}
+
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
-body {
+body { 
   width: 100%;
   height: 100%;
   color: #3d3d3d;
-  font-family: sans-serif;
+  font-family: 'Oxygen-Regular', sans-serif;
   font-size: 16px;
 }
 
@@ -28,6 +51,11 @@ button {
   &:focus {
     outline: none;
   }
+}
+
+h1, h2, h3, h4 {
+  font-family: 'BarlowCondensed-SemiBold';
+  color: #3B3B3B;
 }
 
 input,
