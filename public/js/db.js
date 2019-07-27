@@ -293,11 +293,11 @@ locationDB._syncFromRemoteToLocal().on('complete', function(info){
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info) {
-  //if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
-  fetchJson(eventDB);
+  if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
+  //fetchJson(eventDB);
 }).on('error', function (err) {
-  //if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
-  fetchJson(eventDB); //for mobile, because you cant access the remote database
+  if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
+  //fetchJson(eventDB); //for mobile, because you cant access the remote database
 });
 
 tourDB._syncFromRemoteToLocal().on('complete', function(info) {

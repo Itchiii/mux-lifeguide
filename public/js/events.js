@@ -1,4 +1,5 @@
 
+
 document.getElementById("searchInput").addEventListener("keyup", search);
 
 function search() {
@@ -42,6 +43,8 @@ eventDB.allDocsOfLocalDB.then(function(result) {
         console.log("ist leer");
       }
       else {
+
+
       //div for daydate and month called eventDate
       const eventDate = document.createElement("div");
       const daydate = document.createElement("div");
@@ -109,6 +112,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventColumn.append(eventInfo);
       eventColumn.classList.add("eventColumn");
 
+
       //div for event with image called eventimg
       if (entry.doc._attachments !== undefined) {
         eventDB._getAttachment(entry.doc._id, Object.keys(entry.doc._attachments)[0]).then(function(blob){
@@ -135,6 +139,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       }
       //event when there's no image
       else {
+        
           //div for eventimg and eventColumn
           const event = document.createElement("div");
           event.classList.add("event")
@@ -153,3 +158,59 @@ eventDB.allDocsOfLocalDB.then(function(result) {
     }
     }
   });
+
+
+
+  function setFunctionForLinkedEventMenuContent() {
+
+    //functionality for share button
+    document.getElementById('entity-event-share').addEventListener('click', () => {
+      const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+      const title = document.title;
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          url: url
+        }).then(() => {
+        })
+        .catch(console.error);
+      } else {
+        // fallback
+      }
+    });
+  
+    //functionality for export button
+    document.getElementById('entity-event-export').addEventListener('click', () => {
+      const eventID = document.getElementById('event-menu-content').dataset.eventid;
+      eventDB._getDoc(eventID).then(function(data) {
+        const cal = ics();
+        const date = data.date.split('.').reverse().join('-');
+        const time = data.start.replace(/[^\d:]/g, '');
+        //add offset to UTC 
+        cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
+  
+        //time is not local time format
+        cal.download(data.title);
+      });
+    });
+  
+  
+    //functionality for bookmark button
+    document.getElementById('entity-event-bookmark').addEventListener('click', () => {
+      const eventID = document.getElementById('event-menu-content').dataset.eventid;
+      eventDB._getDoc(eventID).then(function(data) {
+        let putItemBookmarksDB = new Promise(function(resolve, reject){
+          bookmarksDB._putItem(data, resolve, reject);
+        });
+        putItemBookmarksDB.then(() => {
+          bookmarksDB.infoLocal.then(function(info) {
+            console.log(info);
+  
+            //TODO: add image to bookmark
+          });
+        });
+      });
+    });
+  }
+  
+  
