@@ -15,7 +15,7 @@ $highlightedColor: #7ECE96;
 /****************FONTS**************/
 @font-face {
   $name: 'BarlowCondensed-SemiBold';
-  @include fontFace($name);
+  @include fontFace($name); 
 }
 
 @font-face {
@@ -48,7 +48,7 @@ a {
   transition: color .2s ease-in;
 
   &:hover {
-    color: $highlightedColor;
+    color: inherit;
   }
 }
 

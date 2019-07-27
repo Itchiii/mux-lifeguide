@@ -13,6 +13,13 @@
   src: local("Oxygen-Regular"), url("/public/fonts/Oxygen-Regular.woff2") format("woff2"), url("/public/fonts/Oxygen-Regular.woff") format("woff"), url("/public/fonts/Oxygen-Regular.ttf") format("truetype"), url("/public/fonts/Oxygen-Regular.svg#svgFontName") format("svg");
   /* Legacy iOS */ }
 
+@font-face {
+  font-synthesis: none;
+  font-display: swap;
+  font-family: "Oxygen-Bold";
+  src: local("Oxygen-Bold"), url("/public/fonts/Oxygen-Bold.woff2") format("woff2"), url("/public/fonts/Oxygen-Bold.woff") format("woff"), url("/public/fonts/Oxygen-Bold.ttf") format("truetype"), url("/public/fonts/Oxygen-Bold.svg#svgFontName") format("svg");
+  /* Legacy iOS */ }
+
 * {
   padding: 0;
   margin: 0;
@@ -30,7 +37,7 @@ a {
   text-decoration: none;
   transition: color .2s ease-in; }
   a:hover {
-    color: #7ECE96; }
+    color: inherit; }
 
 button:focus {
   outline: none; }
@@ -698,23 +705,38 @@ body.overflow-hidden {
   .marker.shop {
     background-image: url("/public/assets/images/marker/shop.svg"); }
     .marker.shop.openPreview {
-      background-image: url("/public/assets/images/marker/shop-green.svg"); }
+      background-image: url("/public/assets/images/marker/shop-green.svg");
+      height: 46px;
+      width: 34px;
+      z-index: 1; }
   .marker.dinner {
     background-image: url("/public/assets/images/marker/dinner.svg"); }
     .marker.dinner.openPreview {
-      background-image: url("/public/assets/images/marker/dinner-green.svg"); }
+      background-image: url("/public/assets/images/marker/dinner-green.svg");
+      height: 46px;
+      width: 34px;
+      z-index: 1; }
   .marker.leisure {
     background-image: url("/public/assets/images/marker/leisure.svg"); }
     .marker.leisure.openPreview {
-      background-image: url("/public/assets/images/marker/leisure-green.svg"); }
+      background-image: url("/public/assets/images/marker/leisure-green.svg");
+      height: 46px;
+      width: 34px;
+      z-index: 1; }
   .marker.greenLocation {
     background-image: url("/public/assets/images/marker/greenLocation.svg"); }
     .marker.greenLocation.openPreview {
-      background-image: url("/public/assets/images/marker/greenLocation-green.svg"); }
+      background-image: url("/public/assets/images/marker/greenLocation-green.svg");
+      height: 46px;
+      width: 34px;
+      z-index: 1; }
   .marker.orga {
     background-image: url("/public/assets/images/marker/orga.svg"); }
     .marker.orga.openPreview {
-      background-image: url("/public/assets/images/marker/orga-green.svg"); }
+      background-image: url("/public/assets/images/marker/orga-green.svg");
+      height: 46px;
+      width: 34px;
+      z-index: 1; }
 
 .end-marker {
   height: 15px;
@@ -872,3 +894,64 @@ body.overflow-hidden {
     content: url("/public/assets/images/icons/orga-green.svg"); }
   .wrapping-filter .filter-leisure::after {
     content: url("/public/assets/images/icons/leisure-green.svg"); }
+
+.bookmark-header {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; }
+  .bookmark-header > a {
+    padding: 1em 1.5em;
+    font-size: 0.8em;
+    font-family: 'Oxygen-Bold'; }
+    .bookmark-header > a.active {
+      border-bottom: 3px solid #7ECE96; }
+    .bookmark-header > a:visited {
+      border-bottom: 3px solid #7ECE96; }
+
+.bookmarks {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; }
+  .bookmarks .bookmark-site {
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    padding: 3em 1.5em; }
+    .bookmarks .bookmark-site .b-empty {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%; }
+      .bookmarks .bookmark-site .b-empty .b-empty-text {
+        font-size: 1.2em;
+        font-family: 'Oxygen-Bold';
+        width: 80%;
+        max-width: 20em;
+        text-align: center; }
+      .bookmarks .bookmark-site .b-empty .button {
+        background-color: #7ECE96;
+        color: #fff;
+        text-transform: uppercase;
+        border-radius: 5px;
+        padding: 1em 2em;
+        margin-top: 3em; }
+  .bookmarks .b-event-entries, .bookmarks .b-locations-entries, .bookmarks .b-tours-entries {
+    display: flex;
+    flex-direction: column; }
+    .bookmarks .b-event-entries:empty + div, .bookmarks .b-locations-entries:empty + div, .bookmarks .b-tours-entries:empty + div {
+      display: flex; }
+    .bookmarks .b-event-entries .event, .bookmarks .b-locations-entries .event, .bookmarks .b-tours-entries .event {
+      margin-left: 0;
+      margin-right: 0; }
+  .bookmarks .b-events .b-column {
+    border-radius: 5px;
+    width: 100%; }

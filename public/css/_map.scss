@@ -429,6 +429,9 @@ body.overflow-hidden {
 
     &.openPreview {
       background-image: url('/public/assets/images/marker/shop-green.svg');
+      height: 46px;
+      width: 34px;
+      z-index: 1;
     }
   }
 
@@ -437,6 +440,9 @@ body.overflow-hidden {
 
     &.openPreview {
       background-image: url('/public/assets/images/marker/dinner-green.svg');
+      height: 46px;
+      width: 34px;
+      z-index: 1;
     }
   }
 
@@ -445,6 +451,9 @@ body.overflow-hidden {
 
     &.openPreview {
       background-image: url('/public/assets/images/marker/leisure-green.svg');
+      height: 46px;
+      width: 34px;
+      z-index: 1;
     }
   }
 
@@ -453,6 +462,9 @@ body.overflow-hidden {
 
     &.openPreview {
       background-image: url('/public/assets/images/marker/greenLocation-green.svg');
+      height: 46px;
+      width: 34px;
+      z-index: 1;
     }
   }
 
@@ -461,6 +473,9 @@ body.overflow-hidden {
 
     &.openPreview {
       background-image: url('/public/assets/images/marker/orga-green.svg');
+      height: 46px;
+      width: 34px;
+      z-index: 1;
     }
   }
 }
