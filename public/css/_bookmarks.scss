@@ -5,7 +5,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
+	width: 100%;
 
 	> a {
 		padding: 1em 1.5em;
@@ -79,19 +79,9 @@
 	}
 
 	.b-events {
-		//background-color: black;
-
 		.b-column {
 			border-radius: 5px;
 			width: 100%;
 		}
-	}
-
-	.b-locations {
-		//background-color: red;
-	}
-
-	.b-tours {
-
 	}
 }

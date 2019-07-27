@@ -136,6 +136,45 @@ a {
   z-index: 9998;
   background-color: #7ECE96; }
 
+.notification-bookmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(126, 206, 150, 0.7);
+  display: flex;
+  text-align: center;
+  color: #ffffff;
+  min-height: 6em;
+  max-height: 10em;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 4;
+  transition: transform 0.3s ease-out; }
+  .notification-bookmark.hide {
+    display: none; }
+  .notification-bookmark.transformOut {
+    transform: translateY(-10em); }
+  .notification-bookmark:after {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    height: 30px;
+    width: 30px;
+    content: url("/public/assets/images/icons/heart-white.svg"); }
+  .notification-bookmark .n-bookmark-text {
+    width: 80%;
+    max-width: 25em;
+    font-size: 0.9em;
+    font-family: 'Oxygen-Bold'; }
+  .notification-bookmark .n-bookmark-link {
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 1em;
+    font-family: 'Oxygen-Bold';
+    font-size: .9em; }
+
 div[class^="related"] {
   color: #fff;
   width: 100%; }
@@ -440,7 +479,7 @@ body.overflow-hidden {
   width: 100vw;
   background-color: #fff;
   padding-bottom: 1em;
-  z-index: 10001;
+  z-index: 3;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
   scroll-behavior: smooth;
@@ -764,7 +803,7 @@ body.overflow-hidden {
   max-width: 30rem;
   position: absolute;
   top: 1em;
-  z-index: 9997;
+  z-index: 2;
   right: 0;
   left: 0;
   align-items: center; }
@@ -902,7 +941,7 @@ body.overflow-hidden {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0; }
+  width: 100%; }
   .bookmark-header > a {
     padding: 1em 1.5em;
     font-size: 0.8em;
