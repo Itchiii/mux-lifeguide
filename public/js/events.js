@@ -1,6 +1,7 @@
 
 
 document.getElementById("searchInput").addEventListener("keyup", search);
+document.getElementById("searchglass").addEventListener("click", searchGlass);
 
 function search() {
   console.log(event);
@@ -15,6 +16,35 @@ function search() {
     }
   }
   if(event.key === "Enter") {
+    var tippedWord = document.getElementById("searchInput").value.toLowerCase();
+    //Show all events when you make a new search
+    for (i = 0; i<eventBlock.length; i++) {
+        eventBlock[i].style.display="flex";
+    }
+    //check tippedWord
+    for (i = 0; i<entrys.length; i++) {
+      if(entrys[i].textContent.toLowerCase().includes(tippedWord)) {
+        console.log("Gefunden!");
+      }
+      else {
+        eventBlock[i].style.display="none";
+      }
+    }
+  }
+}
+function searchGlass() {
+  console.log(event);
+  var entrys = document.getElementsByClassName("eventInfo");
+  var eventBlock = document.getElementsByClassName("event");
+  //check if input is empty again
+  if(document.getElementById("searchInput").value === "") {
+    console.log()
+    //Show all events
+    for (i = 0; i<eventBlock.length; i++) {
+      eventBlock[i].style.display="flex";
+    }
+  }
+  else {
     var tippedWord = document.getElementById("searchInput").value.toLowerCase();
     //Show all events when you make a new search
     for (i = 0; i<eventBlock.length; i++) {
@@ -47,7 +77,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
 
       //div for daydate and month called eventDate
       const eventDate = document.createElement("div");
-      const daydate = document.createElement("div");
+      const daydate = document.createElement("h4");
       const month = document.createElement("div");
       daydate.innerHTML = entry.doc.date.substring(0, 2);
       const whichMonth = entry.doc.date.substring(3, 5);
@@ -98,9 +128,9 @@ eventDB.allDocsOfLocalDB.then(function(result) {
 
       //div for title and summary called eventInfo
       const eventInfo = document.createElement("div");
-      const title = document.createElement("h4");
+      const title = document.createElement("h2");
       const summary = document.createElement("p");
-      title.innerHTML = entry.doc.title;
+      title.innerHTML = entry.doc.title.toUpperCase();
       summary.innerHTML = entry.doc.summary;
       eventInfo.append(title);
       eventInfo.append(summary);

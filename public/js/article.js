@@ -12,7 +12,7 @@ eventDB._getDoc(iddata).then(function(doc) {
     
           //div for article title
           const articleTitle = document.createElement("h2");
-          articleTitle.innerHTML = doc.title;
+          articleTitle.innerHTML = doc.title.toUpperCase();
           articleTitle.classList.add("articletitle");
           articleForm.append(articleTitle);
   
@@ -22,7 +22,7 @@ eventDB._getDoc(iddata).then(function(doc) {
   
           //div for daydate and month called articleDate
           const eventDate = document.createElement("div");
-          const daydate = document.createElement("div");
+          const daydate = document.createElement("h4");
           const month = document.createElement("div");
           daydate.innerHTML = doc.date.substring(0, 2);
           month.innerHTML = doc.month.substring(0, 3).toUpperCase();
@@ -64,12 +64,21 @@ eventDB._getDoc(iddata).then(function(doc) {
           articleHead.append(articleInfo);
   
           //div for map
+          const mapwrapper = document.createElement("div")
+          mapwrapper.classList.add("map-wrapper");
           const map = document.createElement("div");
+          const icon = document.createElement("IMG");
+          icon.setAttribute("src", "public/assets/images/icons/needle_green.svg");
+          icon.classList.add("needle-article");
           map.innerHTML = "Auf Karte anzeigen";
-          articleHead.append(map);
+          map.style.color ="#7ECE96";
+          mapwrapper.append(icon);
+          mapwrapper.append(map);
+          articleHead.append(mapwrapper);
+          
   
           //div for summary and description
-          const articleSummary = document.createElement("h4");
+          const articleSummary = document.createElement("h3");
           articleSummary.innerHTML = doc.summary;
           articleSummary.classList.add("articleSummary");
           const articleText = document.createElement("div");
