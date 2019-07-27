@@ -40,6 +40,9 @@ fetch('accessTokenMapBox.txt')
           
           //add eventListener to create a new bottom layer
           el.addEventListener('click', function(){
+            if(document.getElementById('filter-add').classList.contains('open')) {
+              document.getElementById('filter-add').click();
+            }
             if (!this.classList.contains('openPreview')) {
               removeStyleOfMarker();
             }
@@ -408,29 +411,39 @@ function setEntityContent(id) {
         switch (entry) {
           case 'title':
             entityCollapsedHeading.textContent = "";
+            entityCollapsedHeading.classList.add('hide');
             entityOpenHeading.textContent = "";
+            entityOpenHeading.classList.add('hide');
             break;
           case 'address':
             entityCollapsedAddress.textContent = "";
+            entityCollapsedAddress.classList.add('hide');
             entityFullAddress.textContent = "";
+            entityFullAddress.classList.add('hide');
             break;
           case 'zipCode':
             entityCollapsedZipCode.textContent = "";
+            entityCollapsedZipCode.classList.add('hide');
             break;
           case 'summary':
             entityOpenDescription.textContent = "";
+            entityOpenDescription.classList.add('hide');
             break;
           case 'openingHours':
             entityFullOpeningHours.insertAdjacentHTML('afterbegin', "");
+            entityFullOpeningHours.classList.add('hide');
             break;
           case 'phone':
             entityFullPhone.textContent = "";
+            entityFullPhone.classList.add('hide');
             break;
           case 'web':
             entityFullWeb.textContent = "";
+            entityFullWeb.classList.add('hide');
             break;
           case 'owner':
             entityFullOwner.textContent = "";
+            entityFullOwner.classList.add('hide');
             break;
           default:
             break;
@@ -496,7 +509,7 @@ function setEntityContent(id) {
             const content = document.getElementById('event-menu-content');
             //set position
             content.style.top = this.getBoundingClientRect().top - document.getElementById('location-entity-content').getBoundingClientRect().top + offset + "px";
-
+                       
             if(content.dataset.eventid === this.closest('.eventColumn').dataset.eventid || content.classList.contains('hide')) {
               content.classList.toggle('hide');
             }
@@ -504,6 +517,13 @@ function setEntityContent(id) {
             if (!content.classList.contains('hide')) {
               content.dataset.eventid = eventById._id;
             }
+
+            const eventID = content.dataset.eventid;
+            bookmarksDB._getDoc(eventID).then(function(data) {
+              document.getElementById('entity-event-bookmark').classList.add('marked');
+            }).catch(function(){
+              document.getElementById('entity-event-bookmark').classList.remove('marked');
+            });
           });
           
           date.append(day, month);
@@ -840,7 +860,8 @@ function setFunctionForLinkedEventMenuContent() {
 
   //functionality for share button
   document.getElementById('entity-event-share').addEventListener('click', () => {
-    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    const url = `${window.location.origin}/article.html?id=${eventID}`;
     const title = document.title;
     if (navigator.share) {
       navigator.share({
@@ -850,7 +871,7 @@ function setFunctionForLinkedEventMenuContent() {
       })
       .catch(console.error);
     } else {
-      // fallback
+      console.log(url);
     }
   });
 

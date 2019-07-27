@@ -32,6 +32,7 @@ $highlightedColor: #7ECE96;
   padding: 0;
   margin: 0;
   box-sizing: border-box; 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body { 
@@ -61,14 +62,6 @@ button {
 h1, h2, h3, h4 {
   font-family: 'BarlowCondensed-SemiBold';
   color: #3B3B3B;
-}
-
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .bottom-menu {

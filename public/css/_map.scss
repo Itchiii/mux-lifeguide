@@ -214,6 +214,7 @@ body.overflow-hidden {
       .map-entity-events {
         margin-top: 2em;
         padding: 0 1.5em;
+        cursor: pointer;
 
         .eventColumn {
           margin-top: 1em;
@@ -225,11 +226,15 @@ body.overflow-hidden {
           }
 
           .eventMenu {
-            color: $highlightedColor;
             align-self: flex-start;
+            cursor: default; 
 
             &::after {
-              content: "I";
+              content: url("/public/assets/images/icons/menu-green.svg");
+              width: 4px;
+              height: 18px;
+              display: inline-block;
+              padding: 1em 1em 1em 0.2em;
             }
           }
         }
@@ -263,9 +268,10 @@ body.overflow-hidden {
         }
 
         .entity-event-share, .entity-event-export, .entity-event-bookmark {
-          display: block;
+          display: flex;
           font-size: 0.8em;
           color: #747474;
+          align-items: center;
 
           &:not(:last-child):not(:first-child) {
             margin: 1.5em 0;
@@ -273,20 +279,25 @@ body.overflow-hidden {
 
            &::before {
             padding-right: 1.5em;
-            color: $highlightedColor;
+            height: 1.5em;
+            width: 1.5em;
           }
         }
 
         .entity-event-share::before {
-          content: "T";
+          content: url("/public/assets/images/icons/share-green.svg");
         }
 
         .entity-event-export::before {
-          content: "R";
+          content: url("/public/assets/images/icons/export-green.svg");
         }
 
         .entity-event-bookmark::before {
-          content: "S";
+          content: url("/public/assets/images/icons/heart-green.svg");
+        }
+
+        .entity-event-bookmark.marked::before {
+          content: url("/public/assets/images/icons/heart-full-green.svg");
         }
       }
     }

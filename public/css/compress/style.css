@@ -23,7 +23,8 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   width: 100%;
@@ -45,13 +46,6 @@ button:focus {
 h1, h2, h3, h4 {
   font-family: 'BarlowCondensed-SemiBold';
   color: #3B3B3B; }
-
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .bottom-menu {
   height: 56px;
@@ -77,7 +71,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center; }
-    .bm-inner-menu a svg {
+    .bm-inner-menu a img {
       height: 40%; }
     .bm-inner-menu a span {
       font-size: 0.8em;
@@ -604,7 +598,8 @@ body.overflow-hidden {
           margin-right: 20px; }
       .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
         margin-top: 2em;
-        padding: 0 1.5em; }
+        padding: 0 1.5em;
+        cursor: pointer; }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
           margin-top: 1em;
           border-radius: 5px;
@@ -612,10 +607,14 @@ body.overflow-hidden {
           .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
             flex: 1; }
           .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
-            color: #7ECE96;
-            align-self: flex-start; }
+            align-self: flex-start;
+            cursor: default; }
             .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
-              content: "I"; }
+              content: url("/public/assets/images/icons/menu-green.svg");
+              width: 4px;
+              height: 18px;
+              display: inline-block;
+              padding: 1em 1em 1em 0.2em; }
       .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
         margin: 2em 0;
         padding: 0 1.5em; }
@@ -637,20 +636,24 @@ body.overflow-hidden {
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
           display: none; }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
-          display: block;
+          display: flex;
           font-size: 0.8em;
-          color: #747474; }
+          color: #747474;
+          align-items: center; }
           .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
             margin: 1.5em 0; }
           .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
             padding-right: 1.5em;
-            color: #7ECE96; }
+            height: 1.5em;
+            width: 1.5em; }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
-          content: "T"; }
+          content: url("/public/assets/images/icons/share-green.svg"); }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
-          content: "R"; }
+          content: url("/public/assets/images/icons/export-green.svg"); }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
-          content: "S"; }
+          content: url("/public/assets/images/icons/heart-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark.marked::before {
+          content: url("/public/assets/images/icons/heart-full-green.svg"); }
     .location-entity-wrapper .location-entity-content .location-entity-createRoute img {
       height: 60%;
       width: 60%; }
