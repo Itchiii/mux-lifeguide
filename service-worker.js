@@ -8,16 +8,25 @@ var contentToCache = [
   './',
   './index.html',
   './map.html',
+  './events.html',
+  './article.html',
+  './bookmarks.html',
+  './eventformular.html',
   '/public/js/register-worker.js',
   '/public/js/app.js',
   '/public/js/db.js',
   '/public/js/map.js',
   '/public/css/compress/style.min.css',
+  '/node_modules/mapbox-gl/dist/mapbox-gl.css',
+  '/node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css',
   '/public/assets/favicon.ico',
   '/public/assets/images/lifeguideLogo.png',
   '/accessTokenMapBox.txt',
   '/mux-lifeguide.manifest',
-  '/node_modules/pouchdb/dist/pouchdb.find.js'
+  '/node_modules/pouchdb/dist/pouchdb.find.js',
+  '/node_modules/mapbox-gl/dist/mapbox-gl.js',
+  '/node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.min.js',
+  '/vendor/ics/ics.js'
 ];
 
 //code from https://github.com/gokulkrishh/demo-progressive-web-app/blob/master/serviceWorker.js
