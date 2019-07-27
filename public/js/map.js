@@ -853,19 +853,45 @@ function setFunctionForLinkedEventMenuContent() {
   //functionality for bookmark button
   document.getElementById('entity-event-bookmark').addEventListener('click', () => {
     const eventID = document.getElementById('event-menu-content').dataset.eventid;
-    eventDB._getDoc(eventID).then(function(data) {
-      let putItemBookmarksDB = new Promise(function(resolve, reject){
-        bookmarksDB._putItem(data, resolve, reject);
+    bookmarksDB._getDoc(eventID).then(function(data) {
+      bookmarksDB._removeDoc(data).then(() => {
+        showNotificationForBookmark(false);  
       });
-      putItemBookmarksDB.then(() => {
-        bookmarksDB.infoLocal.then(function(info) {
-          console.log(info);
-
-          //TODO: add image to bookmark
+    }).catch(function(){
+      //put element on bookmarks
+      eventDB._getDoc(eventID).then(function(data) {
+        let putItemBookmarksDB = new Promise(function(resolve, reject){
+          bookmarksDB._putItem(data, resolve, reject);
+        });
+        putItemBookmarksDB.then(() => {
+          bookmarksDB.infoLocal.then(() => {
+            showNotificationForBookmark(true);  
+            //TODO: add image to bookmark
+          });
         });
       });
     });
   });
+}
+
+function showNotificationForBookmark(add) {
+  
+  document.getElementById('n-bookmark-text').textContent = add ? "Die Veranstaltung wurde zu deiner Merkliste hinzugefügt." : "Die Veranstaltung wurde aus deiner Merkliste entfernt."
+
+  document.getElementById('notification-bookmark').classList.remove('hide');
+  
+  setTimeout(() => {
+    document.getElementById('notification-bookmark').classList.remove('transformOut');
+  }, 10);
+
+  setTimeout(() => {
+    document.getElementById('notification-bookmark').classList.add('transformOut');
+
+    setTimeout(() => {
+      document.getElementById('notification-bookmark').classList.add('hide');
+    }, 300);
+
+  }, 4000);
 }
 
 

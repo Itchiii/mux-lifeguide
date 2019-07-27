@@ -215,6 +215,11 @@ class Database {
     }.bind(this));
   }
 
+  //get a specific attachment with given id and image name
+  _removeDoc(doc) {
+    return this.localDB.remove(doc);
+  }
+
   /*sync from local to remote database, 
    *checkpoint if needed: [URL]
   */

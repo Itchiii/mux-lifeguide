@@ -5,7 +5,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
+	width: 100%;
 
 	> a {
 		padding: 1em 1.5em;
@@ -13,7 +13,12 @@
 		font-family: 'Oxygen-Bold';
 
 		&.active {
-			border-bottom: 2px solid $highlightedColor;
+			border-bottom: 3px solid $highlightedColor;
+		}
+
+		&:visited {
+			border-bottom: 3px solid $highlightedColor;
+
 		}
 	}
 }
@@ -28,28 +33,55 @@
 	.bookmark-site {
 		min-width: 100vw;
 		max-width: 100vw;
-		display: flex;
-		flex-direction: column;
 		min-height: 100vh;
 		scroll-snap-align: start;
 		scroll-snap-stop: normal;
-		padding: 3em 0;
+		padding: 3em 1.5em;
+
+		.b-empty {
+			display: none;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 100%;
+
+			.b-empty-text {
+				font-size: 1.2em;
+				font-family: 'Oxygen-Bold';
+				width: 80%;
+				max-width: 20em;
+				text-align: center
+			}
+
+			.button {
+				background-color: $highlightedColor;
+				color: #fff;
+				text-transform: uppercase;
+				border-radius: 5px;
+				padding: 1em 2em;
+				margin-top: 3em;
+			}
+		}
+	}
+
+	.b-event-entries, .b-locations-entries, .b-tours-entries {
+		display: flex;
+		flex-direction: column;
+
+		&:empty + div{
+			display: flex;
+		}
+
+		.event {
+			margin-left: 0;
+			margin-right: 0;
+		}
 	}
 
 	.b-events {
-		background-color: black;
-
 		.b-column {
 			border-radius: 5px;
 			width: 100%;
 		}
-	}
-
-	.b-locations {
-		background-color: red;
-	}
-
-	.b-tours {
-		background-color: green;
 	}
 }

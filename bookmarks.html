@@ -17,14 +17,32 @@
 </head>
 <body>
 	<div class="bookmark-header">
-		<a href="#b-events" class="active">Veranstaltungen</a>
-		<a href="#b-locations" class="">Orte</a>
-		<a href="#b-tours" class="">Spaziergänge</a>
+		<a href="#b-events" class="active" id="b-h-events">Veranstaltungen</a>
+		<a href="#b-locations" class="" id="b-h-locations">Orte</a>
+		<a href="#b-tours" class="" id="b-h-tours">Spaziergänge</a>
 	</div>
 	<div class="bookmarks" id="bookmarks">
-		<div class="bookmark-site b-events" id="b-events"></div>
-		<div class="bookmark-site b-locations" id="b-locations"></div>
-		<div class="bookmark-site b-tours" id="b-tours"></div>
+		<div class="bookmark-site b-events" id="b-events">
+			<div class="b-event-entries" id="b-event-entries"></div>
+			<div class="b-empty">
+				<span class="b-empty-text">Bisher hast du dir noch keine Veranstaltungen gemerkt</span>
+				<a href="events.html" class="b-empty-button button">Veranstaltungen entdecken</a>
+			</div>
+		</div>
+		<div class="bookmark-site b-locations" id="b-locations">
+			<div class="b-locations-entries" id="b-locations-entries"></div>
+			<div class="b-empty">
+				<span class="b-empty-text">Bisher hast du dir noch keine Orte gemerkt</span>
+				<a href="map.html" class="b-empty-button button">Orte entdecken</a>
+			</div>
+		</div>
+		<div class="bookmark-site b-tours" id="b-tours">
+			<div class="b-tours-entries" id="b-tours-entries"></div>
+			<div class="b-empty">
+				<span class="b-empty-text">Bisher hast du dir noch keine Spaziergänge gemerkt</span>
+				<a href="map.html" class="b-empty-button button">Spaziergänge entdecken</a>
+			</div>
+		</div>
 	</div>
 	
 

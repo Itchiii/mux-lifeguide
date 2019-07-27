@@ -15,7 +15,7 @@ $highlightedColor: #7ECE96;
 /****************FONTS**************/
 @font-face {
   $name: 'BarlowCondensed-SemiBold';
-  @include fontFace($name);
+  @include fontFace($name); 
 }
 
 @font-face {
@@ -48,7 +48,7 @@ a {
   transition: color .2s ease-in;
 
   &:hover {
-    color: $highlightedColor;
+    color: inherit;
   }
 }
 
@@ -167,6 +167,57 @@ a {
   cursor: pointer;
   z-index: 9998;
   background-color: $highlightedColor;
+}
+
+.notification-bookmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(126, 206, 150, 0.7);
+  display: flex;
+  text-align: center;
+  color: #ffffff;
+  min-height: 6em;
+  max-height: 10em;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 4;
+  transition: transform 0.3s ease-out;
+
+  &.hide {
+    display: none;
+  }
+
+  &.transformOut {
+    transform: translateY(-10em);
+  }
+
+  &:after {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    height: 30px;
+    width: 30px;
+    content: url("/public/assets/images/icons/heart-white.svg");
+  }
+
+  .n-bookmark-text {
+    width: 80%;
+    max-width: 25em;
+    font-size: 0.9em;
+    font-family: 'Oxygen-Bold';
+
+  }
+
+  .n-bookmark-link {
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 1em;
+    font-family: 'Oxygen-Bold';
+    font-size: .9em;
+  }
 }
 
 @import 'index';
