@@ -811,6 +811,11 @@ body.overflow-hidden {
       height: 46px;
       width: 34px;
       z-index: 1; }
+  .marker.onHold {
+    background-image: url("/public/assets/images/marker/map-full-green.svg");
+    height: 35px;
+    width: 27px;
+    z-index: 1; }
 
 .end-marker {
   height: 15px;
@@ -833,17 +838,14 @@ body.overflow-hidden {
 
 .topSearch {
   margin: auto;
-  display: flex;
-  width: 80%;
+  width: 70%;
   max-width: 30rem;
   position: absolute;
   top: 1em;
   z-index: 2;
   right: 0;
-  left: 0;
-  align-items: center; }
+  left: 0; }
   .topSearch .search {
-    flex: 1;
     display: flex;
     align-items: center;
     position: relative; }
@@ -974,6 +976,63 @@ body.overflow-hidden {
     content: url("/public/assets/images/icons/orga-green.svg"); }
   .wrapping-filter .filter-leisure::after {
     content: url("/public/assets/images/icons/leisure-green.svg"); }
+
+.addLocationLayer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 56px;
+  background-color: #fff;
+  min-height: 7em;
+  max-height: 10em;
+  width: 100%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease-out;
+  visibility: visible;
+  opacity: 1; }
+  .addLocationLayer.hide {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10em); }
+  .addLocationLayer .addressOnHold {
+    text-align: center; }
+  .addLocationLayer .addLocationLayer-text {
+    display: block;
+    text-align: center;
+    font-size: 0.8em; }
+  .addLocationLayer .button {
+    display: block;
+    background-color: #7ECE96;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 0.8em 2em;
+    text-align: center;
+    max-width: 18rem;
+    margin-bottom: 0.5em;
+    font-size: 0.8em; }
+
+.tourButton {
+  position: absolute;
+  top: 5px;
+  z-index: 2;
+  left: -3em;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .tourButton::after {
+    content: url("/public/assets/images/icons/tour-green.svg");
+    height: 25px;
+    width: 13px; }
 
 .bookmark-header {
   background-color: #fafafa;

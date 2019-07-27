@@ -68,8 +68,48 @@ fetch('accessTokenMapBox.txt')
      //document.getElementById('panel').classList.remove('open');  
       
       document.getElementById('search-results').classList.add('hide');
-    });
+      document.getElementById('addLocationLayer').classList.add('hide');
+      holdMarkerEle.classList.add('hide');
+    });     
 
+    //create marker for touch hold event
+    //TODO: events for mousedown (prevent click)
+    let touchhold;
+    let holdMarkerEle = document.createElement('div');
+    holdMarkerEle.classList.add('marker', 'onHold', 'hide');
+    let holdMarker = new mapboxgl.Marker({
+      element: holdMarkerEle,
+      anchor: 'bottom'
+    }).setLngLat([0, 0]).addTo(map);
+
+    function showMarkerOnHold(e) {
+      touchhold = setTimeout(function() {
+        removePreview();
+        document.getElementById('addLocationLayer').classList.remove('hide');
+      
+        var url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.lngLat.lng}%2C%20${e.lngLat.lat}.json?access_token=${mapboxgl.accessToken}`;
+        var req = new XMLHttpRequest();
+        req.responseType = 'json';
+        req.open('GET', url, true);
+        req.onload = function() {
+          document.getElementById('addressOnHold').textContent = req.response.features[0].place_name;
+          holdMarkerEle.classList.remove('hide');
+          holdMarker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
+        };
+        req.send();
+      }, 1000);
+    }
+
+    function clearMouseHold(e){
+      window.clearTimeout(touchhold);
+    }
+
+    map.on('touchstart', showMarkerOnHold);
+    map.on('touchmove', clearMouseHold);
+    map.on('touchend', clearMouseHold);    
+    map.on('mousedown', showMarkerOnHold);
+    map.on('mouseup', clearMouseHold);
+    map.on('touchmove', clearMouseHold);
 
     /* 
      * Search functionality 
