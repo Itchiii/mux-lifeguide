@@ -40,7 +40,12 @@ fetch('accessTokenMapBox.txt')
           
           //add eventListener to create a new bottom layer
           el.addEventListener('click', function(){
-            removeStyleOfMarker();
+            if(document.getElementById('filter-add').classList.contains('open')) {
+              document.getElementById('filter-add').click();
+            }
+            if (!this.classList.contains('openPreview')) {
+              removeStyleOfMarker();
+            }
             if (history.pushState) {
               let newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?id=${entry.doc._id}`;
               window.history.pushState({path:newurl},'',newurl);
@@ -305,8 +310,8 @@ window.onload = function () {
     addContentToEntity();
   }
 
-  setFunctionForShareButton();
   setFunctionForLinkedEventMenuContent();
+  setFunctionForLocationActions();
   setFuntionForFilter();
 }
 
@@ -325,6 +330,8 @@ function setEntityContent(id) {
       return;
     }
     entityWrapper.setAttribute('data-id', id);
+
+    changeHeart();
 
     //get content elements
     const entityFullImages = document.getElementById('entity-full-images');
@@ -356,45 +363,91 @@ function setEntityContent(id) {
 
     //set keydata
     for (const entry in data) {
-      switch (entry) {
-        case 'title':
-          entityCollapsedHeading.textContent = data[entry];
-          entityCollapsedHeading.classList.remove('hide');
-          entityOpenHeading.textContent = data[entry];
-          entityOpenHeading.classList.remove('hide');
-          break;
-        case 'address':
-          entityCollapsedAddress.textContent = data[entry];
-          entityCollapsedAddress.classList.remove('hide');
-          entityFullAddress.textContent = `${data.address}, ${data.zipCode}`;
-          entityFullAddress.classList.remove('hide');
-          break;
-        case 'zipCode':
-          entityCollapsedZipCode.textContent = data[entry];
-          entityCollapsedZipCode.classList.remove('hide');
-          break;
-        case 'summary':
-          entityOpenDescription.textContent = data[entry];
-          entityOpenDescription.classList.remove('hide');
-          break;
-        case 'openingHours':
-          entityFullOpeningHours.insertAdjacentHTML('afterbegin', data[entry]);
-          entityFullOpeningHours.classList.remove('hide');
-          break;
-        case 'phone':
-          entityFullPhone.textContent = data[entry];
-          entityFullPhone.classList.remove('hide');
-          break;
-        case 'web':
-          entityFullWeb.textContent = data[entry];
-          entityFullWeb.classList.remove('hide');
-          break;
-        case 'owner':
-          entityFullOwner.textContent = data[entry];
-          entityFullOwner.classList.remove('hide');
-          break;
-        default:
-          break;
+      console.log(data[entry] === "");
+
+      if (data[entry] !== "") {
+        switch (entry) {
+          case 'title':
+            entityCollapsedHeading.textContent = data[entry];
+            entityCollapsedHeading.classList.remove('hide');
+            entityOpenHeading.textContent = data[entry];
+            entityOpenHeading.classList.remove('hide');
+            break;
+          case 'address':
+            entityCollapsedAddress.textContent = data[entry];
+            entityCollapsedAddress.classList.remove('hide');
+            entityFullAddress.textContent = `${data.address}, ${data.zipCode}`;
+            entityFullAddress.classList.remove('hide');
+            break;
+          case 'zipCode':
+            entityCollapsedZipCode.textContent = data[entry];
+            entityCollapsedZipCode.classList.remove('hide');
+            break;
+          case 'summary':
+            entityOpenDescription.textContent = data[entry];
+            entityOpenDescription.classList.remove('hide');
+            break;
+          case 'openingHours':
+            entityFullOpeningHours.insertAdjacentHTML('afterbegin', data[entry]);
+            entityFullOpeningHours.classList.remove('hide');
+            break;
+          case 'phone':
+            entityFullPhone.textContent = data[entry];
+            entityFullPhone.classList.remove('hide');
+            break;
+          case 'web':
+            entityFullWeb.textContent = data[entry];
+            entityFullWeb.classList.remove('hide');
+            break;
+          case 'owner':
+            entityFullOwner.textContent = data[entry];
+            entityFullOwner.classList.remove('hide');
+            break;
+          default:
+            break;
+        }
+      }
+      else {
+        switch (entry) {
+          case 'title':
+            entityCollapsedHeading.textContent = "";
+            entityCollapsedHeading.classList.add('hide');
+            entityOpenHeading.textContent = "";
+            entityOpenHeading.classList.add('hide');
+            break;
+          case 'address':
+            entityCollapsedAddress.textContent = "";
+            entityCollapsedAddress.classList.add('hide');
+            entityFullAddress.textContent = "";
+            entityFullAddress.classList.add('hide');
+            break;
+          case 'zipCode':
+            entityCollapsedZipCode.textContent = "";
+            entityCollapsedZipCode.classList.add('hide');
+            break;
+          case 'summary':
+            entityOpenDescription.textContent = "";
+            entityOpenDescription.classList.add('hide');
+            break;
+          case 'openingHours':
+            entityFullOpeningHours.insertAdjacentHTML('afterbegin', "");
+            entityFullOpeningHours.classList.add('hide');
+            break;
+          case 'phone':
+            entityFullPhone.textContent = "";
+            entityFullPhone.classList.add('hide');
+            break;
+          case 'web':
+            entityFullWeb.textContent = "";
+            entityFullWeb.classList.add('hide');
+            break;
+          case 'owner':
+            entityFullOwner.textContent = "";
+            entityFullOwner.classList.add('hide');
+            break;
+          default:
+            break;
+        }
       }
     }
 
@@ -456,7 +509,7 @@ function setEntityContent(id) {
             const content = document.getElementById('event-menu-content');
             //set position
             content.style.top = this.getBoundingClientRect().top - document.getElementById('location-entity-content').getBoundingClientRect().top + offset + "px";
-
+                       
             if(content.dataset.eventid === this.closest('.eventColumn').dataset.eventid || content.classList.contains('hide')) {
               content.classList.toggle('hide');
             }
@@ -464,6 +517,13 @@ function setEntityContent(id) {
             if (!content.classList.contains('hide')) {
               content.dataset.eventid = eventById._id;
             }
+
+            const eventID = content.dataset.eventid;
+            bookmarksDB._getDoc(eventID).then(function(data) {
+              document.getElementById('entity-event-bookmark').classList.add('marked');
+            }).catch(function(){
+              document.getElementById('entity-event-bookmark').classList.remove('marked');
+            });
           });
           
           date.append(day, month);
@@ -535,7 +595,7 @@ let initScrollLeftOfImgContainer, firstMoveScrollLeftOfImgContainer, moveCount =
 */
 function holderOnClick(e) {
   //return after click on share button
-  if (e !== undefined && e.target.id === 'location-entity-shareButton') {
+  if (e !== undefined && (e.target.id === 'location-entity-shareButton' || e.target.id === 'location-entity-markButton')) {
     return;
   }
 
@@ -742,26 +802,6 @@ function removeStyleOfMarker() {
   }
 }
 
-function setFunctionForShareButton() {
-  //https://css-tricks.com/how-to-use-the-web-share-api/
-  document.getElementById('location-entity-shareButton').addEventListener('click', () => {
-    const title = document.title;
-    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
-    if (navigator.share) {
-      navigator.share({
-        title: title,
-        url: url
-      }).then(() => {
-      })
-      .catch(console.error);
-    } else {
-      //fallback
-      console.log(url);
-    }
-  });
-}
-
-
 function setFuntionForFilter() {
   document.getElementById('filter-add').addEventListener('click', function() {
     this.classList.toggle('open');
@@ -820,7 +860,8 @@ function setFunctionForLinkedEventMenuContent() {
 
   //functionality for share button
   document.getElementById('entity-event-share').addEventListener('click', () => {
-    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    const url = `${window.location.origin}/article.html?id=${eventID}`;
     const title = document.title;
     if (navigator.share) {
       navigator.share({
@@ -830,7 +871,7 @@ function setFunctionForLinkedEventMenuContent() {
       })
       .catch(console.error);
     } else {
-      // fallback
+      console.log(url);
     }
   });
 
@@ -855,7 +896,7 @@ function setFunctionForLinkedEventMenuContent() {
     const eventID = document.getElementById('event-menu-content').dataset.eventid;
     bookmarksDB._getDoc(eventID).then(function(data) {
       bookmarksDB._removeDoc(data).then(() => {
-        showNotificationForBookmark(false);  
+        showNotificationForBookmark(false, "event");  
       });
     }).catch(function(){
       //put element on bookmarks
@@ -865,7 +906,7 @@ function setFunctionForLinkedEventMenuContent() {
         });
         putItemBookmarksDB.then(() => {
           bookmarksDB.infoLocal.then(() => {
-            showNotificationForBookmark(true);  
+            showNotificationForBookmark(true, "event");  
             //TODO: add image to bookmark
           });
         });
@@ -874,10 +915,15 @@ function setFunctionForLinkedEventMenuContent() {
   });
 }
 
-function showNotificationForBookmark(add) {
-  
-  document.getElementById('n-bookmark-text').textContent = add ? "Die Veranstaltung wurde zu deiner Merkliste hinzugefügt." : "Die Veranstaltung wurde aus deiner Merkliste entfernt."
+function showNotificationForBookmark(add, string) {
 
+  if (string === "location") {
+    document.getElementById('n-bookmark-text').textContent = add ? "Der Ort wurde zu deiner Merkliste hinzugefügt." : "Der Ort wurde aus deiner Merkliste entfernt."
+  }
+  else {
+    document.getElementById('n-bookmark-text').textContent = add ? "Die Veranstaltung wurde zu deiner Merkliste hinzugefügt." : "Die Veranstaltung wurde aus deiner Merkliste entfernt."
+  }
+  
   document.getElementById('notification-bookmark').classList.remove('hide');
   
   setTimeout(() => {
@@ -894,6 +940,60 @@ function showNotificationForBookmark(add) {
   }, 4000);
 }
 
+function setFunctionForLocationActions() {
+  //function foor bookmark button
+  document.getElementById('location-entity-markButton').addEventListener('click', () => {
+    const locationID = document.getElementById('location-entity-wrapper').getAttribute('data-id');
+    bookmarksDB._getDoc(locationID).then(function(data) {
+      bookmarksDB._removeDoc(data).then(() => {
+        showNotificationForBookmark(false, "location");
+        changeHeart();
+      });
+    }).catch(function(){
+      //put element on bookmarks
+      locationDB._getDoc(locationID).then(function(data) {
+        let putItemBookmarksDB = new Promise(function(resolve, reject){
+          bookmarksDB._putItem(data, resolve, reject);
+        });
+        putItemBookmarksDB.then(() => {
+          bookmarksDB.infoLocal.then(() => {
+            showNotificationForBookmark(true, "location");
+            changeHeart();
+            //TODO: add image to bookmark
+          });
+        });
+      });
+    });
+  });
+
+  //function for shareButton
+  //https://css-tricks.com/how-to-use-the-web-share-api/
+  document.getElementById('location-entity-shareButton').addEventListener('click', () => {
+    const title = document.title;
+    const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+      })
+      .catch(console.error);
+    } else {
+      //fallback
+      console.log(url);
+    }
+  });
+}
+
+function changeHeart() {
+  const locationID = document.getElementById('location-entity-wrapper').getAttribute('data-id');
+
+  bookmarksDB._getDoc(locationID).then(function(data) {
+    document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-full-green.svg";
+  }).catch(function(){
+    document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-green.svg";
+  });
+}
 
 
 

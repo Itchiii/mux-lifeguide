@@ -40,30 +40,30 @@ class Database {
         else {
           switch (prop) {
             case 'id': obj[prop] = makeid(10); break;
-            case 'title': obj[prop] = "title"; break;
-            case 'description': obj[prop] = "description"; break;
+            case 'title': obj[prop] = ""; break;
+            case 'description': obj[prop] = ""; break;
             case 'lat': obj[prop] = 0; break;
             case 'long': obj[prop] = 0; break;
-            case 'address': obj[prop] = "address"; break;
-            case 'zipCode': obj[prop] = "zip Code"; break;
-            case 'openingHours': obj[prop] = '42 Uhr'; break;
-            case 'phone': obj[prop] = '000'; break;
-            case 'web': obj[prop] = '#'; break;
-            case 'owner': obj[prop] = 'Max Mustermann'; break;
+            case 'address': obj[prop] = ""; break;
+            case 'zipCode': obj[prop] = ""; break;
+            case 'openingHours': obj[prop] = ''; break;
+            case 'phone': obj[prop] = ''; break;
+            case 'web': obj[prop] = ''; break;
+            case 'owner': obj[prop] = ''; break;
             case 'rating': obj[prop] = 0; break;
-            case 'summary': obj[prop] = "summary"; break;
+            case 'summary': obj[prop] = ""; break;
             case 'recommend': obj[prop] = false; break;
-            case 'start': obj[prop] = "start"; break;
-            case 'end': obj[prop] = "end"; break;
-            case 'date': obj[prop] = "date"; break;
-            case 'daydate': obj[prop] = "daydate"; break;
-            case 'day': obj[prop] = "day"; break;
-            case 'month': obj[prop] = "month"; break;
-            case 'location': obj[prop] = "location"; break;
-            case 'street': obj[prop] = "street"; break;
-            case 'place': obj[prop] = "place"; break;
+            case 'start': obj[prop] = ""; break;
+            case 'end': obj[prop] = ""; break;
+            case 'date': obj[prop] = ""; break;
+            case 'daydate': obj[prop] = ""; break;
+            case 'day': obj[prop] = ""; break;
+            case 'month': obj[prop] = ""; break;
+            case 'location': obj[prop] = ""; break;
+            case 'street': obj[prop] = ""; break;
+            case 'place': obj[prop] = ""; break;
             case 'linkedEvents': obj[prop] = []; break;
-            case 'category': obj[prop] = "category"; break;
+            case 'category': obj[prop] = ""; break;
             default: obj[prop] = null; break;
           }
         }
@@ -290,11 +290,11 @@ const bookmarksDB = new Database('bookmarks');
 
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
-  //if(document.body.id === "index") setRecommend(locationDB);
-  fetchJson(locationDB);
+  if(document.body.id === "index") setRecommend(locationDB);
+  //fetchJson(locationDB);
 }).on('error', function (err) {
-  //if(document.body.id === "index") setRecommend(locationDB);
-  fetchJson(locationDB); //for mobile, because you cant access the remote database
+  if(document.body.id === "index") setRecommend(locationDB);
+  //fetchJson(locationDB); //for mobile, because you cant access the remote database
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info) {

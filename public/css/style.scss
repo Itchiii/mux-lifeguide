@@ -32,6 +32,7 @@ $highlightedColor: #7ECE96;
   padding: 0;
   margin: 0;
   box-sizing: border-box; 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body { 
@@ -63,14 +64,6 @@ h1, h2, h3, h4 {
   color: #3B3B3B;
 }
 
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
 .bottom-menu {
   height: 56px;
   width: 100%;
@@ -98,7 +91,7 @@ a {
     justify-content: center;
     align-items: center;
 
-    svg {
+    img {
       height: 40%;
     } 
   
@@ -152,20 +145,24 @@ a {
 
 .floatingButton {
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
 	position:fixed;
 	width:50px;
 	height:50px;
 	bottom:80px;
+<<<<<<< HEAD
   right:40px;
   border-radius:50px;
+=======
+	right:20px;
+>>>>>>> 9c2a8d536f0ef4e2873ca93d46a2e565499f0102
 	color:#FFF;
   font-size: 1.8em;
   box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.3);
   border: none;
   cursor: pointer;
-  z-index: 9998;
+  z-index: 6;
   background-color: $highlightedColor;
 }
   .floatingButton img {
@@ -179,7 +176,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(126, 206, 150, 0.7);
+  background-color: rgba(126, 206, 150, 0.8);
   display: flex;
   text-align: center;
   color: #ffffff;

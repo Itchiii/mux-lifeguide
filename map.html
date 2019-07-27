@@ -36,7 +36,7 @@
 		<button class="floatingButton filter-greenLocation" data-category="greenLocation"></button>
 		<button class="floatingButton filter-orga" data-category="orga"></button>
 		<button class="floatingButton filter-leisure" data-category="leisure"></button>
-		<button class="floatingButton filter-add" id="filter-add">+</button>
+		<button class="floatingButton filter-add" id="filter-add"></button>
 	</div>
 	<div class="location-routing hide transitionOut" id="location-routing">
 		<button class="create-routing-back" id="create-routing-back"></button>
@@ -50,18 +50,9 @@
 	</div>
 	<div class="location-entity-wrapper transition" id="location-entity-wrapper">
 		<div class="location-entity-holder" id="location-entity-holder">
-			<svg class="location-entity-grabble" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-				<path fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M20 40l11.994-14L44 40" stroke-linejoin="round" stroke-linecap="round"/>
-			</svg>
-			<svg class="location-entity-markButton hide" id="location-entity-markButton" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-				<path data-name="layer1" d="M47 5c-6.5 0-12.9 4.2-15 10-2.1-5.8-8.5-10-15-10A15 15 0 0 0 2 20c0 13 11 26 30 39 19-13 30-26 30-39A15 15 0 0 0 47 5z" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
-			  </svg>
-			<svg class="location-entity-shareButton hide" id="location-entity-shareButton" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-				<path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M20.9 36.5l22.2 11m0-31l-22.2 11" stroke-linejoin="round" stroke-linecap="round"></path>
-				<circle data-name="layer1" cx="12" cy="32" r="10" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></circle>
-				<circle data-name="layer1" cx="52" cy="12" r="10" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></circle>
-				<circle data-name="layer1" cx="52" cy="52" r="10" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></circle>
-			</svg>
+			<img class="location-entity-grabble" src="/public/assets/images/icons/arrow.svg" alt="grabbling">
+			<img class="location-entity-markButton hide" id="location-entity-markButton" src="/public/assets/images/icons/heart-green.svg" alt="bookmark location">
+			<img class="location-entity-shareButton hide" id="location-entity-shareButton" src="/public/assets/images/icons/share-green.svg" alt="share location">
 		</div>
 		<div class="location-entity-content" id="location-entity-content">
 			<div class="location-entity-collapsed-text" id="location-entity-text">
@@ -72,7 +63,7 @@
 			<div class="location-entity-open-text hide" id="location-entity-open-text">
 				<h3 class="entity-open-heading hide" id="entity-open-heading"></h3>
 				<p class="entity-open-description hide" id="entity-open-description"></p>
-				<a href="#entity-full-text" class="entity-show-more">Mehr anzeigen</a>
+				<a href="#entity-full-text" class="entity-show-more">mehr anzeigen</a>
 			</div>
 			<div class="location-entity-full-text hide" id="location-entity-full-text">
 				<div class="location-entity-keydata" id="location-entity-keydata">
@@ -94,43 +85,25 @@
 					<span class="entity-event-bookmark" id="entity-event-bookmark">Veranstaltung merken</span>
 				</div>
 			</div>
-			<div class="floatingButton location-entity-createRoute" id="location-entity-createRoute">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-					<path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M50 31.998H14" stroke-linejoin="round" stroke-linecap="round"></path>
-					<path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M36 18l14 14-14 14" stroke-linejoin="round" stroke-linecap="round"></path>
-				</svg>
-			</div>
+			<div class="floatingButton location-entity-createRoute" id="location-entity-createRoute"></div>
 		</div>
 	</div>
 	<div class="bottom-menu">
 		<div class="bm-inner-menu">
 			<a href="index.html">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-					<path data-name="layer1" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M2 31L32 5l30 26" stroke-linejoin="round"></path>
-					<path data-name="layer2" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M54 19v-9h-9" stroke-linejoin="round"></path>
-					<path data-name="layer1" fill="none" stroke="#202020" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M10 32.167V62h14V42h16v20h14V32.083" stroke-linejoin="round"></path>
-				</svg>
+				<img src="/public/assets/images/icons/home.svg" alt="home button">
 				<span>Start</span>
 			</a>
 			<a href="events.html">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-					<path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M2 8h60v54H2z" stroke-linejoin="round" stroke-linecap="round"></path>
-					<path data-name="layer2" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M54 54H10V16h44v38z" stroke-linejoin="round" stroke-linecap="round"></path>
-					<path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" d="M32 2v18M18 2v18M46 2v18" stroke-linejoin="round" stroke-linecap="round"></path>
-				</svg>
+				<img src="/public/assets/images/icons/calendar.svg" alt="calendar button">
 				<span>Kalender</span>
 			</a>
 			<a href="map.html">
-					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-						<path stroke-width="2" stroke-miterlimit="10" stroke="#202020" fill="none" d="M55.9 28.3c.1-.8.1-1.5.1-2.3a24 24 0 0 0-48 0c0 .8 0 1.6.1 2.3v.3C10.1 47.6 32 61 32 61s21.9-13.6 23.8-32.3z" data-name="layer2" stroke-linejoin="round" stroke-linecap="round"></path>
-						<circle stroke-width="2" stroke-miterlimit="10" stroke="#202020" fill="none" r="12" cy="26" cx="32" data-name="layer1" stroke-linejoin="round" stroke-linecap="round"></circle>
-					</svg>
+				<img src="/public/assets/images/icons/map-full.svg" alt="map button">
 				<span>Karte</span>
 			</a>
 			<a href="bookmarks.html">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-						<path data-name="layer1" d="M47 5c-6.5 0-12.9 4.2-15 10-2.1-5.8-8.5-10-15-10A15 15 0 0 0 2 20c0 13 11 26 30 39 19-13 30-26 30-39A15 15 0 0 0 47 5z" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
-					</svg>
+				<img src="/public/assets/images/icons/bookmark.svg" alt="bookmark button">
 				<span>Merkliste</span>
 			</a>
 		</div>
