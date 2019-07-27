@@ -126,14 +126,14 @@ a {
   width: 56px;
   height: 56px;
   bottom: 80px;
-  right: 40px;
+  right: 20px;
   color: #FFF;
   border-radius: 50px;
   font-size: 1.8em;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
   border: none;
   cursor: pointer;
-  z-index: 9998;
+  z-index: 6;
   background-color: #7ECE96; }
 
 .notification-bookmark {
@@ -141,7 +141,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(126, 206, 150, 0.7);
+  background-color: rgba(126, 206, 150, 0.8);
   display: flex;
   text-align: center;
   color: #ffffff;
@@ -483,7 +483,8 @@ body.overflow-hidden {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   overflow: hidden;
   scroll-behavior: smooth;
-  top: 100vh; }
+  top: 100vh;
+  min-height: 7em; }
   .location-entity-wrapper.show {
     display: block; }
   .location-entity-wrapper.transition {
@@ -495,7 +496,7 @@ body.overflow-hidden {
     overflow: auto;
     padding-bottom: 56px !important; }
     .location-entity-wrapper.show-complete .location-entity-holder .location-entity-grabble {
-      transform: scale(1.5) rotate(180deg); }
+      transform: rotate(-90deg); }
   .location-entity-wrapper h2 {
     padding-top: 21px; }
   .location-entity-wrapper .location-entity-holder {
@@ -509,32 +510,22 @@ body.overflow-hidden {
     position: relative;
     align-items: center; }
     .location-entity-wrapper .location-entity-holder .location-entity-grabble {
-      height: 100%;
+      height: 80%;
       width: auto;
-      transform: scale(1.5);
+      transform: rotate(90deg);
       margin: 0 auto; }
       .location-entity-wrapper .location-entity-holder .location-entity-grabble path {
         stroke: #7ECE96; }
     .location-entity-wrapper .location-entity-holder .location-entity-shareButton, .location-entity-wrapper .location-entity-holder .location-entity-markButton {
       position: absolute;
-      height: 80%;
+      height: 70%;
       width: 30px; }
-      .location-entity-wrapper .location-entity-holder .location-entity-shareButton svg, .location-entity-wrapper .location-entity-holder .location-entity-markButton svg {
-        transform: scale(0.8); }
-      .location-entity-wrapper .location-entity-holder .location-entity-shareButton path, .location-entity-wrapper .location-entity-holder .location-entity-shareButton circle, .location-entity-wrapper .location-entity-holder .location-entity-markButton path, .location-entity-wrapper .location-entity-holder .location-entity-markButton circle {
-        stroke: #7ECE96; }
       .location-entity-wrapper .location-entity-holder .location-entity-shareButton.hide, .location-entity-wrapper .location-entity-holder .location-entity-markButton.hide {
         display: none; }
     .location-entity-wrapper .location-entity-holder .location-entity-markButton {
       right: 60px; }
     .location-entity-wrapper .location-entity-holder .location-entity-shareButton {
       right: 20px; }
-  .location-entity-wrapper + .location-entity-placeholder {
-    position: absolute;
-    width: 100vw;
-    background-color: #fff;
-    bottom: 1px;
-    z-index: 10000; }
   .location-entity-wrapper .location-entity-content {
     margin-top: 1em; }
     .location-entity-wrapper .location-entity-content .hide {
@@ -545,7 +536,7 @@ body.overflow-hidden {
         font-size: 0.8em;
         color: #747474; }
     .location-entity-wrapper .location-entity-content .location-entity-open-text {
-      padding: 0 1.5em;
+      padding: 0 1.5em 1em 1.5em;
       display: flex;
       flex-direction: column; }
       .location-entity-wrapper .location-entity-content .location-entity-open-text.hide {
@@ -566,89 +557,103 @@ body.overflow-hidden {
       .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more {
         margin-top: 0.5em;
         color: #7ECE96;
-        margin-left: auto; }
+        margin-left: auto;
+        font-family: 'Oxygen-Bold';
+        font-size: 0.8em; }
         .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more::after {
           content: "P";
           padding-left: 10px; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span {
-      color: #747474;
-      border-top: 1px solid #e7e7e7;
-      display: flex;
-      padding: 1em 0;
-      align-items: center; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span:last-child {
-        border-bottom: 1px solid #e7e7e7; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span::before {
-        content: "U";
-        padding-right: 1.5em;
-        padding-left: 1.5em;
-        color: #7ECE96; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
-      margin: 2em 1.5em 0 1.5em;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      overflow-x: auto; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images img {
-        min-width: 11em;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 5px;
-        margin-right: 20px; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
-      margin-top: 2em;
-      padding: 0 1.5em; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
-        margin-top: 1em;
-        border-radius: 5px;
-        width: auto; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
-          flex: 1; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
-          color: #7ECE96;
-          align-self: flex-start; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
-            content: "I"; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
-      margin: 2em 0;
-      padding: 0 1.5em; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text > p {
-        margin: 1em 0;
-        font-size: 0.8em;
-        color: #747474; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content {
-      position: absolute;
-      background-color: #fff;
-      z-index: 10002;
-      top: 0;
-      right: 0;
-      padding: 1.5em;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-      display: block; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
-        display: none; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
-        display: block;
-        font-size: 0.8em;
-        color: #747474; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
-          margin: 1.5em 0; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
+    .location-entity-wrapper .location-entity-content .location-entity-full-text {
+      background-color: #ffffff; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span {
+        color: #747474;
+        border-top: 1px solid #e7e7e7;
+        display: flex;
+        padding: 1em 0;
+        align-items: center; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.hide {
+          display: none; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span:last-child {
+          border-bottom: 1px solid #e7e7e7; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-address::before {
+          content: url("/public/assets/images/icons/location-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-openingHours::before {
+          content: url("/public/assets/images/icons/time-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-phone::before {
+          content: url("/public/assets/images/icons/phone-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-web::before {
+          content: url("/public/assets/images/icons/global-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-owner::before {
+          content: url("/public/assets/images/icons/owner-green.svg"); }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span::before {
           padding-right: 1.5em;
-          color: #7ECE96; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
-        content: "T"; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
-        content: "R"; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
-        content: "S"; }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute svg {
+          padding-left: 1.5em;
+          height: 1em;
+          width: 1em; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
+        margin: 2em 1.5em 0 1.5em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images img {
+          min-width: 11em;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 5px;
+          margin-right: 20px; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
+        margin-top: 2em;
+        padding: 0 1.5em; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
+          margin-top: 1em;
+          border-radius: 5px;
+          width: auto; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
+            flex: 1; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
+            color: #7ECE96;
+            align-self: flex-start; }
+            .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
+              content: "I"; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
+        margin: 2em 0;
+        padding: 0 1.5em; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text > p {
+          margin: 1em 0;
+          font-size: 0.8em;
+          color: #747474; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content {
+        position: absolute;
+        background-color: #fff;
+        z-index: 5;
+        top: 0;
+        right: 0;
+        padding: 1.5em;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+        display: block; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
+          display: none; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
+          display: block;
+          font-size: 0.8em;
+          color: #747474; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
+            margin: 1.5em 0; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
+            padding-right: 1.5em;
+            color: #7ECE96; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
+          content: "T"; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
+          content: "R"; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
+          content: "S"; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute img {
       height: 60%;
       width: 60%; }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute path {
-      stroke: #fff; }
     .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
       display: none; }
 
@@ -738,7 +743,8 @@ body.overflow-hidden {
   background-size: cover;
   height: 38px;
   width: 28px;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: height 0.3s, width 0.3s; }
   .marker.hide {
     display: none; }
   .marker.shop {
@@ -919,8 +925,10 @@ body.overflow-hidden {
     .wrapping-filter > button:not(.filter-add)::after {
       height: 50%;
       width: 50%; }
-  .wrapping-filter .filter-add.open {
-    transform: rotate(45deg); }
+  .wrapping-filter .filter-add {
+    transition: background-color 0.3s; }
+    .wrapping-filter .filter-add.open {
+      background-color: #FF6347; }
   .wrapping-filter > button:not(:first-child) {
     margin-top: 0.4em; }
   .wrapping-filter .filter-shop::after {
@@ -991,6 +999,6 @@ body.overflow-hidden {
     .bookmarks .b-event-entries .event, .bookmarks .b-locations-entries .event, .bookmarks .b-tours-entries .event {
       margin-left: 0;
       margin-right: 0; }
-  .bookmarks .b-events .b-column {
-    border-radius: 5px;
-    width: 100%; }
+    .bookmarks .b-event-entries .b-column, .bookmarks .b-locations-entries .b-column, .bookmarks .b-tours-entries .b-column {
+      border-radius: 5px;
+      width: 100%; }

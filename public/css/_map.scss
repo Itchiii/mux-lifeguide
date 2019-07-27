@@ -20,6 +20,7 @@ body.overflow-hidden {
   overflow: hidden;
   scroll-behavior: smooth;
   top: 100vh;
+  min-height: 7em;
 
   &.show {
     display: block;
@@ -38,7 +39,7 @@ body.overflow-hidden {
     padding-bottom: 56px !important;
 
     .location-entity-holder .location-entity-grabble {
-      transform: scale(1.5) rotate(180deg);
+      transform: rotate(-90deg);
     }
   }
 
@@ -58,9 +59,9 @@ body.overflow-hidden {
     align-items: center;
   
     .location-entity-grabble {
-      height: 100%;
+      height: 80%;
       width: auto;
-      transform: scale(1.5);
+      transform: rotate(90deg);
       margin: 0 auto;
 
       path {
@@ -70,15 +71,8 @@ body.overflow-hidden {
 
     .location-entity-shareButton, .location-entity-markButton {
       position: absolute;
-      height: 80%;
+      height: 70%;
       width: 30px;
-
-      svg {
-        transform: scale(0.8);
-      }
-      path, circle {
-        stroke: $highlightedColor;
-      }
 
       &.hide {
         display: none;
@@ -92,14 +86,6 @@ body.overflow-hidden {
     .location-entity-shareButton {
       right: 20px;
     }
-  }
-
-  & + .location-entity-placeholder {
-    position: absolute;
-    width: 100vw;
-    background-color: #fff;
-    bottom: 1px;
-    z-index: 10000;
   }
 
   .location-entity-content {
@@ -119,7 +105,7 @@ body.overflow-hidden {
     }
 
     .location-entity-open-text {
-      padding: 0 1.5em;
+      padding: 0 1.5em 1em 1.5em;
       display: flex;
       flex-direction: column;
 
@@ -148,6 +134,8 @@ body.overflow-hidden {
         margin-top: 0.5em;
         color: $highlightedColor;
         margin-left: auto;
+        font-family: 'Oxygen-Bold';
+        font-size: 0.8em;
 
         &::after {
           content: "P";
@@ -158,7 +146,7 @@ body.overflow-hidden {
     }
 
     .location-entity-full-text {
-      //padding: 0 30px 60px 30px;
+      background-color: #ffffff;
 
       .location-entity-keydata {
         > span {
@@ -168,15 +156,39 @@ body.overflow-hidden {
           padding: 1em 0;
           align-items: center;
 
+          &.hide {
+            display: none;
+          }
+
           &:last-child {
             border-bottom: 1px solid #e7e7e7;
           }
   
+          &.entity-full-address::before {
+            content: url("/public/assets/images/icons/location-green.svg");
+          }
+
+          &.entity-full-openingHours::before {
+            content: url("/public/assets/images/icons/time-green.svg");
+          }
+
+          &.entity-full-phone::before {
+            content: url("/public/assets/images/icons/phone-green.svg");
+          }
+
+          &.entity-full-web::before {
+            content: url("/public/assets/images/icons/global-green.svg");
+          }
+
+          &.entity-full-owner::before {
+            content: url("/public/assets/images/icons/owner-green.svg");
+          }
+
           &::before {
-            content: "U";
             padding-right: 1.5em;
             padding-left: 1.5em;
-            color: $highlightedColor;
+            height: 1em;
+            width: 1em;
           }
         }
       }
@@ -237,7 +249,7 @@ body.overflow-hidden {
       .event-menu-content {
         position: absolute;
         background-color: #fff;
-        z-index: 10002;
+        z-index: 5;
         top: 0;
         right: 0;
         padding: 1.5em;
@@ -280,13 +292,9 @@ body.overflow-hidden {
     }
   
     .location-entity-createRoute {    
-      svg {
+      img {
         height: 60%;
         width: 60%;
-      }
-  
-      path {
-        stroke: #fff;
       }
 
       &.hide {
@@ -419,6 +427,7 @@ body.overflow-hidden {
   height: 38px;
   width: 28px;
   cursor: pointer;
+  transition: height 0.3s, width 0.3s;
 
   &.hide {
     display: none;
@@ -673,9 +682,10 @@ body.overflow-hidden {
   }
 
   .filter-add {
+    transition: background-color 0.3s;
 
     &.open {
-      transform: rotate(45deg);
+      background-color: #FF6347;
     }
   }
 
