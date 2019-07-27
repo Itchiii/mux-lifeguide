@@ -10,9 +10,10 @@
         "daydate": "02",
         "day": "Fr., ",
         "month": "AUG",
-        "start": "14:30 Uhr",
+        "start": "14:30",
+        "end": "17:30",
         "location": "Waldpavillon",
-        "street": "Ilsungstraße 15a, ",
+        "street": "Ilsungstraße 15a",
         "place": "86161 Augsburg",
         "attachments": [
             {
@@ -34,9 +35,10 @@
         "daydate": "28",
         "day": "Fr., ",
         "month": "JUN",
-        "start": "17:00 Uhr",
+        "start": "17:00",
+        "end": "19:00",
         "location": "Stadtwald",
-        "street": "Ilsungstraße 15a, ",
+        "street": "Ilsungstraße 15a",
         "place": "86161 Augsburg",
         "attachments": [
             {
@@ -58,9 +60,10 @@
         "daydate": "26",
         "day": "Mi., ",
         "month": "JUN",
-        "start": "19:30 Uhr",
+        "start": "19:30",
+        "end": "21:00",
         "location": "Anna Café",
-        "street": "Im Annahof 4, ",
+        "street": "Im Annahof 4",
         "place": "86150 Augsburg",
         "attachments": [
             {
@@ -82,17 +85,124 @@
         "daydate": "26",
         "day": "Mi., ",
         "month": "JUN",
-        "start": "18:30 Uhr",
+        "start": "18:30",
+        "end": "20:30",
         "location": "The Box",
-        "street": "Werner-Heisenberg-Straße 4, ",
+        "street": "Werner-Heisenberg-Straße 4",
         "place": "96123 Augsburg",
         "attachments": [
             {
                 "attachmentFile": "./public/assets/images/events/marktwirtschaft.png",
-                "attachmentName": "marktwirtschaft.jpg"
+                "attachmentName": "marktwirtschaft.png"
             }
         ],
         "rating": 0,
         "recommend": true
+    },
+    {
+        "id": "pilzausstellung",
+        "title": "Pilzausstellung",
+        "summary": "Pilzausstellung im Forstmuseum Waldpavillon",
+        "description": "Pilze gehören zu den geheimnisvollsten Wesen des Waldes. Beim Pilztag im Waldpavillon können sich Besucher*innen einen Einblick in die Welt der Pilze verschaffen. Die Ausstellung zeigt zahlreiche, frisch gesammelte Exemplare aus der Umgebung. Pilzexperte Peter Groß und sein Team vom Pilzverein Königsbrunn halten Vorträge zur Pilzkunde und stehen für Fragen über Pilze zur Verfügung. Auch für Kinder ist Einiges geboten: im Waldkino kann man einen Kurzfilm über Pilze anschauen und im Anschluss daran darf jeder seinen eigenen Fantasiepilz basteln.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "29.09.2019",
+        "daydate": "29",
+        "day": "Do., ",
+        "month": "SEP",
+        "start": "14:00",
+        "end": "18:00",
+        "location": "Forstmuseum Waldpavillon",
+        "street": "Ilsungstraße 15a",
+        "place": "86161 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/pilzausstellung.jpg",
+                "attachmentName": "pilzausstellung.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": false
+    },
+    {
+        "id": "reicht",
+        "title": "Es reicht! Für alle.",
+        "summary": "Warum wir uns Hunger nicht mehr leisten können. Sylvia Hank von der Werkstatt solidarische Welt Augsburg beim Boxenstopp.",
+        "description": "Hunger ist einer der größten Entwicklungshemmer. In einer Gesellschaft, die im Überluss lebt, fällt es schwer, sich in die Dramatik des Hungers einzufühlen. Wir kennen ihn eigentlich nur von der letzten Diät oder aus Erzählungen unserer Großeltern. Wenn wir uns schon nicht aus Mitgefühl für eine Welt ohne Hunger engagieren, dann vielleicht aus Eigennutz.
+
+        Denn Menschen kommen nicht nur aus Kriegsgebieten zu uns, sondern auch aus Regionen, in denen die Familien morgens nicht wissen, was es abends zu essen gibt. Die Welt bietet genug zu essen - es reicht für alle. Wir können uns Hunger einfach nicht mehr leisten.
+        Ernährung sichern – den Hunger beenden so heißt das zweite Ziel der insgesamt 17 sustainable development goals (17 Ziele für eine nachhaltige Entwicklung) der Vereinten Nationen. Und weiter heißt es: Ernährungssicherheit und eine bessere Ernährung erreichen und eine nachhaltige Landwirtschaft fördern. Die Referentin des Abends, Sylvia Hank, ist Bildungsreferentin der Werkstatt solidarische Welt. Mit ihrem Weltladen war die Werkstatt Solidarische Welt 2018 einer von sechs Preisträgern des Zukunftspreises des Stadt Augsburg.
+         
+        
+        Der Trägerkreis Boxenstopp Augsburg findet es überaus lohnenswert darüber nachzudenken, wie die 17 Ziele für eine nachhaltige Entwicklung Unternehmer*innen, Führungskräfte und Selbständige betreffen und wird auch weitere Veranstaltungen zu diesem Thema anbieten.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "17.10.2019",
+        "daydate": "17",
+        "day": "Mo., ",
+        "month": "OKT",
+        "start": "18:30",
+        "end": "19:30",
+        "location": "The Box",
+        "street": "Werner-Heisenberg-Straße 4, ",
+        "place": "86156 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/reicht.jpg",
+                "attachmentName": "reicht.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": false
+    },    
+    {
+        "id": "stadtrundgang",
+        "title": "Stadtrundgang zu Augsburgs nachhaltigsten Plätzen",
+        "summary": "Immer mehr Menschen wollen nachhaltiger leben und ihren ökologischen Fußabdruck möglichst klein halten. Im Alltag und auch auf Reisen.",
+        "description": "Es gibt noch vier weitere Termine, im Mai, Juni, Juli und August. Die Stadtführung startet vor der Tourismus-Information am Augsburger Rathaus. In etwa zwei Stunden geht es zu Fuß durch Augsburgs Innenstadt. Besucht werden Menschen und Initiativen, die zu ihren Fachgebieten wie plastikfrei leben, unverpackt einkaufen oder faire Kleidung informieren und Fragen beantworten. Dabei erfahren die Teilnehmenden viel über nachhaltiges Schenken, die Bedeutung von Reparieren und natürlich über reduce, reuse und recyclen. Wer seine eigene Trinkflasche mitbringt, kann an einem der zahlreichen Trinkbrunnen oder Refill-Stationen in Augsburg das außergewöhnlich gute Augsburger Trinkwasser probieren. Denn eines zeigt die Tour auch: Ökologisch leben ist heute für alle erschwinglich und lässt sich in Augsburg bereits sehr gut in den Alltag integrieren.",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "03.08.2019",
+        "daydate": "03",
+        "day": "Sa., ",
+        "month": "AUG",
+        "start": "10:00",
+        "end": "14:00",
+        "location": "Tourismus-Information",
+        "street": "Rathausplatz",
+        "place": "86150 Augsburg",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/stadtrundgang.jpg",
+                "attachmentName": "stadtrundgang.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": false
+    },
+    {
+        "id": "freiluft",
+        "title": "Freiluft-Theater rund um das Thema Wasser",
+        "summary": "Wiedersehen mit dem kleinen Wasserdrachen und dem widerspenstigen Brunnen",
+        "description": "»Der widerspenstige Brunnen« ist ein Straßentheater und Brunnenspektakel für alle ab 9 Jahren und eine Koproduktion des Jungen Theaters mit der Gruppe PasParTouT. In dem Stück mit viel Livemusik und wenigen Worten geht es auf spielerische Weise um die Themen Wasserverteilung und Wasser als Lebensspender: Ein nagelneuer Brunnen soll die Augsburger Innenstadt schmücken und die Stadtbewohner*innen mit Trinkwasser erfreuen. Zur feierlichen Einweihung sind die wichtigsten Bürger*innen der Stadt und eine imposante Blaskapelle vor Ort. Das Wasser ist allerdings – so erzählt es die Geschichte – in Privatbesitz und das Prachtwerk von Brunnen entwickelt plötzlich ein unerwartetes Eigenleben …",
+        "lat": 48.36756,
+        "long": 10.88579,
+        "date": "02.07.2019",
+        "daydate": "02",
+        "day": "So., ",
+        "month": "JUL",
+        "start": "15:00",
+        "end": "17:00",
+        "location": "Freiluft-Theater",
+        "street": "Caron-du-Val-Straße",
+        "place": "86150 Siebentischwald",
+        "attachments": [
+            {
+                "attachmentFile": "./public/assets/images/events/freiluft.jpg",
+                "attachmentName": "freiluft.jpg"
+            }
+        ],
+        "rating": 0,
+        "recommend": false
     }
 ]

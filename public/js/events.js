@@ -1,12 +1,12 @@
 
-document.getElementById("formInput").addEventListener("keyup", search);
+document.getElementById("searchInput").addEventListener("keyup", search);
 
 function search() {
   console.log(event);
   var entrys = document.getElementsByClassName("eventInfo");
   var eventBlock = document.getElementsByClassName("event");
   //check if input is empty again
-  if(document.getElementById("formInput").value === "") {
+  if(document.getElementById("searchInput").value === "") {
     console.log()
     //Show all events
     for (i = 0; i<eventBlock.length; i++) {
@@ -14,7 +14,7 @@ function search() {
     }
   }
   if(event.key === "Enter") {
-    var tippedWord = document.getElementById("formInput").value.toLowerCase();
+    var tippedWord = document.getElementById("searchInput").value.toLowerCase();
     //Show all events when you make a new search
     for (i = 0; i<eventBlock.length; i++) {
         eventBlock[i].style.display="flex";
@@ -38,15 +38,55 @@ function search() {
 //function to get database entrys appear on events.html
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
-
-      console.log(entry);
-
+      if(entry.doc.month === undefined || entry.doc.title === undefined || entry.doc.daydate === undefined){
+        console.log("ist leer");
+      }
+      else {
       //div for daydate and month called eventDate
       const eventDate = document.createElement("div");
       const daydate = document.createElement("div");
       const month = document.createElement("div");
-      daydate.innerHTML = entry.doc.daydate;
-      month.innerHTML = entry.doc.month;
+      daydate.innerHTML = entry.doc.date.substring(0, 2);
+      const whichMonth = entry.doc.date.substring(3, 5);
+      switch (whichMonth) {
+        case "01":
+          month.innerHTML = "JAN";
+          break;
+        case "02":
+          month.innerHTML = "FEB";
+          break;
+          case "03":
+            month.innerHTML = "MÄR";
+            break;
+          case "04":
+            month.innerHTML = "APR";
+            break;
+            case "05":
+              month.innerHTML = "MAI";
+              break;
+            case "06":
+              month.innerHTML = "JUN";
+              break;
+              case "07":
+                month.innerHTML = "JUL";
+                break;
+              case "08":
+                month.innerHTML = "AUG";
+                break;
+                case "09":
+                  month.innerHTML = "SEP";
+                  break;
+                case "10":
+                  month.innerHTML = "OKT";
+                  break;
+                  case "11":
+                    month.innerHTML = "NOV";
+                    break;
+                  case "12":
+                    month.innerHTML = "DEZ";
+                    break;   
+      }
+            
       daydate.classList.add("daydate");
       month.classList.add("month");
       eventDate.classList.add("eventDate");
@@ -110,5 +150,6 @@ eventDB.allDocsOfLocalDB.then(function(result) {
             window.open(`article.html?id=${this.dataset.id}`, "_self");
           });
       }
+    }
     }
   });

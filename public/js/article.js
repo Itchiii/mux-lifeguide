@@ -24,8 +24,8 @@ eventDB._getDoc(iddata).then(function(doc) {
           const eventDate = document.createElement("div");
           const daydate = document.createElement("div");
           const month = document.createElement("div");
-          daydate.innerHTML = doc.daydate;
-          month.innerHTML = doc.month;
+          daydate.innerHTML = doc.date.substring(0, 2);
+          month.innerHTML = doc.month.substring(0, 3).toUpperCase();
           daydate.classList.add("daydate");
           month.classList.add("month");
           eventDate.classList.add("eventDate");
@@ -44,10 +44,16 @@ eventDB._getDoc(iddata).then(function(doc) {
           const location = document.createElement("div");
           const street = document.createElement("div");
           const place = document.createElement("div");
-          day.innerHTML = doc.day;
-          start.innerHTML = doc.start;
+          const daybegin = doc.day.substring(0, 2); //day with first 2 letters
+          const dayadd = ".,\xa0";
+          day.innerHTML = daybegin.concat(dayadd);
+          const clock = doc.start;
+          const uhr = "\xa0Uhr";
+          start.innerHTML = clock.concat(uhr);
           location.innerHTML = doc.location;
-          street.innerHTML = doc.street;
+          const streetstreet = doc.street;
+          const streetadd = ",\xa0";
+          street.innerHTML = streetstreet.concat(streetadd);
           place.innerHTML = doc.place;
           dayandstart.append(day);
           dayandstart.append(start);

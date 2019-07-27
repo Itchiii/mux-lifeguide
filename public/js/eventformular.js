@@ -59,12 +59,51 @@ function back() {
     }
     checkback();
 }
-function sendEvent() {
+
+function goEvent() {
     hostID = document.getElementById('hostID').value;
     text = document.getElementById('description').value;
     day = document.getElementById('day').value;
-    daydate = document.getElementById('daydate').value;
-    month = document.getElementById('month').value;
+    date = document.getElementById('date').value;
+    const whichMonth = date.substring(3, 5);
+    switch (whichMonth) {
+      case "01":
+        month = "JAN";
+        break;
+      case "02":
+        month = "FEB";
+        break;
+        case "03":
+          month = "MÄR";
+          break;
+        case "04":
+          month = "APR";
+          break;
+          case "05":
+            month = "MAI";
+            break;
+          case "06":
+            month = "JUN";
+            break;
+            case "07":
+              month = "JUL";
+              break;
+            case "08":
+              month = "AUG";
+              break;
+              case "09":
+                month = "SEP";
+                break;
+              case "10":
+                month = "OKT";
+                break;
+                case "11":
+                  month = "NOV";
+                  break;
+                case "12":
+                  month = "DEZ";
+                  break;   
+    }
     time = document.getElementById('time').value;
     city = document.getElementById('city').value;
     adress = document.getElementById('adress').value;
@@ -81,7 +120,7 @@ function sendEvent() {
           lat: 48.36756,
           long: 10.88579,
           day: day,
-        daydate: daydate,
+        date: date,
         month: month,
         start: time,
         place: city,

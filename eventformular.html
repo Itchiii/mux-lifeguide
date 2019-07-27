@@ -46,8 +46,7 @@
 				<div class="summary">Wo und wann findet deine Veranstaltung statt?</div>
 				<form class="form"> 
 					<input name="name" type="date" placeholder="Wochentag*" class="formInput" id="day"/>
-					<input name="name" type="date" placeholder="Monatstag*" class="formInput" id="daydate"/>
-					<input name="name" type="date" placeholder="Monat*" class="formInput" id="month"/>
+					<input name="name" type="date" placeholder="Datum ex. 20.09.2019*" class="formInput" id="date"/>
 					<input name="titel" type="text" placeholder="Uhrzeit*" class="formInput" id="time"/>
 					<input name="summary" type="text" placeholder="Ort*" class="formInput" id="city"/>
 					<input name="adress" type="text" placeholder="Adresse*" class="formInput" id="adress"/>
@@ -61,7 +60,7 @@
 					<input name="titel" type="text" placeholder="Veranstaltungsort*" id="venue" class="formInput"/>
 					<input name="summary" type="text" placeholder="Kurzbeschreibung*" class="formInput" id="subject"/>
 					<input name="description" type="text" placeholder="Beschreibungstext*" id="description" class="formInput"/>
-					<input type="button" value="Abschicken" class="formButton" onclick="sendEvent()">
+					<input type="button" value="Abschicken" class="formButton" id="sendEvent" onclick="goEvent()">
 				</form>
 		</div>
 	</div>  

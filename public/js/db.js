@@ -54,6 +54,7 @@ class Database {
             case 'summary': obj[prop] = "summary"; break;
             case 'recommend': obj[prop] = false; break;
             case 'start': obj[prop] = "start"; break;
+            case 'end': obj[prop] = "end"; break;
             case 'date': obj[prop] = "date"; break;
             case 'daydate': obj[prop] = "daydate"; break;
             case 'day': obj[prop] = "day"; break;
@@ -92,6 +93,7 @@ class Database {
         summary: options.summary,
         recommend: options.recommend,
         start: options.start,
+        end: options.end,
         date: options.date,
         daydate: options.daydate,
         day: options.day,
@@ -128,6 +130,7 @@ class Database {
               summary: options.summary,
               recommend: options.recommend,
               start: options.start,
+              end: options.end,
               date: options.date,
               daydate: options.daydate,
               day: options.day,
