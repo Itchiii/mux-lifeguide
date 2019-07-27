@@ -860,6 +860,8 @@ function setFunctionForLinkedEventMenuContent() {
       putItemBookmarksDB.then(() => {
         bookmarksDB.infoLocal.then(function(info) {
           console.log(info);
+
+          //TODO: add image to bookmark
         });
       });
     });
