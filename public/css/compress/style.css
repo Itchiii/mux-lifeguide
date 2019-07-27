@@ -120,13 +120,8 @@ h1, h2, h3, h4 {
   width: 50px;
   height: 50px;
   bottom: 80px;
-<<<<<<< HEAD
-  right: 40px;
-=======
   right: 20px;
-  color: #FFF;
->>>>>>> 9c2a8d536f0ef4e2873ca93d46a2e565499f0102
-  border-radius: 50px;
+  border-radius: 50%;
   color: #FFF;
   font-size: 1.8em;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
