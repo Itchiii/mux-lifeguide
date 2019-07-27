@@ -23,6 +23,11 @@ $highlightedColor: #7ECE96;
   @include fontFace($name);
 }
 
+@font-face {
+  $name: 'Oxygen-Bold';
+  @include fontFace($name);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -95,7 +100,7 @@ a {
 
     svg {
       height: 40%;
-    }
+    } 
   
     span {
       font-size: 0.8em;
@@ -163,3 +168,10 @@ a {
   z-index: 9998;
   background-color: $highlightedColor;
 }
+
+@import 'index';
+@import 'events';
+@import 'article';
+@import 'form';
+@import 'map';
+@import 'bookmarks'

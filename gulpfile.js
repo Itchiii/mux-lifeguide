@@ -16,8 +16,7 @@ const scssFiles = 'public/css/*.scss',
 
 gulp.task('styles', function (cb) {
   pump([
-      gulp.src(scssFiles),
-      concat('styles.scss'),
+      gulp.src('public/css/style.scss'),
       sass(),
       rename('style.css'),
       gulp.dest(cssCompDest),
