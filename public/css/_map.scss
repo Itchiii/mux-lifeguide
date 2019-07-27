@@ -303,11 +303,12 @@ body.overflow-hidden {
     }
   
     .location-entity-createRoute {    
-      img {
-        height: 60%;
-        width: 60%;
+      &::after {
+        content: url("/public/assets/images/icons/route-white.svg");
+        width: 1em;
+        height: 1em;
       }
-
+  
       &.hide {
         display: none;
       }
@@ -695,8 +696,16 @@ body.overflow-hidden {
   .filter-add {
     transition: background-color 0.3s;
 
+    &::after {
+      content: url("/public/assets/images/icons/filter-white.svg");
+      width: 1em;
+      height: 1em;
+    }
+
     &.open {
-      background-color: #FF6347;
+      &::after {
+        content: url("/public/assets/images/icons/filter-check-white.svg");
+      }
     }
   }
 

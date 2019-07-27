@@ -654,9 +654,10 @@ body.overflow-hidden {
           content: url("/public/assets/images/icons/heart-green.svg"); }
         .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark.marked::before {
           content: url("/public/assets/images/icons/heart-full-green.svg"); }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute img {
-      height: 60%;
-      width: 60%; }
+    .location-entity-wrapper .location-entity-content .location-entity-createRoute::after {
+      content: url("/public/assets/images/icons/route-white.svg");
+      width: 1em;
+      height: 1em; }
     .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
       display: none; }
 
@@ -930,8 +931,12 @@ body.overflow-hidden {
       width: 50%; }
   .wrapping-filter .filter-add {
     transition: background-color 0.3s; }
-    .wrapping-filter .filter-add.open {
-      background-color: #FF6347; }
+    .wrapping-filter .filter-add::after {
+      content: url("/public/assets/images/icons/filter-white.svg");
+      width: 1em;
+      height: 1em; }
+    .wrapping-filter .filter-add.open::after {
+      content: url("/public/assets/images/icons/filter-check-white.svg"); }
   .wrapping-filter > button:not(:first-child) {
     margin-top: 0.4em; }
   .wrapping-filter .filter-shop::after {
