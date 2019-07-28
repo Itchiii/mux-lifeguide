@@ -900,7 +900,7 @@ function setFuntionForFilter() {
       this.classList.toggle('active');
 
       const allActiveButtons = document.querySelectorAll('.wrapping-filter .floatingButton.active');
-      const allMarker = document.querySelectorAll('.mapboxgl-canvas-container > div.marker');
+      const allMarker = document.querySelectorAll('.mapboxgl-canvas-container > div.marker:not(.end-marker):not(.onHold)');
 
       for (const marker of allMarker) {
         marker.classList.add('hide');

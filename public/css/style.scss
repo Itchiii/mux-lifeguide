@@ -47,6 +47,11 @@ body {
   font-size: 16px;
 }
 
+::placeholder {
+  color: #B0B0B0 !important;
+  opacity: 1; /* Firefox */
+}
+
 a {
   color: $highlightedColor;
   text-decoration: none;
@@ -70,6 +75,10 @@ h1, h2, h3, h4 {
 
 a, span, p {
   font-size: 0.8em;
+}
+
+input {
+  color: $textColor;
 }
 
 .bottom-menu {

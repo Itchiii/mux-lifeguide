@@ -433,7 +433,14 @@ body.overflow-hidden {
   }
 
   .create-routing-menu {
-    margin-left: 0.5em;
+    margin-left: 1em;
+
+    &::after {
+      content: url("/public/assets/images/icons/menu-green.svg");
+      width: 4px;
+      height: 18px;
+      display: inline-block;
+    }
   }
 }
 
@@ -759,6 +766,7 @@ body.overflow-hidden {
 
   .addressOnHold {
     text-align: center;
+    margin-top: 1em;
   }
 
   .addLocationLayer-text {
