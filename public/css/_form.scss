@@ -54,6 +54,10 @@
 #description{
   height:8em;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #3d3d3d;
+  opacity: 1; /* Firefox */
+}
 .formButton{
   font-weight: bold;
   width: 50vw;
@@ -93,13 +97,14 @@
   margin: auto;
   width: 60vw;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .warning h2{
   color: white;
   margin-top: -3em;
   margin-bottom: 1em;
   font-size: 2em;
+  text-transform: uppercase;
 }
 #loadingBar{
   display: flex;
