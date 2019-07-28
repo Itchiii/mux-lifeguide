@@ -47,7 +47,9 @@
   
 }
 #events{
-  margin-bottom: 4em;
+  margin-bottom: $heighOfNav;
+  //for event context menu
+  padding-bottom: 7em;
 }
 
 #searchInput{
