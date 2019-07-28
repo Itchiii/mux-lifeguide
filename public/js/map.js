@@ -126,10 +126,11 @@ fetch('accessTokenMapBox.txt')
       }, 1000);
     }
 
-    function clearMouseHold(e){
+    function clearMouseHold(){
       window.clearTimeout(touchhold);
     }
 
+    //I cannot clear the timeout on mobile, if user zoomed..
     map.on('touchstart', showMarkerOnHold);
     map.on('mousedown', showMarkerOnHold);
     map.on('touchmove', clearMouseHold);
@@ -137,9 +138,14 @@ fetch('accessTokenMapBox.txt')
     map.on('mouseup', clearMouseHold);
     map.on('touchmove', clearMouseHold);
     map.on('pitch', clearMouseHold);
+    map.on('pitstart', clearMouseHold);
     map.on('rotate', clearMouseHold);
+    map.on('rotatestart', clearMouseHold);
     map.on('zoom', clearMouseHold);
-
+    map.on('zoomstart', clearMouseHold);
+    map.on('movestart', clearMouseHold);
+    map.on('dragstart', clearMouseHold);
+    map.on('resize', clearMouseHold);
 
 
     /* 
