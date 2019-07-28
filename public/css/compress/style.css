@@ -398,7 +398,8 @@ div[class^="related"] {
   display: flex;
   flex-direction: column;
   max-width: 800px;
-  margin-bottom: 5em; }
+  margin-bottom: 5em;
+  padding: 1.5em; }
 
 #headline-form {
   text-transform: uppercase;
