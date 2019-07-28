@@ -320,7 +320,8 @@ div[class^="related"] {
   justify-content: space-around; }
 
 #events {
-  margin-bottom: 4em; }
+  margin-bottom: 56px;
+  padding-bottom: 7em; }
 
 #searchInput {
   display: block;
