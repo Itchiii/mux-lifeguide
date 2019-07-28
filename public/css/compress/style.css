@@ -338,6 +338,9 @@ div[class^="related"] {
   width: 1.5em;
   height: 1.5em; }
 
+.title-event {
+  margin-bottom: 0.2em; }
+
 @media only screen and (min-width: 768px) {
   .events {
     flex-direction: row;

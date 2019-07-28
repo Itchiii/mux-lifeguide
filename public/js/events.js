@@ -69,7 +69,7 @@ function searchGlass() {
 //function to get database entrys appear on events.html
 eventDB.allDocsOfLocalDB.then(function(result) {
     for (const entry of result.rows) {
-      if(entry.doc.month === undefined || entry.doc.title === undefined || entry.doc.daydate === undefined){
+      if(entry.doc.month === undefined || entry.doc.title === undefined || entry.doc.date === undefined){
         console.log("ist leer");
       }
       else {
@@ -129,6 +129,7 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       //div for title and summary called eventInfo
       const eventInfo = document.createElement("div");
       const title = document.createElement("h2");
+      title.classList.add("title-event");
       const summary = document.createElement("p");
       title.innerHTML = entry.doc.title.toUpperCase();
       summary.innerHTML = entry.doc.summary;
