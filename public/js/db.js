@@ -290,28 +290,28 @@ const bookmarksDB = new Database('bookmarks');
 
 //if you want to change your local init, comment fetchJson out and setRecommend in.
 locationDB._syncFromRemoteToLocal().on('complete', function(info){
-  if(document.body.id === "index") setRecommend(locationDB);
-  //fetchJson(locationDB);
+  //if(document.body.id === "index") setRecommend(locationDB);
+  fetchJson(locationDB);
 }).on('error', function (err) {
-  if(document.body.id === "index") setRecommend(locationDB);
-  //fetchJson(locationDB); //for mobile, because you cant access the remote database
+  //if(document.body.id === "index") setRecommend(locationDB);
+  fetchJson(locationDB); //for mobile, because you cant access the remote database
 });
 
 eventDB._syncFromRemoteToLocal().on('complete', function(info) {
-  if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
-  //fetchJson(eventDB);
+  //if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
+  fetchJson(eventDB);
 }).on('error', function (err) {
-  if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
-  //fetchJson(eventDB); //for mobile, because you cant access the remote database
+  //if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
+  fetchJson(eventDB); //for mobile, because you cant access the remote database
 });
 
 tourDB._syncFromRemoteToLocal().on('complete', function(info) {
-  if(document.body.id === "index") setRecommend(tourDB);
-  //fetchJson(tourDB);
+  //if(document.body.id === "index") setRecommend(tourDB);
+  fetchJson(tourDB);
 }).on('error', function (err) {
   console.log("error");
-  if(document.body.id === "index") setRecommend(tourDB);
-    //fetchJson(tourDB); //for mobile, because you cant access the remote database
+  //if(document.body.id === "index") setRecommend(tourDB);
+  fetchJson(tourDB); //for mobile, because you cant access the remote database
 });
 
 
