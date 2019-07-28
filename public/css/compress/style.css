@@ -135,7 +135,7 @@ h1, h2, h3, h4 {
   width: 30px; }
 
 .notification-bookmark {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -1033,6 +1033,52 @@ body.overflow-hidden {
     content: url("/public/assets/images/icons/tour-green.svg");
     height: 25px;
     width: 13px; }
+
+.eventInfo {
+  flex: 1; }
+
+.eventMenu {
+  align-self: flex-start;
+  cursor: default; }
+  .eventMenu::after {
+    content: url("/public/assets/images/icons/menu-green.svg");
+    width: 4px;
+    height: 18px;
+    display: inline-block;
+    padding: 1em 1em 1em 0.2em; }
+
+.event-menu-content {
+  position: absolute;
+  background-color: #fff;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  padding: 1.5em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+  display: block; }
+  .event-menu-content.hide {
+    display: none; }
+  .event-menu-content .entity-event-share, .event-menu-content .entity-event-export, .event-menu-content .entity-event-bookmark {
+    display: flex;
+    font-size: 0.8em;
+    color: #747474;
+    align-items: center; }
+    .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
+      margin: 1.5em 0; }
+    .event-menu-content .entity-event-share::before, .event-menu-content .entity-event-export::before, .event-menu-content .entity-event-bookmark::before {
+      padding-right: 1.5em;
+      height: 1.5em;
+      width: 1.5em; }
+  .event-menu-content .entity-event-share::before {
+    content: url("/public/assets/images/icons/share-green.svg"); }
+  .event-menu-content .entity-event-export::before {
+    content: url("/public/assets/images/icons/export-green.svg"); }
+  .event-menu-content .entity-event-bookmark::before {
+    content: url("/public/assets/images/icons/heart-green.svg"); }
+  .event-menu-content .entity-event-bookmark.marked::before {
+    content: url("/public/assets/images/icons/heart-full-green.svg"); }
 
 .bookmark-header {
   background-color: #fafafa;
