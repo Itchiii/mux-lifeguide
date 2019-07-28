@@ -6,6 +6,8 @@ div[class^="related"] {
 		font-weight: bold;
 		text-transform: uppercase;
 		text-align: center;
+		color: #fff;
+		width: 100%;
 	}
 
 	.r-heading-contact, .r-heading-imprint {
@@ -14,7 +16,7 @@ div[class^="related"] {
 }
 
 .related-about {
-	background-color: #878787;
+	background-color: #7ece96;
 
 	.r-heading-about {
     padding-top: 2em;
@@ -29,7 +31,7 @@ div[class^="related"] {
 }
 
 .related-contact {
-	background-color: #d0d0d0;
+	background-color: #6da37d;
 
 	&-content {
 		background-color: #e2e2e2;
@@ -51,7 +53,7 @@ div[class^="related"] {
 }
 
 .related-imprint {
-	background-color: #acacac;
+	background-color: #646464
 }
 
 .index-lifeguideLogo {
@@ -112,12 +114,8 @@ div[class^="related"] {
 	margin-left: auto;
 	color: $highlightedColor;
 		
-	svg {
+	img {
 		height: 30px;
-
-		> * {
-			stroke: $highlightedColor;
-		}
 	}
 }
 
