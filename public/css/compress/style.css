@@ -387,9 +387,8 @@ div[class^="related"] {
 .top-nav {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
-  height: 4em; }
+  height: 2.5em; }
 
 .left-nav {
   display: flex;
