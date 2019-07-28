@@ -158,7 +158,8 @@ function setFunctionForLinkedEventMenuContent() {
     const eventID = document.getElementById('event-menu-content').dataset.eventid;
     bookmarksDB._getDoc(eventID).then(function(data) {
       bookmarksDB._removeDoc(data).then(() => {
-        showNotificationForBookmark(false, "event");  
+        showNotificationForBookmark(false, "event");
+        document.querySelector(`.event[data-id^="${eventID}"]`).remove();
       });
     }).catch(function(){
       //put element on bookmarks

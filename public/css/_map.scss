@@ -88,9 +88,7 @@ body.overflow-hidden {
     }
   }
 
-  .location-entity-content {
-    margin-top: 1em;
-    
+  .location-entity-content { 
     .hide {
       display: none;
     }
@@ -115,18 +113,19 @@ body.overflow-hidden {
 
       .entity-open-heading {
         text-transform: uppercase;
+        margin: 1.5em 0;
       }
     
       .entity-open-description {
         font-size: 0.8em;
-        margin-top: 0.5em;
+        
         color: #747474;
         width: 75%;
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        -moz-line-clamp: 3;
+        -moz-line-clamp: 2;
         -moz-box-orient: vertical;  
       }
 
@@ -136,11 +135,16 @@ body.overflow-hidden {
         margin-left: auto;
         font-family: 'Oxygen-Bold';
         font-size: 0.8em;
+        display: flex;
+        align-items: center;
 
         &::after {
-          content: "P";
-          padding-left: 10px;
-          
+          content: url("/public/assets/images/icons/route-green.svg");
+          height: 1em;
+          display: inline-block;
+          width: 1em;
+          padding-bottom: 10px;
+          transform: rotate(90deg);
         }
       }
     }
@@ -509,23 +513,15 @@ body.overflow-hidden {
 }
 
 .end-marker {
-  height: 15px;
-  width: 15px;
-  background-color: #ac39ac;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-
-  &::after {
-    position: absolute;
-    background-color: rgba(172, 57, 172, 0.5);
-    content: "";
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-  }
+  border: 4px solid $highlightedColor;
 
   &.hide {
     display: none;

@@ -23,10 +23,37 @@ bookmarksDB.allDocsOfLocalDB.then(function(result) {
         eventInfo.append(summary);
         eventInfo.classList.add("eventInfo");
 
+
+        const menu = document.createElement('div');
+        menu.classList.add('eventMenu');
+        //move and toggle display of menu content
+        menu.addEventListener('click', function () {
+          const offset = 50;
+          const content = document.getElementById('event-menu-content');
+          //set position
+          content.style.top = this.getBoundingClientRect().top - document.getElementById('bookmarks').getBoundingClientRect().top + offset + "px";
+                
+          if(content.dataset.eventid === this.closest('.event').dataset.id || content.classList.contains('hide')) {
+            content.classList.toggle('hide');
+          }
+
+          if (!content.classList.contains('hide')) {
+            content.dataset.eventid = entry.doc._id;
+          }
+
+          const eventID = content.dataset.eventid;
+          bookmarksDB._getDoc(eventID).then(function(data) {
+            document.getElementById('entity-event-bookmark').classList.add('marked');
+          }).catch(function(){
+            document.getElementById('entity-event-bookmark').classList.remove('marked');
+          });
+        });
+
         //div for eventInfo and eventDate called eventColumn
         const eventColumn = document.createElement("div");
         eventColumn.append(eventDate);
         eventColumn.append(eventInfo);
+        eventColumn.append(menu);
         eventColumn.classList.add("eventColumn", "b-column");
        
         //div for eventimg and eventColumn
@@ -40,8 +67,10 @@ bookmarksDB.allDocsOfLocalDB.then(function(result) {
         event.dataset.id = entry.doc._id;
         //Put events container in DOM
         //document.getElementById('b-events').append(events);
-        event.addEventListener("click", function(){
-          window.open(`article.html?id=${this.dataset.id}`, "_self");
+        event.addEventListener("click", function(e){
+          if (!e.target.classList.contains("eventMenu") && document.getElementById('event-menu-content').classList.contains('hide')) {
+            window.open(`article.html?id=${this.dataset.id}`, "_self");
+          }
         });
        }
 
@@ -105,3 +134,13 @@ document.getElementById('bookmarks').addEventListener('scroll', function ( event
   }, 50);
 
 }, false);
+
+
+setFunctionForLinkedEventMenuContent();
+
+//add body listener on click to hide the event menu
+document.body.addEventListener('click', function (event) {
+  if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {
+    document.getElementById('event-menu-content').classList.add('hide');
+  }
+});

@@ -8,7 +8,7 @@ fetch('accessTokenMapBox.txt')
     mapboxgl.accessToken = accessTokenMapBox;
     var map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/student123456/cjyg2mizy00731cpb3g66n986',
+      style: 'mapbox://styles/student123456/cjymz3gtj2tak1do2c1jagy5i',
       center: [10.89851, 48.37154], // starting position [lng, lat]
       zoom: 12 // starting zoom
     });

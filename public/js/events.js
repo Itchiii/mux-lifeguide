@@ -230,17 +230,6 @@ eventDB.allDocsOfLocalDB.then(function(result) {
 
   setFunctionForLinkedEventMenuContent();
 
-
-  document.getElementById('entity-event-bookmark').addEventListener('click', () => {
-    const eventID = document.getElementById('event-menu-content').dataset.eventid;
-
-    bookmarksDB._getDoc(eventID).then(function(data) {
-      document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-full-green.svg";
-    }).catch(function(){
-      document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-green.svg";
-    });
-  });
-
   //add body listener on click to hide the event menu
   document.body.addEventListener('click', function (event) {
     if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {

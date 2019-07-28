@@ -11,14 +11,10 @@
 		padding: 1em 1.5em;
 		font-size: 0.8em;
 		font-family: 'Oxygen-Bold';
+		color: $headingTextColor;
 
 		&.active {
 			border-bottom: 3px solid $highlightedColor;
-		}
-
-		&:visited {
-			border-bottom: 3px solid $highlightedColor;
-
 		}
 	}
 }
@@ -29,6 +25,7 @@
 	overflow-x: scroll;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
+	padding-bottom: 7em;
 
 	.bookmark-site {
 		min-width: 100vw;
