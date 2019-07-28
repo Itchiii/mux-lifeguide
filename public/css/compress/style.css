@@ -401,6 +401,28 @@ div[class^="related"] {
   max-width: 800px;
   margin-bottom: 5em; }
 
+#headline-form {
+  text-transform: uppercase;
+  margin: 2em auto 0 auto; }
+
+#back {
+  display: flex;
+  flex-direction: row;
+  margin-left: -0.3em; }
+
+#back img {
+  width: 1.5em;
+  height: 1.5em; }
+
+#exit img {
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 0.1em; }
+
+#back span {
+  color: #7ECE96;
+  padding-top: 0.1em; }
+
 #wrapperFormular {
   width: 300vw;
   display: flex;
@@ -416,14 +438,14 @@ div[class^="related"] {
 #stepOne, #stepTwo, #stepThree {
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
+  padding: 1.5em;
   width: 100vw; }
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2em; }
+  margin-top: 1.5em; }
 
 #description {
   height: 8em; }
@@ -431,7 +453,7 @@ div[class^="related"] {
 .formButton {
   font-weight: bold;
   width: 50vw;
-  margin-top: 1em;
+  margin-top: 2.5em;
   height: 3em;
   padding: 1em;
   border-radius: 5px;
@@ -439,6 +461,17 @@ div[class^="related"] {
   border: none;
   background: #7ECE96;
   color: #F6F7F9;
+  font-size: 1em; }
+
+.formInput {
+  width: 100%;
+  margin-top: 1em;
+  height: 3em;
+  padding: 1em;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background: white;
   font-size: 1em; }
 
 .backdrop {
@@ -452,13 +485,21 @@ div[class^="related"] {
   background-color: #7ECE96; }
 
 .warning {
-  color: white; }
+  color: white;
+  margin: auto;
+  width: 60vw;
+  text-align: center; }
+
+.warning h2 {
+  color: white;
+  margin-top: -3em;
+  margin-bottom: 1em; }
 
 #loadingBar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 0.2em; }
+  margin-top: 0.3em; }
 
 #bar1, #bar2, #bar3 {
   height: 5px;
@@ -477,11 +518,14 @@ div[class^="related"] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: white; }
+  background-color: white;
+  padding: .5em 1.5em;
+  align-items: center; }
 
 .summary {
   margin: 0 auto;
-  width: 75vw; }
+  width: 100%;
+  text-align: center; }
 
 body.overflow-hidden {
   overflow: hidden;

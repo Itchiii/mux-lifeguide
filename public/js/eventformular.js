@@ -133,8 +133,12 @@ function goEvent() {
       
     var backdrop = document.createElement("div");
     backdrop.classList.add("backdrop");
-    var warning = document.createElement("h4");
-    warning.innerHTML = "Wir prüfen ihre Anfrage und stellen sie danach online. Ihre Veranstaltung steht ihnen lokal allerdings schon zur Verfügung.";
+    var warning = document.createElement("div");
+    var danke = document.createElement("h2");
+    var info = document.createElement("span");
+    danke.innerHTML = "Danke!"
+    info.innerHTML = "Wir prüfen ihre Anfrage und stellen sie danach online. Ihre Veranstaltung steht ihnen lokal allerdings schon zur Verfügung.";
+    warning.append(danke, info);
     warning.classList.add("warning");
     backdrop.append(warning);
     document.getElementById("eventformular").append(backdrop);
