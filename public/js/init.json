@@ -1,85 +1,383 @@
 [
     {
-        "id": "architekturmusuem",
-        "title": "Architekturmuseum im Theolottviertel",
-        "summary": "In der Villa des Architekten Sebastian Buchegger befindet sich heute ein Museum. Anfang des 20. Jahrhunderts plante der Architekt dieses Viertel als grüne Gartenstadt. Citynah und trotzdem im Grünen. ",
-        "description": "Der Architekt Sebastian Buchegger griff die Idee der Gartenstädte auf und kaufte 1905 ein Stück feuchtes, abschüssiges Land an der Wertach – für 2,60 Mark pro Quadratmeter. Dort entstanden hübsche Bürgerhäuser und mehrgeschossige Mietshäuser, die durch gewundene Straßen miteinander verbunden sind und wie eine eigene Kleinstadt anmuten.",
-        "lat": 48.36440,
-        "long": 10.90127,
-        "address": "Thelottstraße 11", 
-        "zipCode": "86150 Augsburg",
-        "openingHours": "Mo.-Fr. 9:00 Uhr bis 18:00 Uhr <br /> Sa. 10:00 Uhr bis 16:00 Uhr",
-        "phone": "Mobil: +49123456789",
-        "web": "https://www.takuna.de",
-        "owner": "Mustermann",
-        "rating": 0,
-        "attachments": [
-            {
-                "attachmentFile": "./public/assets/images/architekturmuseum.jpg",
-                "attachmentName": "architekturmusuem.jpg"
-            },
-            {
-                "attachmentFile": "./public/assets/images/europadorf.jpg",
-                "attachmentName": "architekturmusuem2.jpg"
-            },
-            {
-                "attachmentFile": "./public/assets/images/gruenfux.jpg",
-                "attachmentName": "architekturmusuem3.jpg"
-            }
-        ],
-        "linkedEvents": ["barfuss", "stadtwald"],
-        "category": "shop",
-        "recommend": true
+      "id": "architekturmusuem",
+      "title": "Architekturmuseum im Theolottviertel",
+      "summary": "In der Villa des Architekten Sebastian Buchegger befindet sich heute ein Museum. Anfang des 20. Jahrhunderts plante der Architekt dieses Viertel als grüne Gartenstadt. Citynah und trotzdem im Grünen. ",
+      "description": "Der Architekt Sebastian Buchegger griff die Idee der Gartenstädte auf und kaufte 1905 ein Stück feuchtes, abschüssiges Land an der Wertach – für 2,60 Mark pro Quadratmeter. Dort entstanden hübsche Bürgerhäuser und mehrgeschossige Mietshäuser, die durch gewundene Straßen miteinander verbunden sind und wie eine eigene Kleinstadt anmuten.",
+      "lat": 48.3644,
+      "long": 10.90127,
+      "address": "Thelottstraße 11",
+      "zipCode": "86150 Augsburg",
+      "openingHours": "Mo.-Fr. 9:00 Uhr bis 18:00 Uhr <br /> Sa. 10:00 Uhr bis 16:00 Uhr",
+      "phone": "Mobil: +49123456789",
+      "web": "https://www.takuna.de",
+      "owner": "Mustermann",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/architekturmuseum.jpg",
+          "attachmentName": "architekturmusuem.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/architekturmuseum.jpg",
+          "attachmentName": "architekturmusuem2.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/architekturmuseum.jpg",
+          "attachmentName": "architekturmusuem3.jpg"
+        }
+      ],
+      "linkedEvents": [
+        "barfuss",
+        "reicht",
+        "freiluft"
+      ],
+      "category": "shop",
+      "recommend": true
     },
     {
-        "id": "europadorf",
-        "title": "Augsburger Europadorf",
-        "summary": "Gelungenes Integrationsprojekt, günstige Mieten, buntgemischte Mieterschaft, generationsübergreifendes Wohnen, ökologischer Wohnungsbau ",
-        "description": "Die Idee für Europadörfer stammt aus der Zeit nach dem zweiten Weltkrieg. Heimatlose Menschen aus unterschiedlichen Ländern sollten in den sechs Häusern in Hochzoll friedlich miteinander leben. Der Initiator Pater Dominique Pire erhielt für diese Idee der Völkerverständigung 1958 den Friedensnobelpreis.",
-        "lat": 48.36756,
-        "long": 10.88579,
-        "rating": 0,
-        "attachments": [
-            {
-                "attachmentFile": "./public/assets/images/europadorf.jpg",
-                "attachmentName": "europadorf.jpg"
-            }
-        ],
-        "category": "leisure",
-        "recommend": true
+      "id": "europadorf",
+      "title": "Augsburger Europadorf",
+      "summary": "Gelungenes Integrationsprojekt, günstige Mieten, buntgemischte Mieterschaft, generationsübergreifendes Wohnen, ökologischer Wohnungsbau ",
+      "description": "Die Idee für Europadörfer stammt aus der Zeit nach dem zweiten Weltkrieg. Heimatlose Menschen aus unterschiedlichen Ländern sollten in den sechs Häusern in Hochzoll friedlich miteinander leben. Der Initiator Pater Dominique Pire erhielt für diese Idee der Völkerverständigung 1958 den Friedensnobelpreis.",
+      "lat": 48.36756,
+      "long": 10.88579,
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/europadorf.jpg",
+          "attachmentName": "europadorf.jpg"
+        }
+      ],
+      "category": "leisure",
+      "recommend": true
     },
     {
-        "id": "gruenfux",
-        "title": "Schuberts Biobackwaren im Grünfux-deluxe",
-        "summary": "Für Sparfüchse: Im neuen Unverpackt-Verkaufswagen der Bio-Bäckerei Schubert kommt das (noch) Gute von gestern ins Körbchen – beste Bioqualität wandert preiswert und unverpackt in die Einkaufstaschen der Kund*innen!",
-        "description": "Warum wegwerfen was noch schmeckt? Gutes Brot, Feingebäck und Snacks von gestern, leckerer Kuchen mit Schönheitsfehlern, Dauerbackwaren mit kurzem Mindesthaltbarkeitsdatum und guter Kondition, frisches Kleingebäck aus den laufenden Qualitätskontrollen, Brezen falsch geschlungen, Backtests aus der Produktentwicklung (Sneak Preview!) – all die feinen Dinge können doch nicht im Müll landen! Ab sofort kommen diese hochwertigen Biobackwaren ins neue Grünfux-deluxe und warten dort auf ihre Genießer*innen. Jeder Tag wird anders.",
-        "lat": 48.37638,
-        "long": 10.89685,
-        "rating": 0,
-        "attachments": [
-            {
-                "attachmentFile": "./public/assets/images/gruenfux.jpg",
-                "attachmentName": "gruenfux.jpg"
-            }
-        ],
-        "category": "dinner",
-        "recommend": true
+      "id": "gruenfux",
+      "title": "Schuberts Biobackwaren im Grünfux-deluxe",
+      "summary": "Für Sparfüchse: Im neuen Unverpackt-Verkaufswagen der Bio-Bäckerei Schubert kommt das (noch) Gute von gestern ins Körbchen – beste Bioqualität wandert preiswert und unverpackt in die Einkaufstaschen der Kund*innen!",
+      "description": "Warum wegwerfen was noch schmeckt? Gutes Brot, Feingebäck und Snacks von gestern, leckerer Kuchen mit Schönheitsfehlern, Dauerbackwaren mit kurzem Mindesthaltbarkeitsdatum und guter Kondition, frisches Kleingebäck aus den laufenden Qualitätskontrollen, Brezen falsch geschlungen, Backtests aus der Produktentwicklung (Sneak Preview!) – all die feinen Dinge können doch nicht im Müll landen! Ab sofort kommen diese hochwertigen Biobackwaren ins neue Grünfux-deluxe und warten dort auf ihre Genießer*innen. Jeder Tag wird anders.",
+      "lat": 48.37638,
+      "long": 10.89685,
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/gruenfux.jpg",
+          "attachmentName": "gruenfux.jpg"
+        }
+      ],
+      "category": "dinner",
+      "recommend": true
     },
     {
-        "id": "horn",
-        "title": "Deutscher Alpenverein Sektion Augsburg",
-        "summary": "Seit 150 Jahren Engagement für die Alpenlandschaft, Bergsport und Naturschutz. Augsburg hat 15.000 Mitglieder. ",
-        "description": "Vor 150 Jahren, am 8. Juli 1869, gründeten die Augsburger Buchhändler Theodor Lampart und Friedrich Schenkenhofer mit 56 weiteren Herren der gehobenen Gesellschaft die Sektion Augsburg des Deutschen Alpenvereins. Aus einer Interessengemeinschaft für die Alpenlandschaft entwickelte sich zunächst ein Bergsportverband und seit den frühen achtziger Jahren des vergangenen Jahrhunderts auch ein Naturschutzverband. Heute hat die Sektion Augsburg 15.000 Mitglieder und engagiert sich nachhaltig für Natur- und Umweltschutz",
-        "lat": 48.36865,
-        "long": 10.90934,
-        "rating": 0,
-        "attachments": [
-            {
-                "attachmentFile": "./public/assets/images/horn.jpg",
-                "attachmentName": "horn.jpg"
-            }
-        ],
-        "category": "greenLocation",
-        "recommend": true
+      "id": "horn",
+      "title": "Deutscher Alpenverein Sektion Augsburg",
+      "summary": "Seit 150 Jahren Engagement für die Alpenlandschaft, Bergsport und Naturschutz. Augsburg hat 15.000 Mitglieder. ",
+      "description": "Vor 150 Jahren, am 8. Juli 1869, gründeten die Augsburger Buchhändler Theodor Lampart und Friedrich Schenkenhofer mit 56 weiteren Herren der gehobenen Gesellschaft die Sektion Augsburg des Deutschen Alpenvereins. Aus einer Interessengemeinschaft für die Alpenlandschaft entwickelte sich zunächst ein Bergsportverband und seit den frühen achtziger Jahren des vergangenen Jahrhunderts auch ein Naturschutzverband. Heute hat die Sektion Augsburg 15.000 Mitglieder und engagiert sich nachhaltig für Natur- und Umweltschutz",
+      "lat": 48.36865,
+      "long": 10.90934,
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/horn.jpg",
+          "attachmentName": "horn.jpg"
+        }
+      ],
+      "category": "greenLocation",
+      "recommend": true
+    },
+    {
+      "id": "biolandhofkreppold",
+      "title": "Bioland-Hof Kreppold",
+      "summary": "Hofladen mit ökologischen Anbau. Der Einödhof bei Sielenbach wurde 1230 erstmals erwähnt. Seit 1982 bewirtschaftet die Familie Kreppold das Anwesen nach Bioland-Standards.",
+      "description": "Der Hof in Wilpersberg bei Aichach gehört zu den Einödhöfen rund um Sielenbach und wurde 1230 erstmals erwähnt. Seit 1982 bewirtschaftet die Familie Kreppold das Anwesen nach Bioland-Standards. Schwerpunkt ist der Anbau von Getreide wie Weizen, Roggen, Dinkel und Hafer, sowie Gemüse, Mais und Zuckerrüben. Auf den Wiesen rund um den Kreppold-Hof weiden Angus-Rinder in kleinen Herden. Im Sommer entscheiden sie je nach Witterung, ob sie im Stall oder draußen bleiben möchten. Der Hofladen hält ein breites Angebot von Bio-Fleisch und anderen Bio-Produkte bereit. Die Familie Kreppold veranstaltet regelmäßig Hoffeste, Ausstellungen oder Hofführungen.",
+      "lat": 48.35323,
+      "long": 10.88263,
+      "address": "Wilpersberg 1",
+      "zipCode": "86551 Aichach",
+      "openingHours": "Do. 16:00 Uhr bis 18:30 Uhr <br /> Fr. 10:00 Uhr bis 18:30 Uhr <br /> Sa. 08:00 Uhr bis 12:30 Uhr",
+      "phone": "Tel.: +49-08258-211",
+      "web": "http://www.biolandhof-kreppold.de",
+      "owner": "Familie Kreppold",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/biolandhof.jpg",
+          "attachmentName": "biolandhof.jpg"
+        }
+      ],
+      "linkedEvents": [
+        "reicht",
+        "pilzausstellung"
+      ],
+      "category": "shop",
+      "recommend": false
+    },
+    {
+      "id": "takuna",
+      "title": "[takuna] Naturkosmetik in Glasflaschen",
+      "summary": "Schluss mit der Plastikflut im Bad! Das Startup des Augsburgers Florian Strobl bietet Naturkosmetik in nachhaltiger Verpackung.",
+      "description": "Mit [takuna] Naturkosmetik will Florian Strobl den Plastikmüll im Badezimmer deutlich reduzieren. Bereits während seines Studiums zum Wirtschaftsingenieur an der Universität Augsburg interessierte er sich für das Thema Plastikvermeidung. So arbeitete er zum Beispiel am Leitfaden für Abfallvermeidung in bayerischen Kommunen mit. Das Thema Plastikvermeidung hat ihn seitdem nicht mehr losgelassen. Da kein Kosmetikhersteller eine zufriedenstellende Begründung für die Verwendung von Plastikverpackungen geben konnte, hat er es schließlich selber in die Hand genommen und im Herbst 2018 [takuna] Naturkosmetik gegründet.",
+      "lat": 48.39747,
+      "long": 10.87234, 
+      "address": "Gärtnerstraße 18",
+      "zipCode": "86161 Augsburg",
+      "phone": "Mobil: +49-151-14648447",
+      "web": "www.takuna.de",
+      "owner": "Florian Strobel",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/florianstrobel.jpg",
+          "attachmentName": "florianstrobel.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/takuna.jpg",
+          "attachmentName": "takuna.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/duschgeltakuna.jpg",
+          "attachmentName": "duschgeltakuna.jpg"
+        }
+      ],
+      "category": "shop",
+      "recommend": true
+    },
+    {
+      "id": "energieberatung",
+      "title": "Energieberatung der Stadt Augsburg",
+      "summary": "Kostenfreie und neutrale Erstberatung – Hilfe bei der Orientierung im „Dschungel der Energiethemen“",
+      "description": "Auf Fragen rund um die Themen Energiesparen, erneuerbare Energien und energieeffizientes Bauen und Sanieren gibt die Energieberatung der Stadt Augsburg Antworten. Das kostenlose Angebot einer 30-minütige Initialberatung steht allen Augsburger Bürger*innen offen. Der große Vorteil dieser Beratungstermine: Die erfahrenen Energieberater*innen der Stadt Augsburg beantworten alle Anliegen individuell und unabhängig.",
+      "lat": 48.37923,
+      "long": 10.93483,
+      "address": "Elias-Holl-Platz 3",
+      "zipCode": "86150 Augsburg",
+      "openingHours": "Di. 13:00 Uhr bis 16:00 Uhr",
+      "phone": "Tel.: +49-0821 -324-7322",
+      "web": "https://www.augsburg.de/umwelt-soziales/umwelt/klima-energie/energieberatung/",
+      "rating": 0,
+      "linkedEvents": [
+        "marktwirtschaft"
+      ],
+      "category": "orga",
+      "recommend": false
+    },
+    {
+      "id": "eselgarten",
+      "title": "Permakulturhof Eselgarten",
+      "summary": "Ausflugziel in den Westlichen Wäldern: Vom idyllischen Hof starten Eselwanderungen und im naturnahen Garten leben viele Tiere",
+      "description": "Auf dem historisch anmutendem Hof gibt es in dem naturnahen Garten eine bunte Mischung aus Gemüse, Obstbäumen, Beerensträuchern, Blumen und Kräutern. Außerdem lebt hier eine große, bunte  Tierfamilie, zu der unter anderem zwei Esel, ein paar Schafe, Ziegen, Hühner, Enten, Hunde und Katzen gehören. Kinder können im Eselsgarten einfach eine schöne Zeit mit den Tieren verbringen oder auch ihren Geburtstag hier feiern. Außerdem haben Besucher*innen die Möglichkeit eine kleine Ausstellung mit Naturbildern zu sehen oder Tipps für ihre eigene Gartengestaltung zu bekommen.",
+      "lat": 48.32128,
+      "long": 10.94032,
+      "address": "Blumenstraße 4",
+      "zipCode": "86868 Reichertshofen",
+      "phone": "Tel.: +49-08262-968330",
+      "web": "http://www.permakulturhof-eselgarten.de/",
+      "rating": 0,
+       "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/eselgarten.jpg",
+          "attachmentName": "eselgarten.jpg"
+        }
+      ],
+      "linkedEvents": [
+        "stadtrundgang",
+        "stadtwald"
+      ],
+      "category": "greenLocation",
+      "recommend": true
+    },
+    {
+      "id": "k41",
+      "title": "Restaurant K 41",
+      "summary": "Gesund und lecker, vegan und glutenfrei. Der Inhaber Lienus Nguyen will vor allem eines: seine Gäste glücklich machen.",
+      "description": "Nguyen ist sowohl Inhaber, als auch Kellner und Koch im K41. Der Vietnamese möchte, dass sich die Gäste in seinem Restaurant wie in einer Großfamilie fühlen. Nguyen kocht nicht nach Kochbuch und es gibt auch keine Speisekarte. Gekocht wird, was die Saison hergibt oder was die Gäste, zum Beispiel aus dem Garten, mitbringen. Stets gesund versteht sich. Zudem achtet Nguyen auf die richtige Kombination von Eiweißen, Vitaminen und Ballaststoffen. Denn Essen soll schließlich glücklich machen!",
+      "lat": 48.34729,
+      "long": 10.87234,
+      "openingHours": "Mo.-Fr. 11:30 Uhr bis 15:00 Uhr <br /> Di.-Fr. 11:30 Uhr bis 15:00 Uhr 18:00 Uhr bis 21:00 Uhr",
+      "phone": "Mobil: +49 0175 665 1912",
+      "web": "http://lienus.de/",
+      "rating": 0,
+      "linkedEvents": [
+        "pilzausstellung",
+        "stadtwald"
+      ],
+      "category": "dinner",
+      "recommend": false
+    },
+    {
+      "id": "leihwand",
+      "title": "LeihWand im Wohnzimmer",
+      "summary": "Nicht alles muss man selbst besitzen, wenn es hilfsbereite Nachbar*innen gibt! Nachbar*innen leihen sich gegenseitig und kostenlos Dinge von A-Z.",
+      "description": "Jeder besitzt Dinge, die er oder sie nur sehr selten benutzt. Beispielsweise ein Waffeleisen oder eine Bohrmaschine. Und ist umgekehrt vielleicht auf der Suche nach einer Säge, einem Lötkolben oder einer Nähmaschine. Das Wohnzimmer im Schwabencenter gibt es seit März 2018 die LeihWand, kurz LeiWa.  „Nicht alles muss man selbst besitzen, wenn es hilfsbereite Nachbarn gibt!“, erklärt Johannes Breuer, einer der Initiatoren des Projektes. Eine gemeinsame Kartei vermittelt unkompliziert Kontakte zum gegenseitigen Aus- und Verleihen selten genutzter Dinge. Kostenlos versteht sich. Alle können mitmachen und auf einem Karteikarten-System ihre Angebote und Wünsche vermerken. Jeden Mittwoch und jeden Samstag von 14 – 15 Uhr ist Kontaktzeit.",
+      "lat":  48.35688,
+      "long": 10.90462, 
+      "address": "Wilhelm-Hauff-Straße 28",
+      "zipCode": "86161 Augsburg",
+      "web": "https://www.facebook.com/LebensraumSchwabencenter/",
+      "rating": 0,
+      "linkedEvents": [
+        "freiluft"
+      ],
+      "category": "leisure",
+      "recommend": false
+    },
+    {
+      "id": "naturmuseum",
+      "title": "Naturmuseum",
+      "summary": "Wissenswertes zum Thema Natur aus den Bereichen Geologie, Paläontologie, Mineralogie und Biologie",
+      "description": "Das Naturmuseum in den Augusta Arcaden zeigt Interessantes und Außergewöhnliches aus den Bereichen Geologie, Paläontologie, Mineralogie und Biologie. Immer am ersten Sonntag des Monats bietet das Naturmuseum ab 14 Uhr seine beliebte Turnusführung für die ganze Familie an. Dabei geht es auf eine spannende Entdeckungstour durch alle Ausstellungsbereiche des Naturmuseums mit Blick auf die Geschichte unseres Planeten, insbesondere die jüngere Erdgeschichte unserer Heimat, sowie auf die unglaubliche Vielfalt der Natur.",
+      "lat":  48.37740,
+      "long": 10.88951,
+      "address": "Ludwigstraße 14",
+      "zipCode": "86152 Augsburg",
+      "phone": "Tel.: +49-0821-324 67 40",
+      "web": "http://www.augsburg.de/kultur/museen-galerien/naturmuseum/",
+      "rating": 0,
+       "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/naturmuseum.jpg",
+          "attachmentName": "naturmuseum.jpg"
+        }
+      ],
+      "linkedEvents": [
+        "barfuss",
+        "lebensstil"
+      ],
+      "category": "leisure",
+      "recommend": true
+    },
+    {
+      "id": "deargoods",
+      "title": "DearGoods",
+      "summary": "Fair + Bio + Vegan: Kleidung und Lifestyle.",
+      "description": "Alle Produkte von DearGoods sind menschen-, tier- und umweltfreundlich. Die Philosophie von DearGoods lautet: Mode macht Spaß. Noch mehr Spaß macht Mode, wenn man Verantwortung übernimmt. Und so wird eine schöne Tasche noch schöner, wenn weder Menschen noch Tiere leiden mussten und auch die Umwelt möglichst unversehrt bleibt. DearGoods bietet Konsum ohne Ausbeutung.",
+      "lat": 48.35779,
+      "long": 10.91080,
+      "address": "Frauentorstr. 7",
+      "zipCode": "86152 Augsburg",
+      "phone": "Tel.: +49-0821-24414941",
+      "web": "http://www.deargoods.com/",
+      "rating": 0,
+       "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/deargoods.jpg",
+          "attachmentName": "deargoods.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/deargoods2.png",
+          "attachmentName": "deargoods2.png"
+        }
+      ],
+      "linkedEvents": [
+        "barfuss",
+        "freiluft"
+      ],
+      "category": "shop",
+      "recommend": true
+    },
+    {
+      "id": "greenoffice",
+      "title": "GreenOffice Augsburg",
+      "summary": "Initiative zur Vernetzung und Unterstützung von grünen Initiativen an der Uni und darüber hinaus.",
+      "description": "GreenOffice möchte für einen grünen Campus an der Uni Augsburg sorgen. Dazu vernetzt das GreenOffice engagierte Studierende, Dozierende, Interessierte und Kooperationspartner und fördert so die Umsetzung von Projekten im Bereich Nachhaltigkeit. Durch externe Projektpartner und regionale Projekte soll nachhaltiges Denken in die Gesellschaft transportiert werden. Gleichzeitig möchte GreenOffice Wissenschaft, Forschung und Bildung auf diesem Gebiet voranbringen. GreenOffice glaubt fest an die Synergieeffekte von Wissenschaft und Gesellschaft.",
+      "lat": 48.35551,
+      "long": 10.92865,
+      "web": "http://greenofficeaugsburg.de",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/greenoffice.jpg",
+          "attachmentName": "greenoffice.jpg"
+        }
+      ],
+       "linkedEvents": [
+        "barfuss",
+        "lebensstil",
+        "pilzausstellung"
+      ],
+      "category": "orga",
+      "recommend": true
+    },
+    {
+      "id": "denkmal",
+      "title": "Denkmal an die Zukunft",
+      "summary": "Ausruhen. Nachdenken. Anpacken.",
+      "description": "Im November 2016 pflanzten das Agendateam, der Nachhaltigkeitsbeirat, das Amt für Grünordnung, Naturschutz und Friedhofswesen sowie Nachhaltigkeitsreferent Reiner Erben drei Obstbäume in der Grünanlage am Curt-Frenzel-Stadion. Gefeiert wurde das 20jährige Bestehen der Lokale Agenda 21. Entstanden ist ein kleiner öffentlicher Ort mit Obstbäumen und Sitzsteinen zum Ausruhen und Nachdenken als „Denkmal an die Zukunft“. In wenigen Jahren können dann dort hoffentlich Zwetschgen, Äpfel und Quitten von allen Bürgerinnen und Bürgern geerntet werden.",
+      "lat": 48.39747,
+      "long": 10.87234, 
+      "address": "An der Blauen Kappe, Grünanlage oberhalb des Curt-Frenzel-Stadion (Eisstadion)",
+      "zipCode": "86150 Augsburg",
+      "web": "http://www.nachhaltigkeit.augsburg.de",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/denkmal.jpg",
+          "attachmentName": "denkmal.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/denkmal3.jpg",
+          "attachmentName": "denkmal3.jpg"
+        },
+        {
+          "attachmentFile": "./public/assets/images/locations/denkmal2.jpg",
+          "attachmentName": "denkmal2.jpg"
+        }
+      ],
+       "linkedEvents": [
+        "stadtrundgang",
+        "freiluft"
+      ],
+      "category": "greenLocation",
+      "recommend": true
+    },
+    {
+      "id": "lechallianz",
+      "title": "Lechallianz: Für einen freien Lech!",
+      "summary": "Was früher als reißender Wildfluss bekannt war, gilt heute als einer der am dichtesten verbauten Flüsse Bayerns. Für die Renaturierung des Lechs haben sich zahlreiche Verbände und Vereine zusammengeschlossen.",
+      "description": "Die Lechalllianz hat sich im Jahr 1997 aus verschiedenen Verbänden und Vereinen zusammengeschlossen.  Das Hauptanliegen ist eine Renaturierung des Flusses. Ein Katalog realisierbarer Maßnahmen wurde im landeskreisübergreifenden Projekt „Lebensraum Lechtal“ ein Jahr später festgehalten.",
+      "lat": 48.36418,
+      "long": 10.93620,
+      "address": "Füssener Straße 5",
+      "zipCode": "86343 Königsbrunn",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/lechallianz.jpg",
+          "attachmentName": "lechallianz.jpg"
+        }
+      ],
+       "linkedEvents": [
+        "stadtrundgang",
+        "stadtwald"
+      ],
+      "category": "orga",
+      "recommend": true
+    },
+    {
+      "id": "hexentreff",
+      "title": "Zum Hexentreff",
+      "summary": "„Essen ist ein Bedürfnis – Genießen eine Kunst“, so lautet das Motto des Friedberger Bio-Lokals.",
+      "description": "In dem Restaurant mit der farbenfrohen Inneneinrichtung werden ausgewählte Bio-Produkte, vegetarische und vegane Speisen, sowie selbstgebackenes Brot angeboten. Neben der festen Speisekarte mit Bio-Gerichten sorgt ein tägliches Speisekarten Update mit saisonalen Tagesgerichten für Abwechslung.",
+      "lat": 48.36418,
+      "long": 10.85861,
+      "address": "Jungbräustr. 8",
+      "zipCode": "86316 Fiedberg",
+      "phone": "Tel.: +49-0821-45034766",
+      "web": "http://zumhexentreff.com/",
+      "rating": 0,
+      "attachments": [
+        {
+          "attachmentFile": "./public/assets/images/locations/hexentreff.png",
+          "attachmentName": "hexentreff.png"
+        }
+      ],
+       "linkedEvents": [
+        "lebensstil",
+        "stadtwald",
+        "pilzausstellung"
+      ],
+      "category": "dinner",
+      "recommend": false
     }
-]
+  ]
