@@ -52,7 +52,7 @@ h1, h2, h3, h4 {
   font-family: 'BarlowCondensed-SemiBold';
   color: #3B3B3B; }
 
-a, span, p {
+span, p {
   font-size: 0.8em; }
 
 input {
@@ -222,7 +222,9 @@ div[class^="related"] {
 .index-lifeguideLogo {
   display: block;
   margin: 0 auto;
-  margin-top: 1em; }
+  margin-top: 1em;
+  width: 50%;
+  max-width: 15em; }
 
 .location-tips-container, .event-tips-container, .tour-tips-container {
   width: 100%;
