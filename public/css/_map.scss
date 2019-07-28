@@ -762,6 +762,7 @@ body.overflow-hidden {
     visibility: hidden;
     opacity: 0;
     transform: translateY(10em);
+    display: none;
   }
 
   .addressOnHold {

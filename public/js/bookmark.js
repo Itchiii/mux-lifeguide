@@ -119,7 +119,7 @@ bookmarksDB.allDocsOfLocalDB.then(function(result) {
         const title = document.createElement("h2");
         title.classList.add("title-event");
         const summary = document.createElement("p");
-        title.innerHTML = entry.doc.titletoUpperCase();
+        title.innerHTML = entry.doc.title.toUpperCase();
         summary.innerHTML = entry.doc.summary;
         eventInfo.append(title);
         eventInfo.append(summary);

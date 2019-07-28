@@ -1,3 +1,8 @@
+if(document.body.id === "index") setRecommend(locationDB);
+if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
+if(document.body.id === "index") setRecommend(tourDB);
+
+
 function setRecommend(database) {
   switch (database) {
     case eventDB:   eventDB._getDocByFind('recommend', true).then(function(recommendLocations) {

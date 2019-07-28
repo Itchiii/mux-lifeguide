@@ -1083,7 +1083,8 @@ body.overflow-hidden {
   .addLocationLayer.hide {
     visibility: hidden;
     opacity: 0;
-    transform: translateY(10em); }
+    transform: translateY(10em);
+    display: none; }
   .addLocationLayer .addressOnHold {
     text-align: center;
     margin-top: 1em; }
