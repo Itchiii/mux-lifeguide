@@ -116,3 +116,88 @@ function setTipWithJSON(database, entry) {
   
   heading.textContent = entry.title;
 }
+
+
+function setFunctionForLinkedEventMenuContent() {
+
+  //functionality for share button
+  document.getElementById('entity-event-share').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    const url = `${window.location.origin}/article.html?id=${eventID}`;
+    const title = document.title;
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+      })
+      .catch(console.error);
+    } else {
+      console.log(url);
+    }
+  });
+
+  //functionality for export button
+  document.getElementById('entity-event-export').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    eventDB._getDoc(eventID).then(function(data) {
+      const cal = ics();
+      const date = data.date.split('.').reverse().join('-');
+      const time = data.start.replace(/[^\d:]/g, '');
+      //add offset to UTC 
+      cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
+
+      //time is not local time format
+      cal.download(data.title);
+    });
+  });
+
+
+  //functionality for bookmark button
+  document.getElementById('entity-event-bookmark').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+    bookmarksDB._getDoc(eventID).then(function(data) {
+      bookmarksDB._removeDoc(data).then(() => {
+        showNotificationForBookmark(false, "event");  
+      });
+    }).catch(function(){
+      //put element on bookmarks
+      eventDB._getDoc(eventID).then(function(data) {
+        let putItemBookmarksDB = new Promise(function(resolve, reject){
+          bookmarksDB._putItem(data, resolve, reject);
+        });
+        putItemBookmarksDB.then(() => {
+          bookmarksDB.infoLocal.then(() => {
+            showNotificationForBookmark(true, "event");  
+            //TODO: add image to bookmark
+          });
+        });
+      });
+    });
+  });
+}
+
+function showNotificationForBookmark(add, string) {
+
+  if (string === "location") {
+    document.getElementById('n-bookmark-text').textContent = add ? "Der Ort wurde zu deiner Merkliste hinzugefügt." : "Der Ort wurde aus deiner Merkliste entfernt."
+  }
+  else {
+    document.getElementById('n-bookmark-text').textContent = add ? "Die Veranstaltung wurde zu deiner Merkliste hinzugefügt." : "Die Veranstaltung wurde aus deiner Merkliste entfernt."
+  }
+  
+  document.getElementById('notification-bookmark').classList.remove('hide');
+  
+  setTimeout(() => {
+    document.getElementById('notification-bookmark').classList.remove('transformOut');
+  }, 10);
+
+  setTimeout(() => {
+    document.getElementById('notification-bookmark').classList.add('transformOut');
+
+    setTimeout(() => {
+      document.getElementById('notification-bookmark').classList.add('hide');
+    }, 300);
+
+  }, 4000);
+}
