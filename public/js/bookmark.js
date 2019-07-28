@@ -173,6 +173,27 @@ document.getElementById('bookmarks').addEventListener('scroll', function ( event
     }
   }, 50);
 
+  testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+  'BlackBerry|Windows Phone|'  +
+  'Opera Mini|IEMobile|Mobile' , 
+ 'i');
+
+  if (testExp.test(navigator.userAgent)) {
+    const aTags = document.querySelectorAll('.bookmark-header > a');
+    for (const a of aTags) {
+      a.classList.remove('active');
+    }
+  
+    switch (event.srcElement.scrollLeft / window.innerWidth) {
+      case 0: document.getElementById('b-h-events').classList.add('active'); break;
+      case 1: document.getElementById('b-h-locations').classList.add('active'); break;
+      case 2: document.getElementById('b-h-tours').classList.add('active'); break;
+      default: document.getElementById('b-h-events').classList.add('active'); break;
+      }
+  }
+
+
+
 }, false);
 
 

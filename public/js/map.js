@@ -138,6 +138,7 @@ fetch('accessTokenMapBox.txt')
     map.on('touchmove', clearMouseHold);
     map.on('pitch', clearMouseHold);
     map.on('rotate', clearMouseHold);
+    map.on('zoom', clearMouseHold);
 
 
 
