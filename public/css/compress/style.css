@@ -413,6 +413,9 @@ div[class^="related"] {
   margin-bottom: 5em;
   padding: 1.5em; }
 
+.needle-article {
+  margin-bottom: .2em; }
+
 #headline-form {
   text-transform: uppercase;
   margin: 2em auto 0 auto; }

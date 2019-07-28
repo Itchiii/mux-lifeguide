@@ -555,7 +555,7 @@ function setEntityContent(id) {
           const info = document.createElement('div');
           info.classList.add('eventInfo');
 
-          const day = document.createElement('p');
+          const day = document.createElement('h4');
           day.classList.add('daydate');
           day.textContent = eventById.daydate;
 
@@ -563,8 +563,9 @@ function setEntityContent(id) {
           month.classList.add('month');
           month.textContent = eventById.month;
 
-          const title = document.createElement('h4');
-          title.textContent = eventById.title;
+          const title = document.createElement("h2");
+          title.classList.add("title-event");
+          title.textContent = eventById.title.toUpperCase();
 
           const start = document.createElement('p');
           start.textContent = eventById.day + " " + eventById.start;

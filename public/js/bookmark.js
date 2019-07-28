@@ -1,12 +1,50 @@
 bookmarksDB.allDocsOfLocalDB.then(function(result) {
   for (const entry of result.rows) {
       if (entry.doc.date !== "") {
-        //div for daydate and month called eventDate
-        const eventDate = document.createElement("div");
-        const daydate = document.createElement("div");
-        const month = document.createElement("div");
-        daydate.innerHTML = entry.doc.daydate;
-        month.innerHTML = entry.doc.month;
+      //div for daydate and month called eventDate
+      const eventDate = document.createElement("div");
+      const daydate = document.createElement("h4");
+      const month = document.createElement("div");
+      daydate.innerHTML = entry.doc.date.substring(0, 2);
+      const whichMonth = entry.doc.date.substring(3, 5);
+      switch (whichMonth) {
+        case "01":
+          month.innerHTML = "JAN";
+          break;
+        case "02":
+          month.innerHTML = "FEB";
+          break;
+          case "03":
+            month.innerHTML = "MÄR";
+            break;
+          case "04":
+            month.innerHTML = "APR";
+            break;
+            case "05":
+              month.innerHTML = "MAI";
+              break;
+            case "06":
+              month.innerHTML = "JUN";
+              break;
+              case "07":
+                month.innerHTML = "JUL";
+                break;
+              case "08":
+                month.innerHTML = "AUG";
+                break;
+                case "09":
+                  month.innerHTML = "SEP";
+                  break;
+                case "10":
+                  month.innerHTML = "OKT";
+                  break;
+                  case "11":
+                    month.innerHTML = "NOV";
+                    break;
+                  case "12":
+                    month.innerHTML = "DEZ";
+                    break;   
+      }
         daydate.classList.add("daydate");
         month.classList.add("month");
         eventDate.classList.add("eventDate");
@@ -15,9 +53,10 @@ bookmarksDB.allDocsOfLocalDB.then(function(result) {
 
         //div for title and summary called eventInfo
         const eventInfo = document.createElement("div");
-        const title = document.createElement("h4");
+        const title = document.createElement("h2");
+        title.classList.add("title-event");
         const summary = document.createElement("p");
-        title.innerHTML = entry.doc.title;
+        title.innerHTML = entry.doc.title.toUpperCase();
         summary.innerHTML = entry.doc.summary;
         eventInfo.append(title);
         eventInfo.append(summary);
@@ -77,9 +116,10 @@ bookmarksDB.allDocsOfLocalDB.then(function(result) {
       else {
         //div for title and summary called eventInfo
         const eventInfo = document.createElement("div");
-        const title = document.createElement("h4");
+        const title = document.createElement("h2");
+        title.classList.add("title-event");
         const summary = document.createElement("p");
-        title.innerHTML = entry.doc.title;
+        title.innerHTML = entry.doc.titletoUpperCase();
         summary.innerHTML = entry.doc.summary;
         eventInfo.append(title);
         eventInfo.append(summary);

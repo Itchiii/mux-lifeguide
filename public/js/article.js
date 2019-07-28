@@ -39,11 +39,11 @@ eventDB._getDoc(iddata).then(function(doc) {
           articleInfo.classList.add("articleInfo");
           const dayandstart = document.createElement("div");
           dayandstart.classList.add("dayandstart");
-          const day = document.createElement("div");
-          const start = document.createElement("div");
-          const location = document.createElement("div");
-          const street = document.createElement("div");
-          const place = document.createElement("div");
+          const day = document.createElement("p");
+          const start = document.createElement("p");
+          const location = document.createElement("p");
+          const street = document.createElement("p");
+          const place = document.createElement("p");
           const daybegin = doc.day.substring(0, 2); //day with first 2 letters
           const dayadd = ".,\xa0";
           day.innerHTML = daybegin.concat(dayadd);
@@ -66,7 +66,7 @@ eventDB._getDoc(iddata).then(function(doc) {
           //div for map
           const mapwrapper = document.createElement("div")
           mapwrapper.classList.add("map-wrapper");
-          const map = document.createElement("div");
+          const map = document.createElement("p");
           const icon = document.createElement("IMG");
           icon.setAttribute("src", "public/assets/images/icons/needle_green.svg");
           icon.classList.add("needle-article");
@@ -81,7 +81,7 @@ eventDB._getDoc(iddata).then(function(doc) {
           const articleSummary = document.createElement("h3");
           articleSummary.innerHTML = doc.summary;
           articleSummary.classList.add("articleSummary");
-          const articleText = document.createElement("div");
+          const articleText = document.createElement("p");
           articleText.innerHTML = doc.description;
           articleForm.append(articleSummary);
           articleForm.append(articleText);
