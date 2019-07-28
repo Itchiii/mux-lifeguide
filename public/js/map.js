@@ -84,15 +84,41 @@ fetch('accessTokenMapBox.txt')
 
     function showMarkerOnHold(e) {
       touchhold = setTimeout(function() {
-        removePreview();
-        document.getElementById('addLocationLayer').classList.remove('hide');
       
         var url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.lngLat.lng}%2C%20${e.lngLat.lat}.json?access_token=${mapboxgl.accessToken}`;
         var req = new XMLHttpRequest();
         req.responseType = 'json';
         req.open('GET', url, true);
         req.onload = function() {
-          document.getElementById('addressOnHold').textContent = req.response.features[0].place_name;
+
+
+          if (!document.getElementById('location-routing').classList.contains('hide')){
+            const input = document.querySelector('.create-routing-inputs .mapboxgl-ctrl-geocoder input');
+            input.value = req.response.features[0].place_name;
+
+
+            //get id param from url
+            let params = new URLSearchParams(document.location.search.substring(1));
+            const id = params.get("id");
+
+            //get entry with param id
+            locationDB._getDoc(id).then(function(entry) {
+              //create Routing with waypoints and geocoder api
+              let end = [entry.long, entry.lat];
+
+
+              let start = [e.lngLat.lng, e.lngLat.lat];
+
+              setRoute(start, end);
+              document.querySelector('.geocoder-icon.geocoder-icon-close').style.display = "block";
+            });
+          }
+          else {
+          removePreview();
+
+            document.getElementById('addLocationLayer').classList.remove('hide');
+            document.getElementById('addressOnHold').textContent = req.response.features[0].place_name;
+          }
           holdMarkerEle.classList.remove('hide');
           holdMarker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
         };
@@ -187,7 +213,6 @@ fetch('accessTokenMapBox.txt')
       const input = document.querySelector('.create-routing-inputs .mapboxgl-ctrl-geocoder input');
       input.value = "Mein Standort";
 
-      console.log(data);
 
 
       //get id param from url
@@ -201,9 +226,9 @@ fetch('accessTokenMapBox.txt')
 
 
         let start = [data.coords.longitude, data.coords.latitude];
-        console.log(start, end);
 
         setRoute(start, end);
+        document.querySelector('.geocoder-icon.geocoder-icon-close').style.display = "block";
       });
 
 
@@ -220,6 +245,8 @@ fetch('accessTokenMapBox.txt')
       if (document.getElementById('location-entity-wrapper').classList.contains('show-complete')) {
         changeToPreview();
       }
+
+      document.querySelector('.geocoder-icon.geocoder-icon-close').style.display = "none";
 
       const destination = document.getElementById('c-r-to');
       const startpoint = document.querySelector('.mapboxgl-ctrl-geocoder > input');
@@ -249,6 +276,7 @@ fetch('accessTokenMapBox.txt')
       endMarkerEle.classList.add('hide');
       if (map.getSource('route')) {
         map.removeLayer('route');
+        map.removeSource('route');
       }
       
       const routeWrapper = document.getElementById('location-routing');
@@ -314,10 +342,9 @@ fetch('accessTokenMapBox.txt')
 
           endMarkerEle.classList.remove('hide');
           endMarker.setLngLat([start[0], start[1]]);
-
-          map.flyTo({center: [start[0], start[1]], zoom: 15});
-
         }
+        map.flyTo({center: [start[0], start[1]], zoom: 14});
+
       };
       req.send();
     }
