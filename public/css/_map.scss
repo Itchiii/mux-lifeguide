@@ -806,3 +806,70 @@ body.overflow-hidden {
     width: 13px;
   }
 }
+
+.eventInfo {
+  flex: 1;
+}
+
+.eventMenu {
+  align-self: flex-start;
+  cursor: default; 
+
+  &::after {
+    content: url("/public/assets/images/icons/menu-green.svg");
+    width: 4px;
+    height: 18px;
+    display: inline-block;
+    padding: 1em 1em 1em 0.2em;
+  }
+}
+
+.event-menu-content {
+  position: absolute;
+  background-color: #fff;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  padding: 1.5em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+  display: block;
+
+  &.hide {
+    display: none;
+  }
+
+  .entity-event-share, .entity-event-export, .entity-event-bookmark {
+    display: flex;
+    font-size: 0.8em;
+    color: #747474;
+    align-items: center;
+
+    &:not(:last-child):not(:first-child) {
+      margin: 1.5em 0;
+    }
+
+     &::before {
+      padding-right: 1.5em;
+      height: 1.5em;
+      width: 1.5em;
+    }
+  }
+
+  .entity-event-share::before {
+    content: url("/public/assets/images/icons/share-green.svg");
+  }
+
+  .entity-event-export::before {
+    content: url("/public/assets/images/icons/export-green.svg");
+  }
+
+  .entity-event-bookmark::before {
+    content: url("/public/assets/images/icons/heart-green.svg");
+  }
+
+  .entity-event-bookmark.marked::before {
+    content: url("/public/assets/images/icons/heart-full-green.svg");
+  }
+}

@@ -136,10 +136,44 @@ eventDB.allDocsOfLocalDB.then(function(result) {
       eventInfo.append(summary);
       eventInfo.classList.add("eventInfo");
 
+
+
+      const menu = document.createElement('div');
+      menu.classList.add('eventMenu');
+      //move and toggle display of menu content
+      menu.addEventListener('click', function () {
+        const offset = 80;
+        const content = document.getElementById('event-menu-content');
+        //set position
+        content.style.top = this.getBoundingClientRect().top - document.getElementById('events').getBoundingClientRect().top + offset + "px";
+             
+        console.log(content.dataset.eventid);
+        console.log(this.closest('.event').dataset.id);
+        if(content.dataset.eventid === this.closest('.event').dataset.id || content.classList.contains('hide')) {
+          console.log("hit")
+          content.classList.toggle('hide');
+        }
+
+        if (!content.classList.contains('hide')) {
+          content.dataset.eventid = entry.doc._id;
+        }
+
+        const eventID = content.dataset.eventid;
+        bookmarksDB._getDoc(eventID).then(function(data) {
+          document.getElementById('entity-event-bookmark').classList.add('marked');
+        }).catch(function(){
+          document.getElementById('entity-event-bookmark').classList.remove('marked');
+        });
+      });
+
+      
+
+
       //div for eventInfo and eventDate called eventColumn
       const eventColumn = document.createElement("div");
       eventColumn.append(eventDate);
       eventColumn.append(eventInfo);
+      eventColumn.append(menu);
       eventColumn.classList.add("eventColumn");
 
 
@@ -162,8 +196,10 @@ eventDB.allDocsOfLocalDB.then(function(result) {
           event.dataset.id = entry.doc._id;
           //Put events container in DOM
           document.getElementById('events').append(events);
-          event.addEventListener("click", function(){
-            window.open(`article.html?id=${this.dataset.id}`, "_self");
+          event.addEventListener("click", function(e){
+            if (!e.target.classList.contains("eventMenu") && document.getElementById('event-menu-content').classList.contains('hide')) {
+              window.open(`article.html?id=${this.dataset.id}`, "_self");
+            }
           });
         });
       }
@@ -181,8 +217,10 @@ eventDB.allDocsOfLocalDB.then(function(result) {
           event.dataset.id = entry.doc._id;
           //Put events container in DOM
           document.getElementById('events').append(events);
-          event.addEventListener("click", function(){
-            window.open(`article.html?id=${this.dataset.id}`, "_self");
+          event.addEventListener("click", function(e){
+            if (!e.target.classList.contains("eventMenu") && document.getElementById('event-menu-content').classList.contains('hide')) {
+              window.open(`article.html?id=${this.dataset.id}`, "_self");
+            }
           });
       }
     }
@@ -190,57 +228,28 @@ eventDB.allDocsOfLocalDB.then(function(result) {
   });
 
 
+  setFunctionForLinkedEventMenuContent();
 
-  function setFunctionForLinkedEventMenuContent() {
 
-    //functionality for share button
-    document.getElementById('entity-event-share').addEventListener('click', () => {
-      const url = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
-      const title = document.title;
-      if (navigator.share) {
-        navigator.share({
-          title: title,
-          url: url
-        }).then(() => {
-        })
-        .catch(console.error);
-      } else {
-        // fallback
-      }
+  document.getElementById('entity-event-bookmark').addEventListener('click', () => {
+    const eventID = document.getElementById('event-menu-content').dataset.eventid;
+
+    bookmarksDB._getDoc(eventID).then(function(data) {
+      document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-full-green.svg";
+    }).catch(function(){
+      document.getElementById('location-entity-markButton').src = "/public/assets/images/icons/heart-green.svg";
     });
+  });
+
+  //add body listener on click to hide the event menu
+  document.body.addEventListener('click', function (event) {
+    if (document.getElementById('event-menu-content') !== undefined && !document.getElementById('event-menu-content').classList.contains('hide') && !event.target.classList.contains('eventMenu')) {
+      document.getElementById('event-menu-content').classList.add('hide');
+    }
+  });
   
-    //functionality for export button
-    document.getElementById('entity-event-export').addEventListener('click', () => {
-      const eventID = document.getElementById('event-menu-content').dataset.eventid;
-      eventDB._getDoc(eventID).then(function(data) {
-        const cal = ics();
-        const date = data.date.split('.').reverse().join('-');
-        const time = data.start.replace(/[^\d:]/g, '');
-        //add offset to UTC 
-        cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
-  
-        //time is not local time format
-        cal.download(data.title);
-      });
-    });
-  
-  
-    //functionality for bookmark button
-    document.getElementById('entity-event-bookmark').addEventListener('click', () => {
-      const eventID = document.getElementById('event-menu-content').dataset.eventid;
-      eventDB._getDoc(eventID).then(function(data) {
-        let putItemBookmarksDB = new Promise(function(resolve, reject){
-          bookmarksDB._putItem(data, resolve, reject);
-        });
-        putItemBookmarksDB.then(() => {
-          bookmarksDB.infoLocal.then(function(info) {
-            console.log(info);
-  
-            //TODO: add image to bookmark
-          });
-        });
-      });
-    });
-  }
+
+
+
   
   
