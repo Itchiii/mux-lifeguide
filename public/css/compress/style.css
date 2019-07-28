@@ -778,7 +778,7 @@ body.overflow-hidden {
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-search {
         display: none; }
       .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-close, .location-routing .create-routing-inputs .mapboxgl-ctrl-geocoder .geocoder-icon-loading {
-        background-color: #fff;
+        background-color: #f2f2f2;
         right: 3.5em; }
     .location-routing .create-routing-inputs input {
       display: block;
