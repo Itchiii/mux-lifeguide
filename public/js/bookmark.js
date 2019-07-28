@@ -176,7 +176,7 @@ document.getElementById('bookmarks').addEventListener('scroll', function ( event
   }, 50);
 }, false);
 
-
+//see app.js
 setFunctionForLinkedEventMenuContent();
 
 //add body listener on click to hide the event menu

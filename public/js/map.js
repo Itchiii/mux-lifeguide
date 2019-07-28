@@ -441,8 +441,6 @@ function setEntityContent(id) {
 
     //set keydata
     for (const entry in data) {
-      console.log(data[entry] === "");
-
       if (data[entry] !== "") {
         switch (entry) {
           case 'title':

@@ -3,13 +3,14 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       
       //remove all old service Worker 
-      //TODO: this is just for development
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for(let registration of registrations) {
-          registration.unregister().then(function(boolean) {
-           // if (boolean) console.log('Unregistration succeeded');
-          });
-      }
+        
+      //TODO: this is just for development
+      //   for(let registration of registrations) {
+      //     registration.unregister().then(function(boolean) {
+      //      // if (boolean) console.log('Unregistration succeeded');
+      //     });
+      // }
       
       }).then(function(){
         navigator.serviceWorker.register('/service-worker.js', {scope: './'}).then(function(registration) {

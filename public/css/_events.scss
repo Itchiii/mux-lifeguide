@@ -1,90 +1,89 @@
-#event-wrapper{
+#event-wrapper {
   padding: 1.5em;
 }
 
-.eventColumn{
+.eventColumn {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   width: 100%;
   padding: 1em;
-  border-bottom-left-radius: 0.3em;
-  border-bottom-right-radius: 0.3em;
   background-color: rgb(232, 234, 236);
+  border-bottom-right-radius: .3em;
+  border-bottom-left-radius: .3em;
 }
-.eventDate{
+.eventDate {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   padding: 1em;
 }
-.daydate{
+.daydate {
   font-size: 2em;
 }
-.eventInfo{
+.eventInfo {
   display: flex;
   flex-direction: column;
   padding: 1em;
 }
-.event{
-  width: 90vw;
+.event {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 0.75em 0;
+  flex-direction: column;
+  width: 90vw;
+  margin: .75em 0;
 }
-.eventimg{
+.eventimg {
   //margin-top: 1em;
   width: 90vw;
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
+  border-top-right-radius: .3em;
+  border-top-left-radius: .3em;
 }
-.events{
+.events {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: space-around;
-  
 }
-#events{
-  margin-bottom: $heighOfNav;
+#events {
   //for event context menu
   padding-bottom: 7em;
+  margin-bottom: $heighOfNav;
 }
 
-#searchInput{
+#searchInput {
   display: block;
   //margin: 1em auto 0 auto;
   width: 100%;
   height: 3em;
   padding: 1em;
+  //color: #748194;
+  font-size: .8em;
+  background: #f6f7f9;
+  border: none;
   border-radius: 5px;
   outline: none;
-  border: none;
-  background: #F6F7F9;
-  //color: #748194;
-  font-size: 0.8em;
 }
-#searchglass{
+#searchglass {
   position: absolute;
   top: 1.9em;
   right: 2em;
   width: 1.5em;
   height: 1.5em;
 }
-.title-event{
-  margin-bottom: 0.2em;
+.title-event {
+  margin-bottom: .2em;
 }
 
 
-@media only screen and (min-width: 768px){
-  .events{
+@media only screen and (min-width: 768px) {
+  .events {
+    align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
     width: 500px;
   }
-  .eventColumn, .eventimg{
+  .eventColumn, .eventimg {
     width: 500px;
-}
+  }
 }

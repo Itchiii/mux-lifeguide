@@ -1,3 +1,4 @@
+//set recommendations
 if(document.body.id === "index") setRecommend(locationDB);
 if(document.body.id === "index" || document.body.id === "events" || document.body.id === "article-body") setRecommend(eventDB);
 if(document.body.id === "index") setRecommend(tourDB);
@@ -67,62 +68,6 @@ function setAllTips(database, recommends) {
   }
 }
 
-
-//just for development
-function setTipWithJSON(database, entry) {  
-  const locationTips = document.getElementById('location-tips');
-
-  if (locationTips === null || locationTips === undefined) {
-    //return;
-  }
-  const eventTips = document.getElementById('event-tips');
-  const tourTips = document.getElementById('tour-tips');
-  let container;
-
-  switch (database) {
-    case eventDB: container = eventTips; break;
-    case locationDB: container = locationTips; break;
-    case tourDB: container = tourTips; break;
-    default:
-      break;
-  }
-
-     
-  const article = document.createElement('a');
-  const img = document.createElement('img');
-  const heading = document.createElement('h4');
-  heading.classList.add('recommend-sub-heading');
-
-  if (entry.attachments !== undefined && entry.attachments.length !== 0) {
-    database._getAttachment(entry.id, entry.attachments[0].attachmentName).then(function(blob){
-      let url = URL.createObjectURL(blob);
-      img.src = url;
-      article.append(img);
-      article.append(heading);
-      container.append(article);
-    }).catch(function(e) {
-      console.error(e)
-    });
-  }
-
-  else {
-    article.append(img);
-    article.append(heading);
-    container.append(article);
-  }
-
-  switch (database) {
-    case eventDB: article.href = `article.html?id=${entry.id}`; break;
-    case locationDB: article.href = `map.html?id=${entry.id}`; break;
-    case tourDB: container = tourTips; break;
-    default:
-      break;
-  }
-  
-  heading.textContent = entry.title;
-}
-
-
 function setFunctionForLinkedEventMenuContent() {
 
   //functionality for share button
@@ -149,9 +94,11 @@ function setFunctionForLinkedEventMenuContent() {
     eventDB._getDoc(eventID).then(function(data) {
       const cal = ics();
       const date = data.date.split('.').reverse().join('-');
-      const time = data.start.replace(/[^\d:]/g, '');
+      const startTime = data.start.replace(/[^\d:]/g, '');
+      const endTime = data.end.replace(/[^\d:]/g, '');
+
       //add offset to UTC 
-      cal.addEvent(data.title, data.summary, data.location, `${date}T${time}+02:00`, `${date}T${time}+02:00`);
+      cal.addEvent(data.title, data.summary, data.location, `${date}T${startTime}+02:00`, `${date}T${endTime}+02:00`);
 
       //time is not local time format
       cal.download(data.title);
@@ -185,7 +132,6 @@ function setFunctionForLinkedEventMenuContent() {
 }
 
 function showNotificationForBookmark(add, string) {
-
   if (string === "location") {
     document.getElementById('n-bookmark-text').textContent = add ? "Der Ort wurde zu deiner Merkliste hinzugefügt." : "Der Ort wurde aus deiner Merkliste entfernt."
   }
@@ -193,12 +139,13 @@ function showNotificationForBookmark(add, string) {
     document.getElementById('n-bookmark-text').textContent = add ? "Die Veranstaltung wurde zu deiner Merkliste hinzugefügt." : "Die Veranstaltung wurde aus deiner Merkliste entfernt."
   }
   
+  //show notification
   document.getElementById('notification-bookmark').classList.remove('hide');
-  
   setTimeout(() => {
     document.getElementById('notification-bookmark').classList.remove('transformOut');
   }, 10);
 
+  //hide notification after 4s
   setTimeout(() => {
     document.getElementById('notification-bookmark').classList.add('transformOut');
 

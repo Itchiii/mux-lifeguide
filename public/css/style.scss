@@ -1,7 +1,6 @@
-$highlightedColor: #7ECE96;
+$highlightedColor: #7ece96;
 $textColor: #707070;
-$headingTextColor: #3B3B3B;
-
+$headingTextColor: #3b3b3b;
 $heighOfNav: 56px;
 
 @mixin fontFace($name) {
@@ -14,41 +13,42 @@ $heighOfNav: 56px;
     url('/public/fonts/#{$name}.woff') format('woff'), /* Pretty Modern Browsers */
     url('/public/fonts/#{$name}.ttf')  format('truetype'), /* Safari, Android, iOS */
     url('/public/fonts/#{$name}.svg#svgFontName') format('svg'); /* Legacy iOS */
-}
+} 
 
 /****************FONTS**************/
 @font-face {
-  $name: 'BarlowCondensed-SemiBold';
-  @include fontFace($name); 
-}
-
-@font-face {
-  $name: 'Oxygen-Regular';
+  $name: "BarlowCondensed-SemiBold";
   @include fontFace($name);
 }
 
 @font-face {
-  $name: 'Oxygen-Bold';
+  $name: "Oxygen-Regular";
+  @include fontFace($name);
+}
+
+@font-face {
+  $name: "Oxygen-Bold";
   @include fontFace($name);
 }
 
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box; 
+
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-body { 
+body {
   width: 100%;
   height: 100%;
   color: $textColor;
-  font-family: 'Oxygen-Regular', sans-serif;
+  font-family: "Oxygen-Regular", sans-serif;
   font-size: 16px;
 }
 
 ::placeholder {
-  color: #B0B0B0 !important;
+  color: #b0b0b0 !important;
   opacity: 1; /* Firefox */
 }
 
@@ -69,12 +69,12 @@ button {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'BarlowCondensed-SemiBold';
   color: $headingTextColor;
+  font-family: "BarlowCondensed-SemiBold";
 }
 
 span, p {
-  font-size: 0.8em;
+  font-size: .8em;
 }
 
 input {
@@ -82,40 +82,40 @@ input {
 }
 
 .bottom-menu {
-  height: 56px;
-  width: 100%;
-  background-color: #fff;
   position: fixed;
   bottom: 0;
-  left:0;
+  left: 0;
   z-index: 11111;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
+  width: 100%;
+  height: 56px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
 }
 
 .bm-inner-menu {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  margin: auto;
-  max-width: 50em;
+  justify-content: space-around;
   width: 100vw;
   height: 100%;
-  
+  max-width: 50em;
+  margin: auto;
+
   a {
-    height: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    height: 100%;
 
     img {
       height: 40%;
-    } 
-  
+    }
+
     span {
-      font-size: 0.8em;
-      margin-top: 0.3em;
+      margin-top: .3em;
       color: $textColor;
+      font-size: .8em;
     }
   }
 }
@@ -123,12 +123,12 @@ input {
 .default-wrapper {
   width: 100%;
   max-width: 60em;
-  margin: 0 auto;
   padding: 1.5em;
+  margin: 0 auto;
 }
 
 .input {
-	display: block;
+  display: block;
   width: 100%;
   padding: 1em;
   border: none;
@@ -139,60 +139,60 @@ input {
   }
 }
 
-.submit-button  {
-  background-color: $highlightedColor;
+.submit-button {
   display: block;
   padding: 1.2em 5em;
   margin: auto;
+  margin-top: 2em;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: $highlightedColor;
   border: none;
   border-radius: 5px;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1em;
-  margin-top: 2em;
-  font-weight: 700;
 }
 
 .floatingButton {
   display: flex;
-  align-items: center; 
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  align-items: center;
   justify-content: center;
-	position:fixed;
-	width:50px;
-	height:50px;
-	bottom:80px;
-  right:20px;
-  border-radius: 50%;
-	color:#FFF;
-  font-size: 1.8em;
-  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.3);
-  border: none;
-  cursor: pointer;
   z-index: 6;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  font-size: 1.8em;
   background-color: $highlightedColor;
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,.3);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
-  .floatingButton img {
-    height: 30px;
-    width: 30px;
-  }
+.floatingButton img {
+  width: 30px;
+  height: 30px;
+}
 
 
-.notification-bookmark { 
+.notification-bookmark {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background-color: rgba(126, 206, 150, 0.8);
-  display: flex;
-  text-align: center;
-  color: #ffffff;
-  min-height: 6em;
-  max-height: 10em;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   z-index: 4;
-  transition: transform 0.3s ease-out;
+  width: 100%;
+  max-height: 10em;
+  min-height: 6em;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(126, 206, 150, .8);
+  transition: transform .3s ease-out;
 
   &.hide {
     display: none;
@@ -206,31 +206,31 @@ input {
     position: absolute;
     right: 20px;
     bottom: 20px;
-    height: 30px;
     width: 30px;
+    height: 30px;
     content: url("/public/assets/images/icons/heart-white.svg");
   }
 
   .n-bookmark-text {
     width: 80%;
     max-width: 25em;
-    font-size: 0.9em;
-    font-family: 'Oxygen-Bold';
-
+    font-family: "Oxygen-Bold";
+    font-size: .9em;
   }
 
   .n-bookmark-link {
-    color: #fff;
-    text-transform: uppercase;
     margin-top: 1em;
-    font-family: 'Oxygen-Bold';
+    color: #fff;
+    font-family: "Oxygen-Bold";
     font-size: .9em;
+    text-transform: uppercase;
   }
 }
 
-@import 'index';
-@import 'events';
-@import 'article';
-@import 'form';
-@import 'map';
-@import 'bookmarks'
+@import "index";
+@import "events";
+@import "article";
+@import "form";
+@import "map";
+@import "bookmarks"
+

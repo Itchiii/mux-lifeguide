@@ -1,5 +1,6 @@
 body.overflow-hidden {
   overflow: hidden;
+
   overscroll-behavior: contain;
 }
 
@@ -12,15 +13,16 @@ body.overflow-hidden {
 .location-entity-wrapper {
   display: none;
   position: absolute;
-  width: 100vw;
-  background-color: #fff;
-  padding-bottom: 1em;
-  z-index: 3;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
-  overflow: hidden;
-  scroll-behavior: smooth;
   top: 100vh;
+  z-index: 3;
+  width: 100vw;
   min-height: 7em;
+  padding-bottom: 1em;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+
+  scroll-behavior: smooth;
 
   &.show {
     display: block;
@@ -32,11 +34,11 @@ body.overflow-hidden {
 
   &.show-complete {
     top: 0;
-    height: 100vh;
     bottom: unset;
-    overflow: auto;
+    height: 100vh;
     //height of nav
     padding-bottom: 56px !important;
+    overflow: auto;
 
     .location-entity-holder .location-entity-grabble {
       transform: rotate(-90deg);
@@ -49,20 +51,20 @@ body.overflow-hidden {
 
   .location-entity-holder {
     display: flex;
-    height: 30px;
-    width: 100%;
-    justify-content: center;
     position: fixed;
-    background-color: #fff;
-    margin-top: -1px;
     position: relative;
     align-items: center;
-  
+    justify-content: center;
+    width: 100%;
+    height: 30px;
+    margin-top: -1px;
+    background-color: #fff;
+
     .location-entity-grabble {
-      height: 80%;
       width: auto;
-      transform: rotate(90deg);
+      height: 80%;
       margin: 0 auto;
+      transform: rotate(90deg);
 
       path {
         stroke: $highlightedColor;
@@ -71,8 +73,8 @@ body.overflow-hidden {
 
     .location-entity-shareButton, .location-entity-markButton {
       position: absolute;
-      height: 70%;
       width: 30px;
+      height: 70%;
 
       &.hide {
         display: none;
@@ -88,7 +90,7 @@ body.overflow-hidden {
     }
   }
 
-  .location-entity-content { 
+  .location-entity-content {
     .hide {
       display: none;
     }
@@ -97,68 +99,68 @@ body.overflow-hidden {
       padding: 0 1.5em;
 
       .entity-collapsed-address, .entity-collapsed-zipCode {
-        font-size: 0.8em;
         color: #747474;
+        font-size: .8em;
       }
     }
 
     .location-entity-open-text {
-      padding: 0 1.5em 1em 1.5em;
       display: flex;
       flex-direction: column;
+      padding: 0 1.5em 1em 1.5em;
 
       &.hide {
         display: none;
       }
 
       .entity-open-heading {
-        text-transform: uppercase;
         margin: 1.5em 0;
+        text-transform: uppercase;
       }
-    
+
       .entity-open-description {
-        font-size: 0.8em;
-        
-        color: #747474;
+        display: -webkit-box;
         width: 75%;
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
+        color: #747474;
+        font-size: .8em;
+
         -webkit-box-orient: vertical;
-        -moz-line-clamp: 2;
-        -moz-box-orient: vertical;  
+           -moz-box-orient: vertical;
+        -webkit-line-clamp: 2;
+           -moz-line-clamp: 2;
       }
 
       .entity-show-more {
-        margin-top: 0.5em;
-        color: $highlightedColor;
-        margin-left: auto;
-        font-family: 'Oxygen-Bold';
-        font-size: 0.8em;
         display: flex;
         align-items: center;
+        margin-top: .5em;
+        margin-left: auto;
+        color: $highlightedColor;
+        font-family: "Oxygen-Bold";
+        font-size: .8em;
 
         &::after {
-          content: url("/public/assets/images/icons/route-green.svg");
-          height: 1em;
           display: inline-block;
           width: 1em;
+          height: 1em;
           padding-bottom: 10px;
+          content: url("/public/assets/images/icons/route-green.svg");
           transform: rotate(90deg);
         }
       }
     }
 
     .location-entity-full-text {
-      background-color: #ffffff;
+      background-color: #fff;
 
       .location-entity-keydata {
         > span {
+          display: flex;
+          align-items: center;
+          padding: 1em 0;
           color: #747474;
           border-top: 1px solid #e7e7e7;
-          display: flex;
-          padding: 1em 0;
-          align-items: center;
 
           &.hide {
             display: none;
@@ -167,7 +169,7 @@ body.overflow-hidden {
           &:last-child {
             border-bottom: 1px solid #e7e7e7;
           }
-  
+
           &.entity-full-address::before {
             content: url("/public/assets/images/icons/location-green.svg");
           }
@@ -189,41 +191,42 @@ body.overflow-hidden {
           }
 
           &::before {
+            width: 1em;
+            height: 1em;
             padding-right: 1.5em;
             padding-left: 1.5em;
-            height: 1em;
-            width: 1em;
           }
         }
       }
 
 
       .entity-full-images {
-        margin: 2em 1.5em 0 1.5em;
         display: flex;
-        flex-direction: row; 
-        flex-wrap: nowrap;  
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin: 2em 1.5em 0 1.5em;
         overflow-x: auto;
-      
+
         img {
-          min-width: 11em;
           height: 100px;
-          //width: 100%;
-          object-fit: cover;
-          border-radius: 5px;
+          min-width: 11em;
           margin-right: 20px;
+          border-radius: 5px;
+          //width: 100%;
+
+          object-fit: cover;
         }
       }
 
       .map-entity-events {
-        margin-top: 2em;
         padding: 0 1.5em;
+        margin-top: 2em;
         cursor: pointer;
 
         .eventColumn {
+          width: auto;
           margin-top: 1em;
           border-radius: 5px;
-          width: auto;
 
           .eventInfo {
             flex: 1;
@@ -231,41 +234,41 @@ body.overflow-hidden {
 
           .eventMenu {
             align-self: flex-start;
-            cursor: default; 
+            cursor: default;
 
             &::after {
-              content: url("/public/assets/images/icons/menu-green.svg");
+              display: inline-block;
               width: 4px;
               height: 18px;
-              display: inline-block;
-              padding: 1em 1em 1em 0.2em;
+              padding: 1em 1em 1em .2em;
+              content: url("/public/assets/images/icons/menu-green.svg");
             }
           }
         }
       }
 
       .entity-full-text {
-        margin: 2em 0;
         padding: 0 1.5em;
+        margin: 2em 0;
 
         > p {
-        margin: 1em 0;
-        font-size: 0.8em;
-        color: #747474;
+          margin: 1em 0;
+          color: #747474;
+          font-size: .8em;
         }
       }
 
       .event-menu-content {
+        display: block;
         position: absolute;
-        background-color: #fff;
-        z-index: 5;
         top: 0;
         right: 0;
+        z-index: 5;
         padding: 1.5em;
-        border-top-left-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
         border-bottom-left-radius: 5px;
-        box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
-        display: block;
+        border-top-left-radius: 5px;
 
         &.hide {
           display: none;
@@ -273,18 +276,18 @@ body.overflow-hidden {
 
         .entity-event-share, .entity-event-export, .entity-event-bookmark {
           display: flex;
-          font-size: 0.8em;
-          color: #747474;
           align-items: center;
+          color: #747474;
+          font-size: .8em;
 
           &:not(:last-child):not(:first-child) {
             margin: 1.5em 0;
           }
 
-           &::before {
-            padding-right: 1.5em;
-            height: 1.5em;
+          &::before {
             width: 1.5em;
+            height: 1.5em;
+            padding-right: 1.5em;
           }
         }
 
@@ -305,14 +308,14 @@ body.overflow-hidden {
         }
       }
     }
-  
-    .location-entity-createRoute {    
+
+    .location-entity-createRoute {
       &::after {
-        content: url("/public/assets/images/icons/route-white.svg");
         width: 1em;
         height: 1em;
+        content: url("/public/assets/images/icons/route-white.svg");
       }
-  
+
       &.hide {
         display: none;
       }
@@ -321,16 +324,16 @@ body.overflow-hidden {
 }
 
 .location-routing {
-  background-color: #fff;
+  display: flex;
   position: absolute;
-  z-index: 10000;
   top: 0;
-  display: flex; 
-  padding: 1.5em;
+  z-index: 10000;
   width: 100%;
-  transition: transform 0.3s ease-out;
-  transform: translateY(0px);
+  padding: 1.5em;
+  background-color: #fff;
   box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+  transform: translateY(0px);
+  transition: transform .3s ease-out;
   visibility: visible;
 
   &.transitionOut {
@@ -342,26 +345,26 @@ body.overflow-hidden {
   }
 
   .create-routing-back {
-    width: 30px;
-    border: none;
-    background: 0 0;
     display: flex;
-    justify-content: center;
     align-items: flex-start;
+    justify-content: center;
+    width: 30px;
     height: 100%;
-    
+    background: 0 0;
+    border: none;
+
     &::after {
-      content: url("/public/assets/images/icons/arrow.svg");
       width: 17px;
       height: 24px;
+      content: url("/public/assets/images/icons/arrow.svg");
     }
   }
 
   .create-routing-symbol {
-    width: 1.5em;
-    margin: 0 0.5em;
-    max-height: 70px;
     align-self: center;
+    width: 1.5em;
+    max-height: 70px;
+    margin: 0 .5em;
 
     img {
       max-height: 70px;
@@ -369,14 +372,14 @@ body.overflow-hidden {
   }
 
   .create-routing-inputs {
-    flex: 1;
     position: relative;
+    flex: 1;
 
     .mapboxgl-ctrl-geocoder {
       width: 100%;
-      box-shadow: none;
-      margin-bottom: 0.5em;
       max-width: none;
+      margin-bottom: .5em;
+      box-shadow: none;
 
       input {
         padding: 1em 5em 1em 1em;
@@ -387,42 +390,42 @@ body.overflow-hidden {
       }
 
       .geocoder-icon-close, .geocoder-icon-loading {
-        background-color: #f2f2f2;
         right: 3.5em;
+        background-color: #f2f2f2;
       }
     }
 
     input {
       display: block;
-      padding: 1em;
       width: 100%;
+      padding: 1em;
+      text-overflow: ellipsis;
+      background-color: #f2f2f2;
       border: none;
       border-radius: 5px;
-      background-color: #f2f2f2;
-      text-overflow: ellipsis;
     }
 
     .mapboxgl-ctrl-group {
-      border-radius: 50%;
       position: absolute;
-      right: 4px;
       top: 4px;
+      right: 4px;
       z-index: 10000;
       background: none;
       box-shadow: none;
+      border-radius: 50%;
 
       .mapboxgl-ctrl-icon {
-        height: 2.5em;
-        width: 2.5em;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 2.5em;
+        height: 2.5em;
 
         &::before {
-          background-image: none;
-          content: url("/public/assets/images/icons/geolocate.svg");
-          height: 28px;
           width: 28px;
+          height: 28px;
+          content: url("/public/assets/images/icons/geolocate.svg");
+          background-image: none;
         }
 
         &:hover {
@@ -436,99 +439,99 @@ body.overflow-hidden {
     margin-left: 1em;
 
     &::after {
-      content: url("/public/assets/images/icons/menu-green.svg");
+      display: inline-block;
       width: 4px;
       height: 18px;
-      display: inline-block;
+      content: url("/public/assets/images/icons/menu-green.svg");
     }
   }
 }
 
 
 .marker {
-  background-size: cover;
-  height: 38px;
   width: 28px;
+  height: 38px;
+  background-size: cover;
+  transition: height .3s, width .3s;
   cursor: pointer;
-  transition: height 0.3s, width 0.3s;
 
   &.hide {
     display: none;
   }
 
   &.shop {
-    background-image: url('/public/assets/images/marker/shop.svg');
+    background-image: url("/public/assets/images/marker/shop.svg");
 
     &.openPreview {
-      background-image: url('/public/assets/images/marker/shop-green.svg');
-      height: 46px;
-      width: 34px;
       z-index: 1;
+      width: 34px;
+      height: 46px;
+      background-image: url("/public/assets/images/marker/shop-green.svg");
     }
   }
 
   &.dinner {
-    background-image: url('/public/assets/images/marker/dinner.svg');
+    background-image: url("/public/assets/images/marker/dinner.svg");
 
     &.openPreview {
-      background-image: url('/public/assets/images/marker/dinner-green.svg');
-      height: 46px;
-      width: 34px;
       z-index: 1;
+      width: 34px;
+      height: 46px;
+      background-image: url("/public/assets/images/marker/dinner-green.svg");
     }
   }
 
   &.leisure {
-    background-image: url('/public/assets/images/marker/leisure.svg');
+    background-image: url("/public/assets/images/marker/leisure.svg");
 
     &.openPreview {
-      background-image: url('/public/assets/images/marker/leisure-green.svg');
-      height: 46px;
-      width: 34px;
       z-index: 1;
+      width: 34px;
+      height: 46px;
+      background-image: url("/public/assets/images/marker/leisure-green.svg");
     }
   }
 
   &.greenLocation {
-    background-image: url('/public/assets/images/marker/greenLocation.svg');
+    background-image: url("/public/assets/images/marker/greenLocation.svg");
 
     &.openPreview {
-      background-image: url('/public/assets/images/marker/greenLocation-green.svg');
-      height: 46px;
-      width: 34px;
       z-index: 1;
+      width: 34px;
+      height: 46px;
+      background-image: url("/public/assets/images/marker/greenLocation-green.svg");
     }
   }
 
   &.orga {
-    background-image: url('/public/assets/images/marker/orga.svg');
+    background-image: url("/public/assets/images/marker/orga.svg");
 
     &.openPreview {
-      background-image: url('/public/assets/images/marker/orga-green.svg');
-      height: 46px;
-      width: 34px;
       z-index: 1;
+      width: 34px;
+      height: 46px;
+      background-image: url("/public/assets/images/marker/orga-green.svg");
     }
   }
 
   &.onHold {
-    background-image: url('/public/assets/images/marker/map-full-green.svg');
-    height: 35px;
-    width: 27px; 
     z-index: 1;
+    width: 27px;
+    height: 35px;
+    background-image: url("/public/assets/images/marker/map-full-green.svg");
   }
 }
 
 .end-marker {
-  height: 20px;
-  width: 20px;
-  background-color: #ffffff;
-  border-radius: 50%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
   border: 4px solid $highlightedColor;
+  border-radius: 50%;
 
   &.hide {
     display: none;
@@ -536,43 +539,43 @@ body.overflow-hidden {
 }
 
 .topSearch {
-  margin: auto;
-  width: 70%;
-  max-width: 30rem;
   position: absolute;
   top: 1em;
-  z-index: 2;
   right: 0;
   left: 0;
+  z-index: 2;
+  width: 70%;
+  max-width: 30rem;
+  margin: auto;
 
   .search {
     display: flex;
-    align-items: center;
     position: relative;
+    align-items: center;
 
     .searchLocations {
-      background-color: #fff;
       padding-right: 2.5em;
       text-overflow: ellipsis;
+      background-color: #fff;
     }
 
     .search-results {
-      background-color: #fff;
-      border-radius: 5px;
+      display: block;
       position: absolute;
+      top: 3em;
       left: 0;
       width: 100%;
-      top: 3em;
-      display: block;
+      background-color: #fff;
+      border-radius: 5px;
 
       &.hide {
         display: none;
       }
 
       > li {
-        list-style: none;
-        font-size: 0.8em;
         padding: 1em;
+        font-size: .8em;
+        list-style: none;
 
         &:not(:last-child) {
           border-bottom: 1px solid #f2f2f2;
@@ -581,26 +584,26 @@ body.overflow-hidden {
     }
 
     .mapboxgl-ctrl-group {
-      border-radius: 50%;
-      margin-left: 0.5em;
-      box-shadow: none;
       position: absolute;
-      right: 4px;
       top: 4px;
+      right: 4px;
+      margin-left: .5em;
+      box-shadow: none;
+      border-radius: 50%;
 
 
       .mapboxgl-ctrl-icon {
-        height: 2.5em;
-        width: 2.5em;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 2.5em;
+        height: 2.5em;
 
         &::before {
-          background-image: none;
-          content: url("/public/assets/images/icons/geolocate.svg");
-          height: 28px;
           width: 28px;
+          height: 28px;
+          content: url("/public/assets/images/icons/geolocate.svg");
+          background-image: none;
         }
 
         &:hover {
@@ -612,101 +615,97 @@ body.overflow-hidden {
 }
 
 .wrapping-filter {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  align-items: center;
-
   $time2: 0;
+  display: flex;
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  align-items: center;
+  flex-direction: column;
   @for $var from 1 to 6 {
-    $time2: $time2 + 0.1;
-    &.showElements > button:nth-child(#{$var}){
+    $time2: $time2 + .1;
+    &.showElements > button:nth-child(#{$var}) {
       transition: transform #{0.6 - $time2}s, opacity #{0.6 - $time2}s, visibility #{0.6 - $time2}s;
-
     }
   }
 
-  &.showElements > button:not(.filter-add){
-    opacity: 1;
+  &.showElements > button:not(.filter-add) {
     transform: scale(1);
+    opacity: 1;
     visibility: visible;
-  } 
+  }
 
-  &.hideElements > button:not(.filter-add):not(.active){
+  &.hideElements > button:not(.filter-add):not(.active) {
     display: none;
   }
 
   > button {
+    $time: 0;
     position: relative;
     right: unset;
     bottom: unset;
-
-    $time: 0;
     @for $var from 1 to 6 {
-      $time: $time + 0.1;
-      &:nth-child(#{$var}){
+      $time: $time + .1;
+      &:nth-child(#{$var}) {
         transition: transform #{$time}s ease-in-out, opacity #{$time}s ease-in-out, visibility #{$time}s ease-in-out;
       }
     }
 
     &:not(.filter-add) {
-      height: 35px;
-      width: 35px;
-      background-color: #fff;
       display: flex;
+      width: 35px;
+      height: 35px;
+      background-color: #fff;
+      transform: scale(.5);
       opacity: 0;
-      transform: scale(0.5);
       visibility: hidden;
 
       &.hide {
         display: none;
-
       }
     }
 
     &.active {
-      background-color: $highlightedColor;
-      opacity: 1;
-      transform: scale(1);
-      visibility: visible;
       display: flex;
+      background-color: $highlightedColor;
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
 
       &.filter-shop::after {
-        content: url('/public/assets/images/icons/shop-white.svg');
+        content: url("/public/assets/images/icons/shop-white.svg");
       }
-    
+
       &.filter-dinner::after {
-        content: url('/public/assets/images/icons/dinner-white.svg');
+        content: url("/public/assets/images/icons/dinner-white.svg");
       }
-    
+
       &.filter-greenLocation::after {
-        content: url('/public/assets/images/icons/greenLocation-white.svg');
+        content: url("/public/assets/images/icons/greenLocation-white.svg");
       }
-    
+
       &.filter-orga::after {
-        content: url('/public/assets/images/icons/orga-white.svg');
+        content: url("/public/assets/images/icons/orga-white.svg");
       }
-    
+
       &.filter-leisure::after {
-        content: url('/public/assets/images/icons/leisure-white.svg');
+        content: url("/public/assets/images/icons/leisure-white.svg");
       }
     }
 
     &:not(.filter-add)::after {
-      height: 50%;
       width: 50%;
+      height: 50%;
     }
   }
 
   .filter-add {
-    transition: background-color 0.3s;
+    transition: background-color .3s;
 
     &::after {
-      content: url("/public/assets/images/icons/filter-white.svg");
       width: 1em;
       height: 1em;
+      content: url("/public/assets/images/icons/filter-white.svg");
     }
 
     &.open {
@@ -717,98 +716,98 @@ body.overflow-hidden {
   }
 
   > button:not(:first-child) {
-    margin-top: 0.4em;
+    margin-top: .4em;
   }
 
   .filter-shop::after {
-    content: url('/public/assets/images/icons/shop-green.svg');
+    content: url("/public/assets/images/icons/shop-green.svg");
   }
 
   .filter-dinner::after {
-    content: url('/public/assets/images/icons/dinner-green.svg');
+    content: url("/public/assets/images/icons/dinner-green.svg");
   }
 
   .filter-greenLocation::after {
-    content: url('/public/assets/images/icons/greenLocation-green.svg');
+    content: url("/public/assets/images/icons/greenLocation-green.svg");
   }
 
   .filter-orga::after {
-    content: url('/public/assets/images/icons/orga-green.svg');
+    content: url("/public/assets/images/icons/orga-green.svg");
   }
 
   .filter-leisure::after {
-    content: url('/public/assets/images/icons/leisure-green.svg');
+    content: url("/public/assets/images/icons/leisure-green.svg");
   }
 }
 
 .addLocationLayer {
+  display: flex;
   position: absolute;
   bottom: 0;
-  margin-bottom: 56px;
-  background-color: #fff;
-  min-height: 7em;
-  max-height: 10em;
-  width: 100%;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
-  display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  transition: transform 0.3s ease-out;
-  visibility: visible;
+  width: 100%;
+  max-height: 10em;
+  min-height: 7em;
+  margin-bottom: 56px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+  transition: transform .3s ease-out;
   opacity: 1;
+  visibility: visible;
 
   &.hide {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(10em);
     display: none;
+    transform: translateY(10em);
+    opacity: 0;
+    visibility: hidden;
   }
 
   .addressOnHold {
-    text-align: center;
     margin-top: 1em;
+    text-align: center;
   }
 
   .addLocationLayer-text {
     display: block;
+    font-size: .8em;
     text-align: center;
-    font-size: 0.8em;
   }
 
   .button {
     display: block;
-    background-color: $highlightedColor;
-    color: #fff;
-    text-transform: uppercase;
-    border-radius: 5px;
-    padding: 0.8em 2em;
-    text-align: center;
     max-width: 18rem;
-    margin-bottom: 0.5em;
-    font-size: 0.8em;
+    padding: .8em 2em;
+    margin-bottom: .5em;
+    color: #fff;
+    font-size: .8em;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: $highlightedColor;
+    border-radius: 5px;
   }
 }
 
 .tourButton {
+  display: flex;
   position: absolute;
   top: 5px;
-  z-index: 2;
   left: -3em;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
   width: 2.5em;
   height: 2.5em;
-  border-radius: 50%;
   background-color: #fff;
   border: none;
+  border-radius: 50%;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &::after {
-    content: url("/public/assets/images/icons/tour-green.svg");
-    height: 25px;
     width: 13px;
+    height: 25px;
+    content: url("/public/assets/images/icons/tour-green.svg");
   }
 }
 
@@ -818,28 +817,28 @@ body.overflow-hidden {
 
 .eventMenu {
   align-self: flex-start;
-  cursor: default; 
+  cursor: default;
 
   &::after {
-    content: url("/public/assets/images/icons/menu-green.svg");
+    display: inline-block;
     width: 4px;
     height: 18px;
-    display: inline-block;
-    padding: 1em 1em 1em 0.2em;
+    padding: 1em 1em 1em .2em;
+    content: url("/public/assets/images/icons/menu-green.svg");
   }
 }
 
 .event-menu-content {
+  display: block;
   position: absolute;
-  background-color: #fff;
-  z-index: 5;
   top: 0;
   right: 0;
+  z-index: 5;
   padding: 1.5em;
-  border-top-left-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
   border-bottom-left-radius: 5px;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,0.3);
-  display: block;
+  border-top-left-radius: 5px;
 
   &.hide {
     display: none;
@@ -847,18 +846,18 @@ body.overflow-hidden {
 
   .entity-event-share, .entity-event-export, .entity-event-bookmark {
     display: flex;
-    font-size: 0.8em;
-    color: #747474;
     align-items: center;
+    color: #747474;
+    font-size: .8em;
 
     &:not(:last-child):not(:first-child) {
       margin: 1.5em 0;
     }
 
-     &::before {
-      padding-right: 1.5em;
-      height: 1.5em;
+    &::before {
       width: 1.5em;
+      height: 1.5em;
+      padding-right: 1.5em;
     }
   }
 

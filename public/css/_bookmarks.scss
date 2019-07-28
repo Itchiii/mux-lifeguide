@@ -1,82 +1,84 @@
-.bookmark-header{
-	background-color: #fafafa;
-	display: flex;
-	justify-content: space-between;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
+.bookmark-header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #fafafa;
 
-	> a {
-		padding: 1em 1.5em;
-		font-size: 0.8em;
-		font-family: 'Oxygen-Bold';
-		color: $headingTextColor;
+  > a {
+    padding: 1em 1.5em;
+    color: $headingTextColor;
+    font-family: "Oxygen-Bold";
+    font-size: .8em;
 
-		&.active {
-			border-bottom: 3px solid $highlightedColor;
-		}
-	}
+    &.active {
+      border-bottom: 3px solid $highlightedColor;
+    }
+  }
 }
 
 .bookmarks {
-	display: flex;
-	flex-direction: row;
-	overflow-x: scroll;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	padding-bottom: 7em;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 7em;
+  overflow-x: scroll;
 
-	.bookmark-site {
-		min-width: 100vw;
-		max-width: 100vw;
-		min-height: 100vh;
-		scroll-snap-align: start;
-		scroll-snap-stop: normal;
-		padding: 3em 1.5em;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 
-		.b-empty {
-			display: none;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
-			height: 100%;
+  .bookmark-site {
+    max-width: 100vw;
+    min-width: 100vw;
+    min-height: 100vh;
+    padding: 3em 1.5em;
 
-			.b-empty-text {
-				font-size: 1.2em;
-				font-family: 'Oxygen-Bold';
-				width: 80%;
-				max-width: 20em;
-				text-align: center
-			}
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
 
-			.button {
-				background-color: $highlightedColor;
-				color: #fff;
-				text-transform: uppercase;
-				border-radius: 5px;
-				padding: 1em 2em;
-				margin-top: 3em;
-			}
-		}
-	}
+    .b-empty {
+      display: none;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
 
-	.b-event-entries, .b-locations-entries, .b-tours-entries {
-		display: flex;
-		flex-direction: column;
+      .b-empty-text {
+        width: 80%;
+        max-width: 20em;
+        font-family: "Oxygen-Bold";
+        font-size: 1.2em;
+        text-align: center;
+      }
 
-		&:empty + div{
-			display: flex;
-		}
-
-		.event {
-			margin-left: 0;
-			margin-right: 0;
+      .button {
+        padding: 1em 2em;
+        margin-top: 3em;
+        color: #fff;
+        text-transform: uppercase;
+        background-color: $highlightedColor;
+        border-radius: 5px;
+      }
     }
-    
+  }
+
+  .b-event-entries, .b-locations-entries, .b-tours-entries {
+    display: flex;
+    flex-direction: column;
+
+    &:empty + div {
+      display: flex;
+    }
+
+    .event {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
     .b-column {
-			border-radius: 5px;
-			width: 100%;
-		}
-	}
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
 }

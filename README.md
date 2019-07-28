@@ -42,7 +42,11 @@ $ npm install
 $ npm start
 ```
 
-#### `Step 6` - open application on mobile
+#### `Step 6` - initialize data
+
+To load new data (important at the very first start), `fetchJson` must be initialized in db.js (row 291)
+
+#### `Step 7` - open application on mobile
 
 The ServiceWorker and the WebShareAPI need a secure connection to server. Localhost is considered secure but can not be opened remotely. You can use [ngrok](https://ngrok.com/) to tunnel localhost or follow [these](https://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http#answer-43426714) instructions.
 

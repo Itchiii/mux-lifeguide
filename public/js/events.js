@@ -4,12 +4,10 @@ document.getElementById("searchInput").addEventListener("keyup", search);
 document.getElementById("searchglass").addEventListener("click", searchGlass);
 
 function search() {
-  console.log(event);
   var entrys = document.getElementsByClassName("eventInfo");
   var eventBlock = document.getElementsByClassName("event");
   //check if input is empty again
   if(document.getElementById("searchInput").value === "") {
-    console.log()
     //Show all events
     for (i = 0; i<eventBlock.length; i++) {
       eventBlock[i].style.display="flex";
@@ -33,12 +31,10 @@ function search() {
   }
 }
 function searchGlass() {
-  console.log(event);
   var entrys = document.getElementsByClassName("eventInfo");
   var eventBlock = document.getElementsByClassName("event");
   //check if input is empty again
   if(document.getElementById("searchInput").value === "") {
-    console.log()
     //Show all events
     for (i = 0; i<eventBlock.length; i++) {
       eventBlock[i].style.display="flex";
@@ -53,7 +49,6 @@ function searchGlass() {
     //check tippedWord
     for (i = 0; i<entrys.length; i++) {
       if(entrys[i].textContent.toLowerCase().includes(tippedWord)) {
-        console.log("Gefunden!");
       }
       else {
         eventBlock[i].style.display="none";
@@ -147,18 +142,18 @@ eventDB.allDocsOfLocalDB.then(function(result) {
         const content = document.getElementById('event-menu-content');
         //set position
         content.style.top = this.getBoundingClientRect().top - document.getElementById('events').getBoundingClientRect().top + offset + "px";
-             
-        console.log(content.dataset.eventid);
-        console.log(this.closest('.event').dataset.id);
+        
+        //show menu
         if(content.dataset.eventid === this.closest('.event').dataset.id || content.classList.contains('hide')) {
-          console.log("hit")
           content.classList.toggle('hide');
         }
 
+        //set event ID
         if (!content.classList.contains('hide')) {
           content.dataset.eventid = entry.doc._id;
         }
 
+        //set or remove heart 
         const eventID = content.dataset.eventid;
         bookmarksDB._getDoc(eventID).then(function(data) {
           document.getElementById('entity-event-bookmark').classList.add('marked');
