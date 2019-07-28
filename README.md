@@ -3,6 +3,8 @@
 *A prototype for a Progressive Web App for the map and calendar function of the sustainability magazine Lifeguide Augsburg.*
 
 A project at the University of Applied Science Brandenburg in Digital Media.
+
+![Preview of Lifeguide](https://raw.githubusercontent.com/Itchiii/mux-lifeguide/master/public/assets/images/preview.png)
 ______
 ##### Technologies / Frameworks / Libraries used in project:
 * [npm/nodeJS](https://nodejs.org/en/)
