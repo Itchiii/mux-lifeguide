@@ -29,12 +29,17 @@
 body {
   width: 100%;
   height: 100%;
-  color: #3d3d3d;
+  color: #707070;
   font-family: 'Oxygen-Regular', sans-serif;
   font-size: 16px; }
 
+::placeholder {
+  color: #B0B0B0 !important;
+  opacity: 1;
+  /* Firefox */ }
+
 a {
-  color: #1e1e1e;
+  color: #7ECE96;
   text-decoration: none;
   transition: color .2s ease-in; }
   a:hover {
@@ -46,6 +51,12 @@ button:focus {
 h1, h2, h3, h4 {
   font-family: 'BarlowCondensed-SemiBold';
   color: #3B3B3B; }
+
+a, span, p {
+  font-size: 0.8em; }
+
+input {
+  color: #707070; }
 
 .bottom-menu {
   height: 56px;
@@ -76,13 +87,7 @@ h1, h2, h3, h4 {
     .bm-inner-menu a span {
       font-size: 0.8em;
       margin-top: 0.3em;
-      color: #747474; }
-
-.share-button {
-  height: 50px;
-  background-color: #1e1e1e;
-  color: #fff;
-  border: none; }
+      color: #707070; }
 
 .default-wrapper {
   width: 100%;
@@ -179,12 +184,14 @@ div[class^="related"] {
   div[class^="related"] .heading {
     font-weight: bold;
     text-transform: uppercase;
-    text-align: center; }
+    text-align: center;
+    color: #fff;
+    width: 100%; }
   div[class^="related"] .r-heading-contact, div[class^="related"] .r-heading-imprint {
     padding: 0.8em 0; }
 
 .related-about {
-  background-color: #878787; }
+  background-color: #7ece96; }
   .related-about .r-heading-about {
     padding-top: 2em; }
   .related-about .r-text-about {
@@ -194,7 +201,7 @@ div[class^="related"] {
     padding: 1em 0; }
 
 .related-contact {
-  background-color: #d0d0d0; }
+  background-color: #6da37d; }
   .related-contact-content {
     background-color: #e2e2e2;
     padding: 1.5em;
@@ -209,7 +216,8 @@ div[class^="related"] {
       margin: 1em 0 2.5em; }
 
 .related-imprint {
-  background-color: #acacac; }
+  background-color: #646464;
+  margin-bottom: 56px; }
 
 .index-lifeguideLogo {
   display: block;
@@ -254,10 +262,8 @@ div[class^="related"] {
   align-self: flex-end;
   margin-left: auto;
   color: #7ECE96; }
-  .location-tips-showAll svg, .event-tips-showAll svg, .tour-tips-showAll svg {
+  .location-tips-showAll img, .event-tips-showAll img, .tour-tips-showAll img {
     height: 30px; }
-    .location-tips-showAll svg > *, .event-tips-showAll svg > *, .tour-tips-showAll svg > * {
-      stroke: #7ECE96; }
 
 .location-tips-heading, .event-tips-heading, .tour-tips-heading {
   font-size: 1em;
@@ -454,7 +460,7 @@ div[class^="related"] {
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #3d3d3d;
+  color: #707070;
   opacity: 1;
   /* Firefox */ }
 
@@ -600,146 +606,150 @@ body.overflow-hidden {
       right: 60px; }
     .location-entity-wrapper .location-entity-holder .location-entity-shareButton {
       right: 20px; }
-  .location-entity-wrapper .location-entity-content {
-    margin-top: 1em; }
-    .location-entity-wrapper .location-entity-content .hide {
+  .location-entity-wrapper .location-entity-content .hide {
+    display: none; }
+  .location-entity-wrapper .location-entity-content .location-entity-collapsed-text {
+    padding: 0 1.5em; }
+    .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-address, .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-zipCode {
+      font-size: 0.8em;
+      color: #747474; }
+  .location-entity-wrapper .location-entity-content .location-entity-open-text {
+    padding: 0 1.5em 1em 1.5em;
+    display: flex;
+    flex-direction: column; }
+    .location-entity-wrapper .location-entity-content .location-entity-open-text.hide {
       display: none; }
-    .location-entity-wrapper .location-entity-content .location-entity-collapsed-text {
+    .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-heading {
+      text-transform: uppercase;
+      margin: 1.5em 0; }
+    .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-description {
+      font-size: 0.8em;
+      color: #747474;
+      width: 75%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      -moz-line-clamp: 2;
+      -moz-box-orient: vertical; }
+    .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more {
+      margin-top: 0.5em;
+      color: #7ECE96;
+      margin-left: auto;
+      font-family: 'Oxygen-Bold';
+      font-size: 0.8em;
+      display: flex;
+      align-items: center; }
+      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more::after {
+        content: url("/public/assets/images/icons/route-green.svg");
+        height: 1em;
+        display: inline-block;
+        width: 1em;
+        padding-bottom: 10px;
+        transform: rotate(90deg); }
+  .location-entity-wrapper .location-entity-content .location-entity-full-text {
+    background-color: #ffffff; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span {
+      color: #747474;
+      border-top: 1px solid #e7e7e7;
+      display: flex;
+      padding: 1em 0;
+      align-items: center; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.hide {
+        display: none; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span:last-child {
+        border-bottom: 1px solid #e7e7e7; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-address::before {
+        content: url("/public/assets/images/icons/location-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-openingHours::before {
+        content: url("/public/assets/images/icons/time-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-phone::before {
+        content: url("/public/assets/images/icons/phone-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-web::before {
+        content: url("/public/assets/images/icons/global-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-owner::before {
+        content: url("/public/assets/images/icons/owner-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span::before {
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        height: 1em;
+        width: 1em; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
+      margin: 2em 1.5em 0 1.5em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images img {
+        min-width: 11em;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 20px; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
+      margin-top: 2em;
+      padding: 0 1.5em;
+      cursor: pointer; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
+        margin-top: 1em;
+        border-radius: 5px;
+        width: auto; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
+          flex: 1; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
+          align-self: flex-start;
+          cursor: default; }
+          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
+            content: url("/public/assets/images/icons/menu-green.svg");
+            width: 4px;
+            height: 18px;
+            display: inline-block;
+            padding: 1em 1em 1em 0.2em; }
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
+      margin: 2em 0;
       padding: 0 1.5em; }
-      .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-address, .location-entity-wrapper .location-entity-content .location-entity-collapsed-text .entity-collapsed-zipCode {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text > p {
+        margin: 1em 0;
         font-size: 0.8em;
         color: #747474; }
-    .location-entity-wrapper .location-entity-content .location-entity-open-text {
-      padding: 0 1.5em 1em 1.5em;
-      display: flex;
-      flex-direction: column; }
-      .location-entity-wrapper .location-entity-content .location-entity-open-text.hide {
+    .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content {
+      position: absolute;
+      background-color: #fff;
+      z-index: 5;
+      top: 0;
+      right: 0;
+      padding: 1.5em;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+      display: block; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
         display: none; }
-      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-heading {
-        text-transform: uppercase; }
-      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-open-description {
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
+        display: flex;
         font-size: 0.8em;
-        margin-top: 0.5em;
         color: #747474;
-        width: 75%;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        -moz-line-clamp: 3;
-        -moz-box-orient: vertical; }
-      .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more {
-        margin-top: 0.5em;
-        color: #7ECE96;
-        margin-left: auto;
-        font-family: 'Oxygen-Bold';
-        font-size: 0.8em; }
-        .location-entity-wrapper .location-entity-content .location-entity-open-text .entity-show-more::after {
-          content: "P";
-          padding-left: 10px; }
-    .location-entity-wrapper .location-entity-content .location-entity-full-text {
-      background-color: #ffffff; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span {
-        color: #747474;
-        border-top: 1px solid #e7e7e7;
-        display: flex;
-        padding: 1em 0;
         align-items: center; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.hide {
-          display: none; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span:last-child {
-          border-bottom: 1px solid #e7e7e7; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-address::before {
-          content: url("/public/assets/images/icons/location-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-openingHours::before {
-          content: url("/public/assets/images/icons/time-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-phone::before {
-          content: url("/public/assets/images/icons/phone-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-web::before {
-          content: url("/public/assets/images/icons/global-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span.entity-full-owner::before {
-          content: url("/public/assets/images/icons/owner-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .location-entity-keydata > span::before {
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
+          margin: 1.5em 0; }
+        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
           padding-right: 1.5em;
-          padding-left: 1.5em;
-          height: 1em;
-          width: 1em; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images {
-        margin: 2em 1.5em 0 1.5em;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-images img {
-          min-width: 11em;
-          height: 100px;
-          object-fit: cover;
-          border-radius: 5px;
-          margin-right: 20px; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events {
-        margin-top: 2em;
-        padding: 0 1.5em;
-        cursor: pointer; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn {
-          margin-top: 1em;
-          border-radius: 5px;
-          width: auto; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventInfo {
-            flex: 1; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu {
-            align-self: flex-start;
-            cursor: default; }
-            .location-entity-wrapper .location-entity-content .location-entity-full-text .map-entity-events .eventColumn .eventMenu::after {
-              content: url("/public/assets/images/icons/menu-green.svg");
-              width: 4px;
-              height: 18px;
-              display: inline-block;
-              padding: 1em 1em 1em 0.2em; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text {
-        margin: 2em 0;
-        padding: 0 1.5em; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .entity-full-text > p {
-          margin: 1em 0;
-          font-size: 0.8em;
-          color: #747474; }
-      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content {
-        position: absolute;
-        background-color: #fff;
-        z-index: 5;
-        top: 0;
-        right: 0;
-        padding: 1.5em;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-        display: block; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content.hide {
-          display: none; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark {
-          display: flex;
-          font-size: 0.8em;
-          color: #747474;
-          align-items: center; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export:not(:last-child):not(:first-child), .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark:not(:last-child):not(:first-child) {
-            margin: 1.5em 0; }
-          .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before, .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
-            padding-right: 1.5em;
-            height: 1.5em;
-            width: 1.5em; }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
-          content: url("/public/assets/images/icons/share-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
-          content: url("/public/assets/images/icons/export-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
-          content: url("/public/assets/images/icons/heart-green.svg"); }
-        .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark.marked::before {
-          content: url("/public/assets/images/icons/heart-full-green.svg"); }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute::after {
-      content: url("/public/assets/images/icons/route-white.svg");
-      width: 1em;
-      height: 1em; }
-    .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
-      display: none; }
+          height: 1.5em;
+          width: 1.5em; }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-share::before {
+        content: url("/public/assets/images/icons/share-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-export::before {
+        content: url("/public/assets/images/icons/export-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark::before {
+        content: url("/public/assets/images/icons/heart-green.svg"); }
+      .location-entity-wrapper .location-entity-content .location-entity-full-text .event-menu-content .entity-event-bookmark.marked::before {
+        content: url("/public/assets/images/icons/heart-full-green.svg"); }
+  .location-entity-wrapper .location-entity-content .location-entity-createRoute::after {
+    content: url("/public/assets/images/icons/route-white.svg");
+    width: 1em;
+    height: 1em; }
+  .location-entity-wrapper .location-entity-content .location-entity-createRoute.hide {
+    display: none; }
 
 .location-routing {
   background-color: #fff;
@@ -821,7 +831,12 @@ body.overflow-hidden {
         .location-routing .create-routing-inputs .mapboxgl-ctrl-group .mapboxgl-ctrl-icon:hover {
           background: none; }
   .location-routing .create-routing-menu {
-    margin-left: 0.5em; }
+    margin-left: 1em; }
+    .location-routing .create-routing-menu::after {
+      content: url("/public/assets/images/icons/menu-green.svg");
+      width: 4px;
+      height: 18px;
+      display: inline-block; }
 
 .marker {
   background-size: cover;
@@ -873,21 +888,15 @@ body.overflow-hidden {
     z-index: 1; }
 
 .end-marker {
-  height: 15px;
-  width: 15px;
-  background-color: #ac39ac;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; }
-  .end-marker::after {
-    position: absolute;
-    background-color: rgba(172, 57, 172, 0.5);
-    content: "";
-    height: 25px;
-    width: 25px;
-    border-radius: 50%; }
+  position: relative;
+  border: 4px solid #7ECE96; }
   .end-marker.hide {
     display: none; }
 
@@ -1053,7 +1062,8 @@ body.overflow-hidden {
     opacity: 0;
     transform: translateY(10em); }
   .addLocationLayer .addressOnHold {
-    text-align: center; }
+    text-align: center;
+    margin-top: 1em; }
   .addLocationLayer .addLocationLayer-text {
     display: block;
     text-align: center;
@@ -1146,10 +1156,9 @@ body.overflow-hidden {
   .bookmark-header > a {
     padding: 1em 1.5em;
     font-size: 0.8em;
-    font-family: 'Oxygen-Bold'; }
+    font-family: 'Oxygen-Bold';
+    color: #3B3B3B; }
     .bookmark-header > a.active {
-      border-bottom: 3px solid #7ECE96; }
-    .bookmark-header > a:visited {
       border-bottom: 3px solid #7ECE96; }
 
 .bookmarks {
@@ -1157,7 +1166,8 @@ body.overflow-hidden {
   flex-direction: row;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth; }
+  scroll-behavior: smooth;
+  padding-bottom: 7em; }
   .bookmarks .bookmark-site {
     min-width: 100vw;
     max-width: 100vw;
