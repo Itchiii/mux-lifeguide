@@ -345,6 +345,9 @@ div[class^="related"] {
   width: 1.5em;
   height: 1.5em; }
 
+.right-nav a {
+  margin-left: 2em; }
+
 .map-wrapper {
   display: flex;
   flex-direction: column;
@@ -384,13 +387,12 @@ div[class^="related"] {
 
 .left-nav {
   display: flex;
-  width: 50%;
-  margin-left: 1em; }
+  width: 50%; }
 
 .right-nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   width: 50%; }
 
 #article-body {
@@ -488,12 +490,14 @@ div[class^="related"] {
   color: white;
   margin: auto;
   width: 60vw;
-  text-align: center; }
+  text-align: center;
+  font-size: 1.5em; }
 
 .warning h2 {
   color: white;
   margin-top: -3em;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  font-size: 2em; }
 
 #loadingBar {
   display: flex;
