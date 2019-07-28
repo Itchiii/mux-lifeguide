@@ -394,21 +394,29 @@ div[class^="related"] {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-content: center;
   height: 2.5em;
   position: fixed;
-  top: 1.5em;
+  top: 0em;
   left: 1.5em;
-  right: 1.5em; }
+  right: 1.5em;
+  background-color: white; }
 
 .left-nav {
   display: flex;
-  width: 50%; }
+  width: 50%;
+  padding: 2em 0;
+  align-items: center;
+  background-color: white; }
 
 .right-nav {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 50%; }
+  width: 50%;
+  padding: 2em 0;
+  align-items: center;
+  background-color: white; }
 
 #article-body {
   margin: 0 auto;
@@ -419,7 +427,7 @@ div[class^="related"] {
   padding: 1.5em; }
 
 #article {
-  padding-top: 3em; }
+  padding-top: 2.5em; }
 
 .needle-article {
   margin-bottom: .2em; }
