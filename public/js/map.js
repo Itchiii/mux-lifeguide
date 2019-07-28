@@ -131,11 +131,15 @@ fetch('accessTokenMapBox.txt')
     }
 
     map.on('touchstart', showMarkerOnHold);
+    map.on('mousedown', showMarkerOnHold);
     map.on('touchmove', clearMouseHold);
     map.on('touchend', clearMouseHold);    
-    map.on('mousedown', showMarkerOnHold);
     map.on('mouseup', clearMouseHold);
     map.on('touchmove', clearMouseHold);
+    map.on('pitch', clearMouseHold);
+    map.on('rotate', clearMouseHold);
+
+
 
     /* 
      * Search functionality 

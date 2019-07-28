@@ -124,7 +124,8 @@ function setFunctionForLinkedEventMenuContent() {
   document.getElementById('entity-event-share').addEventListener('click', () => {
     const eventID = document.getElementById('event-menu-content').dataset.eventid;
     const url = `${window.location.origin}/article.html?id=${eventID}`;
-    const title = document.title;
+    const title = "Lifeguide-Augsburg";
+    
     if (navigator.share) {
       navigator.share({
         title: title,

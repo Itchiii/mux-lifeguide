@@ -61,6 +61,8 @@ div[class^="related"] {
 	display: block;
 	margin: 0 auto;
 	margin-top: 1em;
+	width: 50%;
+	max-width: 15em;
 }
 
 .location-tips-container, .event-tips-container, .tour-tips-container {
