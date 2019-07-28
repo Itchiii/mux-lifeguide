@@ -58,4 +58,4 @@ In browser, open [http://localhost:8000](http://localhost:8000)
 
 To open your remote database based on pouchedb-server: [http://localhost:5984/_utils/](http://localhost:5984/_utils/)
 
-Note: To get the map tiles, you need a API Token of Mapbox or you have to change the tiles server e.g http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png
+Note: To get the map tiles and use Mapbox API, you need a API-Token of Mapbox
