@@ -52,6 +52,12 @@ To load new data (important at the very first start), `fetchJson` must be initia
 
 The ServiceWorker and the WebShareAPI need a secure connection to server. Localhost is considered secure but can not be opened remotely. You can use [ngrok](https://ngrok.com/) to tunnel localhost or follow [these](https://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http#answer-43426714) instructions.
 
+
+### Browser compatibility
+
+- tested on Chrome (Destkop and Mobile)
+- Share API just work on Safari and Chrome (mobile), see [CanIuse](https://caniuse.com/#feat=web-share)
+
 _____
 
 In browser, open [http://localhost:8000](http://localhost:8000)
